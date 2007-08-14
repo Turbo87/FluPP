@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<license name="GPL Lehr (Segelflug)" country="DE" medical="JAR Class 2;JAR Class 1">
+	<currency desc="25 Starts innderhalb der letzten 24 Monate|5 Starts in der jeweiligen Startart">
+		<condition name="Starts" value="Starts" required="25" duration="24" />
+		<condition name="Windenstart" value="WStarts" optional="true" required="5" duration="24" />
+		<condition name="F-Schlepp" value="FStarts" optional="true" required="5" duration="24" />
+		<condition name="Eigenstart" value="EStarts" optional="true" required="5" duration="24" />
+	</currency>
+	<extension meet="2" date="Lehrberechtigung" desc="Lehrberechtigung Segelflug (2 von 3 erfüllt)|60 Schulstarts in den letzten 36 Monaten vor Verlängerung|Überprüfungsflug mit Examiner in den letzen 12 Monaten vor Verlängerung|Fluglehrervortbildung in den letzen 12 Monaten vor Verlängerung" >
+		<condition name="60 Schultarts in 3 Jahren" value="Starts" required="60" duration="36" category="Schulflug" />
+		<condition name="Überprüfungsflug" value="Starts" required="1" duration="12" category="Überprüfung" />
+		<condition name="FL Fortbildung" value="Starts" required="1" duration="12" category="Fortbildung" />
+	</extension>
+</license>

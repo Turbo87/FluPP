@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<license name="GPL (Segelflug)" country="DE" medical="JAR Class 2;JAR Class 1">
+	<currency desc="25 Starts innderhalb der letzten 24 Monate|5 Starts in der jeweiligen Startart">
+		<condition name="Starts" value="Starts" required="25" duration="24" />
+		<condition name="Windenstart" value="WStarts" optional="true" required="5" duration="24" />
+		<condition name="F-Schlepp" value="FStarts" optional="true" required="5" duration="24" />
+		<condition name="Eigenstart" value="EStarts" optional="true" required="5" duration="24" />
+	</currency>
+</license>

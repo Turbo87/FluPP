@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<license name="PPL-A" country="DE" medical="JAR Class 2;JAR Class 1">
+	<currency desc="12 Flugstunden auf SEP,TMG oder UL darin enthalten|12 Starts und Landungen|6 Flugstunden als verantwortlicher Flugzeugführer|1 Trainingsflug mit Fluglehrer von mind. 1 Stunde je Klassenberechtigung">
+		<condition name="Flugzeit" value="FlightTime" required="12:00" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Flugzeit als PIC" value="PICFlightTime" required="6:00" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Starts" value="Starts" required="12" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Übungsflug mit Fluglehrer" value="Starts" required="1" duration="24" category="Uebungsflug" />
+	</currency>
+	<extension date="Verlängerung PPL-A">
+		<condition name="Flugzeit" value="FlightTime" required="12:00" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Flugzeit als PIC" value="PICFlightTime" required="6:00" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Starts" value="Starts" required="12" duration="24" acceptedlicenses="Ultraleicht;Motorseler" />
+		<condition name="Übungsflug mit Fluglehrer" value="Starts" required="1" duration="24" category="Uebungsflug" />
+	</extension>
+</license>

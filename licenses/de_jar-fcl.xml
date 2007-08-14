@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<license name="JAR-FCL" country="DE" medical="JAR Class 2;JAR Class 1">
+	<extension date="Verlängerung JAR-FCL" desc="Innerhalb 12 Monaten vor Ablauf der Gültigkeit 12 Flugstunden auf SEP oder TMG darin enthalten:|12 Starts und Landungen| 6 Stunden als verantwortlicher steuernder Pilot|1 Trainingsflug mit FI von mind. 1 Stunde auf TMG oder SEP">
+		<condition name="Blockzeit" value="BlockTime" required="12:00" duration="12" acceptedlicenses="TMG" />
+		<condition name="Blockzeit als PIC" value="PICBlockTime" required="6:00" duration="12" acceptedlicenses="TMG" />
+		<condition name="Starts" value="Starts" required="12" duration="12" acceptedlicenses="TMG" />
+		<condition name="Übungsflug mit Fluglehrer" value="Starts" required="1" duration="3" category="Uebungsflug" acceptedlicenses="TMG"/>
+	</extension>
+</license>

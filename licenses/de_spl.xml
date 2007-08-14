@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<license name="SPL (Ultraleicht)" country="DE" medical="JAR Class 2;JAR Class 1">
+	<currency desc="12 Flugstunden auf SEP, TMG oder UL darin enthalten:|12 Starts und Landungen|6 Flugstunden als verantwortlicher Flugzeugführer|1 Trainingsflug mit Fluglehrer von mind. 1 Stunde">
+		<condition name="Flugzeit" value="FlightTime" required="12:00" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Flugzeit als PIC" value="PICFlightTime" required="6:00" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Starts" value="Starts" required="12" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Übungsflug mit Fluglehrer" value="Starts" required="1" duration="24" category="Uebungsflug" />
+	</currency>
+	<extension meet="1" date="Verlängerung SPL" desc="12 Flugstunden auf SEP, TMG oder UL darin enthalten:|12 Starts und Landungen|6 Flugstunden als verantwortlicher Flugzeugführer|1 Trainingsflug mit Fluglehrer von mind. 1 Stunde">
+		<condition name="Flugzeit" value="FlightTime" required="12:00" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Flugzeit als PIC" value="PICFlightTime" required="6:00" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Starts" value="Starts" required="12" duration="24" acceptedlicenses="SEP;TMG" />
+		<condition name="Übungsflug mit Fluglehrer" value="Starts" required="1" duration="24" category="Uebungsflug" />
+		<condition name="Schleppberechtigung" value="Starts" required="5" optional="true" duration="12" category="FSchlepp" />
+	</extension>
+</license>
