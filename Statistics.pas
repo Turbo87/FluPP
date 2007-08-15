@@ -26,7 +26,7 @@ type
     CTime: TKat;
     Contest: TKat;
   end;
-  TStatData = array[0..255] of record
+  TStatData = array of record
     GraphData: TGraphData;
     Name: String;
     Flights: Word;
@@ -344,7 +344,7 @@ begin
   FStat_Graph.CBY1.ItemIndex := 0;
   FStat_Graph.CBY2.ItemIndex := 1;
 
-  { Categoriesn hinzufügen }
+  { Categoriesn hinzufï¿½gen }
   LBFlu.Items.Clear;
   CLBKat.Clear;
   for i := 0 to FMain.MDIChildCount-1 do
@@ -610,7 +610,7 @@ var
     end;
   end;
 {----------}
-  { TStatData-Records ausfüllen }
+  { TStatData-Records ausfï¿½llen }
   procedure AddData(var StatData: TStatData; j: Word);
   begin
     StatData[j].Time := CalcTime(GridIdx, StatData[j].Time,i,i, RGDefaultTime.ItemIndex);
@@ -690,11 +690,12 @@ var
 {----------}
   { Prüfen ob TStatData-Record schon vorhanden }
   procedure AddDetail(var StatData: TStatData; Data: String);
+  var j: Integer;
   begin
     if GridChild(GridIdx).data[Data,i] = '' then Exit;
-    j:= 0;
     ItsIn := False;
-    while (StatData[j].Name <> '') and (not ItsIn) do
+    if length(StatData)>0 then
+      for j := 0 to length(StatData)-1 do
     begin
       if GridChild(GridIdx).data[Data,i] = StatData[j].Name then
       begin
@@ -702,20 +703,22 @@ var
         AddData(StatData,j);
         Break;
       end;
-    inc(j);
     end;
     if not ItsIn then
     begin
-      SetLength(StatData[j].GraphData,years);
-      StatData[j].Name := GridChild(GridIdx).data[Data,i];
-      AddData(StatData,j);
+      SetLength(StatData,length(StatData)+1);
+      SetLength(StatData[length(StatData)-1].GraphData,years);
+      StatData[length(StatData)-1].Name := GridChild(GridIdx).data[Data,i];
+      AddData(StatData,length(StatData)-1);
     end;
   end;
 {----------}
   procedure Reset(var StatData: TStatData);
   var i: Word;
   begin
-    for i := 0 to 255 do
+    if length(StatData)=0 then
+      Exit;
+    for i := 0 to length(StatData)-1 do
     begin
       StatData[i].Name := '';
       StatData[i].Flights := 0;
@@ -790,7 +793,7 @@ begin
       exit;
     end;
 
-    { Gültiger Wert in Flights? }
+    { Gï¿½ltiger Wert in Flights? }
     if RBStarts.checked then
     begin
       try StrToInt(CBSTFrom.Text)
@@ -814,7 +817,7 @@ begin
       end;
     end;
 
-    { Startjahr für Statistik }
+    { Startjahr fï¿½r Statistik }
     SetLength(GraphData,0);
     Years := 0;
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
@@ -846,15 +849,15 @@ begin
 
       SetLength(GraphData,Length(GraphData)+years);
     end;
-  { Schleife über alle Flugbücher }
+  { Schleife ï¿½ber alle Flugbï¿½cher }
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
     begin
       GSNr := GridIdx;
-      { für alle ausgewählten Scheine }
+      { fï¿½r alle ausgewï¿½hlten Scheine }
       if LBFlu.Selected[GridIdx] then
       if GridChild(GridIdx).Data['Num',1] <> '' then
       begin
-        { Wenn Seit Schein: "Schein Seit" ausgefüllt? }
+        { Wenn Seit Schein: "Schein Seit" ausgefï¿½llt? }
         if RBSchein.checked then
         begin
           if GridChild(GridIdx).Settings.Values['LicenseSince'] = '  .  .    ' then
@@ -1032,7 +1035,8 @@ begin
             { AddDetail Pilot }
             j:= 0;
             ItsIn := False;
-            while (Pilot[j].Name <> '') and (not ItsIn) do
+            if length(Pilot)>0 then
+              for j := 0 to length(Pilot)-1 do
             begin
               if GridChild(GridIdx).Data['Pi1',i] = Pilot[j].Name then
               begin
@@ -1040,14 +1044,14 @@ begin
                 AddData(Pilot,j);
                 break;
               end;
-            inc(j);
             end;
             if not ItsIn then
             begin
-              SetLength(Pilot[j].GraphData,years);
+              SetLength(Pilot,length(Pilot)+1);
+              SetLength(Pilot[length(Pilot)-1].GraphData,years);
               if GridChild(GridIdx).Data['Pi1',i] = '' then BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi1',i];
-              Pilot[j].Name := BegleitTemp;
-              AddData(Pilot,j);
+              Pilot[length(Pilot)-1].Name := BegleitTemp;
+              AddData(Pilot,length(Pilot)-1);
             end;
 
             { AddDetail CoPilot }
@@ -1055,7 +1059,9 @@ begin
             ItsIn := False;
             if GridChild(GridIdx).Data['Pi2',i] = '' then
               BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',i];
-            while (CoPilot[j].Name <> '') and (not ItsIn) do
+            if length(CoPilot) > 0 then
+            begin
+              for j := 0 to length(CoPilot)-1 do
             begin
               if BegleitTemp = CoPilot[j].Name then
               begin
@@ -1063,19 +1069,20 @@ begin
                 AddData(CoPilot,j);
                 break;
               end;
-            inc(j);
             end;
             if GridChild(GridIdx).Data['Pi2',i] <> '' then
             begin
               SetLength(CoPilot[0].GraphData,years);
               AddData(CoPilot,0);
             end;
+            end;
             if not ItsIn then
             begin
-              SetLength(CoPilot[j].GraphData,years);
+              SetLength(CoPilot,length(CoPilot)+1);
+              SetLength(CoPilot[length(CoPilot)-1].GraphData,years);
               if GridChild(GridIdx).Data['Pi2',i] = '' then BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',i];
-              CoPilot[j].Name := BegleitTemp;
-              AddData(CoPilot,j);
+              CoPilot[length(CoPilot)-1].Name := BegleitTemp;
+              AddData(CoPilot,length(CoPilot)-1);
             end;
 
             { Costs }
@@ -1113,7 +1120,7 @@ begin
       ButtontabGesamt.Enabled:= True;
     end;
 
-    if LBFlu.SelCount > 1 then //noch ändern!!
+    if LBFlu.SelCount > 1 then //noch ï¿½ndern!!
     begin
       LabelFrom.Caption := '-';
       LabelTo.Caption := '-';
@@ -1341,15 +1348,15 @@ begin
   { Graph }
   if (Sender = ButtonGraphGesamt) or (Sender = ButtonGraphDetail) then
   begin
-    { CB aufüllen }
+    { CB aufï¿½llen }
     FSTat_Graph.CBY1.Clear;
     FSTat_Graph.CBY1.Items.Add(_('Flights'));
     FSTat_Graph.CBY1.Items.Add(_('Time'));
-    FSTat_Graph.CBY1.Items.Add(_('Ø-Flight Time:'));
+    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Flight Time:'));
     FSTat_Graph.CBY1.Items.Add(_('Distance'));
-    FSTat_Graph.CBY1.Items.Add(_('Ø-Speed'));
+    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Speed'));
     FSTat_Graph.CBY1.Items.Add(_('Passengers'));
-    FSTat_Graph.CBY1.Items.Add(_('Ø-Passengers'));
+    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Passengers'));
     FSTat_Graph.CBY1.Items.Add('------------------------------');
     FSTat_Graph.CBY1.Items.Add(_('Costs:')+' '+_('Aircraft'));
     FSTat_Graph.CBY1.Items.Add(_('Costs:')+' '+_('Crew'));
@@ -1418,9 +1425,9 @@ var
 
   begin
     { GraphData
-       herausfinden des höchsten Datensatzes
+       herausfinden des hï¿½chsten Datensatzes
        skalieren
-       Text für Beschriftung erstellen }
+       Text fï¿½r Beschriftung erstellen }
     SetLength(GraphDataY,Years);
 
     case ComboBoxY.ItemIndex of
@@ -1440,13 +1447,13 @@ var
            end;
            YLabel := _('Time')+' [hh:mm]';
          end;
-      2: begin  { Ø-Flugzeit }
+      2: begin  { ï¿½-Flugzeit }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := TimeToHour(avgTime(DGraphData[i].Time,DGraphData[i].Flights));
              GraphDataY[i].Text := avgTime(DGraphData[i].Time,DGraphData[i].Flights);
            end;
-           YLabel := _('Ø-Flight Time:')+' [hh:mm]';
+           YLabel := _('ï¿½-Flight Time:')+' [hh:mm]';
          end;
       3: begin { Distance }
            for i := 0 to Years-1 do
@@ -1456,13 +1463,13 @@ var
            end;
            YLabel := _('Distance')+' ['+StatDistUnit+']';
          end;
-      4: begin  { Ø-Speed }
+      4: begin  { ï¿½-Speed }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := avgSpeed(Round(DGraphData[i].Distance),DGraphData[i].DistanceTime);
              GraphDataY[i].Text := InttoStr(avgSpeed(Round(DGraphData[i].Distance),DGraphData[i].DistanceTime));
            end;
-           YLabel := _('Ø-speed')+' ['+GetSpeedUnit(StatDistUnit)+']';
+           YLabel := _('ï¿½-speed')+' ['+GetSpeedUnit(StatDistUnit)+']';
          end;
       5: begin  { Passengers }
            for i := 0 to Years-1 do
@@ -1472,13 +1479,13 @@ var
            end;
            YLabel := _('Passengers');
          end;
-      6: begin  { Ø-Passengers }
+      6: begin  { ï¿½-Passengers }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := avgPassengers(DGraphData[i].Passengers, DGraphData[i].Flights);
              GraphDataY[i].Text := FormatFloat('0.00',avgPassengers(DGraphData[i].Passengers, DGraphData[i].Flights));
            end;
-           YLabel := _('Ø-Passengers');
+           YLabel := _('ï¿½-Passengers');
          end;
       8: begin
            for i := 0 to Years-1 do begin
@@ -1584,7 +1591,7 @@ var
     end; { case }
 
     MaxY := 0.001; // sonst evt. Division durch Null
-    { Höchsten Wert ermitteln }
+    { Hï¿½chsten Wert ermitteln }
     for i := StartIndex to EndIndex do
     if GraphDataY[i].Data > MaxY then MaxY := GraphDataY[i].Data;
 

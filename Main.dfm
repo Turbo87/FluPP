@@ -3,7 +3,7 @@ object FMain: TFMain
   Top = 261
   Width = 886
   Height = 415
-  Caption = 'FliPS'
+  Caption = 'FluPP'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,9 +27,9 @@ object FMain: TFMain
     Height = 28
     ActionManager = ActionManager
     Caption = 'Main'
-    ColorMap.HighlightColor = 15660791
+    ColorMap.HighlightColor = 15921906
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15660791
+    ColorMap.UnusedColor = 15921906
     Spacing = 4
     VertMargin = 2
   end
@@ -42,9 +42,9 @@ object FMain: TFMain
     ActionManager = ActionManager
     AnimationStyle = asNone
     Caption = 'ActionMainMenuBar'
-    ColorMap.HighlightColor = 15660791
+    ColorMap.HighlightColor = 15921906
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15660791
+    ColorMap.UnusedColor = 15921906
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

@@ -247,7 +247,7 @@ uses Main, Tools, ToolsGrid, Export;
 procedure TFSettings.FormCreate(Sender: TObject);
 begin
   TranslateComponent(Self);
-  LabelGetAirports.Hint := FliPSDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)));
+  LabelGetAirports.Hint := FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)));
 end;
 
 // ----------------------------------------------------------------

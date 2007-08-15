@@ -219,7 +219,7 @@ end;
 
 
 //*******************************************************
-// Older FluPP-Versions (untested for FliPS)
+// Older FluPP-Versions
 //*******************************************************
 
 procedure OpenOldFile5;
@@ -239,17 +239,17 @@ var
   Column, i : Word;
   AircraftID, AircraftType: TStrings;
 begin
-  if not fileexists(FlpFileName) then
+  if not fileexists(FluFileName) then
   begin
-    MessageDlg(format(_('File ''%s'' does not exist'),[FlpFileName]),mtWarning,[mbOK],0);
+    MessageDlg(format(_('File ''%s'' does not exist'),[FluFileName]),mtWarning,[mbOK],0);
     Exit;
   end;
   DataChanged := False;
   FMain.StatusBar1.Panels[2].Text := '';
-  FMain.Statusbar1.Panels[3].Text := FlpFileName;
+  FMain.Statusbar1.Panels[3].Text := FluFileName;
 
   TempFileName := FlpTempDir+'\'+'flightlog.xml';
-  ShellcopyFile(FlpTempDir+'\'+ExtractFileName(FlpFileName), TempFileName);
+  ShellcopyFile(FlpTempDir+'\'+ExtractFileName(FluFileName), TempFileName);
 
   try
     AircraftID := TStringList.Create;
@@ -471,16 +471,16 @@ var
   Column, i : Word;
   AircraftID, AircraftType: TStrings;
 begin
-  if not fileexists(FlpFileName) then
+  if not fileexists(FluFileName) then
   begin
-    MessageDlg(format(_('File ''%s'' does not exist'),[FlpFileName]),mtWarning,[mbOK],0);
+    MessageDlg(format(_('File ''%s'' does not exist'),[FluFileName]),mtWarning,[mbOK],0);
     Exit;
   end;
   AircraftID := TStringList.Create;
   AircraftType := TStringList.Create;
   DataChanged := False;
   FMain.StatusBar1.Panels[2].Text := '';
-  FMain.Statusbar1.Panels[3].Text := FlpFileName;
+  FMain.Statusbar1.Panels[3].Text := FluFileName;
 
   TempFileName := FlpTempDir+'\'+'flightlog.xml';
   AssignFile(AFile,TempFileName);
@@ -663,9 +663,9 @@ var
   Row, column, i,j, n, DataFormat : Word;
   AircraftID, AircraftType: TStrings;
 begin
-  if not fileexists(FlpFileName) then
+  if not fileexists(FluFileName) then
   begin
-    MessageDlg(format(_('File ''%s'' does not exist'),[FlpFileName]),mtWarning,[mbOK],0);
+    MessageDlg(format(_('File ''%s'' does not exist'),[FluFileName]),mtWarning,[mbOK],0);
     Exit;
   end;
   AircraftID := TStringList.Create;
@@ -673,8 +673,8 @@ begin
 
   DataChanged := False;
   FMain.StatusBar1.Panels[2].Text := '';
-  FMain.Statusbar1.Panels[3].Text := FlpFileName;
-  AssignFile(AFile,FlpFileName);
+  FMain.Statusbar1.Panels[3].Text := FluFileName;
+  AssignFile(AFile,FluFileName);
   Reset(AFile);
 
 { Einstellungen lesen }
@@ -857,24 +857,51 @@ begin
 end;
 
 
-// ----------------------------------------------------------------
-// Import flight log
-// ----------------------------------------------------------------
-
+//*******************************************************
+// Import csv-File
+//*******************************************************
 procedure ImportCSV(FileName: String);
-var Count : Integer;
+var
+  AFile: TextFile;
+  TmpTableCols, RowStrings: TStrings;
+  RowData: String;
+  i: word;
 begin
-  with GridActiveChild do begin
-    Grid.LoadFromCSV(FileName);
-    CheckCols;
+  try
+    TmpTableCols := TStringList.Create;
+    RowStrings := TStringList.Create;
 
-    For Count := 0 to GridCols.Count - 1 do begin
-      if Grid.Cells[Count, 0] <> GridCols[Count] then begin
-        Grid.RemoveCol(Count); Grid.InsertCol(Count);
-      end;
+    AssignFile(AFile,FileName);
+    Reset(AFile);
+    if Eof(aFile) then
+    begin
+
+      Exit;
     end;
 
-    NameCols;
+    { read TableCols }
+    Readln(aFile,RowData);
+    TmpTableCols.CommaText := RowData;
+
+    { read data }
+    if not Eof(aFile) then
+    repeat
+      Readln(aFile,RowData);
+      //RowStrings.Delimiter := ',';
+      //RowStrings.QuoteChar := '"';
+      RowStrings.CommaText := RowData;
+      if GridActiveChild.Grid.Cells[1,1] <> '' then
+        GridActiveChild.Grid.RowCount := GridActiveChild.Grid.RowCount+1;
+      for i := 0 to RowStrings.Count-1 do
+      begin
+        GridActiveChild.Data[TmpTableCols.Strings[i], GridActiveChild.Grid.RowCount-1] := RowStrings[i];
+      end;
+
+    until Eof(aFile);
+  finally
+    CloseFile(aFile);
+    TmpTableCols.Free;
+    RowStrings.Free;
   end;
 end;
 

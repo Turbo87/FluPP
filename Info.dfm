@@ -1,11 +1,11 @@
 object FInfo: TFInfo
-  Left = 1385
+  Left = 500
   Top = 271
   AlphaBlend = True
   AlphaBlendValue = 230
   BorderIcons = []
   BorderStyle = bsNone
-  Caption = 'Infos about FliPS'
+  Caption = 'Infos about FluPP'
   ClientHeight = 504
   ClientWidth = 442
   Color = 9868950
@@ -69,10 +69,7 @@ object FInfo: TFInfo
     Height = 34
     Alignment = taCenter
     AutoSize = False
-    Caption = 
-      '  FliPS is based on FluPP 1.0.9 Alpha 3 (http://flupp.sourceforg' +
-      'e.net).   Both programs are Open Source and licenced under the G' +
-      'NU-GPL'
+    Caption = 'FluPP is Open Source and is licenced under the GNU-GPL'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -87,12 +84,11 @@ object FInfo: TFInfo
   object LabelHomepage: TLabel
     Left = 16
     Top = 186
-    Width = 409
+    Width = 154
     Height = 16
     Cursor = crHandPoint
     Alignment = taCenter
-    AutoSize = False
-    Caption = 'http://flips.unpoint.de'
+    Caption = 'http://flupp.sourceforge.net'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -149,34 +145,16 @@ object FInfo: TFInfo
   object LabelPrgName: TLabel
     Left = 109
     Top = 16
-    Width = 223
+    Width = 254
     Height = 104
     Alignment = taCenter
-    Caption = 'FliPS'
+    Caption = 'FluPP'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -93
     Font.Name = 'Arial'
     Font.Style = []
-    ParentColor = False
-    ParentFont = False
-    Transparent = True
-  end
-  object Label1: TLabel
-    Left = 21
-    Top = 101
-    Width = 400
-    Height = 21
-    Alignment = taCenter
-    AutoSize = False
-    Caption = '(Fli)ght (P)rotocol (S)oftware'
-    Color = clBlack
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWhite
-    Font.Height = -11
-    Font.Name = 'Arial'
-    Font.Style = [fsItalic]
     ParentColor = False
     ParentFont = False
     Transparent = True

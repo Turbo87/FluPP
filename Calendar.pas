@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses Main, Tools, ToolsGrid, InputBox, Export;
+uses Main, Tools, ToolsGrid, InputBox, Export, CalendarAdd;
 
 {$R *.dfm}
 
@@ -80,7 +80,6 @@ procedure TFCalendar.FormShow(Sender: TObject);
        begin
          if GridSched.Cells[0,1] <> '' then
            GridSched.RowCount := GridSched.RowCount + 1;
-
          GridSched.Cells[0,GridSched.RowCount-1] := InttoStr(ImageIdx);
          GridSched.Cells[1,GridSched.RowCount-1] := Schedule.ValueFromIndex[i];
          GridSched.Cells[2,GridSched.RowCount-1] := Schedule.Names[i];
@@ -155,7 +154,6 @@ begin
   for Row := 1 to GridSched.RowCount-1 do
     if Assigned(GridSched.Objects[0,Row]) then
         TStrings(GridSched.Objects[0,Row]).Add(GridSched.Cells[2,Row]+'='+GridSched.Cells[1,Row]);
-
   DataChanged := True;
   FMain.StatusBar1.Panels[2].Text := '*';
   ExportSchedulesAsICal;
@@ -196,98 +194,35 @@ end;
 // ----------------------------------------------------------------
 procedure TFCalendar.ButtonAddClick(Sender: TObject);
 var
-  GridIdx : Integer;
-  InputBox: TFInputBox;
-  ComboBox : TComboBox;
-  DateTimePicker: TDateTimePicker;
-  EditDesc: TEdit;
-  LabelDate, LabelDesc: TLabel;
+  FCalendarAdd: TFCalendarAdd;
 begin
+  FCalendarAdd := TFCalendarAdd.Create(Application);
   try
-    InputBox := TFInputBox.Create(FCalendar);
-
-    InputBox.Caption := _('Date and description');
-    InputBox.Width := 250;
-    InputBox.Height := 170;
-
-    DateTimePicker := TDateTimePicker.Create(InputBox);
-    DateTimePicker.Parent := InputBox;
-    DateTimePicker.Date := now;
-    DateTimePicker.Width := 80;
-    DateTimePicker.Left := 20;
-    DateTimePicker.Top := 30;
-
-    EditDesc := TEdit.Create(InputBox);
-    EditDesc.Parent := InputBox;
-    EditDesc.Width := 120;
-    EditDesc.Left := 110;
-    EditDesc.Top := 30;
-
-    ComboBox := TComboBox.Create(InputBox);
-    ComboBox.Style := csDropDownList;
-    ComboBox.Parent := InputBox;
-    ComboBox.Width := 210;
-    ComboBox.Left := 20;
-    ComboBox.Top := 60;
-
-    ComboBox.Items.Add(_('-- General --'));
-    for GridIdx := 0 to FMain.MdiChildCount-1 do
-      ComboBox.Items.Add(_('Event: ')+GridChild(GridIdx).Caption);
-    If ComboBox.Items.Count > 0 then ComboBox.ItemIndex := 0;
-
-    LabelDate := TLabel.Create(InputBox);
-    LabelDate.Parent := InputBox;
-    LabelDate.Left := DateTimePicker.Left;
-    LabelDate.Top := DateTimePicker.Top-15;
-    LabelDate.Caption := _('Date');
-
-    LabelDesc := TLabel.Create(InputBox);
-    LabelDesc.Parent := InputBox;
-    LabelDesc.Left := EditDesc.Left;
-    LabelDesc.Top := EditDesc.Top-15;
-    LabelDesc.Caption := _('Description');
-
-    InputBox.ActiveControl := EditDesc;
-
-    repeat InputBox.ShowModal;
-      if InputBox.ModalResult = mrOK then
+    if FCalendarAdd.ShowModal = mrOK then
+    begin
+      if GridSched.Cells[1,1] <> '' then
+        GridSched.InsertRow(GridSched.RowCount);
+      { Event }
+      if FCalendarAdd.PageControl.ActivePageIndex = 0 then
       begin
-        if EditDesc.Text = '' then
-        begin
-          MessageDlg(_('Please enter a description'),mtWarning,[mbOK],0);
-          InputBox.ActiveControl := EditDesc;
-          InputBox.ModalResult := mrNone;
+        GridSched.Cells[0,GridSched.RowCount-1] := InttoStr(SchImageIdxEvt);
+        GridSched.Cells[1,GridSched.RowCount-1] := DatetoStr(FCalendarAdd.DtpEvent.Date);
+        GridSched.Cells[2,GridSched.RowCount-1] := FCalendarAdd.cbEvent.Text;
+        GridSched.Objects[0,GridSched.RowCount-1] := GridChild(FCalendarAdd.cbFlightLog.ItemIndex).Events;
         end;
-        if InputBox.ModalResult = mrOK then
-        begin
-          if GridSched.Cells[1,1] <> '' then
-            GridSched.InsertRow(GridSched.RowCount);
-
-          If ComboBox.ItemIndex = 0 then begin
-            GridSched.Objects[0,GridSched.RowCount-1] := Schedules;
-            GridSched.Cells[0,GridSched.RowCount-1] := InttoStr(SchImageIdxUsr);
-          end else begin
-            GridSched.Objects[0,GridSched.RowCount-1] := GridChild(ComboBox.ItemIndex-1).Events;
-            GridSched.Cells[0,GridSched.RowCount-1] := InttoStr(SchImageIdxEvt);
-          end;
-
-          GridSched.Cells[1,GridSched.RowCount-1] := DatetoStr(DateTimePicker.Date);
-          GridSched.Cells[2,GridSched.RowCount-1] := EditDesc.Text;
-          GridSched.Cells[3,GridSched.RowCount-1] := 'Sch';
-
-          SortGridByCols([1], GridSched);
-          UpdateTimeline;
-        end;
+      { Schedule }
+      if FCalendarAdd.PageControl.ActivePageIndex = 1 then
+      begin
+        GridSched.Cells[0,GridSched.RowCount-1] := InttoStr(SchImageIdxUsr);
+        GridSched.Cells[1,GridSched.RowCount-1] := DatetoStr(FCalendarAdd.DtpSchedule.Date);
+        GridSched.Cells[2,GridSched.RowCount-1] := FCalendarAdd.EditDesc.Text;
       end;
-      if InputBox.ModalResult = mrCancel then
-        Exit;
-    until (InputBox.ModalResult <> mrNone);
+
+      SortGridByCols([1], GridSched);
+      UpdateTimeline;
+    end;
   finally
-    DateTimePicker.Free;
-    EditDesc.Free;
-    LabelDate.Free;
-    LabelDesc.Free;
-    InputBox.Free;
+    FCalendarAdd.Release;
   end;
 end;
 
@@ -429,7 +364,7 @@ begin
     begin
       if MonthsBetween(now, StrToDate(Cells[1, ARow])) <  StrToInt(GenSettings.Values['WarningMonth']) then
         Canvas.Brush.Color := clFYellow;
-      if now >= StrToDate(Cells[1, ARow]) then
+      if now > incDay(StrToDate(Cells[1, ARow]), -7) then
         Canvas.Brush.Color := clFRed;
     end;
     Canvas.FillRect(Rect);

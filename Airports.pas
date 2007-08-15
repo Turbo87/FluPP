@@ -77,7 +77,7 @@ uses Main, Input, Tools, ToolsGrid;
 procedure TFAirports.FormCreate(Sender: TObject);
 begin
   TranslateComponent(Self);
-  LabelGetAirports.Hint := FliPSDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)));
+  LabelGetAirports.Hint := FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)));
 end;
 
 // ----------------------------------------------------------------
@@ -192,7 +192,7 @@ begin
     FAirports.ActiveControl := EditName;
     Exit;
   end;
-  if (MEBreit.Text = '  °  ''  "') or (MElaeng.Text = '  °  ''  "') then
+  if (MEBreit.Text = '  ï¿½  ''  "') or (MElaeng.Text = '  ï¿½  ''  "') then
   begin
     MessageDlg(_('Please enter airport position!'),mtInformation,[mbOK],0);
     Exit
@@ -350,7 +350,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFAirports.LabelGetAirportsClick(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 // ----------------------------------------------------------------

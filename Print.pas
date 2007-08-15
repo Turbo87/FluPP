@@ -874,7 +874,7 @@ begin
     WriteLineColumnAlign(17,SummZeile,IntToStr(Strecke),2);
 
     if CBDateTime.checked then WriteLineAlign(SummZeile, DateTimeToStr(now()), wtRight);
-    if CBFileName.checked then WriteLineAlign(SummZeile,{ExtractFileName(}FlpFileName{)}, wtLeft);
+    if CBFileName.checked then WriteLineAlign(SummZeile,{ExtractFileName(}FluFileName{)}, wtLeft);
   end;
 end;
 

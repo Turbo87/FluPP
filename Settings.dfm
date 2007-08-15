@@ -1346,8 +1346,6 @@ object FSettings: TFSettings
             Top = 72
             Width = 185
             Height = 21
-            CriticalPoints.MaxValueIncluded = False
-            CriticalPoints.MinValueIncluded = False
             DisplayFormat = dfFloat
             DecimalPlaces = 2
             TabOrder = 3
@@ -1358,8 +1356,6 @@ object FSettings: TFSettings
             Top = 48
             Width = 185
             Height = 21
-            CriticalPoints.MaxValueIncluded = False
-            CriticalPoints.MinValueIncluded = False
             DisplayFormat = dfFloat
             DecimalPlaces = 2
             TabOrder = 2

@@ -83,9 +83,9 @@ begin
     Prolog.Encoding := 'UTF-8';
     Prolog.Version := '1.0';
 
-    Root.Name := 'FliPS';
+    Root.Name := 'FluPP';
     Root.Properties.Add('Version', FileVersion);
-    Root.Properties.Add('Program', 'FliPS '+GetFileVersion(ParamStr(0)));
+    Root.Properties.Add('Program', 'FluPP '+GetFileVersion(ParamStr(0)));
 
     writeValStrings(Root.Items.Add('GenSettings'), GenSettings);
     writeObjStrings(Root, 'Medicals', Medicals);
@@ -177,7 +177,7 @@ begin
 
     Root.Name := 'FluPP';
     Root.Properties.Add('Version', '1');
-    Root.Properties.Add('Program', 'FliPS '+GetFileVersion(ParamStr(0)));
+    Root.Properties.Add('Program', 'FluPP '+GetFileVersion(ParamStr(0)));
 
     writeValStrings(Root.Items.Add('GenSettings'), GenSettings);
     writeObjStrings(Root, 'Medicals', Medicals);
@@ -278,7 +278,7 @@ var
   ScheduleList: TStrings;
   GridIdx: Word;
 begin
-  if (not StrToBool(GenSettings.Values['ExportICal'])) or (FlpFileName = '') then Exit;
+  if (not StrToBool(GenSettings.Values['ExportICal'])) or (FluFileName = '') then Exit;
 
   ScheduleList := TSTringList.Create;
   try
@@ -287,7 +287,7 @@ begin
       ScheduleList.AddStrings(GridChild(GridIdx).LicenseDates);
     ScheduleList.AddStrings(Medicals);
 
-    ExportICal(FlpFileName+'.ics', 'FliPS', ScheduleList);
+    ExportICal(FluFileName+'.ics', 'FluPP', ScheduleList);
   finally
     ScheduleList.Free;
   end;
@@ -327,7 +327,7 @@ begin
           Randomize;
           writeln(aFile,'BEGIN:VEVENT');
           writeln(aFile,'UID:'+ICalDateTime(now)+'-'+IntToStr(RandomRange(10000000,99999999))+'-'+AppName+'-'+IntToStr(i));
-          writeln(aFile,'CATEGORIES:FliPS');
+          writeln(aFile,'CATEGORIES:FluPP');
           writeln(aFile,'SUMMARY:'+UTF8Encode(ScheduleList.Names[i]));
           writeln(aFile,'DTSTART;VALUE=DATE:'+ICalDate(StrToDate(ScheduleList.ValueFromIndex[i])));
           writeln(aFile,'DTEND;VALUE=DATE:'+ICalDate(StrToDate(ScheduleList.ValueFromIndex[i])));
@@ -373,7 +373,7 @@ begin
   finally
     DecimalSeparator := TmpDecimalSeparator;
   end;
-  ShellExecute(FMain.Handle, 'open', PChar(FliPSDomain+'/gmaps/'+Params), nil, nil, SW_NORMAL);
+  ShellExecute(FMain.Handle, 'open', PChar(FLuPPDomain+'/gmaps/'+Params), nil, nil, SW_NORMAL);
 end;
 
 // ----------------------------------------------------------------
@@ -531,9 +531,9 @@ begin
         AddPoint(TargetAirport, PlaceMElem);
       end;
     end;
-    SaveToFile(FlpFileName+'.kml');
-    MessageDlg(PChar('Google Earth File saved as: '+#10+#13+ExtractFileName(FlpFileName)+'.kml'), mtInformation, [mbOK], 0);
-    ShellExecute(FMain.Handle, 'open', PChar(ExtractFileName(FlpFileName)+'.kml'), nil, nil, SW_NORMAL);
+    SaveToFile(FluFileName+'.kml');
+    MessageDlg(PChar('Google Earth File saved as: '+#10+#13+ExtractFileName(FluFileName)+'.kml'), mtInformation, [mbOK], 0);
+    ShellExecute(FMain.Handle, 'open', PChar(ExtractFileName(FluFileName)+'.kml'), nil, nil, SW_NORMAL);
   finally
     Free;
     DecimalSeparator := TmpDecimalSeparator;

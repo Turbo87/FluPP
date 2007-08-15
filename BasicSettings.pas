@@ -63,7 +63,7 @@ var
   IniFile: TIniFile;
 begin
   { read inifile }
-  Inifile := Tinifile.create(GetActualDir(false)+'\FliPS.Ini');
+  Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
   CBAutoLoad.checked := IniFile.ReadBool('General','AutoLoad',False);
   LabelAutoLoad.caption := Inifile.ReadString('General','AutoLoadFile','');
   Inifile.Free;
@@ -110,9 +110,9 @@ var
   IniFile: TIniFile;
 begin
   if Languages[LBLanguages.ItemIndex] <> copy(DefaultInstance.GetCurrentLanguage,1,2) then
-    MessageDlg(_('Please restart FliPS for changes to apply'),mtInformation,[mbOK],0);
+    MessageDlg(_('Please restart FluPP for changes to apply'),mtInformation,[mbOK],0);
 
-  Inifile := Tinifile.create(GetActualDir(false)+'\FliPS.Ini');
+  Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
   Inifile.WriteBool('General','AutoLoad',CBAutoLoad.checked);
   Inifile.WriteString('General','AutoLoadFile',LabelAutoLoad.caption);
   if LBLanguages.ItemIndex <> -1 then
@@ -140,7 +140,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFBasicSettings.Button2Click(Sender: TObject);
 begin
-  LabelAutoload.caption := FlpFileName;
+  LabelAutoload.caption := FluFileName;
 end;
 
 // ----------------------------------------------------------------
@@ -153,16 +153,16 @@ begin
   Reg := TRegistry.Create;
   try
     Reg.RootKey := HKEY_CLASSES_ROOT;
-    if not Reg.OpenKey('.flg', False) then
+    if not Reg.OpenKey('.flu', False) then
     begin
-      Reg.OpenKey('.flg',True);
-      Reg.WriteString('','FLG-File');
+      Reg.OpenKey('.flu',True);
+      Reg.WriteString('','FLU-File');
 
-      Reg.OpenKey('\FLG-File',True);
-      Reg.WriteString('','FliPS Datei');
+      Reg.OpenKey('\FLU-File',True);
+      Reg.WriteString('','FluPP Datei');
       Reg.OpenKey('DefaultIcon',True);
       Reg.WriteString('',ParamStr(0)+',0');
-      Reg.OpenKey('\FLG-File\Shell',True);
+      Reg.OpenKey('\FLU-File\Shell',True);
       Reg.WriteString('','Open');
       Reg.OpenKey('Open\Command',True);
       Reg.WriteString('','"' + ParamStr(0) + '" "%1"');

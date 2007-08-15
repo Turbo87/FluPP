@@ -12,7 +12,7 @@ uses
   JvExGrids, DateUtils, JvSimpleXml, GetWindowsVersion, JvComponentBase;
 
 const
-  {$I FliPS.inc}
+  {$I FluPP.inc}
 
 type
   TFMain = class(TForm)
@@ -143,7 +143,7 @@ var
   Medicals: TStrings;
   Schedules: TSTrings;
   SchedValidity: TSTrings;
-  FlpFileName: String;
+  FluFileName: String;
   FlpTempDir: String;
 
 implementation
@@ -230,7 +230,7 @@ begin
     ', procedure: ' + ProcedureName + ', line: '
     + LineNumber));
   AddLogEntry(_('OS-Version: '+ GetWinVersion));
-  AddLogEntry(_('FliPS-Version: '+ GetFileVersion(ParamStr(0))));
+  AddLogEntry(_('FluPP-Version: '+ GetFileVersion(ParamStr(0))));
   AddLogComment('------------------------------------------------------------');
 
 // Error Message
@@ -242,7 +242,7 @@ begin
     'Do you want to report this bug (completly anoymous) via internet now ?',
     mtError, [mbYes, mbNo], 0) = mrYes then
     begin
-      ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0))+'/'+UnitName+'/'+ProcedureName+'/'+LineNumber)),nil,nil,SW_NORMAL);
+      ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0))+'/'+UnitName+'/'+ProcedureName+'/'+LineNumber)),nil,nil,SW_NORMAL);
     end;
 end;
 
@@ -252,8 +252,8 @@ end;
 procedure TFMain.FormCreate(Sender: TObject);
 var IniFile: TIniFile;
 begin
-  Caption := 'FliPS - ' + GetFileVersion(ParamStr(0));
-  FlpFileName := '';
+  Caption := 'FluPP - ' + GetFileVersion(ParamStr(0));
+  FluFileName := '';
 
   ShortTimeFormat := 'hh:mm';
   TimeSeparator := ':';
@@ -261,12 +261,8 @@ begin
   //ShortDateFormat := 'dd.MM.yyyy';
   //DateSeparator := '.';
 
-  { FluPP -> FliPS }
-  if FileExists(GetActualDir(false)+'\FluPP.Ini') then
-    MoveFile(PChar(GetActualDir(false)+'\FluPP.Ini'), PChar(GetActualDir(false)+'\FliPS.Ini'));
-
   { read inifile }
-  Inifile := Tinifile.create(GetActualDir(false)+'\FliPS.Ini');
+  Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
   LF1.Caption := Inifile.ReadString('LastFife', '1', '');
   LF2.Caption := Inifile.ReadString('LastFife', '2', '');
   LF3.Caption := Inifile.ReadString('LastFife', '3', '');
@@ -274,7 +270,7 @@ begin
   LF5.Caption := Inifile.ReadString('LastFife', '5', '');
   if Inifile.ReadBool('General', 'AutoLoad', False) = True then
   begin
-    FlpFileName := Inifile.ReadString('General', 'AutoLoadFile', '');
+    FluFileName := Inifile.ReadString('General', 'AutoLoadFile', '');
     StartTimer.Enabled := True;
   end;  
   Height := Inifile.ReadInteger('General', 'Height', 480);
@@ -317,7 +313,7 @@ begin
   { Load with params }
   if (ParamStr(1) <> '') and (ExtractFileExt(ParamStr(1)) = '.flu') then
   begin
-    FlpFileName := ParamStr(1);
+    FluFileName := ParamStr(1);
     StartTimer.Enabled := True;
   end;
   ReadAirportData;
@@ -597,7 +593,7 @@ begin
 
   DelTree(FlpTempDir);
 
-  Inifile := Tinifile.create(GetActualDir(false)+'\FliPS.Ini');
+  Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
   Inifile.WriteString('LastFife', '1', LF1.Caption);
   Inifile.WriteString('LastFife', '2', LF2.Caption);
   Inifile.WriteString('LastFife', '3', LF3.Caption);
@@ -644,7 +640,7 @@ begin
   StatusBar1.Panels[0].Text := '';
   StatusBar1.Panels[2].Text := '';
   StatusBar1.Panels[3].Text := '';
-  FlpFileName := '';
+  FluFileName := '';
   UpdateButtonState;
 end;
 
@@ -655,7 +651,7 @@ procedure TFMain.LastFifeClick(Sender: TObject);
 begin
  if not SpeichernAbfrage then Exit;
  CloseClick(Self);
- FlpFileName := TAction(Sender).Caption;
+ FluFileName := TAction(Sender).Caption;
  LoadFlpFile;
 end;
 
@@ -727,9 +723,9 @@ end;
 procedure TFMain.FileOpen(Sender: TObject);
 begin
   CloseClick(Self);
-  OpenDialog.Filter := _('FliPS File')+' (*.flp)'+'|*.flp'+'|'+_('FluPP File')+' (*.flu)'+'|*.flu';
+  OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
   if not OpenDialog.Execute then Exit;
-  FlpFileName := OpenDialog.FileName;
+  FluFileName := OpenDialog.FileName;
   LoadFlpFile;
 end;
 
@@ -741,16 +737,16 @@ var IGCDir, TempFileName: String;
     XML : TJvSimpleXML;
     i : Word;
 begin
-  if not FileExists(FlpFileName) then
+  if not FileExists(FluFileName) then
   begin
-    MessageDlg(format(_('File ''%s'' does not exist'), [FlpFileName]), mtWarning, [mbOK], 0);
+    MessageDlg(format(_('File ''%s'' does not exist'), [FluFileName]), mtWarning, [mbOK], 0);
     Exit;
   end;
 
-  LastFife(FlpFileName);
+  LastFife(FluFileName);
   DataChanged := False;
   StatusBar1.Panels[2].Text := '';
-  Statusbar1.Panels[3].Text := FlpFileName;
+  Statusbar1.Panels[3].Text := FluFileName;
 
   GenSettings.Clear;
   Medicals.Clear;
@@ -773,12 +769,12 @@ begin
     StatusBar1.Repaint;
     Screen.Cursor := crHourGlass;
     try
-      JvZlib.DecompressFile(FlpFileName,FlpTempDir,True);
+      JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
     except
       on E: Exception do
       begin
-        CopyFile(pChar(FlpFileName), pChar(TempFileName), False);
-        IGCDir := copy(FlpFileName, 1, length(FlpFileName)-length(ExtractFileExt(FlpFileName)));
+        CopyFile(pChar(FluFileName), pChar(TempFileName), False);
+        IGCDir := copy(FluFileName, 1, length(FluFileName)-length(ExtractFileExt(FluFileName)));
         if DirectoryExists(IGCDir) then
           ShellCopyFile(IGCDir+'\*.*', FlpTempDir+'\Files', False);
         OpenOldFile4;
@@ -847,7 +843,7 @@ begin
 
   if DataChanged then
     answer := MessageDlg(format(_('Do you want to save the file ''%s''?'),
-      [extractFilename(FlpFileName)]),mtConfirmation,[mbYes,mbNo,mbCancel],0);
+      [extractFilename(FluFileName)]),mtConfirmation,[mbYes,mbNo,mbCancel],0);
 
   if answer = mrYes then FileSave(self);
   if answer = mrCancel then result := false;
@@ -858,16 +854,16 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FileSave(Sender: TObject);
 begin
-  if FlpFileName = '' then
+  if FluFileName = '' then
   begin
-    SaveDialog.Filter := _('FliPS File')+' (*.flp)'+'|*.flp'+'|'+_('FluPP File')+' (*.flu)'+'|*.flu';
+    SaveDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu';
     if not SaveDialog.Execute then Exit;
     SaveFile(SaveDialog.FileName);
-    FlpFileName := SaveDialog.FileName;
-    LastFife(FlpFileName);
-    Statusbar1.Panels[3].Text := FlpFileName;
+    FluFileName := SaveDialog.FileName;
+    LastFife(FluFileName);
+    Statusbar1.Panels[3].Text := FluFileName;
   end
-  else SaveFile(FlpFileName)
+  else SaveFile(FluFileName)
 end;
 
 // ----------------------------------------------------------------
@@ -875,15 +871,15 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FileSaveAsClick(Sender: TObject);
 begin
-  SaveDialog.Filter := _('FliPS File')+' (*.flp)'+'|*.flp'+'|'+_('FluPP File')+' (*.flu)'+'|*.flu';
+  SaveDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu';
   if not SaveDialog.Execute then Exit;
 
   SaveFile(SaveDialog.FileName);
 
-  FlpFileName := SaveDialog.FileName;
-  LastFife(FlpFileName);
+  FluFileName := SaveDialog.FileName;
+  LastFife(FluFileName);
 
-  Statusbar1.Panels[3].Text := FlpFileName;
+  Statusbar1.Panels[3].Text := FluFileName;
 end;
 
 // ----------------------------------------------------------------
@@ -969,10 +965,10 @@ begin
     if ModalResult = idOK then
       FileSave(self)
     else begin
-      LastFile := FlpFileName;
+      LastFile := FluFileName;
       CloseClick(Self);
 
-      FlpFileName := LastFile;
+      FluFileName := LastFile;
       LoadFlpFile;
     end;
   finally
@@ -1357,37 +1353,37 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.ActionHPExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',FliPSDomain,nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',FluPPDomain,nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPAirportsExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPLicensesExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/licenses/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/licenses/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPLanguagesExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/languages/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/languages/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPRFEExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/request/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/request/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPBugsExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPSupportExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FliPSDomain+'/support/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/support/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionResetColumnsExecute(Sender: TObject);

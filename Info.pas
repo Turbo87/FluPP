@@ -20,7 +20,6 @@ type
     TimerCredits: TTimer;
     LabelCredits: TLabel;
     LabelPrgName: TLabel;
-    Label1: TLabel;
     procedure HomepageClick(Sender: TObject);
     procedure LabelBugsClick(Sender: TObject);
     procedure LabelFeatureClick(Sender: TObject);
@@ -67,7 +66,7 @@ end;
 
 procedure TFInfo.FormShow(Sender: TObject);
 begin
-  LabelHomepage.caption := FliPSDomain;
+  LabelHomepage.caption := FluPPDomain;
 
   LabelVersion.caption := GetFileVersion(ParamStr(0));
   LabelVersionDate.caption := DateToStr(UnixToDateTime(GetImageLinkTimeStamp(Application.ExeName)));

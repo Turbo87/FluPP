@@ -330,7 +330,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// convert position [Nxxx°xx'xx''] to degree
+// convert position [Nxxxï¿½xx'xx''] to degree
 // ----------------------------------------------------------------
 function PosToDeg(Pos: String): Real;
 var
@@ -342,7 +342,7 @@ begin
   Result := 0;
   while i < length(Pos) do
   begin
-    while (Pos[i] <> '°') and (Pos[i] <> '''') and (Pos[i] <> '"') and (i < length(Pos)) do
+    while (Pos[i] <> 'ï¿½') and (Pos[i] <> '''') and (Pos[i] <> '"') and (i < length(Pos)) do
     begin
       zelle := zelle + Pos[i];
       inc(i);
@@ -542,12 +542,12 @@ end;
 // ----------------------------------------------------------------
 function StrToHTML(S: String): String;
 begin
-  S := StringReplace(S,'ä','&auml;',[rfReplaceAll]);
-  S := StringReplace(S,'ü','&uuml;',[rfReplaceAll]);
-  S := StringReplace(S,'ö','&ouml;',[rfReplaceAll]);
-  S := StringReplace(S,'Ä','&Auml;',[rfReplaceAll]);
-  S := StringReplace(S,'Ü','&Uuml;',[rfReplaceAll]);
-  S := StringReplace(S,'Ö','&Ouml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&auml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&uuml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&ouml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&Auml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&Uuml;',[rfReplaceAll]);
+  S := StringReplace(S,'ï¿½','&Ouml;',[rfReplaceAll]);
   Result := S;
 end;
 
@@ -829,13 +829,6 @@ end;
 function GetStringObject(StringList: TStrings; Name, ObjName: String): String;
 begin
   Result := '';
-
-  if StringList.IndexOfName(Name) > -1 then
-    Name := StringList.Names[StringList.IndexOfName(Name)]+StringList.NameValueSeparator+StringList.Values[StringList.Names[StringList.IndexOfName(Name)]];
-
-  if StringList.IndexOf(Name) = -1 then
-    exit;
-
   if Assigned(StringList.Objects[StringList.IndexOf(Name)]) then
     Result := TStringList(StringList.Objects[StringList.IndexOf(Name)]).Values[ObjName];
 end;
@@ -845,9 +838,6 @@ end;
 // ----------------------------------------------------------------
 procedure SetStringObject(StringList: TStrings; Name, ObjName, ObjValue: String);
 begin
-  if StringList.IndexOfName(Name) > -1 then
-    Name := StringList.Names[StringList.IndexOfName(Name)]+StringList.NameValueSeparator+StringList.Values[StringList.Names[StringList.IndexOfName(Name)]];
-
   if StringList.IndexOf(Name) = -1 then
     StringList.Add(Name);
 
@@ -881,7 +871,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Get File Information [added for FliPS]
+// Get File Information
 // ----------------------------------------------------------------
 function GetFileVersion(FileName: WideString): String;
 var VersionInfoSize, VerInfoSize, GetInfoSizeJunk: LongWord;

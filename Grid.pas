@@ -110,8 +110,6 @@ Via: Airports
 CTi: Time Categoriess
 Fil: Files
 Con: Contest
-
-** Added for FliPS **
 CfF: Costs for flight
 LaF: Landing fees
 CfC: Costs for crew
