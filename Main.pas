@@ -115,7 +115,7 @@ type
     procedure ActionFileImportExecute(Sender: TObject);
   private
     ProgressBar: TProgressBar;
-    procedure LoadFlpFile;
+    procedure LoadFluFile;
     procedure SaveFile(SaveFileName: String);
     procedure LoadDefaultGenSettings;
     procedure LoadDefaultSettings(Grid: TFGrid);
@@ -325,7 +325,7 @@ end;
 procedure TFMain.StartTimerTimer(Sender: TObject);
 begin
   StartTimer.Enabled := False;
-  LoadFlpFile;
+  LoadFluFile;
 end;
 
 // ----------------------------------------------------------------
@@ -652,7 +652,7 @@ begin
  if not SpeichernAbfrage then Exit;
  CloseClick(Self);
  FluFileName := TAction(Sender).Caption;
- LoadFlpFile;
+ LoadFluFile;
 end;
 
 // ----------------------------------------------------------------
@@ -726,13 +726,13 @@ begin
   OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
   if not OpenDialog.Execute then Exit;
   FluFileName := OpenDialog.FileName;
-  LoadFlpFile;
+  LoadFluFile;
 end;
 
 // ----------------------------------------------------------------
 // Read data from flightlog
 // ----------------------------------------------------------------
-procedure TFMain.LoadFlpFile;
+procedure TFMain.LoadFluFile;
 var IGCDir, TempFileName: String;
     XML : TJvSimpleXML;
     i : Word;
@@ -956,7 +956,7 @@ begin
       CloseClick(Self);
 
       FluFileName := LastFile;
-      LoadFlpFile;
+      LoadFluFile;
     end;
   finally
     Release;
