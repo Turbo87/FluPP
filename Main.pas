@@ -754,7 +754,7 @@ begin
   SchedValidity.Clear;
   LoadDefaultGenSettings;
 
-  FlpTempDir := FileGetTempName('Flp');
+  FlpTempDir := FileGetTempName('Flu');
   DeleteFile(FlpTempDir);
   CreateDir(FlpTempDir);
   CreateDir(FlpTempDir+'\Files');
@@ -798,18 +798,14 @@ begin
       end;
     end;
 
-    if (Root.Name = 'FluPP') then
-      OpenFlpFile6(XML);
-
-    if (Root.Name = 'FliPS') then begin
+    if (Root.Name = 'FluPP') then begin
       case StrToInt(Root.Properties.Value('Version')) of
-
-        7 : OpenFlpFile7(XML);
-        8 : OpenFlpFile8(XML);
-
-        else OpenFlpFile6(XML);
+        1 : OpenFluFile1(XML);
       end;
     end;
+
+    if (Root.Name = 'FliPS') then
+      OpenFlpFile7(XML);
 
   finally
     XML.Free;
@@ -887,16 +883,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.SaveFile(SaveFileName: String);
 begin
-  if (LowerCase(ExtractFileExt(SaveFileName)) = '.flu') then begin
-    if MessageDlg(_('If you save as "FluPP File" all additional entries will be lost '+#13#10+'if you re-open and save this file from within FluPP!'+#13#10+#13#10+'This limitations may not apply to files re-opened and saved '+#13#10+'from within FliPS. Do you still want to save as FluPP-File ?'), mtWarning, [mbYes, mbNo], 0) = mrYes then
-      SaveFluFile(SaveFileName)
-    else begin
-      Delete(SaveFileName, Pos('.flu', LowerCase(SaveFileName)), 4);
-      SaveFileName := SaveFileName + '.flp'; SaveFlpFile(SaveFileName);
-    end;
-  end else begin
-    SaveFlpFile(SaveFileName);
-  end;
+  SaveFluFile(SaveFileName);
 
   DataChanged := False;
   StatusBar1.Panels[2].Text := '';

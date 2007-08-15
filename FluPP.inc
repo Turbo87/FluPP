@@ -1,4 +1,4 @@
-FileVersion = '7';
+FileVersion = '1';
 DefaultLanguage = 'en';
 FluppDomain = 'http://www.flupp-flightlog.org';
 FluppEmail = 'info@flupp-flightlog.org';

@@ -4,9 +4,8 @@ interface
 
 uses Classes, StrUtils, SysUtils, Dialogs, gnugettext, Forms, JvSimpleXml;
 
-procedure OpenFlpFile8(XML : TJvSimpleXML); // ZIP, XML-File (FliPS & FileVersion = 8)
 procedure OpenFlpFile7(XML : TJvSimpleXML); // ZIP, XML-File (FliPS & FileVersion = 7)
-procedure OpenFlpFile6(XML : TJvSimpleXML); // ZIP, XML-File (FluPP | FileVersion < 7)
+procedure OpenFluFile1(XML : TJvSimpleXML); // ZIP, XML-File (FluPP | FileVersion = 1)
 
 procedure OpenOldFile5; //     ZIP, TEXT-File (DataFormat > 4)
 procedure OpenOldFile4; // non ZIP, TEXT-File (DataFormat = 4)
@@ -73,16 +72,6 @@ begin
         GridActiveChild.Grid.ColWidths[Col] := StrToInt(XMLElem.Properties.Item[i].Value);
       end;
 end;
-
-
-//*******************************************************
-// FliPS FileVersion = 8
-//*******************************************************
-
-procedure OpenFlpFile8(XML : TJvSimpleXML);
-begin
-end;
-
 
 //*******************************************************
 // FliPS FileVersion = 7
@@ -152,10 +141,10 @@ end;
 
 
 //*******************************************************
-// FluPP-Files or FliPS FileVersion < 7
+// FluPP-Files  FileVersion 1
 //*******************************************************
 
-procedure OpenFlpFile6(XML : TJvSimpleXML);
+procedure OpenFluFile1(XML : TJvSimpleXML);
 var XMLRootIdx, XMLIdx: Word;
     FLElem: TJvSimpleXMLElem;
     FlightLogName : String;    

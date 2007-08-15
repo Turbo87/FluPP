@@ -4,8 +4,7 @@ interface
 
 uses Classes, SysUtils, Math, gnugettext, Grids, Windows, ShellAPI, JvSimpleXml, Dialogs;
 
-function SaveFlpFile(FileName: String) : Boolean; // ZIP, XML-File (FliPS actual FileVersion)
-function SaveFluFile(FileName: String) : Boolean; // ZIP, XML-File (compatible FluPP Files)
+function SaveFluFile(FileName: String) : Boolean; // ZIP, XML-File
 
 procedure ExportCSV(FileName: String);
 
@@ -70,99 +69,7 @@ end;
 
 
 //*******************************************************
-// FliPS actual FileVersion
-//*******************************************************
-
-function SaveFlpFile(FileName: String) : Boolean;
-var GridIdx, i: Integer;
-    FLElem: TJvSimpleXMLElem;
-    ProgressBar: TProgressBar;
-begin
-  with TJvSimpleXML.Create(Application) do
-  try
-    Prolog.Encoding := 'UTF-8';
-    Prolog.Version := '1.0';
-
-    Root.Name := 'FluPP';
-    Root.Properties.Add('Version', FileVersion);
-    Root.Properties.Add('Program', 'FluPP '+GetFileVersion(ParamStr(0)));
-
-    writeValStrings(Root.Items.Add('GenSettings'), GenSettings);
-    writeObjStrings(Root, 'Medicals', Medicals);
-    writeObjStrings(Root, 'Schedules', Schedules);
-
-    { Settings }
-    for GridIdx := 0 to FMain.MDIChildCount-1 do
-    begin
-      FLElem := Root.Items.Add('FlightLog');
-      with FLElem do
-      begin
-        Properties.Add('Name', GridChild(GridIdx).Caption);
-
-        { Settings }
-        writeValStrings(Items.Add('Settings'), GridChild(GridIdx).Settings);
-
-        { AutoComplete }
-        writeObjStrings(FLElem, 'Aircraft', GridChild(GridIdx).ACAircrafts);
-        writeObjStrings(FLElem, 'Pilot', GridChild(GridIdx).ACPilots);
-        writeObjStrings(FLElem, 'Airport', GridChild(GridIdx).ACAirports);
-
-        { Categories }
-        writeObjStrings(FLElem, 'TimeCat', GridChild(GridIdx).ACTimeCat);
-        writeObjStrings(FLElem, 'Category', GridChild(GridIdx).ACCategories);
-        writeObjStrings(FLElem, 'EventCat', GridChild(GridIdx).ACEventCat);
-        writeObjStrings(FLElem, 'ContestCat', GridChild(GridIdx).ACContestCat);
-
-        { License Data }
-        writeObjStrings(FLElem, 'LicenseCat', GridChild(GridIdx).LicenseCategories);
-        writeObjStrings(FLElem, 'LicenseTimeCat', GridChild(GridIdx).LicenseTimeCat);
-        writeObjStrings(FLElem, 'LicenseDates', GridChild(GridIdx).LicenseDates);
-        writeObjStrings(FLElem, 'AccLicenses', GridChild(GridIdx).AccLicenses);
-        writeObjStrings(FLElem, 'OptConditions', GridChild(GridIdx).OptConditions);
-        writeObjStrings(FLElem, 'Events', GridChild(GridIdx).Events);
-
-        { Columns }
-        writeColumns(FLElem, GridIdx);
-
-        { Flight data }
-        for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
-          writeFlight(FLElem.Items.Add('Flight'), GridIdx, i);
-      end;
-    end;
-    SaveToFile(FlpTempDir+'\'+'flightlog.xml');
-  finally
-    Free;
-  end;
-
-  { Compress }
-  Result := True;
-  try
-    ProgressBar := TProgressBar.Create(FMain);
-    ProgressBar.Parent := FMain.StatusBar1;
-    ProgressBar.Top := 2;
-    ProgressBar.Width := FMain.StatusBar1.Panels.Items[0].Width;
-    ProgressBar.Height := FMain.StatusBar1.Height - 2;
-    FMain.StatusBar1.Repaint;
-    Screen.Cursor := crHourGlass;
-    try
-      FMain.JvZlib.CompressDirectory(FlpTempDir,True,FileName);
-    except
-      on E: Exception do
-      begin
-        MessageDlg(E.Message, mtWarning, [mbOK], 0);
-        Result := False;
-      end;
-    end;
-  finally
-    ProgressBar.Free;
-    Screen.Cursor := crDefault;
-    FMain.StatusBar1.Repaint;
-  end;
-end;
-
-
-//*******************************************************
-// FluPP-Files
+// FluPP FileVersion 1
 //*******************************************************
 
 function SaveFluFile(FileName: String) : Boolean;
@@ -176,7 +83,7 @@ begin
     Prolog.Version := '1.0';
 
     Root.Name := 'FluPP';
-    Root.Properties.Add('Version', '1');
+    Root.Properties.Add('Version', FileVersion);
     Root.Properties.Add('Program', 'FluPP '+GetFileVersion(ParamStr(0)));
 
     writeValStrings(Root.Items.Add('GenSettings'), GenSettings);
@@ -252,11 +159,9 @@ begin
   end;
 end;
 
-
 // ----------------------------------------------------------------
-// Export flight log
+// Export flight log as CSV
 // ----------------------------------------------------------------
-
 procedure ExportCSV(FileName: String);
 var Count : Integer;
 begin
@@ -269,9 +174,8 @@ begin
   end;
 end;
 
-
 // ----------------------------------------------------------------
-// Export to ICalendar
+// Export Schedules as ICalendar
 // ----------------------------------------------------------------
 procedure ExportSchedulesAsICal;
 var
