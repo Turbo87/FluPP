@@ -20,9 +20,11 @@ type
     ShapeRed: TShape;
     ShapeBlue: TShape;
     Label1: TLabel;
+    ButtonExport: TJvImgBtn;
     procedure Redraw(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ButtonExportClick(Sender: TObject);
 
   private
     procedure TabFree(Sender: TObject; var Action: TCloseAction);
@@ -57,6 +59,7 @@ begin
   OnResize := FormResize;
   DoubleBuffered := True;
   DrawArea := TImage.create(FStat_Graph);
+  ButtonExport.Visible := False;
   with DrawArea do
   begin
     Parent := FStat_Graph;
@@ -79,6 +82,7 @@ end;
 procedure TFStat_Graph.CreateTab;
 begin
   Tab := TJvStringGrid.create(FStat_Graph);
+  ButtonExport.Visible := True;
   OnClose := TabFree;
   OnResize := nil;
   With Tab do
@@ -192,6 +196,16 @@ begin
   TranslateComponent(Self);
   ShapeBlue.Brush.Color := clFBlue;
   ShapeRed.Brush.Color := clFRed;
+end;
+
+// ----------------------------------------------------------------
+// Export Stats to CSV
+// ----------------------------------------------------------------
+procedure TFStat_Graph.ButtonExportClick(Sender: TObject);
+begin
+  FMain.SaveDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
+  if not FMain.SaveDialog.Execute then exit;
+  Tab.SaveToCSV(FMain.SaveDialog.FileName);
 end;
 
 end.

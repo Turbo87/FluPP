@@ -466,7 +466,9 @@ begin
   SGDetail.Cells[2,0]  := _('Time');
   SGDetail.Cells[3,0]  := _('Flights');
 
-  for i := 0 to high(Data)-2 do if Data[i].Name <> '' then
+  if length(Data) = 0 then
+    Exit;
+  for i := 0 to high(Data) do if Data[i].Name <> '' then
   begin
     SGDetail.Cells[0,i+1] := InttoStr(i);
     SGDetail.Cells[1,i+1] := Data[i].Name;
@@ -610,7 +612,7 @@ var
     end;
   end;
 {----------}
-  { TStatData-Records ausfï¿½llen }
+  { TStatData-Records ausfüllen }
   procedure AddData(var StatData: TStatData; j: Word);
   begin
     StatData[j].Time := CalcTime(GridIdx, StatData[j].Time,i,i, RGDefaultTime.ItemIndex);
@@ -740,6 +742,7 @@ var
       SetLength(StatData[i].Kat,0);
       SetLength(StatData[i].Contest,0);
     end;
+    SetLength(STatData,0);
   end;
 {----------}
 begin
@@ -777,6 +780,7 @@ begin
 
   CBKatGes.ItemIndex := 0;
 
+  SetLength(CoPilot, 1);
   CoPilot[0].Name := ' '+_('With passenger');
 
   try
@@ -793,7 +797,7 @@ begin
       exit;
     end;
 
-    { Gï¿½ltiger Wert in Flights? }
+    { Gültiger Wert in Flights? }
     if RBStarts.checked then
     begin
       try StrToInt(CBSTFrom.Text)
@@ -817,7 +821,7 @@ begin
       end;
     end;
 
-    { Startjahr fï¿½r Statistik }
+    { Startjahr für Statistik }
     SetLength(GraphData,0);
     Years := 0;
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
@@ -849,15 +853,15 @@ begin
 
       SetLength(GraphData,Length(GraphData)+years);
     end;
-  { Schleife ï¿½ber alle Flugbï¿½cher }
+  { Schleife über alle Flugbücher }
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
     begin
       GSNr := GridIdx;
-      { fï¿½r alle ausgewï¿½hlten Scheine }
+      { für alle ausgewählten Scheine }
       if LBFlu.Selected[GridIdx] then
       if GridChild(GridIdx).Data['Num',1] <> '' then
       begin
-        { Wenn Seit Schein: "Schein Seit" ausgefï¿½llt? }
+        { Wenn Seit Schein: "Schein Seit" ausgefüllt? }
         if RBSchein.checked then
         begin
           if GridChild(GridIdx).Settings.Values['LicenseSince'] = '  .  .    ' then
@@ -1031,28 +1035,7 @@ begin
             AddDetail(AircraftID,'AId');
             AddDetail(Startort,'StL');
             AddDetail(Landeort,'LaL');
-
-            { AddDetail Pilot }
-            j:= 0;
-            ItsIn := False;
-            if length(Pilot)>0 then
-              for j := 0 to length(Pilot)-1 do
-            begin
-              if GridChild(GridIdx).Data['Pi1',i] = Pilot[j].Name then
-              begin
-                Itsin := True;
-                AddData(Pilot,j);
-                break;
-              end;
-            end;
-            if not ItsIn then
-            begin
-              SetLength(Pilot,length(Pilot)+1);
-              SetLength(Pilot[length(Pilot)-1].GraphData,years);
-              if GridChild(GridIdx).Data['Pi1',i] = '' then BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi1',i];
-              Pilot[length(Pilot)-1].Name := BegleitTemp;
-              AddData(Pilot,length(Pilot)-1);
-            end;
+            AddDetail(Pilot,'Pi1');
 
             { AddDetail CoPilot }
             j:= 0;
@@ -1080,7 +1063,6 @@ begin
             begin
               SetLength(CoPilot,length(CoPilot)+1);
               SetLength(CoPilot[length(CoPilot)-1].GraphData,years);
-              if GridChild(GridIdx).Data['Pi2',i] = '' then BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',i];
               CoPilot[length(CoPilot)-1].Name := BegleitTemp;
               AddData(CoPilot,length(CoPilot)-1);
             end;
@@ -1427,7 +1409,7 @@ var
     { GraphData
        herausfinden des hï¿½chsten Datensatzes
        skalieren
-       Text fï¿½r Beschriftung erstellen }
+       Text für Beschriftung erstellen }
     SetLength(GraphDataY,Years);
 
     case ComboBoxY.ItemIndex of

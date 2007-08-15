@@ -33,7 +33,7 @@ object FStat_Graph: TFStat_Graph
       760
       40)
     object ButtonExit: TJvImgBtn
-      Left = 359
+      Left = 383
       Top = 8
       Width = 89
       Height = 25
@@ -49,6 +49,24 @@ object FStat_Graph: TFStat_Graph
       HotTrackFont.Style = []
       Images = FMain.ImageList
       ImageIndex = 8
+    end
+    object ButtonExport: TJvImgBtn
+      Left = 287
+      Top = 7
+      Width = 89
+      Height = 25
+      Anchors = []
+      Cancel = True
+      Caption = 'Export'
+      TabOrder = 1
+      OnClick = ButtonExportClick
+      HotTrackFont.Charset = DEFAULT_CHARSET
+      HotTrackFont.Color = clWindowText
+      HotTrackFont.Height = -11
+      HotTrackFont.Name = 'MS Sans Serif'
+      HotTrackFont.Style = []
+      Images = FMain.ImageList
+      ImageIndex = 33
     end
   end
   object StatusBar1: TStatusBar
