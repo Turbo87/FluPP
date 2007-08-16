@@ -1,0 +1,3235 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FluPP\n"
+"POT-Creation-Date: 2006-02-13 08:10\n"
+"PO-Revision-Date: 2007-03-24 09:41+0100\n"
+"Last-Translator: Momme Mommsen <momme@flupp-flightlog.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: dxgettext 1.2.1\n"
+"Language-Team: Stefano Lasagna\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+
+#. FAirports..Caption
+#. FMain..ActionManager..ActionHPAirports..Caption
+#. FMain..ActionManager..ActionAirports..Hint
+#. FMain..ActionManager..ActionHPAirports..Caption
+#: Airports.dfm:5
+#: Kopie_von_Main.dfm:660
+#: Main.dfm:670
+#: Main.dfm:700
+msgid "Airports"
+msgstr "Aeroporti"
+
+#. FAirports..ButtonFlp..Caption
+#: Airports.dfm:27
+msgid "Airport database"
+msgstr "Database Aeroporti"
+
+#. FAirports..ButtonOwnFlp..Caption
+#: Airports.dfm:44
+msgid "Custom airports"
+msgstr "Aeroporti Personali"
+
+#. FAirports..LabelGetAirports..Caption
+#: Airports.dfm:69
+msgid "Get more airports"
+msgstr "Cerca altri aeroporti"
+
+#. FAirports..LabelEmail..Caption
+#: Airports.dfm:85
+msgid "Please email us when you find missing or wrong airports"
+msgstr "Per cortesia scrivici una e-mail se trovi aeroporti errati o mancanti"
+
+#. FAirports..Panel1..ButtonOK..Caption
+#. FInput..Panel1..ButtonOK..Caption
+#. FInputBox..Panel1..ButtonOK..Caption
+#. FInput..Panel1..ButtonOK..Caption
+#. FScheduler..Panel1..ButtonOK..Caption
+#: Airports.dfm:176
+#: Input.dfm:53
+#: InputBox.dfm:56
+#: Kopie_von_Input.dfm:53
+#: Scheduler.dfm:34
+msgid "OK"
+msgstr "OK"
+
+#. FAirports..Panel1..ButtonBeenden..Caption
+#. FBasicSettings..Panel1..ButtonBeenden..Caption
+#. FInput..Panel1..ButtonCancel..Caption
+#. FInputBox..Panel1..ButtonCancel..Hint
+#. FInput..Panel1..ButtonCancel..Caption
+#. FScheduler..Panel1..ButtonCancel..Caption
+#. FSettings..Panel1..ButtonExit..Caption
+#: Airports.dfm:194
+#: BasicSettings.dfm:53
+#: Input.dfm:37
+#: InputBox.dfm:35
+#: Kopie_von_Input.dfm:37
+#: Scheduler.dfm:52
+#: Settings.dfm:87
+msgid "Abort"
+msgstr "Termina"
+
+#. FAirports..PanelOwnFlp..Label2..Caption
+#. PanelOrtPos.Visible := True;
+#: Airports.dfm:231
+#: Settings.pas:528
+msgid "Airport name"
+msgstr "Nome aeroporto"
+
+#. FAirports..PanelOwnFlp..Label3..Caption
+#. FAirports..PanelOwnFlp..EditICAO..Hint
+#: Airports.dfm:238
+#: Airports.dfm:308
+msgid "ICAO Code"
+msgstr "Codice ICAO"
+
+#. FAirports..PanelOwnFlp..Label1..Caption
+#: Airports.dfm:245
+msgid "Position:"
+msgstr "Posizione:"
+
+#. FAirports..PanelOwnFlp..ButtonChange..Hint
+#. FFlightLogs..ButtonEdit..Hint
+#: Airports.dfm:252
+#: FlightLogs.dfm:106
+msgid "edit"
+msgstr "modifica"
+
+#. FAirports..PanelOwnFlp..ButtonDelete..Hint
+#. FFlightLogs..ButtonDelete..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonWPRem..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonWPRem..Hint
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..ButtonRem..Hint
+#: Airports.dfm:268
+#: FlightLogs.dfm:90
+#: Input.dfm:1146
+#: Kopie_von_Input.dfm:1089
+#: Settings.dfm:862
+msgid "remove"
+msgstr "rimuovi"
+
+#. FAirports..PanelOwnFlp..ButtonNeu..Hint
+#. FFlightLogs..ButtonNew..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonWPAdd..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonWPAdd..Hint
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..ButtonAdd..Hint
+#: Airports.dfm:284
+#: FlightLogs.dfm:74
+#: Input.dfm:1129
+#: Kopie_von_Input.dfm:1072
+#: Settings.dfm:839
+msgid "add"
+msgstr "aggiungi"
+
+#. FAirports..PanelOwnFlp..EditName..Hint
+#. FAirports..PanelFlpSu..EditFind..Hint
+#: Airports.dfm:300
+#: Airports.dfm:423
+msgid "Name of the airport"
+msgstr "Nome aeroporto"
+
+#. FAirports..PanelOwnFlp..MEBreit..Hint
+#: Airports.dfm:316
+#: Airports.pas:141
+#: Airports.pas:155
+msgid "Latitude"
+msgstr "Latitudine"
+
+#. FAirports..PanelOwnFlp..MELaeng..Hint
+#: Airports.dfm:371
+#: Airports.pas:142
+#: Airports.pas:156
+msgid "Longitude"
+msgstr "Longitudine"
+
+#. FAirports..PanelFindEingabe..RBName..Caption
+#: Airports.dfm:390
+msgid "Inherit airport name"
+msgstr "Importa nome aeroporto"
+
+#. FAirports..PanelFindEingabe..RBKennung..Caption
+#: Airports.dfm:398
+msgid "Inherit ICAO code"
+msgstr "Importa codice ICAO"
+
+#. FAirports..PanelFlpSu..Label4..Caption
+#: Airports.dfm:416
+msgid "Find airport"
+msgstr "Trova aeroporto"
+
+#. FBasicSettings..Caption
+#. FMain..ActionManager..ActionBasicSettings..Hint
+#: BasicSettings.dfm:5
+#: Main.dfm:534
+msgid "Basic settings"
+msgstr "impostazioni di base"
+
+#. FBasicSettings..PageControl..TabSheet1..Caption
+#. FSettings..PageControl..TabSheetGeneral..Caption
+#. FSettings..PageControl..TabSheetGeneral..GroupBox1..Caption
+#. FSettings..PageControl..TabSheetGeneral..GroupBox11..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox3..Caption
+#: BasicSettings.dfm:93
+#: Settings.dfm:111
+#: Settings.dfm:234
+#: Settings.dfm:394
+#: Settings.dfm:725
+msgid "General"
+msgstr "Generali"
+
+#. FBasicSettings..PageControl..TabSheet1..CBAutoLoad..Caption
+#: BasicSettings.dfm:120
+msgid "Load flightlog at startup"
+msgstr "Carica log di volo all'avvio"
+
+#. FBasicSettings..PageControl..TabSheet1..Button1..Caption
+#: BasicSettings.dfm:134
+msgid "Browse [...]"
+msgstr "Sfoglia [...]"
+
+#. FBasicSettings..PageControl..TabSheet1..Button2..Caption
+#: BasicSettings.dfm:149
+msgid "Current"
+msgstr "Attuale"
+
+#. FBasicSettings..PageControl..TabSheet1..GroupBox1..Caption
+#: BasicSettings.dfm:193
+msgid "Shortcut"
+msgstr "Scorciatoia"
+
+#. FBasicSettings..PageControl..TabSheet1..GroupBox1..BitBtn1..Caption
+#. FGrid..PopupMenu..PUKategorieZuordnen..KatAdd..Caption
+#: BasicSettings.dfm:200
+#: Grid.dfm:81
+msgid "Add"
+msgstr "Aggiungi"
+
+#. FBasicSettings..PageControl..TabSheet1..GroupBox1..BitBtn2..Caption
+#. FGrid..PopupMenu..PUKategorieZuordnen..KatRem..Caption
+#: BasicSettings.dfm:222
+#: Grid.dfm:85
+msgid "Remove"
+msgstr "Rimuovi"
+
+#. FBasicSettings..PageControl..TabSheet2..Caption
+#. FBasicSettings..PageControl..TabSheet2..Label3..Caption
+#. FMain..ActionManager..ActionHPLanguages..Caption
+#. FMain..ActionManager..ActionHPLanguages..Caption
+#: BasicSettings.dfm:242
+#: BasicSettings.dfm:249
+#: Kopie_von_Main.dfm:671
+#: Main.dfm:711
+msgid "Languages"
+msgstr "Lingue"
+
+#. FBasicSettings..PageControl..TabSheet2..Label5..Caption
+#: BasicSettings.dfm:270
+msgid "Translator"
+msgstr "Traduttore"
+
+#. FFlightLogs..Caption
+#. FMain..ActionManager..ActionFlightLogs..Hint
+#: FlightLogs.dfm:5
+#: Main.dfm:528
+msgid "Manage flight logs"
+msgstr "Gestisci log di volo"
+
+#. FFlightLogs..Label12..Caption
+#: FlightLogs.dfm:29
+msgid "You can add or remove fllight logs here."
+msgstr "Puoi aggiungere o rimuovere log di volo qui."
+
+#. FFlightLogs..LBFlu..Hint
+#. FSettings..PanelFligtLogs..LBFlu..Hint
+#. FTrainBaro..PanelFligtLogs..LBFlu..Hint
+#: FlightLogs.dfm:122
+#: Settings.dfm:1217
+#: TrainBaro.dfm:139
+msgid "Select flight log"
+msgstr "Scegli log di volo"
+
+#. FGrid..PopupMenu..PUKategorieZuordnen..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLCat..Caption
+#. FSettings..PageControl..TabSheetCat..Caption
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet1..Caption
+#. FStatistics..Panel3..CBKatGes..Text
+#. FStatistics..Panel3..CBKatGes....Items.Strings
+#. FStatistics..Panel3..CBKatDetail..Text
+#. FStatistics..Panel3..CBKatDetail....Items.Strings
+#: Grid.dfm:79
+#: Settings.dfm:577
+#: Settings.dfm:941
+#: Settings.dfm:951
+#: Statistics.dfm:907
+#: Statistics.dfm:910
+#: Statistics.dfm:968
+#: Statistics.dfm:971
+#: Print.pas:646
+msgid "Categories"
+msgstr "Categorie"
+
+#. FGrid..PopupMenu..PUFiles..Caption
+#: Grid.dfm:94
+msgid "Files"
+msgstr "Files"
+
+#. FGrid..PopupMenu..PUFiles..Hint
+#: Grid.dfm:95
+msgid "Attached files"
+msgstr "Files allegati"
+
+#. FInfo..Caption
+#: Info.dfm:8
+msgid "Infos about FluPP"
+msgstr "Info su FluPP"
+
+#. FInfo..LabelBugs..Caption
+#: Info.dfm:33
+msgid "Please report bugs here"
+msgstr "Per cortesia riporta qui eventuali bugs trovati"
+
+#. FInfo..LabelVersionDate..Caption
+#. FPrint..RBDatum..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLDate..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLDate..VLEDate....TitleCaptions.Strings
+#. FSettings..PageControl..TabSheetMedicals..GroupBox10..VLEMedicals....TitleCaptions.Strings
+#. FStatistics..Panel2..RBDatum..Caption
+#. ----------------------------------------------------------------
+#: Info.dfm:54
+#: Print.dfm:468
+#: Settings.dfm:543
+#: Settings.dfm:568
+#: Settings.dfm:793
+#: Statistics.dfm:1331
+#: Main.pas:401
+#: Print.pas:637
+#: Scheduler.pas:94
+#: Scheduler.pas:195
+msgid "Date"
+msgstr "Data"
+
+#. FInfo..Label12..Caption
+#: Info.dfm:87
+msgid "FluPP is Open Source and is licenced under the GNU-GPL"
+msgstr "FluPP è OpenSource ed è registrato sotto GNU-GPL"
+
+#. FInfo..LabelRFE..Caption
+#: Info.dfm:127
+msgid "Please report feature requests here"
+msgstr "Per cortesia riporta qui eventuali richieste di nuove funzioni"
+
+#. FInfo..BitBtn2..Caption
+#. FMain..ActionManager..ActionExit..Caption
+#. FLicenses..Panel1..ButtonExit..Caption
+#. FMain..ActionManager..ActionExit..Caption
+#. FMain..ActionManager..ActionExit..Hint
+#. FNinetyDays..Panel1..BitBtn1..Caption
+#. FPrint..Panel1..BitBtn1..Caption
+#. FStat_Graph..Panel1..ButtonExit..Caption
+#. FStatistics..Panel1..BitBtn1..Caption
+#. FTrainBaro..Panel1..BitBtn1..Caption
+#: Info.dfm:181
+#: Kopie_von_Main.dfm:533
+#: Licenses.dfm:34
+#: Main.dfm:554
+#: Main.dfm:555
+#: NinetyDays.dfm:98
+#: Print.dfm:364
+#: StatGraph.dfm:42
+#: Statistics.dfm:1060
+#: TrainBaro.dfm:110
+msgid "Exit"
+msgstr "Esci"
+
+#. FInput..Caption
+#. FInput..Caption
+#. FSettings..PageControl..TabSheetGeneral..GroupBox6..Caption
+#: Input.dfm:6
+#: Kopie_von_Input.dfm:6
+#: Settings.dfm:275
+msgid "Input"
+msgstr "Input"
+
+#. FInput..Panel1..ButtonNext..Hint
+#. FInput..Panel1..ButtonNext..Hint
+#: Input.dfm:70
+#: Kopie_von_Input.dfm:70
+msgid "Next flight. Or just press RETURN!"
+msgstr "Prossimo volo. Oppure puoi premere RETURN!"
+
+#. FInput..Panel1..ButtonNext..Caption
+#. FInput..Panel1..ButtonNext..Caption
+#. FSettings..Panel1..ButtonNext..Caption
+#: Input.dfm:71
+#: Kopie_von_Input.dfm:71
+#: Settings.dfm:51
+msgid "Next"
+msgstr "Prossimo"
+
+#. FInput..Panel3..Label1..Caption
+#. FInput..Panel3..Label1..Caption
+#: Input.dfm:111
+#: Kopie_von_Input.dfm:118
+msgid "Flight no.:"
+msgstr "Volo nr.:"
+
+#. FInput..TabControl..TSFlugdaten..Caption
+#. FInput..TabControl..TSFlugdaten..Caption
+#: Input.dfm:170
+#: Kopie_von_Input.dfm:170
+msgid "Flightdata"
+msgstr "Dati di volo"
+
+#. FInput..TabControl..TSFlugdaten..Label2..Caption
+#. FInput..TabControl..TSFlugdaten..Label2..Caption
+#: Input.dfm:200
+#: Kopie_von_Input.dfm:218
+msgid "Date:"
+msgstr "Data:"
+
+#. FInput..TabControl..TSFlugdaten..Label3..Caption
+#. FInput..TabControl..TSFlugdaten..Label3..Caption
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..PanelFlugz..LabelTyp..Caption
+#: Input.dfm:208
+#: Kopie_von_Input.dfm:226
+#: Settings.dfm:892
+msgid "Aircraft type:"
+msgstr "Tipo velivolo:"
+
+#. FInput..TabControl..TSFlugdaten..Label5..Caption
+#. FInput..TabControl..TSFlugdaten..Label5..Caption
+#: Input.dfm:215
+#: Kopie_von_Input.dfm:233
+msgid "Aircraft ID:"
+msgstr "ID Velivolo:"
+
+#. FInput..TabControl..TSFlugdaten..Label6..Caption
+#: Input.dfm:223
+msgid "Copilot:"
+msgstr "Copilota:"
+
+#. FInput..TabControl..TSFlugdaten..Label25..Caption
+#. FInput..TabControl..TSFlugdaten..Label25..Caption
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Label7..Caption
+#: Input.dfm:230
+#: Kopie_von_Input.dfm:357
+#: Settings.dfm:157
+msgid "Pilot:"
+msgstr "Pilota:"
+
+#. FInput..TabControl..TSFlugdaten..Label26..Caption
+#. FInput..TabControl..TSFlugdaten..Label26..Caption
+#: Input.dfm:239
+#: Kopie_von_Input.dfm:300
+msgid "<TAB> is the fastest way to get to the next data field!"
+msgstr "<TAB> è il sistema più veloce per passare al campo dati successivo!"
+
+#. FInput..TabControl..TSFlugdaten..Label28..Caption
+#. FStatistics..Panel3..Label25..Caption
+#. FStatistics..Panel3..Label34..Caption
+#: Input.dfm:255
+#: Statistics.dfm:675
+#: Statistics.dfm:740
+msgid "Passengers:"
+msgstr "Passeggeri:"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..Label11..Caption
+#. FInput..TabControl..TSFlugdaten..Label11..Caption
+#: Input.dfm:270
+#: Kopie_von_Input.dfm:386
+msgid "AutoComplete:"
+msgstr "AutoCompletamento:"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuFlugzeug..Hint
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuPilot..Hint
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuBegleiter..Hint
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuLandeOrt..Hint
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuStartOrt..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonNeuFlugzeug..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonNeuBegleiter..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonNeuPilot..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonNeuStartOrt..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonNeuLandeOrt..Hint
+#: Input.dfm:277
+#: Input.dfm:299
+#: Input.dfm:321
+#: Input.dfm:343
+#: Input.dfm:365
+#: Kopie_von_Input.dfm:534
+#: Kopie_von_Input.dfm:556
+#: Kopie_von_Input.dfm:578
+#: Kopie_von_Input.dfm:600
+#: Kopie_von_Input.dfm:622
+msgid "Add to AutoComplete (Makes input easier)"
+msgstr "Aggiungi all'Autocompletamento (Rende più facile l'input)"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuFlugzeug..Caption
+#. FInput..TabControl..TSFlugdaten..ButtonNeuFlugzeug..Caption
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..LBKatAC....Items.Strings
+#: Input.dfm:278
+#: Kopie_von_Input.dfm:535
+#: Settings.dfm:931
+#: Print.pas:638
+msgid "Aircraft"
+msgstr "Velivolo"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuPilot..Caption
+#. FInput..TabControl..TSFlugdaten..ButtonNeuPilot..Caption
+#. FSettings..PageControl..TabSheetGeneral..RGDefPosition....Items.Strings
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#: Input.dfm:300
+#: Kopie_von_Input.dfm:579
+#: Settings.dfm:357
+#: Statistics.dfm:1029
+#: Main.pas:404
+#: Statistics.pas:294
+msgid "Pilot"
+msgstr "Pilota"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuBegleiter..Caption
+#. FSettings..PageControl..TabSheetGeneral..RGDefPosition....Items.Strings
+#: Input.dfm:322
+#: Settings.dfm:358
+#: Main.pas:405
+msgid "Copilot"
+msgstr "Copilota"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuLandeOrt..Caption
+#: Input.dfm:344
+#: Input.pas:1317
+#: Kopie_von_Input.pas:1269
+#: Main.pas:415
+msgid "To"
+msgstr "Da"
+
+#. FInput..TabControl..TSFlugdaten..PanelAC..ButtonNeuStartOrt..Caption
+#. ----------------------------------------------------------------
+#: Input.dfm:366
+#: Input.pas:1316
+#: Kopie_von_Input.pas:1268
+#: Main.pas:414
+msgid "From"
+msgstr "A"
+
+#. FInput..TabControl..TSFlugdaten..CBAircraftID..Hint
+#. FInput..TabControl..TSFlugdaten..CBCoPilot..Hint
+#. FInput..TabControl..TSFlugdaten..CBPilot..Hint
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..CBAPFrom..Hint
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..CBAPTo..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..CBViaOrt..Hint
+#. FInput..TabControl..TSFlugdaten..CBAircraftID..Hint
+#. FInput..TabControl..TSFlugdaten..CBStO..Hint
+#. FInput..TabControl..TSFlugdaten..CBLaO..Hint
+#. FInput..TabControl..TSFlugdaten..CBCoPilot..Hint
+#. FInput..TabControl..TSFlugdaten..CBPilot..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..CBViaOrt..Hint
+#: Input.dfm:388
+#: Input.dfm:400
+#: Input.dfm:419
+#: Input.dfm:845
+#: Input.dfm:856
+#: Input.dfm:1197
+#: Kopie_von_Input.dfm:768
+#: Kopie_von_Input.dfm:780
+#: Kopie_von_Input.dfm:791
+#: Kopie_von_Input.dfm:802
+#: Kopie_von_Input.dfm:850
+#: Kopie_von_Input.dfm:1140
+msgid "Enter manually, by AutoComplete, drop-down list or arrow keys"
+msgstr "Inserisci manualmente, con l'Autocompletamento, mediante la lista drop-down o con le frecce direzionali"
+
+#. FInput..TabControl..TSFlugdaten..massInputCB..Hint
+#. FInput..TabControl..TSFlugdaten..massInputCB..Hint
+#: Input.dfm:431
+#: Kopie_von_Input.dfm:908
+msgid "Jump to start time at the next flight"
+msgstr "Salta all'orario di partenza del prossimo volo"
+
+#. FInput..TabControl..TSFlugdaten..massInputCB..Caption
+#. FInput..TabControl..TSFlugdaten..massInputCB..Caption
+#: Input.dfm:433
+#: Kopie_von_Input.dfm:910
+msgid "Fast input"
+msgstr "Input veloce"
+
+#. FInput..TabControl..TSFlugdaten..PanelLandings..Label30..Caption
+#: Input.dfm:453
+msgid "Flights:"
+msgstr "Voli:"
+
+#. FInput..TabControl..TSFlugdaten..PanelLandings..EditFlights..Hint
+#. FInput..TabControl..TSFlugdaten..EditPassengers..Hint
+#. FInput..TabControl..TSFlugdaten..EditFluege..Hint
+#: Input.dfm:460
+#: Input.dfm:1014
+#: Kopie_von_Input.dfm:887
+msgid "Enter number of takeoffs and landings for collective entries."
+msgstr "Inserisci numero di decolli e atterraggi per compilazioni collettive."
+
+#. FInput..TabControl..TSFlugdaten..PanelFlightTime..Label8..Caption
+#. FInput..TabControl..TSFlugdaten..Label8..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox2..Label9..Caption
+#: Input.dfm:492
+#: Kopie_von_Input.dfm:248
+#: Settings.dfm:449
+msgid "Flight Time:"
+msgstr "Tempo di volo:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFlightTime..Label10..Caption
+#. FInput..TabControl..TSFlugdaten..PanelBlockTime..Label19..Caption
+#. FInput..TabControl..TSFlugdaten..Label10..Caption
+#: Input.dfm:512
+#: Input.dfm:574
+#: Kopie_von_Input.dfm:256
+msgid "Duration:"
+msgstr "Durata:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFlightTime..MEFlightTimeDep..Hint
+#. FInput..TabControl..TSFlugdaten..PanelBlockTime..MEBlockTimeDep..Hint
+#. FInput..TabControl..TSFlugdaten..MEStartzeit..Hint
+#: Input.dfm:519
+#: Input.dfm:594
+#: Kopie_von_Input.dfm:742
+msgid "Enter start time"
+msgstr "Inserisci orario di decollo"
+
+#. FInput..TabControl..TSFlugdaten..PanelFlightTime..MEFlightTimeArr..Hint
+#. FInput..TabControl..TSFlugdaten..PanelBlockTime..MEBlockTimeArr..Hint
+#. FInput..TabControl..TSFlugdaten..MELandezeit..Hint
+#: Input.dfm:532
+#: Input.dfm:607
+#: Kopie_von_Input.dfm:755
+msgid "Enter landing time"
+msgstr "Inserisci orario di atterraggio"
+
+#. FInput..TabControl..TSFlugdaten..PanelFlightTime..MEFlightTime..Hint
+#. FInput..TabControl..TSFlugdaten..PanelBlockTime..MEBlockTime..Hint
+#. FInput..TabControl..TSFlugdaten..MEFlugzeit..Hint
+#: Input.dfm:545
+#: Input.dfm:620
+#: Kopie_von_Input.dfm:862
+msgid "Enter flight time for cumulative entries"
+msgstr "Inserisci tempo di volo per compilazioni collettive"
+
+#. FInput..TabControl..TSFlugdaten..PanelBlockTime..Label15..Caption
+#: Input.dfm:567
+msgid "Block Time:"
+msgstr "Orario ai blocchi:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..Label12..Caption
+#. FInput..TabControl..TSFlugdaten..Label12..Caption
+#. FPrint..Label3..Caption
+#. FStatistics..Panel3..Label21..Caption
+#. FStatistics..Panel2..Label3..Caption
+#: Input.dfm:642
+#: Kopie_von_Input.dfm:263
+#: Print.dfm:86
+#: Statistics.dfm:393
+#: Statistics.dfm:1163
+msgid "From:"
+msgstr "Da:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..Label13..Caption
+#. FInput..TabControl..TSFlugdaten..Label13..Caption
+#. FPrint..Label4..Caption
+#. FStatistics..Panel3..Label22..Caption
+#. FStatistics..Panel2..Label4..Caption
+#: Input.dfm:649
+#: Kopie_von_Input.dfm:270
+#: Print.dfm:79
+#: Statistics.dfm:420
+#: Statistics.dfm:1156
+msgid "To:"
+msgstr "A:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..LabelStO..Hint
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..LabelLaO..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..LabelViaOrt..Hint
+#. FInput..TabControl..TSFlugdaten..LabelStO..Hint
+#. FInput..TabControl..TSFlugdaten..LabelLaO..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..LabelViaOrt..Hint
+#: Input.dfm:656
+#: Input.dfm:686
+#: Input.dfm:1097
+#: Kopie_von_Input.dfm:315
+#: Kopie_von_Input.dfm:333
+#: Kopie_von_Input.dfm:1046
+msgid "Airport name or -position"
+msgstr "Nome o posizione aeroporto"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..Label4..Caption
+#. FInput..TabControl..TSFlugdaten..Label4..Caption
+#: Input.dfm:702
+#: Kopie_von_Input.dfm:343
+msgid "Leg:"
+msgstr "Tratta:"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..ImageAccNotDist....Hint
+#. FInput..TabControl..TSFlugdaten..ImageAccNotDist....Hint
+#: Input.dfm:711
+#: Kopie_von_Input.dfm:395
+msgid "Distance will NOT be taken over as leg, because leg as been changed manually. (see distance flight)"
+msgstr "La distanza NON sarà considerata come tratta, poiché la tratta è stata modificata manualmente. (vedi Voli di distanza)"
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..ImageAccDist..Hint
+#. FInput..TabControl..TSFlugdaten..ImageAccDist..Hint
+#: Input.dfm:760
+#: Kopie_von_Input.dfm:444
+msgid "Distance will be taken over as leg."
+msgstr "La distanza sarà considerata come tratta."
+
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..ButtonFindLandeOrt..Hint
+#. FInput..TabControl..TSFlugdaten..PanelFromTo..ButtonFindStartOrt..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonFindViaOrt..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonFindLandeOrt..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonFindStartOrt..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonFindViaOrt..Hint
+#: Input.dfm:809
+#: Input.dfm:827
+#: Input.dfm:1112
+#: Kopie_von_Input.dfm:500
+#: Kopie_von_Input.dfm:644
+#: Kopie_von_Input.dfm:1055
+msgid "search airport in database"
+msgstr "Cerca aeroporto nel database"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..Label7..Caption
+#. FInput..TabControl..TSFlugdaten..PanelStartart..Label7..Caption
+#: Input.dfm:876
+#: Kopie_von_Input.dfm:669
+msgid "Start type:"
+msgstr "Tipo di decollo:"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..RBW..Caption
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType....Items.Strings
+#. FInput..TabControl..TSFlugdaten..PanelStartart..RBW..Caption
+#. FInput..TabControl..TSFlugdaten..ComboBox1....Items.Strings
+#: Input.dfm:883
+#: Input.dfm:960
+#: Kopie_von_Input.dfm:676
+#: Kopie_von_Input.dfm:930
+msgid "Winch"
+msgstr "Verricello"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..RBF..Caption
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType..Text
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType....Items.Strings
+#. FInput..TabControl..TSFlugdaten..PanelStartart..RBF..Caption
+#. FInput..TabControl..TSFlugdaten..ComboBox1..Text
+#. FInput..TabControl..TSFlugdaten..ComboBox1....Items.Strings
+#: Input.dfm:892
+#: Input.dfm:953
+#: Input.dfm:956
+#: Kopie_von_Input.dfm:685
+#: Kopie_von_Input.dfm:923
+#: Kopie_von_Input.dfm:926
+msgid "Airtow"
+msgstr "Traino"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..RBE..Caption
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType....Items.Strings
+#. FInput..TabControl..TSFlugdaten..PanelStartart..RBE..Caption
+#. FInput..TabControl..TSFlugdaten..ComboBox1....Items.Strings
+#: Input.dfm:900
+#: Input.dfm:959
+#: Kopie_von_Input.dfm:693
+#: Kopie_von_Input.dfm:929
+msgid "Self start"
+msgstr "Decollo autonomo"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..RBA..Caption
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType....Items.Strings
+#. FInput..TabControl..TSFlugdaten..PanelStartart..RBA..Caption
+#. FInput..TabControl..TSFlugdaten..ComboBox1....Items.Strings
+#: Input.dfm:908
+#: Input.dfm:957
+#: Kopie_von_Input.dfm:701
+#: Kopie_von_Input.dfm:927
+msgid "Car start"
+msgstr "Traino con auto"
+
+#. FInput..TabControl..TSFlugdaten..PanelStartType..RBG..Caption
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..CBStartType....Items.Strings
+#. FInput..TabControl..TSFlugdaten..PanelStartart..RBG..Caption
+#. FInput..TabControl..TSFlugdaten..ComboBox1....Items.Strings
+#: Input.dfm:916
+#: Input.dfm:958
+#: Kopie_von_Input.dfm:709
+#: Kopie_von_Input.dfm:928
+msgid "Rubberband"
+msgstr "Elastico"
+
+#. FInput..TabControl..TSFlugdaten..PanelRemarks..Label14..Caption
+#. FInput..TabControl..TSFlugdaten..Label14..Caption
+#: Input.dfm:933
+#: Kopie_von_Input.dfm:277
+msgid "Remarks:"
+msgstr "Note:"
+
+#. FInput..TabControl..TSFlugdaten..PanelCat..Label9..Caption
+#. FInput..TabControl..TSFlugdaten..Label9..Caption
+#. FPrint..Label16..Caption
+#. FStatistics..Panel2..Label16..Caption
+#: Input.dfm:976
+#: Kopie_von_Input.dfm:379
+#: Print.dfm:126
+#: Statistics.dfm:1143
+msgid "Category:"
+msgstr "Categoria:"
+
+#. FInput..TabControl..TSFlugdaten..PanelCat..ButtonKatAdd..Hint
+#. FInput..TabControl..TSFlugdaten..ButtonKatAdd..Hint
+#: Input.dfm:983
+#: Kopie_von_Input.dfm:517
+msgid "Add new category (e.g. instruction, student time, air-tow)"
+msgstr "Inserisci una nuova categoria (p.es. Istruzione, Tempo allievo, Aerotraino)"
+
+#. FInput..TabControl..TSStreckenflug..Caption
+#. FInput..TabControl..TSStreckenflug..Caption
+#: Input.dfm:1040
+#: Kopie_von_Input.dfm:934
+msgid "Distance flight"
+msgstr "Volo di distanza"
+
+#. FInput..TabControl..TSStreckenflug..Panel2..Label16..Caption
+#. FInput..TabControl..TSStreckenflug..Panel2..Label16..Caption
+#: Input.dfm:1055
+#: Kopie_von_Input.dfm:1016
+msgid "Legs:"
+msgstr "Tratte:"
+
+#. FInput..TabControl..TSStreckenflug..Panel2..Label27..Caption
+#. FInput..TabControl..TSStreckenflug..Panel2..Label27..Caption
+#: Input.dfm:1062
+#: Kopie_von_Input.dfm:1023
+msgid "Over-all distance:"
+msgstr "Distanza totale:"
+
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonViaUp..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonViaUp..Hint
+#. FPrint..CTiUpButton..Hint
+#: Input.dfm:1163
+#: Kopie_von_Input.dfm:1106
+#: Print.dfm:647
+msgid "move up"
+msgstr "sposta in alto"
+
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonViaDown..Hint
+#. FInput..TabControl..TSStreckenflug..Panel2..ButtonViaDown..Hint
+#. FPrint..CTiDownButton..Hint
+#: Input.dfm:1180
+#: Kopie_von_Input.dfm:1123
+#: Print.dfm:670
+msgid "move down"
+msgstr "sposta in basso"
+
+#. FInput..TabControl..TSStreckenflug..Panel7..Label17..Caption
+#. FInput..TabControl..TSStreckenflug..Panel7..Label17..Caption
+#. FStatistics..Panel3..Label30..Caption
+#. FStatistics..Panel3..Label31..Caption
+#: Input.dfm:1248
+#: Kopie_von_Input.dfm:949
+#: Statistics.dfm:305
+#: Statistics.dfm:321
+msgid "Distance:"
+msgstr "Distanza:"
+
+#. FInput..TabControl..TSStreckenflug..Panel7..Label24..Caption
+#. FInput..TabControl..TSStreckenflug..Panel7..Label24..Caption
+#: Input.dfm:1263
+#: Kopie_von_Input.dfm:964
+msgid "Speed:"
+msgstr "Velocità:"
+
+#. FInput..TabControl..TSStreckenflug..Panel7..ButtonCalcStrecke..Hint
+#. FInput..TabControl..TSStreckenflug..Panel7..ButtonCalcStrecke..Hint
+#: Input.dfm:1284
+#: Kopie_von_Input.dfm:979
+msgid "Recalc distance"
+msgstr "Ricalcola distanza"
+
+#. FInput..TabControl..TSStreckenflug..Panel7..EditDistance..Hint
+#. FInput..TabControl..TSStreckenflug..Panel7..EditStrecke..Hint
+#: Input.dfm:1302
+#: Kopie_von_Input.dfm:997
+msgid "Enter a distance manually and overwrite leg"
+msgstr "Inserisci manualmente una distanza e sovrascivi la tratta"
+
+#. FInput..TabControl..TSStreckenflug..Panel6..Label31..Caption
+#. FInput..TabControl..TSStreckenflug..Panel6..Label31..Caption
+#: Input.dfm:1320
+#: Kopie_von_Input.dfm:1191
+msgid "Contests:"
+msgstr "Gare:"
+
+#. FInput..TabControl..TSStreckenflug..Panel6..ButtonContestAdd..Hint
+#. FInput..TabControl..TSStreckenflug..Panel6..ButtonContestAdd..Hint
+#: Input.dfm:1327
+#: Kopie_von_Input.dfm:1198
+msgid "Add new Category (e.g. OLC)"
+msgstr "Aggiungi una nuova categoria (p.es. OLC)"
+
+#. FInput..TabControl..TSStreckenflug..Panel5..Label23..Caption
+#. FInput..TabControl..TSStreckenflug..Panel5..Label23..Caption
+#: Input.dfm:1393
+#: Kopie_von_Input.dfm:1264
+msgid "Files:"
+msgstr "Files:"
+
+#. FInput..TabControl..TSStreckenflug..Panel5..ButtonFileAdd..Hint
+#. FInput..TabControl..TSStreckenflug..Panel5..ButtonFileAdd..Hint
+#: Input.dfm:1400
+#: Kopie_von_Input.dfm:1271
+msgid "Add file"
+msgstr "Aggiungi file"
+
+#. FInput..TabControl..TSStreckenflug..Panel5..ButtonFileRem..Hint
+#. FInput..TabControl..TSStreckenflug..Panel5..ButtonFileRem..Hint
+#: Input.dfm:1417
+#: Kopie_von_Input.dfm:1288
+msgid "Remove file"
+msgstr "Rimuovi file"
+
+#. FInput..TabControl..TSStreckenflug..Panel5..LBFiles..Hint
+#: Input.dfm:1434
+msgid "save files with flight (e.g. igc-files, pics)"
+msgstr "Salva files con il volo (p.es. files .igc, immagini)"
+
+#. FInput..TabControl..TabSheet1..Caption
+#. FInput..TabControl..TabSheet1..Caption
+#: Input.dfm:1444
+#: Kopie_von_Input.dfm:1315
+#: Main.pas:420
+#: Print.pas:648
+msgid "Times"
+msgstr "Tempi"
+
+#. FInput..TabControl..TabSheet1..Panel4..Label32..Caption
+#. FInput..TabControl..TabSheet1..Panel4..Label32..Caption
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet2..Caption
+#. FStatistics..Panel3..CBKatGes....Items.Strings
+#. FStatistics..Panel3..CBKatDetail....Items.Strings
+#: Input.dfm:1459
+#: Kopie_von_Input.dfm:1330
+#: Settings.dfm:1033
+#: Statistics.dfm:911
+#: Statistics.dfm:972
+msgid "Time categories"
+msgstr "Categorie di tempo"
+
+#. FInput..TabControl..TabSheet1..Panel4..ButtonKatTimeAdd..Hint
+#. FInput..TabControl..TabSheet1..Panel4..ButtonKatTimeAdd..Hint
+#: Input.dfm:1466
+#: Kopie_von_Input.dfm:1337
+msgid "Add new category (e.g. engine time, night, IFR)"
+msgstr "Aggiungi una nuova categoria (p.es. tempo motore, volo notturno, volo IFR)"
+
+#. FInputBox..Caption
+#. FPrint..CBPrintCTi..Caption
+#. FPrint..KatSelPanel..KatSelCTiRB..Hint
+#: InputBox.dfm:5
+#: Print.dfm:619
+#: Print.dfm:701
+msgid "Time category"
+msgstr "Categoria di tempo"
+
+#. FInputBox..Panel1..ButtonOK..Hint
+#: InputBox.dfm:54
+msgid "Accept data"
+msgstr "Accetta i dati"
+
+#. FInput..TabControl..TSFlugdaten..Label6..Caption
+#: Kopie_von_Input.dfm:241
+msgid "Passenger:"
+msgstr "Passeggero:"
+
+#. FInput..TabControl..TSFlugdaten..Label30..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox2..Label8..Caption
+#: Kopie_von_Input.dfm:365
+#: Settings.dfm:442
+msgid "Landings:"
+msgstr "Atterraggi:"
+
+#. FInput..TabControl..TSFlugdaten..ButtonNeuBegleiter..Caption
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..LBKatAC....Items.Strings
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#: Kopie_von_Input.dfm:557
+#: Settings.dfm:932
+#: Statistics.dfm:1030
+#: Print.pas:639
+#: Settings.pas:518
+msgid "Passenger"
+msgstr "Passeggeri"
+
+#. FInput..TabControl..TSFlugdaten..ButtonNeuStartOrt..Caption
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#. FStatistics..Panel1..BitBtn2..Caption
+#. erster Flug
+#. letzter Flug
+#. noch ändern!!
+#: Kopie_von_Input.dfm:601
+#: Statistics.dfm:1031
+#: Statistics.dfm:1076
+#: Statistics.pas:746
+#: Statistics.pas:749
+#: Statistics.pas:871
+#: Statistics.pas:874
+#: Statistics.pas:1029
+#: Statistics.pas:1030
+msgid "Start"
+msgstr "Decollo"
+
+#. FInput..TabControl..TSFlugdaten..ButtonNeuLandeOrt..Caption
+#. FPrint..CBPrintFlights..Caption
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#: Kopie_von_Input.dfm:623
+#: Print.dfm:538
+#: Statistics.dfm:1032
+msgid "Landing"
+msgstr "Atterraggio"
+
+#. FInput..TabControl..TSFlugdaten..MEDatum..Hint
+#: Kopie_von_Input.dfm:726
+msgid "Day"
+msgstr "Giorno"
+
+#. FInput..TabControl..TSFlugdaten..MEDatumJ..Hint
+#. FStat_Graph..PanelGraph..Label1..Caption
+#. ----------------------------------------------------------------
+#: Kopie_von_Input.dfm:821
+#: StatGraph.dfm:93
+#: StatGraph.pas:96
+msgid "Year"
+msgstr "Anno"
+
+#. FInput..TabControl..TSFlugdaten..MEDatumM..Hint
+#: Kopie_von_Input.dfm:834
+msgid "Month"
+msgstr "Mese"
+
+#. FInput..TabControl..TSStreckenflug..Panel5..LBFiles..Hint
+#: Kopie_von_Input.dfm:1305
+msgid "save files with flight (e.g. .igc)"
+msgstr "salva files con il volo (p.es. .igc)"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:264
+#: Kopie_von_Main.dfm:347
+#: Main.dfm:263
+#: Main.dfm:358
+msgid "&New"
+msgstr "&Nuovo"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:269
+#: Main.dfm:269
+msgid "&Open..."
+msgstr "&Apri..."
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:280
+#: Main.dfm:280
+msgid "S&ave as..."
+msgstr "&Salva con nome..."
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:287
+#: Main.dfm:287
+msgid "&Print..."
+msgstr "&Stampa..."
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:298
+#: Main.dfm:300
+msgid "&Basic settings..."
+msgstr "&Impostazioni di base..."
+
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:303
+msgid "Se&ttings"
+msgstr "&Impostazioni..."
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:311
+#: Main.dfm:315
+msgid "&Close"
+msgstr "&Chiudi"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:315
+#: Main.dfm:320
+msgid "&Exit"
+msgstr "&Esci"
+
+#. FMain..ActionManager..........Caption
+#. FMain..ActionManager..........Caption
+#: Kopie_von_Main.dfm:341
+#: Main.dfm:352
+msgid "&File"
+msgstr "&File"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:353
+#: Main.dfm:364
+msgid "&Edit..."
+msgstr "&Modifica..."
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:359
+#: Main.dfm:370
+msgid "&Insert"
+msgstr "&Inserisci"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:364
+#: Main.dfm:375
+msgid "&Delete"
+msgstr "&Elimina"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:369
+#: Main.dfm:380
+msgid "&Undo delete"
+msgstr "&Annulla Elimina"
+
+#. FMain..ActionManager..........Caption
+#. FMain..ActionManager..........Caption
+#: Kopie_von_Main.dfm:372
+#: Main.dfm:383
+msgid "F&light"
+msgstr "&Volo"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:383
+#: Main.dfm:394
+msgid "&90 Days Regulation..."
+msgstr "&Regolamentazione dei 90 Giorni..."
+
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:389
+msgid "Stat&istic"
+msgstr "&Statistiche"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:400
+#: Main.dfm:410
+msgid "&Training barometer..."
+msgstr "&Barometro dell'allenamento"
+
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:406
+msgid "&Airports..."
+msgstr "&Aeroporti"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:414
+#: Main.dfm:423
+msgid "&Sort all flights"
+msgstr "&Ordina tutti i voli"
+
+#. FMain..ActionManager..........Caption
+#. FMain..ActionManager..........Caption
+#: Kopie_von_Main.dfm:416
+#: Main.dfm:425
+msgid "&Tools"
+msgstr "&Strumenti"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:424
+#: Main.dfm:433
+msgid "&Homepage"
+msgstr "&Homepage"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:431
+#: Main.dfm:440
+msgid "La&nguages"
+msgstr "&Lingue"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:435
+#: Main.dfm:444
+msgid "&Licenses"
+msgstr "&Licenze"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:439
+#: Main.dfm:448
+msgid "&Airports"
+msgstr "&Aeroporti"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:446
+#: Main.dfm:455
+msgid "&Feature Requests"
+msgstr "&Richieste di funzioni"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:450
+#: Main.dfm:459
+msgid "&Bugs"
+msgstr "&Bugs"
+
+#. FMain..ActionManager..................Caption
+#. FMain..ActionManager..................Caption
+#: Kopie_von_Main.dfm:454
+#: Main.dfm:463
+msgid "&Support"
+msgstr "&Assistenza"
+
+#. FMain..ActionManager..............Caption
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:456
+#: Main.dfm:465
+msgid "&Online"
+msgstr "&Online"
+
+#. FMain..ActionManager..............Caption
+#: Kopie_von_Main.dfm:461
+msgid "About FluPP..."
+msgstr "Info su FluPP..."
+
+#. FMain..ActionManager..........Caption
+#. FMain..ActionManager..........Caption
+#: Kopie_von_Main.dfm:465
+#: Main.dfm:474
+msgid "&Help"
+msgstr "&Aiuto"
+
+#. FMain..ActionManager..ActionFileNew..Category
+#. FMain..ActionManager..ActionFileOpen..Category
+#. FMain..ActionManager..ActionFileSave..Category
+#. FMain..ActionManager..ActionFileSaveAs..Category
+#. FMain..ActionManager..ActionFileImport..Category
+#. FMain..ActionManager..ActionPrint..Category
+#. FMain..ActionManager..ActionFlightLogs..Category
+#. FMain..ActionManager..ActionBasicSettings..Category
+#. FMain..ActionManager..ActionSettings..Category
+#. FMain..ActionManager..ActionClose..Category
+#. FMain..ActionManager..ActionExit..Category
+#. FMain..ActionManager..LF1..Category
+#. FMain..ActionManager..LF2..Category
+#. FMain..ActionManager..LF3..Category
+#. FMain..ActionManager..LF4..Category
+#. FMain..ActionManager..LF5..Category
+#. FMain..ActionManager..ActionFileNew..Category
+#. FMain..ActionManager..ActionFileOpen..Category
+#. FMain..ActionManager..ActionFileSave..Category
+#. FMain..ActionManager..ActionFileSaveAs..Category
+#. FMain..ActionManager..ActionFileImport..Category
+#. FMain..ActionManager..ActionPrint..Category
+#. FMain..ActionManager..ActionFlightLogs..Category
+#. FMain..ActionManager..ActionBasicSettings..Category
+#. FMain..ActionManager..ActionSettings..Category
+#. FMain..ActionManager..ActionClose..Category
+#. FMain..ActionManager..ActionExit..Category
+#. FMain..ActionManager..LF1..Category
+#. FMain..ActionManager..LF2..Category
+#. FMain..ActionManager..LF3..Category
+#. FMain..ActionManager..LF4..Category
+#. FMain..ActionManager..LF5..Category
+#: Kopie_von_Main.dfm:474
+#: Kopie_von_Main.dfm:480
+#: Kopie_von_Main.dfm:487
+#: Kopie_von_Main.dfm:494
+#: Kopie_von_Main.dfm:499
+#: Kopie_von_Main.dfm:504
+#: Kopie_von_Main.dfm:510
+#: Kopie_von_Main.dfm:515
+#: Kopie_von_Main.dfm:521
+#: Kopie_von_Main.dfm:527
+#: Kopie_von_Main.dfm:532
+#: Kopie_von_Main.dfm:538
+#: Kopie_von_Main.dfm:543
+#: Kopie_von_Main.dfm:548
+#: Kopie_von_Main.dfm:553
+#: Kopie_von_Main.dfm:558
+#: Main.dfm:483
+#: Main.dfm:491
+#: Main.dfm:499
+#: Main.dfm:507
+#: Main.dfm:513
+#: Main.dfm:518
+#: Main.dfm:526
+#: Main.dfm:532
+#: Main.dfm:539
+#: Main.dfm:546
+#: Main.dfm:553
+#: Main.dfm:561
+#: Main.dfm:567
+#: Main.dfm:573
+#: Main.dfm:579
+#: Main.dfm:585
+#: Main.pas:421
+msgid "File"
+msgstr "File"
+
+#. FMain..ActionManager..ActionFileNew..Caption
+#. FMain..ActionManager..ActionFileNew..Caption
+#: Kopie_von_Main.dfm:475
+#: Main.dfm:484
+msgid "New..."
+msgstr "Nuovo..."
+
+#. FMain..ActionManager..ActionFileOpen..Caption
+#. FMain..ActionManager..ActionFileOpen..Caption
+#: Kopie_von_Main.dfm:481
+#: Main.dfm:492
+msgid "Open..."
+msgstr "Apri..."
+
+#. FMain..ActionManager..ActionFileSave..Caption
+#. FMain..ActionManager..ActionFileSave..Caption
+#: Kopie_von_Main.dfm:488
+#: Main.dfm:500
+msgid "&Save"
+msgstr "&Salva"
+
+#. FMain..ActionManager..ActionFileSaveAs..Caption
+#. FMain..ActionManager..ActionFileSaveAs..Caption
+#: Kopie_von_Main.dfm:495
+#: Main.dfm:508
+msgid "Save as..."
+msgstr "Salva con nome..."
+
+#. FMain..ActionManager..ActionFileImport..Caption
+#. FMain..ActionManager..ActionFileImport..Caption
+#: Kopie_von_Main.dfm:500
+#: Main.dfm:514
+msgid "Import..."
+msgstr "Importa..."
+
+#. FMain..ActionManager..ActionPrint..Caption
+#. FMain..ActionManager..ActionPrint..Caption
+#: Kopie_von_Main.dfm:505
+#: Main.dfm:519
+msgid "Print..."
+msgstr "Stampa..."
+
+#. FMain..ActionManager..ActionFlightLogs..Caption
+#. FMain..ActionManager..ActionFlightLogs..Caption
+#: Kopie_von_Main.dfm:511
+#: Main.dfm:527
+msgid "Flight logs..."
+msgstr "Log di volo..."
+
+#. FMain..ActionManager..ActionBasicSettings..Caption
+#. FMain..ActionManager..ActionBasicSettings..Caption
+#: Kopie_von_Main.dfm:516
+#: Main.dfm:533
+msgid "Basic settings..."
+msgstr "Impostazioni di base..."
+
+#. FMain..ActionManager..ActionSettings..Caption
+#. FLicenses..Panel1..ButtonSettings..Caption
+#. FMain..ActionManager..ActionSettings..Hint
+#. FPrint..Label7..Caption
+#. FSettings..Caption
+#: Kopie_von_Main.dfm:522
+#: Licenses.dfm:50
+#: Main.dfm:541
+#: Print.dfm:167
+#: Settings.dfm:6
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. FMain..ActionManager..ActionClose..Caption
+#. FMain..ActionManager..ActionClose..Caption
+#. FMain..ActionManager..ActionClose..Hint
+#: Kopie_von_Main.dfm:528
+#: Main.dfm:547
+#: Main.dfm:548
+msgid "Close"
+msgstr "Chiudi"
+
+#. FMain..ActionManager..ActionFlightNew..Category
+#. FMain..ActionManager..ActionFlightEdit..Category
+#. FMain..ActionManager..ActionFlightInsert..Category
+#. FMain..ActionManager..ActionFlightDelete..Category
+#. FMain..ActionManager..ActionFlightDeleteUndo..Category
+#. FMain..ActionManager..ActionFlightNew..Category
+#. FMain..ActionManager..ActionFlightEdit..Category
+#. FMain..ActionManager..ActionFlightInsert..Category
+#. FMain..ActionManager..ActionFlightDelete..Category
+#. FMain..ActionManager..ActionFlightDeleteUndo..Category
+#. FStatistics..Panel2..RGDefaultTime....Items.Strings
+#: Kopie_von_Main.dfm:563
+#: Kopie_von_Main.dfm:570
+#: Kopie_von_Main.dfm:577
+#: Kopie_von_Main.dfm:583
+#: Kopie_von_Main.dfm:589
+#: Main.dfm:591
+#: Main.dfm:599
+#: Main.dfm:607
+#: Main.dfm:614
+#: Main.dfm:621
+#: Statistics.dfm:1426
+msgid "Flight"
+msgstr "Volo"
+
+#. FMain..ActionManager..ActionFlightNew..Caption
+#. FMain..ActionManager..ActionFileNew..Hint
+#. FMain..ActionManager..ActionFlightNew..Caption
+#: Kopie_von_Main.dfm:564
+#: Main.dfm:485
+#: Main.dfm:592
+msgid "New"
+msgstr "Nuovo"
+
+#. FMain..ActionManager..ActionFlightEdit..Caption
+#. FMain..ActionManager..ActionFlightEdit..Caption
+#: Kopie_von_Main.dfm:571
+#: Main.dfm:600
+msgid "Edit..."
+msgstr "Modifica..."
+
+#. FMain..ActionManager..ActionFlightInsert..Caption
+#. FMain..ActionManager..ActionFlightInsert..Caption
+#: Kopie_von_Main.dfm:578
+#: Main.dfm:608
+msgid "Insert"
+msgstr "Inserisci"
+
+#. FMain..ActionManager..ActionFlightDelete..Caption
+#. FMain..ActionManager..ActionFlightDelete..Caption
+#: Kopie_von_Main.dfm:584
+#: Main.dfm:615
+msgid "Delete"
+msgstr "Elimina"
+
+#. FMain..ActionManager..ActionFlightDeleteUndo..Caption
+#. FMain..ActionManager..ActionFlightDeleteUndo..Caption
+#. FMain..ActionManager..ActionFlightDeleteUndo..Hint
+#: Kopie_von_Main.dfm:590
+#: Main.dfm:622
+#: Main.dfm:623
+msgid "Undo delete"
+msgstr "Annulla Elimina"
+
+#. FMain..ActionManager..ActionScheduler..Category
+#. FMain..ActionManager..ActionNinetyDays..Category
+#. FMain..ActionManager..ActionStatistic..Category
+#. FMain..ActionManager..ActionLicense..Category
+#. FMain..ActionManager..ActionTrainBaro..Category
+#. FMain..ActionManager..ActionAirports..Category
+#. FMain..ActionManager..ActionSortFlights..Category
+#. FMain..ActionManager..ActionScheduler..Category
+#. FMain..ActionManager..ActionNinetyDays..Category
+#. FMain..ActionManager..ActionStatistic..Category
+#. FMain..ActionManager..ActionLicense..Category
+#. FMain..ActionManager..ActionTrainBaro..Category
+#. FMain..ActionManager..ActionAirports..Category
+#. FMain..ActionManager..ActionSortFlights..Category
+#: Kopie_von_Main.dfm:595
+#: Kopie_von_Main.dfm:602
+#: Kopie_von_Main.dfm:609
+#: Kopie_von_Main.dfm:616
+#: Kopie_von_Main.dfm:623
+#: Kopie_von_Main.dfm:630
+#: Kopie_von_Main.dfm:636
+#: Main.dfm:628
+#: Main.dfm:636
+#: Main.dfm:644
+#: Main.dfm:652
+#: Main.dfm:660
+#: Main.dfm:668
+#: Main.dfm:675
+msgid "Tools"
+msgstr "Strumenti"
+
+#. FMain..ActionManager..ActionScheduler..Caption
+#. FMain..PanelScheduler..GridSched..Hint
+#. FMain..ActionManager..ActionScheduler..Hint
+#: Kopie_von_Main.dfm:596
+#: Main.dfm:113
+#: Main.dfm:630
+msgid "Scheduler"
+msgstr "Agenda"
+
+#. FMain..ActionManager..ActionNinetyDays..Caption
+#. FMain..ActionManager..ActionNinetyDays..Hint
+#. FNinetyDays..Caption
+#: Kopie_von_Main.dfm:603
+#: Main.dfm:638
+#: NinetyDays.dfm:5
+#: Main.pas:1343
+msgid "90 Day Regulation"
+msgstr "Regolamentazione dei 90 Giorni"
+
+#. FMain..ActionManager..ActionStatistic..Caption
+#. FMain..ActionManager..ActionStatistic..Hint
+#. FStatistics..Caption
+#: Kopie_von_Main.dfm:610
+#: Main.dfm:646
+#: Statistics.dfm:9
+msgid "Statistic"
+msgstr "Statistiche"
+
+#. FMain..ActionManager..ActionLicense..Caption
+#: Kopie_von_Main.dfm:617
+msgid "Licence&extension"
+msgstr "Licenza&estensione"
+
+#. FMain..ActionManager..ActionTrainBaro..Caption
+#. FMain..ActionManager..ActionTrainBaro..Caption
+#: Kopie_von_Main.dfm:624
+#: Main.dfm:661
+msgid "Training barometer..."
+msgstr "Barometro dell'allenamento..."
+
+#. FMain..ActionManager..ActionAirports..Caption
+#. FMain..ActionManager..ActionAirports..Caption
+#: Kopie_von_Main.dfm:631
+#: Main.dfm:669
+msgid "Airports..."
+msgstr "Aeroporti..."
+
+#. FMain..ActionManager..ActionSortFlights..Caption
+#. FMain..ActionManager..ActionSortFlights..Caption
+#. FMain..ActionManager..ActionSortFlights..Hint
+#: Kopie_von_Main.dfm:637
+#: Main.dfm:676
+#: Main.dfm:677
+msgid "Sort all flights"
+msgstr "Ordina tutti i voli"
+
+#. FMain..ActionManager..ActionInfo..Category
+#. FMain..ActionManager..ActionHelpOnline..Category
+#. FMain..ActionManager..ActionHP..Category
+#. FMain..ActionManager..ActionHPAirports..Category
+#. FMain..ActionManager..ActionHPLicenses..Category
+#. FMain..ActionManager..ActionHPLanguages..Category
+#. FMain..ActionManager..ActionHPRFE..Category
+#. FMain..ActionManager..ActionHPBugs..Category
+#. FMain..ActionManager..ActionHPSupport..Category
+#. FMain..ActionManager..ActionInfo..Category
+#. FMain..ActionManager..ActionHelpOnline..Category
+#. FMain..ActionManager..ActionHP..Category
+#. FMain..ActionManager..ActionHPAirports..Category
+#. FMain..ActionManager..ActionHPLicenses..Category
+#. FMain..ActionManager..ActionHPLanguages..Category
+#. FMain..ActionManager..ActionHPRFE..Category
+#. FMain..ActionManager..ActionHPBugs..Category
+#. FMain..ActionManager..ActionHPSupport..Category
+#: Kopie_von_Main.dfm:641
+#: Kopie_von_Main.dfm:648
+#: Kopie_von_Main.dfm:653
+#: Kopie_von_Main.dfm:659
+#: Kopie_von_Main.dfm:664
+#: Kopie_von_Main.dfm:670
+#: Kopie_von_Main.dfm:675
+#: Kopie_von_Main.dfm:680
+#: Kopie_von_Main.dfm:685
+#: Main.dfm:681
+#: Main.dfm:688
+#: Main.dfm:693
+#: Main.dfm:699
+#: Main.dfm:704
+#: Main.dfm:710
+#: Main.dfm:715
+#: Main.dfm:720
+#: Main.dfm:725
+msgid "Help"
+msgstr "Aiuto"
+
+#. FMain..ActionManager..ActionInfo..Caption
+#. FMain..ActionManager..ActionInfo..Caption
+#: Kopie_von_Main.dfm:642
+#: Main.dfm:682
+msgid "About"
+msgstr "Info"
+
+#. FMain..ActionManager..ActionHelpOnline..Caption
+#. FMain..ActionManager..ActionHelpOnline..Caption
+#: Kopie_von_Main.dfm:649
+#: Main.dfm:689
+msgid "Online"
+msgstr "Online"
+
+#. FMain..ActionManager..ActionHP..Caption
+#. FMain..ActionManager..ActionHP..Caption
+#: Kopie_von_Main.dfm:654
+#: Main.dfm:694
+msgid "Homepage"
+msgstr "Homepage"
+
+#. FMain..ActionManager..ActionHPLicenses..Caption
+#. FMain..ActionManager..ActionHPLicenses..Caption
+#: Kopie_von_Main.dfm:665
+#: Main.dfm:705
+msgid "Licenses"
+msgstr "Licenze"
+
+#. FMain..ActionManager..ActionHPRFE..Caption
+#. FMain..ActionManager..ActionHPRFE..Caption
+#: Kopie_von_Main.dfm:676
+#: Main.dfm:716
+msgid "Feature Requests"
+msgstr "Richieste di funzioni"
+
+#. FMain..ActionManager..ActionHPBugs..Caption
+#. FMain..ActionManager..ActionHPBugs..Caption
+#: Kopie_von_Main.dfm:681
+#: Main.dfm:721
+msgid "Bugs"
+msgstr "Bugs"
+
+#. FMain..ActionManager..ActionHPSupport..Caption
+#. FMain..ActionManager..ActionHPSupport..Caption
+#: Kopie_von_Main.dfm:686
+#: Main.dfm:726
+msgid "Support"
+msgstr "Assistenza"
+
+#. FLicenses..Caption
+#: Licenses.dfm:5
+msgid "Licence extension"
+msgstr "Estensioni della licenza"
+
+#. FLicenses..VST......WideText
+#: Licenses.dfm:108
+msgid "Required"
+msgstr "Necessario"
+
+#. FLicenses..VST......WideText
+#: Licenses.dfm:114
+msgid "Available"
+msgstr "Disponibile"
+
+#. FLicenses..VST......WideText
+#: Licenses.dfm:120
+msgid "Missing"
+msgstr "Mancante"
+
+#. FLicenses..VST......WideText
+#: Licenses.dfm:125
+msgid "Valid to"
+msgstr "Valido per "
+
+#. FMain..ActionManager..............Caption
+#: Main.dfm:296
+msgid "&Flight logs..."
+msgstr "&Log di volo..."
+
+#. FMain..ActionManager..............Caption
+#: Main.dfm:470
+msgid "&About FluPP..."
+msgstr "&Info su FluPP..."
+
+#. FMain..ActionManager..ActionFileOpen..Hint
+#: Main.dfm:493
+msgid "Open"
+msgstr "Apri"
+
+#. FMain..ActionManager..ActionFileSave..Hint
+#. FPrint..ButtonSpeichern..Hint
+#: Main.dfm:501
+#: Print.dfm:209
+msgid "Save"
+msgstr "Salva"
+
+#. FMain..ActionManager..ActionFileSaveAs..Hint
+#: Main.dfm:509
+msgid "Save as"
+msgstr "Salva con nome"
+
+#. FMain..ActionManager..ActionFileImport..Hint
+#: Main.dfm:515
+msgid "Import"
+msgstr "Import"
+
+#. FMain..ActionManager..ActionPrint..Hint
+#. FPrint..Caption
+#. FPrint..Panel1..ButtonPrint..Caption
+#: Main.dfm:520
+#: Print.dfm:5
+#: Print.dfm:398
+msgid "Print"
+msgstr "Stampa"
+
+#. FMain..ActionManager..ActionSettings..Caption
+#: Main.dfm:540
+msgid "Settings..."
+msgstr "Impostazioni..."
+
+#. FMain..ActionManager..ActionFlightNew..Hint
+#: Main.dfm:593
+msgid "Enter new flight"
+msgstr "Inserisci nuovo volo"
+
+#. FMain..ActionManager..ActionFlightEdit..Hint
+#: Main.dfm:601
+#: Input.pas:507
+#: Kopie_von_Input.pas:474
+msgid "Edit flight"
+msgstr "Modifica volo"
+
+#. FMain..ActionManager..ActionFlightInsert..Hint
+#: Main.dfm:609
+msgid "Insert flight"
+msgstr "Inserisci volo"
+
+#. FMain..ActionManager..ActionFlightDelete..Hint
+#: Main.dfm:616
+msgid "Delete flight"
+msgstr "Elimina volo"
+
+#. FMain..ActionManager..ActionScheduler..Caption
+#: Main.dfm:629
+msgid "Scheduler..."
+msgstr "Agenda..."
+
+#. FMain..ActionManager..ActionNinetyDays..Caption
+#: Main.dfm:637
+msgid "90 Day Regulation..."
+msgstr "Regolamentazione dei 90 Giorni..."
+
+#. FMain..ActionManager..ActionStatistic..Caption
+#: Main.dfm:645
+msgid "Statistic..."
+msgstr "Statistiche..."
+
+#. FMain..ActionManager..ActionLicense..Caption
+#: Main.dfm:653
+msgid "Licenceextension..."
+msgstr "Estensionelicenza..."
+
+#. FMain..ActionManager..ActionLicense..Hint
+#: Main.dfm:654
+msgid "Licenseextension"
+msgstr "Estensionelicenza"
+
+#. FMain..ActionManager..ActionTrainBaro..Hint
+#: Main.dfm:662
+msgid "Training barometer"
+msgstr "Barometro dell'allenamento"
+
+#. FNinetyDays..Label1..Caption
+#: NinetyDays.dfm:25
+msgid "Within the last 90 days"
+msgstr "Entro gli ultimi 90 giorni"
+
+#. FNinetyDays..Label2..Caption
+#: NinetyDays.dfm:38
+msgid "Licences:"
+msgstr "Licenze:"
+
+#. FNinetyDays..Label3..Caption
+#: NinetyDays.dfm:51
+msgid "Type:"
+msgstr "Tipo:"
+
+#. FPrint..Label1..Caption
+#: Print.dfm:26
+msgid "Format:"
+msgstr "Formato:"
+
+#. FPrint..Label23..Caption
+#. FStatistics..Panel2..Label23..Caption
+#: Print.dfm:53
+#: Statistics.dfm:1110
+msgid "Choose data by:"
+msgstr "Scegli dati per:"
+
+#. FPrint..Label37..Caption
+#. FStatistics..Panel2..Label37..Caption
+#: Print.dfm:66
+#: Statistics.dfm:1123
+msgid "Flight log:"
+msgstr "Log di volo:"
+
+#. FPrint..Label5..Caption
+#: Print.dfm:100
+msgid "View:"
+msgstr "Vista:"
+
+#. FPrint..Label6..Caption
+#: Print.dfm:113
+msgid "Colums:"
+msgstr "Colonne:"
+
+#. FPrint..Label24..Caption
+#. FStatistics..Panel2..Label24..Caption
+#: Print.dfm:139
+#: Statistics.dfm:1177
+msgid "= not"
+msgstr "= not"
+
+#. FPrint..Label8..Caption
+#: Print.dfm:195
+msgid "Change column width in \"Print_settings.ini\""
+msgstr "Cambia larghezza colonna in \"Print_settings.ini\""
+
+#. FPrint..CTiCheckListBox..Hint
+#: Print.dfm:238
+msgid "Choose categories"
+msgstr "Scegli categorie"
+
+#. FPrint..PanelJahre..CBJFrom....Items.Strings
+#. FStatistics..Panel2..PanelJahre..CBJFrom....Items.Strings
+#: Print.dfm:336
+#: Statistics.dfm:1249
+#: Statistics.pas:397
+#: Statistics.pas:742
+#: Statistics.pas:746
+#: Statistics.pas:998
+#: Statistics.pas:1069
+#: Statistics.pas:1087
+msgid "Beginning"
+msgstr "Inizio"
+
+#. FPrint..PanelJahre..CBJTo....Items.Strings
+#. FStatistics..Panel2..PanelJahre..CBJTo....Items.Strings
+#. ----------------------------------------------------------------
+#: Print.dfm:348
+#: Statistics.dfm:1261
+#: Statistics.pas:395
+#: Statistics.pas:744
+#: Statistics.pas:749
+#: Statistics.pas:1071
+#: Statistics.pas:1085
+msgid "End"
+msgstr "Fine"
+
+#. FPrint..Panel1..ButtonVorschau..Caption
+#: Print.dfm:381
+msgid "Preview"
+msgstr "Anteprima"
+
+#. FPrint..RBJahre..Caption
+#. FStatistics..Panel2..RBJahre..Caption
+#: Print.dfm:439
+#: Statistics.dfm:1302
+msgid "Years"
+msgstr "Anni"
+
+#. FPrint..RBStarts..Caption
+#. FStat_Graph..PanelGraph..CBY1....Items.Strings
+#. FStat_Graph..PanelGraph..CBY2....Items.Strings
+#. FStatistics..Panel2..RBStarts..Caption
+#. FTrainBaro..Label1..Caption
+#: Print.dfm:450
+#: StatGraph.dfm:137
+#: StatGraph.dfm:153
+#: Statistics.dfm:1313
+#: TrainBaro.dfm:46
+msgid "Starts"
+msgstr "Decolli"
+
+#. FPrint..RBSchein..Caption
+#. FStatistics..Panel2..RBSchein..Caption
+#: Print.dfm:459
+#: Statistics.dfm:1322
+msgid "Since licence"
+msgstr "Dalla licenza"
+
+#. FPrint..LBFlu..Hint
+#. FStatistics..Panel2..LBFlu..Hint
+#: Print.dfm:477
+#: Statistics.dfm:1340
+msgid "Select licence. Hold 'CTRL' for multiple selection"
+msgstr "Scegli licenza. Tieni premuto \"CTRL\" per selezioni multiple"
+
+#. FPrint..CBPageNumber..Caption
+#: Print.dfm:494
+msgid "Page number"
+msgstr "Numero pagina"
+
+#. FPrint..CBFileName..Caption
+#: Print.dfm:502
+msgid "Filename"
+msgstr "Nome file"
+
+#. FPrint..CBHeadLine..Caption
+#: Print.dfm:510
+msgid "Header"
+msgstr "Intestazione"
+
+#. FPrint..CBPrintNr..Caption
+#. ----------------------------------------------------------------
+#: Print.dfm:520
+#: Input.pas:255
+#: Kopie_von_Input.pas:247
+#: Main.pas:400
+#: Print.pas:636
+msgid "Nr."
+msgstr "Nr."
+
+#. FPrint..CBPrintArt..Caption
+#: Print.dfm:530
+msgid "Kind"
+msgstr "Tipo"
+
+#. FPrint..CLBKat..Hint
+#. FStatistics..Panel2..CLBKat..Hint
+#: Print.dfm:548
+#: Statistics.dfm:1357
+msgid "Filter category"
+msgstr "Filtra categoria"
+
+#. FPrint..Panel4..RBKatAnd..Hint
+#: Print.dfm:572
+msgid "[Cat1] and [Cat2] and..."
+msgstr "[Cat1] e [Cat2] e..."
+
+#. FPrint..Panel4..RBKatAnd..Caption
+#. FStatistics..Panel2..Panel4..RBKatAnd..Caption
+#: Print.dfm:573
+#: Statistics.dfm:1379
+msgid "and"
+msgstr "e"
+
+#. FPrint..Panel4..RBKatOr..Hint
+#: Print.dfm:583
+msgid "[Cat1] or [Cat2] or..."
+msgstr "[Cat1] oppure [Cat2] oppure..."
+
+#. FPrint..Panel4..RBKatOr..Caption
+#. FStatistics..Panel2..Panel4..RBKatOr..Caption
+#: Print.dfm:584
+#: Statistics.dfm:1389
+msgid "or"
+msgstr "oppure"
+
+#. FPrint..CBPrintKat..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLCat..VLECat....TitleCaptions.Strings
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLTimeCat..VLETimeCat....TitleCaptions.Strings
+#: Print.dfm:593
+#: Settings.dfm:603
+#: Settings.dfm:637
+#: Input.pas:262
+#: Input.pas:269
+#: Kopie_von_Input.pas:255
+#: Kopie_von_Input.pas:263
+#: Main.pas:418
+msgid "Category"
+msgstr "Categoria"
+
+#. FPrint..CBPrintBem..Caption
+#: Print.dfm:601
+msgid "Comment"
+msgstr "Commento"
+
+#. FPrint..CBPrintVia..Caption
+#: Print.dfm:611
+#: Main.pas:419
+#: Print.pas:647
+msgid "Via"
+msgstr "Tramite"
+
+#. FPrint..CBPrintCon..Caption
+#: Print.dfm:639
+msgid "Competition"
+msgstr "Competizione"
+
+#. FPrint..KatSelPanel..KatSelCTiRB..Caption
+#: Print.dfm:702
+msgid "Tc"
+msgstr "Tc"
+
+#. FPrint..KatSelPanel..KatSelConRB..Hint
+#: Print.dfm:713
+msgid "Competition category"
+msgstr "Categoria di competizione"
+
+#. FPrint..KatSelPanel..KatSelConRB..Caption
+#: Print.dfm:714
+msgid "Wb"
+msgstr "Wb"
+
+#. FPrint..CBPrintStr..Caption
+#. FStat_Graph..PanelGraph..CBY1....Items.Strings
+#. FStat_Graph..PanelGraph..CBY2....Items.Strings
+#: Print.dfm:724
+#: StatGraph.dfm:140
+#: StatGraph.dfm:156
+#: Input.pas:257
+#: Input.pas:270
+#: Input.pas:1685
+#: Kopie_von_Input.pas:249
+#: Kopie_von_Input.pas:264
+#: Kopie_von_Input.pas:1632
+#: Main.pas:417
+#: Print.pas:645
+#: StatGraph.pas:105
+#: Statistics.pas:1258
+#: Statistics.pas:1344
+msgid "Distance"
+msgstr "Distanza"
+
+#. FPrint..Print..DisplayPanel.DisplayMessage
+#: Print.dfm:735
+msgid "Progress"
+msgstr "Avanzamento"
+
+#. FSButton..PanelSB..PanelT..Caption
+#: SButton.dfm:63
+msgid "T"
+msgstr "T"
+
+#. FScheduler..Caption
+#: Scheduler.dfm:5
+msgid "Sheduler"
+msgstr "Agenda"
+
+#. FScheduler..ButtonDelete..Hint
+#: Scheduler.dfm:119
+msgid "Remove event"
+msgstr "Rimuovi evento"
+
+#. FScheduler..ButtonNew..Hint
+#: Scheduler.dfm:136
+msgid "Add event"
+msgstr "Aggiungi evento"
+
+#. FScheduler..ButtonExtend..Hint
+#: Scheduler.dfm:183
+msgid "Extend event"
+msgstr "Proroga evento"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Caption
+#: Settings.dfm:125
+msgid "Personal data"
+msgstr "Dati personali"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Label3..Caption
+#: Settings.dfm:133
+msgid "Name:"
+msgstr "Nome:"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Label4..Caption
+#: Settings.dfm:141
+msgid "Adress:"
+msgstr "Indirizzo:"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Label5..Caption
+#: Settings.dfm:149
+msgid "City:"
+msgstr "Città:"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..Label19..Caption
+#: Settings.dfm:171
+msgid "(Default entry for pilot)"
+msgstr "(Pilota di default)"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox4..GEPilotName..Hint
+#: Settings.dfm:212
+msgid "Enter pilot name"
+msgstr "Inserisci nome del pilota"
+
+#. FSettings..PageControl..TabSheetGeneral..RGNumeration..Caption
+#: Settings.dfm:221
+msgid "Numbering"
+msgstr "Numerazione"
+
+#. FSettings..PageControl..TabSheetGeneral..RGNumeration....Items.Strings
+#: Settings.dfm:224
+msgid "Continuous"
+msgstr "Continua"
+
+#. FSettings..PageControl..TabSheetGeneral..RGNumeration....Items.Strings
+#: Settings.dfm:225
+msgid "Start number"
+msgstr "Numero di partenza"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox1..Label31..Caption
+#: Settings.dfm:243
+msgid "ID prefix:"
+msgstr "Prefisso ID:"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox1..GEKPrae..Hint
+#: Settings.dfm:250
+msgid "Part of aircraft id always staying identical"
+msgstr "Parte dell'identificazione del velivolo che rimane sempre invariata"
+
+#. FSettings..PageControl..TabSheetGeneral..RGDistUnit..Caption
+#: Settings.dfm:261
+msgid "Unit"
+msgstr "Unità di misura"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox6..CBStartType..Caption
+#: Settings.dfm:297
+#: Main.pas:423
+msgid "Type of start"
+msgstr "Tipo di decollo"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox6..CBBlockTime..Caption
+#: Settings.dfm:305
+msgid "Block times"
+msgstr "Tempi ai blocchi"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox6..CBFlightTime..Caption
+#: Settings.dfm:314
+msgid "Flight times"
+msgstr "Tempi di volo"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox6..GroupBox8..LabelDefTime..Caption
+#: Settings.dfm:329
+msgid "Default"
+msgstr "Default"
+
+#. FSettings..PageControl..TabSheetGeneral..RGDefPosition..Caption
+#: Settings.dfm:354
+msgid "Default position"
+msgstr "Posizione di default"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox7..Caption
+#: Settings.dfm:367
+msgid "Warning"
+msgstr "Avviso"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox7..Label21..Caption
+#: Settings.dfm:375
+msgid "months warning before licence or medical extension:"
+msgstr "mesi di avviso prima dell'estensione della licenza o della visita medica:"
+
+#. FSettings..PageControl..TabSheetGeneral..GroupBox11..CBExportICal..Caption
+#: Settings.dfm:401
+msgid "Export iCalendar"
+msgstr "Esporta iCalendar"
+
+#. FSettings..PageControl..TabSheetLicenses..Caption
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..Caption
+#: Settings.dfm:407
+#: Settings.dfm:479
+msgid "Licences"
+msgstr "Licenze"
+
+#. FSettings..PageControl..TabSheetLicenses..LabelGetAirports..Caption
+#: Settings.dfm:419
+msgid "Get more licenses"
+msgstr "Ottieni altre licenze"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox2..Caption
+#: Settings.dfm:433
+msgid "Flight data before FLUPP"
+msgstr "Dati di volo prima di FluPP"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..Label1..Caption
+#: Settings.dfm:488
+msgid "Licence:"
+msgstr "Licenza:"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..Label10..Caption
+#: Settings.dfm:501
+msgid "Country:"
+msgstr "Nazione:"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..LBLicFiles..Hint
+#: Settings.dfm:514
+msgid "Select licence"
+msgstr "Selezione licenza"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLInfo..Caption
+#: Settings.dfm:531
+msgid "Info"
+msgstr "Info"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLDate..Label12..Caption
+#: Settings.dfm:550
+msgid "Here you can enter dates"
+msgstr "Qui puoi inserire le date"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLDate..VLEDate....TitleCaptions.Strings
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLCat..VLECat....TitleCaptions.Strings
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLTimeCat..VLETimeCat....TitleCaptions.Strings
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLAccLic..VLEAccLic....TitleCaptions.Strings
+#: Settings.dfm:567
+#: Settings.dfm:602
+#: Settings.dfm:636
+#: Settings.dfm:672
+#: Airports.pas:139
+#: Airports.pas:153
+#: FlightLogs.pas:81
+#: FlightLogs.pas:100
+msgid "Name"
+msgstr "Nome"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLCat..Label2..Caption
+#: Settings.dfm:585
+msgid "Here you can assign categories."
+msgstr "Qui puoi assegnare le categorie."
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLTimeCat..Caption
+#: Settings.dfm:611
+msgid "Time Cat"
+msgstr "Cat. Tempo"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLTimeCat..Label13..Caption
+#: Settings.dfm:619
+msgid "Here you can assign time categories."
+msgstr "Qui puoi assegnare le categorie di tempo."
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLAccLic..Caption
+#: Settings.dfm:645
+msgid "Flight logs"
+msgstr "Log di volo"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLAccLic..Label11....Caption
+#: Settings.dfm:655
+msgid "If flights from other flight logs are accepted, then they can be selected here."
+msgstr "Se vengono accettati voli da altri log di volo, allora essi possono essere selezionati qui."
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLAccLic..VLEAccLic....TitleCaptions.Strings
+#: Settings.dfm:673
+#: NinetyDays.pas:94
+msgid "Flight log"
+msgstr "Log di volo"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLOptCon..Caption
+#: Settings.dfm:681
+msgid "Ratings"
+msgstr "Valutazioni"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLOptCon..Label18..Caption
+#: Settings.dfm:689
+msgid "Here you can select additional ratings."
+msgstr "Qui puoi selezionare valutazioni addizionali."
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox3..Label6..Caption
+#: Settings.dfm:732
+msgid "Licence received:"
+msgstr "Licenza conseguita:"
+
+#. FSettings..PageControl..TabSheetLicenses..GroupBox3..GEScheinSeit..Hint
+#: Settings.dfm:739
+msgid "Date since obtaining your licence"
+msgstr "Data dal conseguimento della tua licenza"
+
+#. FSettings..PageControl..TabSheetMedicals..Caption
+#: Settings.dfm:749
+msgid "Medicals"
+msgstr "Visite mediche"
+
+#. FSettings..PageControl..TabSheetMedicals..Label20..Caption
+#: Settings.dfm:758
+msgid "Medicals are loaded by selecting a license on the license tab."
+msgstr "Le visite mediche vengono caricate selezionando una licenza sulla barra delle licenze."
+
+#. FSettings..PageControl..TabSheetMedicals..GroupBox10..VLEMedicals....TitleCaptions.Strings
+#. JvSimpleXML.Root.Properties.Value('country');
+#: Settings.dfm:792
+#: Licenses.pas:275
+msgid "Medical"
+msgstr "Visita medica"
+
+#. FSettings..PageControl..TabSheetAutoComplete..Caption
+#: Settings.dfm:803
+msgid "AutoComplete"
+msgstr "AutoCompilazione"
+
+#. FSettings..PageControl..TabSheetAutoComplete..Label16..Caption
+#: Settings.dfm:810
+msgid "AutoComplete helps you by completing a parts of known words"
+msgstr "L'AutoCompilazione ti aiuta completando automaticamente le parole conosciute"
+
+#. FSettings..PageControl..TabSheetAutoComplete..GroupBox5..LBKatAC....Items.Strings
+#: Settings.dfm:933
+#: Input.pas:256
+#: Kopie_von_Input.pas:248
+#: Print.pas:644
+msgid "Airport"
+msgstr "Aeroporto"
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet1..Label14....Caption
+#: Settings.dfm:967
+msgid "Here you can add categories (e.g. air tow, instruction, student time)"
+msgstr "Qui puoi aggiungere categorie (p.es. Aerotraino, Istruzione, Tempo allievo)"
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet1..ButtonKatAdd..Hint
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet2..ButtonCTiAdd..Hint
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet3..ButtonContestAdd..Hint
+#: Settings.dfm:981
+#: Settings.dfm:1065
+#: Settings.dfm:1146
+msgid "Add category"
+msgstr "Aggiungi categoria"
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet1..ButtonKatRem..Hint
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet2..ButtonCTiRem..Hint
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet3..ButtonContestRem..Hint
+#: Settings.dfm:1004
+#: Settings.dfm:1088
+#: Settings.dfm:1169
+msgid "Remove category"
+msgstr "Elimina categoria"
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet2..Label15....Caption
+#: Settings.dfm:1051
+msgid "Here you can add time categories (e.g. engine time, IFR, Night). Times can be assigned to these categories in the data entry field."
+msgstr "Qui puoi aggiungere categorie di tempo (p.es. Tempo motore, Volo IFR, Volo notturno). Nel campo di inserimento dati a queste categorie possono essere assegnati i tempi."
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet3..Caption
+#: Settings.dfm:1117
+msgid "Competition categories"
+msgstr "Categorie di competizione"
+
+#. FSettings..PageControl..TabSheetCat..PageControl1..TabSheet3..Label17..Caption
+#: Settings.dfm:1132
+msgid "Here you can add contest categories (e.g. OLC)"
+msgstr "Qui puoi aggiungere categorie di competizioni (p.es. OLC)"
+
+#. FStat_Graph..PanelGraph..RBBalken..Caption
+#: StatGraph.dfm:100
+msgid "Bar chart"
+msgstr "Diagramma a barre"
+
+#. FStat_Graph..PanelGraph..RBLinien..Caption
+#: StatGraph.dfm:117
+msgid "Line chart"
+msgstr "Diagramma lineare"
+
+#. FStat_Graph..PanelGraph..CBY1....Items.Strings
+#. FStat_Graph..PanelGraph..CBY2....Items.Strings
+#. ----------------------------------------------------------------
+#: StatGraph.dfm:138
+#: StatGraph.dfm:154
+#: Input.pas:263
+#: Input.pas:1487
+#: Kopie_von_Input.pas:256
+#: Kopie_von_Input.pas:1440
+#: Print.pas:641
+#: StatGraph.pas:103
+#: Statistics.pas:295
+#: Statistics.pas:423
+#: Statistics.pas:1256
+#: Statistics.pas:1328
+#: Statistics.pas:1384
+msgid "Time"
+msgstr "Tempo"
+
+#. FStat_Graph..PanelGraph..CBY1....Items.Strings
+#. FStat_Graph..PanelGraph..CBY2....Items.Strings
+#: StatGraph.dfm:139
+#: StatGraph.dfm:155
+#: Statistics.pas:1257
+#: Statistics.pas:1336
+msgid "Ø-Flight Time:"
+msgstr "Ø-Tempo di volo:"
+
+#. FStat_Graph..PanelGraph..CBY1....Items.Strings
+#. FStat_Graph..PanelGraph..CBY2....Items.Strings
+#: StatGraph.dfm:141
+#: StatGraph.dfm:157
+#: Statistics.pas:1352
+msgid "Ø-speed"
+msgstr "Ø-velocità"
+
+#. FStatistics..Panel3..Bevel4..Hint
+#. FStatistics..Panel3..Label11..Hint
+#. FStatistics..Panel3..LabelSDurchn..Hint
+#. FStatistics..Panel3..LabelSGesZeit..Hint
+#. FStatistics..Panel3..Label13..Hint
+#. FStatistics..Panel3..Label12..Hint
+#. FStatistics..Panel3..LabelSGesStart..Hint
+#. FStatistics..Panel3..Label14..Hint
+#. FStatistics..Panel3..LabelSName..Hint
+#. FStatistics..Panel3..Label27..Hint
+#. FStatistics..Panel3..Label28..Hint
+#. FStatistics..Panel3..LabelSW..Hint
+#. FStatistics..Panel3..Label29..Hint
+#. FStatistics..Panel3..LabelSF..Hint
+#. FStatistics..Panel3..LabelSE..Hint
+#. FStatistics..Panel3..Label30..Hint
+#. FStatistics..Panel3..LabelSStrecke..Hint
+#. FStatistics..Panel3..Label32..Hint
+#. FStatistics..Panel3..LabelSDGesch..Hint
+#. FStatistics..Panel3..Label18..Hint
+#. FStatistics..Panel3..LabelSA..Hint
+#. FStatistics..Panel3..LabelSG..Hint
+#. FStatistics..Panel3..Label20..Hint
+#. FStatistics..Panel3..Bevel11..Hint
+#. FStatistics..Panel3..Bevel12..Hint
+#. FStatistics..Panel3..Bevel13..Hint
+#. FStatistics..Panel3..Label19..Hint
+#. FStatistics..Panel3..LabelAuto..Hint
+#. FStatistics..Panel3..LabelGummi..Hint
+#. FStatistics..Panel3..Label35..Hint
+#. FStatistics..Panel3..Label34..Hint
+#. FStatistics..Panel3..Label38..Hint
+#. FStatistics..Panel3..LabelSDPassengers..Hint
+#. FStatistics..Panel3..LabelSDAvPassengers..Hint
+#: Statistics.dfm:39
+#: Statistics.dfm:175
+#: Statistics.dfm:183
+#: Statistics.dfm:192
+#: Statistics.dfm:201
+#: Statistics.dfm:209
+#: Statistics.dfm:217
+#: Statistics.dfm:226
+#: Statistics.dfm:240
+#: Statistics.dfm:253
+#: Statistics.dfm:261
+#: Statistics.dfm:269
+#: Statistics.dfm:278
+#: Statistics.dfm:286
+#: Statistics.dfm:295
+#: Statistics.dfm:304
+#: Statistics.dfm:312
+#: Statistics.dfm:348
+#: Statistics.dfm:356
+#: Statistics.dfm:454
+#: Statistics.dfm:462
+#: Statistics.dfm:471
+#: Statistics.dfm:480
+#: Statistics.dfm:488
+#: Statistics.dfm:496
+#: Statistics.dfm:504
+#: Statistics.dfm:621
+#: Statistics.dfm:629
+#: Statistics.dfm:637
+#: Statistics.dfm:645
+#: Statistics.dfm:739
+#: Statistics.dfm:747
+#: Statistics.dfm:755
+#: Statistics.dfm:764
+msgid "For detail view choose a dataset in the left panel."
+msgstr "Per una vista dettagliata scegli un set di dati nel pannello di sinistra."
+
+#. FStatistics..Panel3..Label15..Caption
+#: Statistics.dfm:54
+msgid "Annual statistic:"
+msgstr "Statistiche annuali:"
+
+#. FStatistics..Panel3..Label1..Caption
+#: Statistics.dfm:88
+msgid "Solo time"
+msgstr "Tempo di volo in Solitario"
+
+#. FStatistics..Panel3..Label2..Caption
+#: Statistics.dfm:103
+msgid "With copilot:"
+msgstr "Con il copilota:"
+
+#. FStatistics..Panel3..Label8..Caption
+#: Statistics.dfm:118
+msgid "Total Time:"
+msgstr "Tempo Totale:"
+
+#. FStatistics..Panel3..Label9..Caption
+#. FStatistics..Panel3..Label11..Caption
+#: Statistics.dfm:145
+#: Statistics.dfm:176
+msgid "Average flight time:"
+msgstr "Tempo medio di volo:"
+
+#. FStatistics..Panel3..LabelGesamt2..Hint
+#: Statistics.dfm:160
+msgid "Flight time including flights before FluPP"
+msgstr "Tempo di volo inclusi i voli prima di FluPP"
+
+#. FStatistics..Panel3..Label13..Caption
+#: Statistics.dfm:202
+msgid "% of flight time:"
+msgstr "% di tempo di volo:"
+
+#. FStatistics..Panel3..Label12..Caption
+#: Statistics.dfm:210
+msgid "% of starts:"
+msgstr "% di decolli:"
+
+#. FStatistics..Panel3..Label14..Caption
+#: Statistics.dfm:227
+msgid "Details for:"
+msgstr "Dettagli per:"
+
+#. FStatistics..Panel3..Label27..Caption
+#: Statistics.dfm:254
+msgid "Winch starts"
+msgstr "Decolli con verricello:"
+
+#. FStatistics..Panel3..Label28..Caption
+#: Statistics.dfm:262
+msgid "Air tows:"
+msgstr "Aerotraini:"
+
+#. FStatistics..Panel3..Label29..Caption
+#: Statistics.dfm:279
+msgid "Self starts:"
+msgstr "Decolli autonomi:"
+
+#. FStatistics..Panel3..Label32..Caption
+#: Statistics.dfm:349
+msgid "Ø-Speed:"
+msgstr "Ø-Velocità:"
+
+#. FStatistics..Panel3..Label33..Caption
+#: Statistics.dfm:373
+msgid "Ø-speed:"
+msgstr "Ø-velocità:"
+
+#. FStatistics..Panel3..Label26..Caption
+#: Statistics.dfm:380
+msgid "Found flights:"
+msgstr "Voli trovati:"
+
+#. FStatistics..Panel3..Label18..Caption
+#. FStatistics..Panel3..Label19..Caption
+#: Statistics.dfm:455
+#: Statistics.dfm:622
+msgid "Car tow start:"
+msgstr "Decolli con autotraino:"
+
+#. FStatistics..Panel3..Label20..Caption
+#. FStatistics..Panel3..Label35..Caption
+#: Statistics.dfm:481
+#: Statistics.dfm:646
+msgid "Rubberband:"
+msgstr "Elastico:"
+
+#. FStatistics..Panel3..Label5..Caption
+#: Statistics.dfm:534
+msgid "Winch start:"
+msgstr "Decollo con verricello:"
+
+#. FStatistics..Panel3..Label6..Caption
+#: Statistics.dfm:541
+msgid "Air tow:"
+msgstr "Aerotraino:"
+
+#. FStatistics..Panel3..Label7..Caption
+#: Statistics.dfm:548
+msgid "Selfstart:"
+msgstr "Decollo autonomo:"
+
+#. FStatistics..Panel3..Label10..Caption
+#: Statistics.dfm:579
+msgid "Over-all flights:"
+msgstr "Voli complessivi:"
+
+#. FStatistics..Panel3..LabelFluege2..Hint
+#: Statistics.dfm:606
+msgid "Flights including flights before FluPP"
+msgstr "Voli inclusi i voli prima di FluPP"
+
+#. FStatistics..Panel3..Label17..Caption
+#: Statistics.dfm:653
+msgid "PIC:"
+msgstr "IMG:"
+
+#. FStatistics..Panel3..Label36..Caption
+#. FStatistics..Panel3..Label38..Caption
+#: Statistics.dfm:702
+#: Statistics.dfm:748
+msgid "Ø-Passengers:"
+msgstr "Ø-Passeggeri:"
+
+#. FStatistics..Panel3..Label39..Caption
+#: Statistics.dfm:724
+msgid "With passengers:"
+msgstr "Con passeggeri:"
+
+#. FStatistics..Panel3..SGDetail..Hint
+#: Statistics.dfm:773
+msgid "Detailed selection. Choose dataset for details"
+msgstr "Selezione dettagliata. Scegli il set di dati per i dettagli"
+
+#. FStatistics..Panel3..ButtonTabGesamt..Hint
+#: Statistics.dfm:796
+msgid "Table of all flights"
+msgstr "Tabella di tutti i voli"
+
+#. FStatistics..Panel3..ButtonTabGesamt..Caption
+#. FStatistics..Panel3..ButtonGraphGesamt..Caption
+#: Statistics.dfm:797
+#: Statistics.dfm:822
+msgid "Over-all"
+msgstr "Complessivo"
+
+#. FStatistics..Panel3..ButtonGraphGesamt..Hint
+#: Statistics.dfm:821
+msgid "Graph of all flights"
+msgstr "Grafico di tutti i voli"
+
+#. FStatistics..Panel3..ButtonTabDetail..Hint
+#: Statistics.dfm:846
+msgid "Table of selected detailed category"
+msgstr "Tabella della categoria dettagliata selezionata"
+
+#. FStatistics..Panel3..ButtonTabDetail..Caption
+#. FStatistics..Panel3..ButtonGraphDetail..Caption
+#: Statistics.dfm:847
+#: Statistics.dfm:872
+msgid "Detail"
+msgstr "Dettaglio"
+
+#. FStatistics..Panel3..ButtonGraphDetail..Hint
+#: Statistics.dfm:871
+msgid "graph of selected detailed category"
+msgstr "Grafico della categoria dettagliata selezionata"
+
+#. FStatistics..Panel3..CBKatGes..Hint
+#. FStatistics..Panel3..CBKatDetail..Hint
+#. FStatistics..Panel3..CBDetail..Hint
+#: Statistics.dfm:896
+#: Statistics.dfm:957
+#: Statistics.dfm:1019
+msgid "Choose category"
+msgstr "Scegli categoria"
+
+#. FStatistics..Panel3..CBKatGes....Items.Strings
+#. FStatistics..Panel3..CBKatDetail....Items.Strings
+#: Statistics.dfm:912
+#: Statistics.dfm:973
+msgid "Contest categories"
+msgstr "Categorie di competizione"
+
+#. FStatistics..Panel3..CBDetail..Text
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#: Statistics.dfm:1024
+#: Statistics.dfm:1027
+msgid "Aircraft type"
+msgstr "Tipo velivolo"
+
+#. FStatistics..Panel3..CBDetail....Items.Strings
+#. ----------------------------------------------------------------
+#: Statistics.dfm:1028
+#: Settings.pas:509
+msgid "Aircraft id"
+msgstr "ID velivolo"
+
+#. FStatistics..Panel2..RGDistUnit..Caption
+#: Statistics.dfm:1398
+msgid "Units"
+msgstr "Unità di misura"
+
+#. FStatistics..Panel2..RGDefaultTime..Caption
+#: Statistics.dfm:1417
+msgid "Default Time"
+msgstr "Tempo di default"
+
+#. FStatistics..Panel2..RGDefaultTime....Items.Strings
+#: Statistics.dfm:1425
+msgid "Block"
+msgstr "Blocchi"
+
+#. FTrainBaro..Caption
+#: TrainBaro.dfm:5
+#: Main.pas:1360
+#: Main.pas:1366
+#: Main.pas:1372
+msgid "Training Barometer"
+msgstr "Barometro dell'allenamento"
+
+#. FTrainBaro..Label2..Caption
+#: TrainBaro.dfm:54
+msgid "Hours"
+msgstr "Ore"
+
+#. FTrainBaro..Label3..Caption
+#: TrainBaro.dfm:61
+msgid "In the last 6 month:"
+msgstr "Negli ultimi 6 mesi:"
+
+#. FTrainBaro..Label4..Caption
+#: TrainBaro.dfm:75
+msgid "Source: Office for aviation safety, German Aeroclub "
+msgstr "Fonte: Ufficio per la Sicurezza dell'Aviazione, Aeroclub tedesco"
+
+#: Airports.pas:140
+#: Airports.pas:154
+msgid "ICAO"
+msgstr "ICAO"
+
+#. ----------------------------------------------------------------
+#: Airports.pas:228
+msgid "Please enter airport name!"
+msgstr "Per cortesia inserire nome aeroporto!"
+
+#: Airports.pas:234
+msgid "Please enter airport position!"
+msgstr "Per cortesia inserire posizione aeroporto!"
+
+#: Airports.pas:240
+#: Settings.pas:585
+msgid "Airport already exists!"
+msgstr "Aeroporto già esistente!"
+
+#. ----------------------------------------------------------------
+#: BasicSettings.pas:113
+msgid "Please restart FluPP for changes to apply"
+msgstr "Per cortesia riavviare FluPP per applicare le modifiche"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: FlightLogs.pas:81
+#: FlightLogs.pas:100
+msgid "Please enter flight log name"
+msgstr "Per cortesia inserire nome del log di volo"
+
+#: FlightLogs.pas:84
+#: FlightLogs.pas:103
+msgid "The name already exists!"
+msgstr "Nome già esistente!"
+
+#. ----------------------------------------------------------------
+#: FlightLogs.pas:119
+msgid "Are you sure you want to delete the flightlog '%s'?"
+msgstr "Sei sicuro di voler eliminare il log di volo '%s'?"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: FlightLogs.pas:134
+#: FlightLogs.pas:147
+msgid "Please create at least one flightlog"
+msgstr "Per cortesia creare almeno un log di volo"
+
+#. ----------------------------------------------------------------
+#: Grid.pas:256
+msgid "To flight %s: %s h, %s flights"
+msgstr "Al volo %s: %s h, %s voli"
+
+#: Grid.pas:278
+msgid "From flight %s to %s: %s h, %s flights"
+msgstr "Dal volo %s al %s: %s h, %s voli"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Import.pas:35
+#: Import.pas:262
+#: Import.pas:435
+#: Main.pas:753
+msgid "File '%s' does not exist"
+msgstr "Il volo '%s' non esiste"
+
+#: Import.pas:457
+msgid "This version of the file is not compatible anymore"
+msgstr "La versione del file non è più compatibile"
+
+#: Input.pas:271
+#: Input.pas:1693
+#: Kopie_von_Input.pas:265
+#: Kopie_von_Input.pas:1640
+msgid "Points"
+msgstr "Punti"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:347
+#: Kopie_von_Input.pas:320
+msgid "Create new flight"
+msgstr "Crea nuovo volo"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:804
+#: Kopie_von_Input.pas:723
+msgid "Please enter aircraft id"
+msgstr "Per cortesia inserisci ID velivolo"
+
+#: Input.pas:809
+#: Kopie_von_Input.pas:730
+msgid "Please enter aircraft type"
+msgstr "Per cortesia inserisci tipo velivolo"
+
+#: Input.pas:816
+#: Input.pas:829
+#: Input.pas:1471
+#: Kopie_von_Input.pas:737
+#: Kopie_von_Input.pas:1424
+msgid "Please enter start time"
+msgstr "Per cortesia inserisci orario di decollo"
+
+#: Input.pas:821
+#: Input.pas:834
+#: Kopie_von_Input.pas:744
+msgid "Please enter landing time"
+msgstr "Per cortesia inserisci orario di atterraggio"
+
+#: Input.pas:840
+#: Kopie_von_Input.pas:751
+msgid "Please enter departure location"
+msgstr "Per cortesia inserisci luogo di partenza"
+
+#: Input.pas:845
+#: Kopie_von_Input.pas:758
+msgid "Please enter arrival location"
+msgstr "Per cortesia inserisci luogo di arrivo"
+
+#. StrtoDate(MEDateD.Text+'.'+MEDateM.Text+'.'+MEDateJ.Text)
+#. ----------------------------------------------------------------
+#: Input.pas:865
+#: Kopie_von_Input.pas:787
+#: Print.pas:271
+#: Print.pas:280
+msgid "Please enter date"
+msgstr "Per cortesia inserisci data"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:953
+#: Kopie_von_Input.pas:875
+#: Settings.pas:561
+msgid "Aircraft id already exists!"
+msgstr "ID velivolo già esistente!"
+
+#: Input.pas:1021
+#: Kopie_von_Input.pas:946
+msgid "Person already exists!"
+msgstr "Persona già esistente!"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1041
+#: Kopie_von_Input.pas:968
+#: Scheduler.pas:272
+msgid "Please enter a time"
+msgstr "Per cortesia inserisci un orario"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1086
+#: Input.pas:1226
+#: Input.pas:1711
+#: Input.pas:1719
+#: Kopie_von_Input.pas:1001
+#: Kopie_von_Input.pas:1126
+#: Kopie_von_Input.pas:1452
+#: Kopie_von_Input.pas:1658
+#: Kopie_von_Input.pas:1666
+#: Print.pas:248
+#: Print.pas:258
+#: Scheduler.pas:306
+#: Statistics.pas:714
+#: Statistics.pas:724
+msgid "Please enter a number"
+msgstr "Per cortesia inserisci un numero"
+
+#: Input.pas:1169
+#: Kopie_von_Input.pas:1090
+msgid "Airport aleready exists!"
+msgstr "Aeroporto già esistente!"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1249
+#: Input.pas:1547
+#: Input.pas:1768
+#: Kopie_von_Input.pas:1196
+#: Kopie_von_Input.pas:1495
+#: Kopie_von_Input.pas:1715
+#: Settings.pas:732
+#: Settings.pas:762
+#: Settings.pas:792
+msgid "Please enter a category"
+msgstr "Per cortesia inserisci una categoria"
+
+#: Input.pas:1253
+#: Input.pas:1551
+#: Input.pas:1772
+#: Kopie_von_Input.pas:1200
+#: Kopie_von_Input.pas:1499
+#: Kopie_von_Input.pas:1719
+#: Settings.pas:736
+#: Settings.pas:766
+#: Settings.pas:796
+msgid "Category already exists!"
+msgstr "Categoria già esistente!"
+
+#. ----------------------------------------------------------------
+#: Input.pas:1344
+#: Kopie_von_Input.pas:1294
+msgid ""
+"Airport not found in the database\n"
+"The distance cannot be calculated"
+msgstr ""
+"Aeroporto non trovato nel database\n"
+"La distanza non può essere calcolata"
+
+#: Input.pas:1499
+msgid "Please enter a valid time"
+msgstr "Per cortesi ainserire un orario valido"
+
+#: Input.pas:1595
+#: Kopie_von_Input.pas:1543
+msgid "File '%s' could not be copied"
+msgstr "Il file '%s' non può essere copiato"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1631
+#: Kopie_von_Input.pas:1579
+msgid "File already exists"
+msgstr "File già esistente"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1651
+#: Kopie_von_Input.pas:1599
+msgid "File could not be deleted"
+msgstr "Il file non può essere cancellato"
+
+#. ----------------------------------------------------------------
+#. ----------------------------------------------------------------
+#: Input.pas:1679
+#: Kopie_von_Input.pas:1626
+#: Main.pas:422
+msgid "Contest"
+msgstr "Competizione"
+
+#: Kopie_von_Input.pas:769
+msgid ""
+"Actual date is before the last flight!\n"
+"After proceeding you will have to sort all flights again using menu \"Tools\"\n"
+"Continue?"
+msgstr ""
+"La data attuale è antecedente all'ultimo volo!\n"
+"Dopo aver confermato dovrai ordinare di nuovo tutti i voli usando \"Strumenti\" nel menu\n"
+"Continua?"
+
+#: Kopie_von_Input.pas:776
+msgid ""
+"Takeoff time is before last landing time! \n"
+"Continue?"
+msgstr ""
+"L'orario di decollo è antecedente all'ultimo orario di atterraggio! \n"
+"Continua?"
+
+#: Licenses.pas:309
+msgid "Validity"
+msgstr "Validità"
+
+#: Licenses.pas:320
+msgid "Extension"
+msgstr "Estensione"
+
+#: Main.pas:402
+#: Print.pas:640
+msgid "Type"
+msgstr "Tipo"
+
+#: Main.pas:403
+msgid "ID"
+msgstr "ID"
+
+#: Main.pas:406
+#: StatGraph.pas:107
+#: Statistics.pas:1260
+#: Statistics.pas:1360
+msgid "Passengers"
+msgstr "Passeggeri"
+
+#: Main.pas:407
+msgid "Dep."
+msgstr "Part."
+
+#: Main.pas:408
+msgid "Arr."
+msgstr "Arr."
+
+#: Main.pas:409
+msgid "Block on"
+msgstr "Blocchi on"
+
+#: Main.pas:410
+msgid "Block off"
+msgstr "Blocchi off"
+
+#: Main.pas:411
+msgid "Fl. Time"
+msgstr "Tempo di volo"
+
+#: Main.pas:412
+msgid "Bl. Time"
+msgstr "Tempo ai blocchi"
+
+#: Main.pas:413
+#: Print.pas:643
+msgid "Ld."
+msgstr "Att."
+
+#: Main.pas:416
+#: Print.pas:650
+msgid "Remarks"
+msgstr "Note"
+
+#. ----------------------------------------------------------------
+#: Main.pas:677
+msgid "FluPP File"
+msgstr "File FluPP"
+
+#. ----------------------------------------------------------------
+#: Main.pas:875
+msgid "Do you want to save the file '%s'?"
+msgstr "Vuoi salvare il file '%s'?"
+
+#. ----------------------------------------------------------------
+#: Main.pas:1255
+msgid "Over-all: %s h and %s flights"
+msgstr "Complessivo: %s h e % voli"
+
+#: Main.pas:1344
+msgid "In the last 90 days you have %s flights"
+msgstr "Hai effettuato %s voli negli ultimi 90 giorni"
+
+#: Main.pas:1361
+#: TrainBaro.pas:155
+msgid "Red Area"
+msgstr "Zona Rossa"
+
+#: Main.pas:1361
+#: TrainBaro.pas:156
+msgid "Exercise is necessary - Flying can be risky."
+msgstr "E' necessario più esercizio - Volare può essere rischioso."
+
+#: Main.pas:1367
+#: TrainBaro.pas:162
+msgid "Yellow Area"
+msgstr "Zona Gialla"
+
+#: Main.pas:1367
+#: TrainBaro.pas:163
+msgid "More exercise helpful - Unexpected events could be dangerous"
+msgstr "Più esercizio può essere utile - Eventi inattesi potrebbero risultare pericolosi"
+
+#: Main.pas:1373
+#: TrainBaro.pas:171
+msgid "Green Area"
+msgstr "Zona Verde"
+
+#: Main.pas:1373
+#: TrainBaro.pas:172
+msgid "The level of exercise is good - but stay cautious!"
+msgstr "Il livello di esercizio è buono - ma sii prudente!"
+
+#: NinetyDays.pas:87
+msgid "Aircraft ID"
+msgstr "ID velivolo"
+
+#: NinetyDays.pas:88
+#: NinetyDays.pas:95
+#: Statistics.pas:296
+#: Statistics.pas:424
+#: Statistics.pas:1255
+#: Statistics.pas:1320
+#: Statistics.pas:1399
+msgid "Flights"
+msgstr "Voli"
+
+#: NinetyDays.pas:89
+#: NinetyDays.pas:96
+msgid "3 flights to"
+msgstr "3 voli a"
+
+#: Print.pas:322
+msgid "Please fill out \"Licence obtained\"!"
+msgstr "Per cortesia completa \"Licenza conseguita\"!"
+
+#: Print.pas:483
+msgid "Too many columns for one page!"
+msgstr "Troppe colonne per una pagina!"
+
+#: Print.pas:543
+#: Statistics.pas:1012
+msgid "No data found"
+msgstr "Nessun dato trovato"
+
+#: Print.pas:642
+msgid "Duration"
+msgstr "Durata"
+
+#: Print.pas:649
+#: Statistics.pas:1414
+#: Statistics.pas:1429
+msgid "Contests"
+msgstr "Competizioni"
+
+#: Scheduler.pas:95
+#: Scheduler.pas:201
+msgid "Description"
+msgstr "Descrizione"
+
+#: Scheduler.pas:174
+msgid "Please enter date and description"
+msgstr "Per cortesia inserisci una data e una descrizione"
+
+#: Scheduler.pas:210
+msgid "Please enter a description"
+msgstr "Per cortesia inserisci una descrizione"
+
+#. ----------------------------------------------------------------
+#: Scheduler.pas:247
+msgid "License and Medical schedules cannot be removed here."
+msgstr "Licenze e Visite mediche non possono essre eliminate qui."
+
+#: Scheduler.pas:297
+msgid "Extend by:"
+msgstr "Estendi fino al:"
+
+#: Settings.pas:424
+msgid "Do you want to convert the distances into the new unit?"
+msgstr "Vuoi convertire le distanze nella nuova unità di misura?"
+
+#: Settings.pas:574
+msgid "Passengert does already exists!"
+msgstr "Passeggero già esistente!"
+
+#: Settings.pas:596
+msgid "Please enter '%s'!"
+msgstr "Per cortesia inserire '%s'!"
+
+#: Settings.pas:601
+msgid "Please enter Type!"
+msgstr "Per cortesia inserire il Tipo!"
+
+#: StatGraph.pas:97
+msgid "flights"
+msgstr "voli"
+
+#: StatGraph.pas:104
+msgid "Ø-Flight time:"
+msgstr "Ø-Tempo di volo:"
+
+#: StatGraph.pas:106
+#: Statistics.pas:1259
+msgid "Ø-Speed"
+msgstr "Ø-Velocità"
+
+#: StatGraph.pas:108
+#: Statistics.pas:1261
+#: Statistics.pas:1368
+msgid "Ø-Passengers"
+msgstr "Ø-Passeggeri"
+
+#: Statistics.pas:691
+msgid "With passenger"
+msgstr "Con passeggeri"
+
+#: Statistics.pas:776
+msgid "Please fill out \"License obtained\"!"
+msgstr "Per cortesia completa \"Licenza conseguita\"!"
+
+#: Statistics.pas:872
+#: Statistics.pas:875
+#: Statistics.pas:1032
+msgid "on"
+msgstr "on"
+
+#: Statistics.pas:962
+#: Statistics.pas:971
+#: Statistics.pas:990
+msgid "Solo"
+msgstr "in Solitario"
+
+#. ----------------------------------------------------------------
+#: Statistics.pas:1236
+msgid "Statistics from -->'%s'<-- in selected area"
+msgstr "Statistiche da -->'%s'<-- nell'area selezionata"
+
+#: Statistics.pas:1243
+msgid "Selection of all flights in selected area"
+msgstr "Selezione di tutti i voli nell'area selezionata"
+
+#: Statistics.pas:1262
+#: Statistics.pas:1387
+msgid "Cat:"
+msgstr "Cat.:"
+
+#: Statistics.pas:1263
+#: Statistics.pas:1371
+msgid "Time:"
+msgstr "Tempo:"
+
+#: Statistics.pas:1264
+#: Statistics.pas:1402
+msgid "ConD:"
+msgstr "ConD:"
+
+#: Statistics.pas:1265
+#: Statistics.pas:1417
+msgid "ConP:"
+msgstr "ConP:"
+
+#. ----------------------------------------------------------------
+#: ToolsLicense.pas:47
+msgid "Attribute '%s' does not exist in XML-tag '%s'!"
+msgstr "Attributo '%s' non esistente nel tag XML '%s'!"
+
+#: ToolsLicense.pas:54
+msgid "The date '%s' is not valid!"
+msgstr "Data '%s' non valida!"
+
+#: ToolsLicense.pas:61
+msgid "The duration '%s' is not valid!"
+msgstr "Durata '%s' non valida!"
+
+#. TODO: msg
+#: ToolsLicense.pas:73
+msgid "'%s' is not a valid property!"
+msgstr "'%s' non è una proprietà valida!"
+
+#: TrainBaro.pas:159
+msgid ""
+"For Novices:\n"
+"- the first few takeoffs after a prolonged period of non-flying should only be made on familiar aircraft and in good weather conditions\n"
+"- if the last takeoff has been made more than three months ago, training with a flight instructor is the best way to regain good flying abilities"
+msgstr ""
+"Per i Neofiti:\n"
+"- i primi decolli dopo un prolungato periodo di inattività dovrebbero essere effettuati solo su velivoli conosciuti ed in buone condizioni meteo\n"
+"- se l'ultimo decollo è stato effettuato più di tre mesi fa, volare con un Istruttore è la maniera migliore di riprendere abilità e confidenza con il volo"
+
+#: TrainBaro.pas:168
+msgid ""
+"Attention on takeoff:\n"
+"- in unknown area (eg mountaineous terrain)\n"
+"- on unknown airfields\n"
+"- on rarely flown aircraft\n"
+"- in a rarely performed type of start"
+msgstr ""
+"Attenzione durante il decollo:\n"
+"- in aree sconosciute (p.es. terreno montuoso)\n"
+"- da aeroporti/aviosuperfici sconosciute\n"
+"- su velivoli poco conosciuti e/o pilotati raramente\n"
+"- con tipologie di decollo utilizzate raramente"
+
+#: TrainBaro.pas:178
+msgid ""
+"Well trained pilots often make the following mistakes:\n"
+"- Aircraft is poorly equipped\n"
+"- poor cockpit check procedure\n"
+"- poor airmanship during rejected takeoffs\n"
+"- mistakes in flying the landing pattern\n"
+"(especially at off-airfield landings)"
+msgstr ""
+"I piloti ben addestrati commettono sovente i seguenti errori:\n"
+"- Il velivolo è scarsamente equipaggiato\n"
+"- Scarse procedure di check nel cockpit\n"
+"- Scarsa abilità di manovra in caso di decolli abortiti\n"
+"- errori nelle procedure di volo all'interno del circuito di atterraggio (specialmente in atterraggi fuori campo)"
+
