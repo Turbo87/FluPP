@@ -1,13 +1,11 @@
 # Copyright (C) 2007
-# This file is distributed under the same license as FliPS.
+# This file is distributed under the same license as FluPP.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: FliPS\n"
+"Project-Id-Version: FluPP\n"
 "POT-Creation-Date: 2007-05-08 18:15\n"
 "PO-Revision-Date: 2007-05-01 00:00 GMT\n"
-"Last-Translator: Bjoern Mueller\n"
-"Language-Team: Bjoern Mueller\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,8 +290,8 @@ msgstr "Angehängte Dateien"
 
 #. FInfo..Caption
 #: Info.dfm:8 
-msgid "Infos about FliPS"
-msgstr "Info über FliPS"
+msgid "Infos about FluPP"
+msgstr "Info über FluPP"
 
 #. FInfo..LabelBugs..Caption
 #: Info.dfm:33 
@@ -309,15 +307,6 @@ msgstr "Fehler bitte hier eintragen"
 #: Calendar.pas:99 Calendar.pas:242 Grid.pas:620 Print.pas:728
 msgid "Date"
 msgstr "Datum"
-
-#. FInfo..LabelLizenz....Caption
-#: Info.dfm:75 
-msgid ""
-"  FliPS is based on FluPP 1.0.9 Alpha 3 (http://flupp.sourceforge.net).   "
-"Both programs are Open Source and licenced under the GNU-GPL"
-msgstr ""
-"  FliPS basiert auf FluPP 1.0.9 Alpha 3 (http://flupp.sourceforge.net).   "
-"Beide Programme sind Open Source und unterliegen der GNU-GPL"
 
 #. FInfo..LabelFeature..Caption
 #: Info.dfm:117 
@@ -1747,8 +1736,8 @@ msgstr "Mehr Lizenzen"
 
 #. FSettings..PageControl..TabSheetLicenses..GroupBox2..Caption
 #: Settings.dfm:463 
-msgid "Flight data before FliPS"
-msgstr "Daten vor FliPS"
+msgid "Flight data before FluPP"
+msgstr "Daten vor FluPP"
 
 #. FSettings..PageControl..TabSheetLicenses..GroupBox9..PageControlLicenses..TSLInfo..Caption
 #: Settings.dfm:530 
@@ -2248,7 +2237,7 @@ msgstr "Durchschnittsflugzeit:"
 #. FStatistics..Panel3..LabelGesamt2..Hint
 #: Statistics.dfm:160 
 msgid "Flight time including flights before FluPP"
-msgstr "Flugzeit (auch Zeiten vor Nutzung von FliPS)"
+msgstr "Flugzeit (auch Zeiten vor Nutzung von FluPP)"
 
 #. FStatistics..Panel3..Label13..Caption
 #: Statistics.dfm:202 
@@ -2332,7 +2321,7 @@ msgstr "Flüge:"
 #. FStatistics..Panel3..LabelFluege2..Hint
 #: Statistics.dfm:608 
 msgid "Flights including flights before FluPP"
-msgstr "Flüge (auch Zeiten vor Nutzung von FliPS)"
+msgstr "Flüge (auch Zeiten vor Nutzung von FluPP)"
 
 #. FStatistics..Panel3..Label17..Caption
 #: Statistics.dfm:655 
@@ -2531,8 +2520,8 @@ msgstr "Flugplatz existiert schon!"
 
 #. ----------------------------------------------------------------
 #: BasicSettings.pas:113 
-msgid "Please restart FliPS for changes to apply"
-msgstr "Bitte FliPS neu starten, damit die Änderungen wirksam werden."
+msgid "Please restart FluPP for changes to apply"
+msgstr "Bitte FluPP neu starten, damit die Änderungen wirksam werden."
 
 # Scheduler.pas:98 #: Scheduler.pas:231
 #: Calendar.pas:100  Calendar.pas:248
@@ -2822,18 +2811,13 @@ msgid "OS-Version: "
 msgstr "OS-Version: "
 
 #: Main.pas:233 
-msgid "FliPS-Version: "
-msgstr "FliPS-Version: "
+msgid "FluPP-Version: "
+msgstr "FluPP-Version: "
 
 # Main.pas:720 #: Main.pas:950 Main.pas:966
 #. ----------------------------------------------------------------
 #. ----------------------------------------------------------------
 #. ----------------------------------------------------------------
-#: Main.pas:730  Main.pas:863 Main.pas:878
-msgid "FliPS File"
-msgstr "FliPS-Datei"
-
-# Main.pas:720 #: Main.pas:950 Main.pas:966
 #: Main.pas:730  Main.pas:863 Main.pas:878
 msgid "FluPP File"
 msgstr "FluPP-Datei"
@@ -2841,16 +2825,6 @@ msgstr "FluPP-Datei"
 #: Main.pas:849 
 msgid "Do you want to save the file '%s'?"
 msgstr "Wollen Sie die Datei '%s' vorher noch speichern?"
-
-#. ----------------------------------------------------------------
-#: Main.pas:895 
-msgid ""
-"If you save as \"FluPP File\" all additional entries will be lost \n"
-"if you re-open and save this file from within FluPP!\n"
-"\n"
-"This limitations may not apply to files re-opened and saved \n"
-"from within FliPS. Do you still want to save as FluPP-File ?"
-msgstr ""
 
 #. ----------------------------------------------------------------
 #: Main.pas:916  Main.pas:1405
