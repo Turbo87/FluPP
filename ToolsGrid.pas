@@ -2,7 +2,7 @@ unit ToolsGrid;
 
 interface
 
-uses SysUtils, Classes, Types, Grid, Grids, JvStringGrid, DateUtils, Windows, Messages;
+uses SysUtils, Classes, Types, Grid, Grids, JvStringGrid, DateUtils, Windows, Messages, Graphics;
 
 const
   DeSelectRect: TGridRect = (Left:-1; Top:-1; Right:-1; Bottom:-1 );
@@ -12,10 +12,9 @@ function GridActiveChild: TFGrid;
 function CalcTime(GridIdx: Word; StartTime: String; NrFrom, NrTo: Word; DefaultTime: Byte = 2): String;
 function CalcFlights(GridIdx: Word; Flights: Word; NrFrom: Word; NrTo: Word): Word;
 procedure SortGridByCols(ColOrder: array of Integer; Grid: TJvStringGrid);
-procedure DrawColorbands(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+procedure DrawColorbands(Grid: TStringGrid; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState; Alignment: TAlignment);
 function SearchInGrid(Grid: TStringGrid; Str: String): Boolean; overload;
 function SearchInGrid(Grid: TStringGrid; Str: String; out aRow: Integer): Boolean; overload;
-procedure StringGridAlignment(Grid: TStringGrid; Rect: TRect; ACol, ARow: Integer; Alignment: TAlignment);
 procedure ConvertColNames(GridCols: TSTrings);
 
 implementation
@@ -194,21 +193,6 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Draw colorbands
-// ----------------------------------------------------------------
-procedure DrawColorbands(Sender: TObject; ACol, ARow: Integer;
-  Rect: TRect; State: TGridDrawState);
-begin
-  if not Odd(ARow) and not (gdFixed in State) and not (gdSelected	in State) then
-  with TStringGrid(Sender) do
-  begin
-    Canvas.Brush.Color := $00F8F8F8;
-    Canvas.FillRect(Rect);
-    DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect,DT_LEFT);
-  end;
-end;
-
-// ----------------------------------------------------------------
 // Search in grid
 // ----------------------------------------------------------------
 function SearchInGrid(Grid: TStringGrid; Str: String): Boolean;
@@ -236,22 +220,37 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Grid cell alignment
+// Draw colorbands
 // ----------------------------------------------------------------
-procedure StringGridAlignment(Grid: TStringGrid; Rect: TRect; ACol, ARow: Integer; Alignment: TAlignment);
+procedure DrawColorbands(Grid: TStringGrid; ACol, ARow: Integer;
+  Rect: TRect; State: TGridDrawState; Alignment: TAlignment);
 var
   TextOut: String;
 begin
+  if not (gdFixed in State) and not (gdSelected	in State) then
+  begin
+    if Odd(ARow) then
+      Grid.Canvas.Brush.Color := clColorband1
+    else
+       Grid.Canvas.Brush.Color := clColorband2;
+  end;
+  if (gdFixed in State) and not (gdSelected	in State) then
+    Grid.Canvas.Brush.Color := clBtnFace;
+  if (gdSelected	in State) then
+    Grid.Canvas.Brush.Color := clBtnFace;
+
   Grid.Canvas.FillRect(Rect);
+
   InflateRect(Rect, -3, -2);
   TextOut := Grid.Cells[ACol,ARow];
   if Alignment = taLeftJustify then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect,DT_LEFT);
+    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_LEFT);
   if Alignment = taCenter then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect,DT_CENTER);
+    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_CENTER);
   if Alignment = taRightJustify then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect,DT_SINGLELINE or DT_NOPREFIX or DT_VCENTER or DT_RIGHT);
+    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_SINGLELINE or DT_NOPREFIX or DT_VCENTER or DT_RIGHT);
 end;
+
 
 // ----------------------------------------------------------------
 // Convert col names (new col names from V1.09 Alpha2)

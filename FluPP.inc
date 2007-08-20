@@ -27,6 +27,8 @@ SchImageIdxMed = 30;
 SchImageIdxLic = 27;
 SchImageIdxEvt = 31;
 
+clColorband1 = clwhite;
+clColorband2 = $00F8F8F8;
 clFYellow = $0000D4ED;
 clFRed    = $002929EF;
 clFGreen  = $0016D273;

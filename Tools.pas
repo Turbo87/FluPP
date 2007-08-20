@@ -2,7 +2,7 @@ unit Tools;
 
 interface
 
-uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, Windows, Dialogs;
+uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, Windows, Dialogs, Grids, CheckLst;
 
 type
   TAirport = record
@@ -67,6 +67,8 @@ procedure DeleteStringObject(StringList: TStrings; Index: Integer);
 procedure FreeObjStringList(StringList: TStrings);
 function GetFileVersion(FileName: WideString): String;
 function GetActualDir(Extract : boolean) : String;
+procedure StringsToCLB(var Cat: TStrings; Data: String; Grid: TStringGrid; CLB: TCheckListBox);  overload;
+procedure StringsToCLB(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
 
 implementation
 
@@ -330,7 +332,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// convert position [Nxxxï¿½xx'xx''] to degree
+// convert position [Nxxx°xx'xx''] to degree
 // ----------------------------------------------------------------
 function PosToDeg(Pos: String): Real;
 var
@@ -342,7 +344,7 @@ begin
   Result := 0;
   while i < length(Pos) do
   begin
-    while (Pos[i] <> 'ï¿½') and (Pos[i] <> '''') and (Pos[i] <> '"') and (i < length(Pos)) do
+    while (Pos[i] <> '°') and (Pos[i] <> '''') and (Pos[i] <> '"') and (i < length(Pos)) do
     begin
       zelle := zelle + Pos[i];
       inc(i);
@@ -542,12 +544,12 @@ end;
 // ----------------------------------------------------------------
 function StrToHTML(S: String): String;
 begin
-  S := StringReplace(S,'ï¿½','&auml;',[rfReplaceAll]);
-  S := StringReplace(S,'ï¿½','&uuml;',[rfReplaceAll]);
-  S := StringReplace(S,'ï¿½','&ouml;',[rfReplaceAll]);
-  S := StringReplace(S,'ï¿½','&Auml;',[rfReplaceAll]);
-  S := StringReplace(S,'ï¿½','&Uuml;',[rfReplaceAll]);
-  S := StringReplace(S,'ï¿½','&Ouml;',[rfReplaceAll]);
+  S := StringReplace(S,'ä','&auml;',[rfReplaceAll]);
+  S := StringReplace(S,'ü','&uuml;',[rfReplaceAll]);
+  S := StringReplace(S,'ö','&ouml;',[rfReplaceAll]);
+  S := StringReplace(S,'Ä','&Auml;',[rfReplaceAll]);
+  S := StringReplace(S,'Ü','&Uuml;',[rfReplaceAll]);
+  S := StringReplace(S,'Ö','&Ouml;',[rfReplaceAll]);
   Result := S;
 end;
 
@@ -905,6 +907,76 @@ begin
      if WorkingDir = '' then GetDir(0, WorkingDir); {0 = Current drive / dir}
      Result := WorkingDir;
    end;
+end;
+
+// ----------------------------------------------------------------
+//  Fill & Check CheckListBox and StringList with TSrings
+// ----------------------------------------------------------------
+procedure StringsToCLB(var Cat: TStrings; Data: String; Grid: TStringGrid; CLB: TCheckListBox);  overload;
+var
+  i, pos: Word;
+  TempStr: String;
+begin
+  Pos := 0;
+  if Data = '' then exit;
+
+  for i := 1 to length(Data) do
+  begin
+    if (Data[i] = '|') then
+    begin
+      if Pos = 0 then
+      begin
+        if Cat.IndexOf(TempStr) = -1 then
+        begin
+          Cat.Add(TempStr);
+          CLB.Items.Add(TempStr);
+        end;
+        CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
+        if Grid.Cells[1,1] <> '' then Grid.RowCount := Grid.RowCount +1;
+        Grid.Cells[0,Grid.RowCount-1] := InttoStr(CLB.Items.IndexOf(TempStr));
+      end;
+      Grid.Cells[Pos+1,Grid.RowCount-1] := TempStr;
+      TempStr := '';
+      inc(Pos);
+    end
+    else if (Data[i] = '/') then
+    begin
+      Grid.Cells[Pos+1,Grid.RowCount-1] := TempStr;
+      TempStr := '';
+      Pos := 0;
+    end
+    else TempStr := TempStr + Data[i];
+  end;
+end;
+
+// ----------------------------------------------------------------
+// Fill & Check CheckListBox with TSrings
+// ----------------------------------------------------------------
+procedure StringsToCLB(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
+var
+  i: Word;
+  TempStr: String;
+begin
+  CLB.Items := Cat;
+  if Data = '' then
+    Exit;
+
+  for i := 1 to length(Data) do
+  begin
+    if (Data[i] = '/') then
+    begin
+      begin
+        if CLB.Items.IndexOf(TempStr) = -1 then
+        begin
+          Cat.Add(TempStr);
+          CLB.Items.Add(TempStr);
+        end;
+        CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
+      end;
+      TempStr := '';
+    end
+    else TempStr := TempStr + Data[i];
+  end;
 end;
 
 end.

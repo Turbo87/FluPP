@@ -514,40 +514,36 @@ procedure TFGrid.GridDrawCell(Sender: TObject; ACol, ARow: Integer;
   Rect: TRect; State: TGridDrawState);
 var Alignment: TAlignment;
 begin
-  if ARow > 0 then
-  begin
-    Alignment := taLeftJustify;
+  Alignment := taLeftJustify;
 
-    if ACol = GridCols.IndexOf('Num') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('NoL') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('Dst') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('StT') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('LaT') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('FlT') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('StB') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('LaB') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('BlT') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('Pas') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('Num') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('NoL') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('Dst') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('StT') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('LaT') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('FlT') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('StB') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('LaB') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('BlT') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('Pas') then Alignment := taRightJustify;
 
-    if ACol = GridCols.IndexOf('CfF') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('LaF') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('CfC') then Alignment := taRightJustify;
-    if ACol = GridCols.IndexOf('EfF') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('CfF') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('LaF') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('CfC') then Alignment := taRightJustify;
+  if ACol = GridCols.IndexOf('EfF') then Alignment := taRightJustify;
 
-    if ACol = GridCols.IndexOf('AId') then Alignment := taCenter;
-    if ACol = GridCols.IndexOf('ATy') then Alignment := taCenter;
-    if ACol = GridCols.IndexOf('ToS') then Alignment := taCenter;
-    if ACol = GridCols.IndexOf('StL') then Alignment := taCenter;
-    if ACol = GridCols.IndexOf('LaL') then Alignment := taCenter;
+  if ACol = GridCols.IndexOf('AId') then Alignment := taCenter;
+  if ACol = GridCols.IndexOf('ATy') then Alignment := taCenter;
+  if ACol = GridCols.IndexOf('ToS') then Alignment := taCenter;
+  if ACol = GridCols.IndexOf('StL') then Alignment := taCenter;
+  if ACol = GridCols.IndexOf('LaL') then Alignment := taCenter;
 
-    try Grid.Canvas.Font.Style := [];
-      if Grid.Cells[GridCols.IndexOf('Del'), ARow] > '' then
-      Grid.Canvas.Font.Style := [fsStrikeOut];
-    except end;
+  try Grid.Canvas.Font.Style := [];
+    if Grid.Cells[GridCols.IndexOf('Del'), ARow] > '' then
+    Grid.Canvas.Font.Style := [fsStrikeOut];
+  except end;
 
-    DrawColorbands(Sender, ACol, ARow, Rect, State);
-    StringGridAlignment(Grid, Rect, ACol, ARow, Alignment);
-  end;
+  DrawColorbands(Grid, ACol, ARow, Rect, State, Alignment);
 end;
 
 // ----------------------------------------------------------------

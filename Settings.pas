@@ -164,6 +164,7 @@ type
     GroupBox11: TGroupBox;
     CBExportICal: TCheckBox;
     Label1: TLabel;
+    ButtonAirCat: TJvImgBtn;
     procedure LBKatACClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LBKatDetailClick(Sender: TObject);
@@ -205,6 +206,7 @@ type
     procedure TabSheetGeneralShow(Sender: TObject);
     procedure TabSheetGeneralHide(Sender: TObject);
     procedure DisallowChangeClick(Sender: TObject);
+    procedure ButtonAirCatClick(Sender: TObject);
   private
     ACAircrafts_S,
     ACPilots_S,
@@ -236,7 +238,7 @@ var
 
 implementation
 
-uses Main, Tools, ToolsGrid, Export;
+uses Main, Tools, ToolsGrid, Export, InputBox;
 
 {$R *.DFM}
 
@@ -722,6 +724,7 @@ begin
 
     LBKatDetail.Items.Add(EditAC.Text);
   end
+
   { Text empty }
   else if (EditAC.Text = '') then
   begin
@@ -1441,6 +1444,51 @@ begin
 
   if not (TCheckBox(Sender).Checked) then
     AllowLastEdit.Checked := false;
+end;
+
+// ----------------------------------------------------------------
+// Aircraft categories
+// ----------------------------------------------------------------
+procedure TFSettings.ButtonAirCatClick(Sender: TObject);
+var
+  InputBox: TFInputBox;
+  ListBox: TCheckListBox;
+  TempStr: String;
+  i: Integer;
+begin
+  if AircraftList.ItemIndex < 0 then
+    Exit;
+  try
+    InputBox := TFInputBox.Create(FSettings);
+
+    InputBox.Caption := _('Categories for Aircraft: '+AircraftList.Items[AircraftList.ItemIndex]);
+    InputBox.Width := 250;
+    InputBox.Height := 250;
+
+
+    ListBox := TCheckListBox.Create(InputBox);
+    ListBox.Parent := InputBox;
+    StringsToCLB(ACCategories_S[LBFlu.ItemIndex]
+      , GetStringObject(ACAircrafts_S[LBFlu.ItemIndex], ACAircrafts_S[LBFlu.ItemIndex][AircraftList.ItemIndex], 'AircraftCat')
+      , ListBox);
+
+    ListBox.Align := alClient;
+
+    InputBox.ActiveControl := ListBox;
+    if InputBox.ShowModal = mrOK then
+    begin
+      TempStr := '';
+      if ListBox.Count > 0 then
+        for i := 0 to ListBox.Count-1 do
+          if ListBox.checked[i] then
+            TempStr := TempStr + ListBox.Items.Strings[i]+'/';
+      SetStringObject(ACAircrafts_S[LBFlu.ItemIndex], ACAircrafts_S[LBFlu.ItemIndex][AircraftList.ItemIndex], 'AircraftCat', TempStr);
+    end;
+
+  finally
+    ListBox.Free;
+    InputBox.Free;
+  end;
 end;
 
 end.

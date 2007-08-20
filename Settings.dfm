@@ -102,7 +102,7 @@ object FSettings: TFSettings
     Top = 0
     Width = 512
     Height = 345
-    ActivePage = TabSheetGeneral
+    ActivePage = TabSheetCosts
     Align = alTop
     HotTrack = True
     MultiLine = True
@@ -1259,7 +1259,7 @@ object FSettings: TFSettings
           Left = 8
           Top = 19
           Width = 121
-          Height = 278
+          Height = 238
           Columns = 2
           ItemHeight = 13
           PopupMenu = PopupMenu1
@@ -1346,6 +1346,8 @@ object FSettings: TFSettings
             Top = 72
             Width = 185
             Height = 21
+            CriticalPoints.MaxValueIncluded = False
+            CriticalPoints.MinValueIncluded = False
             DisplayFormat = dfFloat
             DecimalPlaces = 2
             TabOrder = 3
@@ -1356,6 +1358,8 @@ object FSettings: TFSettings
             Top = 48
             Width = 185
             Height = 21
+            CriticalPoints.MaxValueIncluded = False
+            CriticalPoints.MinValueIncluded = False
             DisplayFormat = dfFloat
             DecimalPlaces = 2
             TabOrder = 2
@@ -1505,6 +1509,21 @@ object FSettings: TFSettings
               'military usage'
               'Airline (JAR 25)')
           end
+        end
+        object ButtonAirCat: TJvImgBtn
+          Left = 30
+          Top = 265
+          Width = 80
+          Height = 25
+          Caption = 'Categories'
+          TabOrder = 3
+          OnClick = ButtonAirCatClick
+          HotTrackFont.Charset = DEFAULT_CHARSET
+          HotTrackFont.Color = clWindowText
+          HotTrackFont.Height = -11
+          HotTrackFont.Name = 'MS Sans Serif'
+          HotTrackFont.Style = []
+          Images = FMain.ImageList
         end
       end
     end

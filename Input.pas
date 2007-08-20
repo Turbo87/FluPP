@@ -521,70 +521,6 @@ end;
 // change flight
 // ----------------------------------------------------------------
 procedure TFInput.Change(FlugNr: Word);
-{----------}
-  procedure AddKat(var Cat: TStrings; Data: String; Grid: TStringGrid; CLB: TCheckListBox);  overload;
-  var
-    i, pos: Word;
-    TempStr: String;
-  begin
-    Pos := 0;
-    if Data = '' then exit;
-
-    for i := 1 to length(Data) do
-    begin
-      if (Data[i] = '|') then
-      begin
-        if Pos = 0 then
-        begin
-          if Cat.IndexOf(TempStr) = -1 then
-          begin
-            Cat.Add(TempStr);
-            CLB.Items.Add(TempStr);
-          end;
-          CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
-          if Grid.Cells[1,1] <> '' then Grid.RowCount := Grid.RowCount +1;
-          Grid.Cells[0,Grid.RowCount-1] := InttoStr(CLB.Items.IndexOf(TempStr));
-        end;
-        Grid.Cells[Pos+1,Grid.RowCount-1] := TempStr;
-        TempStr := '';
-        inc(Pos);
-      end
-      else if (Data[i] = '/') then
-      begin
-        Grid.Cells[Pos+1,Grid.RowCount-1] := TempStr;
-        TempStr := '';
-        Pos := 0;
-      end
-      else TempStr := TempStr + Data[i];
-    end;
-  end;
-{----------}
-  procedure AddKat(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
-  var
-    i: Word;
-    TempStr: String;
-  begin
-    if Data = '' then exit;
-    CLB.Items := Cat;
-
-    for i := 1 to length(Data) do
-    begin
-      if (Data[i] = '/') then
-      begin
-        begin
-          if CLB.Items.IndexOf(TempStr) = -1 then
-          begin
-            Cat.Add(TempStr);
-            CLB.Items.Add(TempStr);
-          end;
-          CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
-        end;
-        TempStr := '';
-      end
-      else TempStr := TempStr + Data[i];
-    end;
-  end;
-{----------}
 var
   i: Word;
   TempStr: String;
@@ -651,11 +587,11 @@ begin
   CLBContest.Items := GridActiveChild.ACContestCat;
 
   if GridActiveChild.data['Cat',InputRow] <> '' then
-    AddKat(GridActiveChild.ACCategories,GridActiveChild.data['Cat',InputRow],CLBKat);
+    StringsToCLB(GridActiveChild.ACCategories,GridActiveChild.data['Cat',InputRow],CLBKat);
   if GridActiveChild.data['CTi',InputRow] <> '' then
-    AddKat(GridActiveChild.ACTimeCat,GridActiveChild.data['CTi',InputRow],GridKatTime,CLBKatTime);
+    StringsToCLB(GridActiveChild.ACTimeCat,GridActiveChild.data['CTi',InputRow],GridKatTime,CLBKatTime);
   if GridActiveChild.data['Con',InputRow] <> '' then
-    AddKat(GridActiveChild.ACContestCat,GridActiveChild.data['Con',InputRow],GridContest,CLBContest);
+    StringsToCLB(GridActiveChild.ACContestCat,GridActiveChild.data['Con',InputRow],GridContest,CLBContest);
 
   { via }
   if length(GridActiveChild.data['Via',InputRow]) > 0 then
@@ -1492,6 +1428,8 @@ procedure TFInput.CalcViaDist;
 var
   i, Dist, TotDist: Word;
 begin
+  if GridVia.Cells[1,1] = '' then
+    Exit;
   TotDist := 0;
   for i := 2 to GridVia.RowCount-1 do
   begin
