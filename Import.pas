@@ -15,7 +15,7 @@ procedure ImportCSV(FileName: String);
 
 implementation
 
-uses Grid, Main, Tools, ToolsGrid, ToolsShell;
+uses Grid, Main, Tools, ToolsGrid, ToolsShell, Debug;
 
 //*******************************************************
 // Standard XML procedures
@@ -38,8 +38,11 @@ begin
     else
       StringList.Values[XMLElem.Properties.Value('Name')] := XMLElem.Properties.Value('Value');
     for i := 0 to XMLElem.Properties.Count - 1 do
+    begin
+      AddLogEntry('Name: '+XMLElem.Properties.Value('Name')+' - ObjName: '+XMLElem.Properties[i].Name+' - ObjValue: '+XMLElem.Properties[i].Value);
       if (XMLElem.Properties[i].Name <> 'Name') and (XMLElem.Properties[i].Name <> 'Value') then
         SetStringObject(StringList, XMLElem.Properties.Value('Name'), XMLElem.Properties[i].Name, XMLElem.Properties[i].Value);
+      end;
   end;
 end;
 

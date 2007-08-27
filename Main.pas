@@ -234,7 +234,8 @@ begin
   AddLogComment('------------------------------------------------------------');
 
 // Error Message
-  if MessageDlg(
+{ TODO -ounPoint : Bug-Handling auf der HP }
+ { if MessageDlg(
     'Exception ' + E.Message + CrLf +
     'File: ' + UnitName + ', '  +
     'Procedure: ' + ProcedureName + ', ' +
@@ -243,7 +244,7 @@ begin
     mtError, [mbYes, mbNo], 0) = mrYes then
     begin
       ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0))+'/'+UnitName+'/'+ProcedureName+'/'+LineNumber)),nil,nil,SW_NORMAL);
-    end;
+    end; }
 end;
 
 // ----------------------------------------------------------------
@@ -949,7 +950,7 @@ begin
 
     ShowModal;
 
-    if ModalResult = idOK then
+   { if ModalResult = idOK then
       FileSave(self)
     else begin
       LastFile := FluFileName;
@@ -957,7 +958,7 @@ begin
 
       FluFileName := LastFile;
       LoadFluFile;
-    end;
+    end;    }  { TODO -ounPoint : wieso? }
   finally
     Release;
   end;

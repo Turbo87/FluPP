@@ -345,8 +345,10 @@ end;
 procedure TFCalendar.GridSchedClick(Sender: TObject);
 begin
   if GridSched.Cells[0,1] = '' then Exit;
-  JvTMTimeline.Date := Trunc(StrToDate(GridSched.Cells[1,GridSched.Row]) - 3);
-  JvTMTimeline.SelDate := StrToDate(GridSched.Cells[1,GridSched.Row]);
+  try
+    JvTMTimeline.Date := Trunc(StrToDate(GridSched.Cells[1,GridSched.Row]) - 3);
+    JvTMTimeline.SelDate := StrToDate(GridSched.Cells[1,GridSched.Row]);
+  except end;
 end;
 
 // ----------------------------------------------------------------
@@ -361,12 +363,12 @@ begin
     Canvas.Font.Color := Font.Color;
     Canvas.Brush.Color := clWhite;
     if GridSched.Cells[0,1] <> '' then
-    begin
+    try
       if MonthsBetween(now, StrToDate(Cells[1, ARow])) <  StrToInt(GenSettings.Values['WarningMonth']) then
         Canvas.Brush.Color := clFYellow;
-      if now > incDay(StrToDate(Cells[1, ARow]), -7) then
+      if now >= StrToDate(Cells[1, ARow]) then
         Canvas.Brush.Color := clFRed;
-    end;
+    except end;
     Canvas.FillRect(Rect);
     InflateRect(Rect, -2, -2);
     if ACol > 0 then

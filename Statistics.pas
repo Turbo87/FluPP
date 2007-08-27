@@ -1407,7 +1407,7 @@ var
 
   begin
     { GraphData
-       herausfinden des hï¿½chsten Datensatzes
+       herausfinden des höchsten Datensatzes
        skalieren
        Text für Beschriftung erstellen }
     SetLength(GraphDataY,Years);
@@ -1429,13 +1429,13 @@ var
            end;
            YLabel := _('Time')+' [hh:mm]';
          end;
-      2: begin  { ï¿½-Flugzeit }
+      2: begin  { Ø-Flugzeit }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := TimeToHour(avgTime(DGraphData[i].Time,DGraphData[i].Flights));
              GraphDataY[i].Text := avgTime(DGraphData[i].Time,DGraphData[i].Flights);
            end;
-           YLabel := _('ï¿½-Flight Time:')+' [hh:mm]';
+           YLabel := _('Ø-Flight Time:')+' [hh:mm]';
          end;
       3: begin { Distance }
            for i := 0 to Years-1 do
@@ -1445,13 +1445,13 @@ var
            end;
            YLabel := _('Distance')+' ['+StatDistUnit+']';
          end;
-      4: begin  { ï¿½-Speed }
+      4: begin  { Ø-Speed }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := avgSpeed(Round(DGraphData[i].Distance),DGraphData[i].DistanceTime);
              GraphDataY[i].Text := InttoStr(avgSpeed(Round(DGraphData[i].Distance),DGraphData[i].DistanceTime));
            end;
-           YLabel := _('ï¿½-speed')+' ['+GetSpeedUnit(StatDistUnit)+']';
+           YLabel := _('Ø-speed')+' ['+GetSpeedUnit(StatDistUnit)+']';
          end;
       5: begin  { Passengers }
            for i := 0 to Years-1 do
@@ -1461,13 +1461,13 @@ var
            end;
            YLabel := _('Passengers');
          end;
-      6: begin  { ï¿½-Passengers }
+      6: begin  { Ø-Passengers }
            for i := 0 to Years-1 do
            begin
              GraphDataY[i].Data := avgPassengers(DGraphData[i].Passengers, DGraphData[i].Flights);
              GraphDataY[i].Text := FormatFloat('0.00',avgPassengers(DGraphData[i].Passengers, DGraphData[i].Flights));
            end;
-           YLabel := _('ï¿½-Passengers');
+           YLabel := _('Ø-Passengers');
          end;
       8: begin
            for i := 0 to Years-1 do begin

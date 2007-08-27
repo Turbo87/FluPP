@@ -114,7 +114,7 @@ type
     TabSheetCosts: TTabSheet;
     GroupBox14: TGroupBox;
     AircraftList: TListBox;
-    GroupBox13: TGroupBox;
+    GroupBoxCosts: TGroupBox;
     Bevel4: TBevel;
     CurLabel2: TLabel;
     CurLabel1: TLabel;
@@ -125,7 +125,7 @@ type
     CalcByFT: TRadioButton;
     CpF: TJvValidateEdit;
     CpH: TJvValidateEdit;
-    GroupBox15: TGroupBox;
+    GroupBoxSpez: TGroupBox;
     Cat: TComboBox;
     Cls: TComboBox;
     Eng: TComboBox;
@@ -267,7 +267,7 @@ begin
     LBFlu.Items.Add(GridChild(i).caption);
   LBFlu.ItemIndex := 0;
   LBFlu.Columns := LBFlu.Count;
-  LBFlu.Visible := false;
+  LBFlu.Visible := False; 
 
   SetLength(ACAircrafts_S,FMain.MDIChildCount);
   SetLength(ACPilots_S,FMain.MDIChildCount);
@@ -330,16 +330,16 @@ begin
   Medicals_S.Assign(Medicals);
 
   { Aircraft / Costs }
-  for i := 0 to GroupBox13.ControlCount-1 do begin
-    if TObject(GroupBox13.Controls[i]) is TRadioButton then
-      TRadioButton(GroupBox13.Controls[i]).Enabled := false;
-    if TObject(GroupBox13.Controls[i]) is TJvValidateEdit then
-      TJvValidateEdit(GroupBox13.Controls[i]).Enabled := false;
+  for i := 0 to GroupBoxCosts.ControlCount-1 do begin
+    if TObject(GroupBoxCosts.Controls[i]) is TRadioButton then
+      TRadioButton(GroupBoxCosts.Controls[i]).Enabled := false;
+    if TObject(GroupBoxCosts.Controls[i]) is TJvValidateEdit then
+      TJvValidateEdit(GroupBoxCosts.Controls[i]).Enabled := false;
   end;
 
-  for i := 0 to GroupBox15.ControlCount-1 do begin
-    if TObject(GroupBox15.Controls[i]) is TComboBox then
-      TComboBox(GroupBox15.Controls[i]).Enabled := false;
+  for i := 0 to GroupBoxCosts.ControlCount-1 do begin
+    if TObject(GroupBoxCosts.Controls[i]) is TComboBox then
+      TComboBox(GroupBoxCosts.Controls[i]).Enabled := false;
   end;
 
   GECurrency.Text := GenSettings.Values['Currency'];
@@ -1383,36 +1383,36 @@ var i : integer;
 begin
   if AircraftList.ItemIndex = -1 then exit;
 
-  for i := 0 to GroupBox13.ControlCount-1 do begin
-    if TObject(GroupBox13.Controls[i]) is TRadioButton then begin
+  for i := 0 to GroupBoxCosts.ControlCount-1 do begin
+    if TObject(GroupBoxCosts.Controls[i]) is TRadioButton then begin
       Tmp := GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], 'Clc');
-      If TRadioButton(GroupBox13.Controls[i]).Name = Tmp then
-        TRadioButton(GroupBox13.Controls[i]).Checked := true
+      If TRadioButton(GroupBoxCosts.Controls[i]).Name = Tmp then
+        TRadioButton(GroupBoxCosts.Controls[i]).Checked := true
       else
-        TRadioButton(GroupBox13.Controls[i]).Checked := false;
+        TRadioButton(GroupBoxCosts.Controls[i]).Checked := false;
 
-      TRadioButton(GroupBox13.Controls[i]).Enabled := true;
-      AcCostsCalcByExit(GroupBox13.Controls[i])
+      TRadioButton(GroupBoxCosts.Controls[i]).Enabled := true;
+      AcCostsCalcByExit(GroupBoxCosts.Controls[i])
     end;
 
-    if TObject(GroupBox13.Controls[i]) is TJvValidateEdit then begin
-      TJvValidateEdit(GroupBox13.Controls[i]).Text := GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TJvValidateEdit(GroupBox13.Controls[i]).Name);
+    if TObject(GroupBoxCosts.Controls[i]) is TJvValidateEdit then begin
+      TJvValidateEdit(GroupBoxCosts.Controls[i]).Text := GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TJvValidateEdit(GroupBoxCosts.Controls[i]).Name);
 
-      TJvValidateEdit(GroupBox13.Controls[i]).Enabled := true;
-      AcCostsEditExit(GroupBox13.Controls[i]);
+      TJvValidateEdit(GroupBoxCosts.Controls[i]).Enabled := true;
+      AcCostsEditExit(GroupBoxCosts.Controls[i]);
     end;
   end;
 
-  for i := 0 to GroupBox15.ControlCount-1 do begin
-    if TObject(GroupBox15.Controls[i]) is TComboBox then begin
-      Tmp := GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TComboBox(GroupBox15.Controls[i]).Name);
+  for i := 0 to GroupBoxCosts.ControlCount-1 do begin
+    if TObject(GroupBoxCosts.Controls[i]) is TComboBox then begin
+      Tmp := GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TComboBox(GroupBoxCosts.Controls[i]).Name);
       if Length(Tmp) > 0 then try
-        TComboBox(GroupBox15.Controls[i]).ItemIndex := StrToInt(GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TComboBox(GroupBox15.Controls[i]).Name));
-      except TComboBox(GroupBox15.Controls[i]).ItemIndex := 0; end else
-        TComboBox(GroupBox15.Controls[i]).ItemIndex := 0;
+        TComboBox(GroupBoxCosts.Controls[i]).ItemIndex := StrToInt(GetStringObject(ACAircrafts_S[LBFlu.Itemindex], ACAircrafts_S[LBFlu.Itemindex][AircraftList.ItemIndex], TComboBox(GroupBoxCosts.Controls[i]).Name));
+      except TComboBox(GroupBoxCosts.Controls[i]).ItemIndex := 0; end else
+        TComboBox(GroupBoxCosts.Controls[i]).ItemIndex := 0;
 
-      TComboBox(GroupBox15.Controls[i]).Enabled := true;
-      AcCostsComboExit(GroupBox15.Controls[i]);
+      TComboBox(GroupBoxCosts.Controls[i]).Enabled := true;
+      AcCostsComboExit(GroupBoxCosts.Controls[i]);
     end;
   end;
 end;

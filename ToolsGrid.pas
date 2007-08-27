@@ -63,34 +63,36 @@ begin
   else
     TmpDefaultTime := StrToInt(GridChild(GridIdx).Settings.Values['DefaultTime']);
 
-  for i := NrFrom to NrTo do
-  begin
-    if TmpDefaultTime = 0 then
+  try
+    for i := NrFrom to NrTo do
     begin
-      if TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT',i] <> '' then
-        Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT', i]
+      if TmpDefaultTime = 0 then
+      begin
+        if TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT',i] <> '' then
+          Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT', i]
+        else
+          Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT', i];
+      end
       else
-        Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT', i];
-    end
-    else
-    begin
-      if TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT',i] <> '' then
-        Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT', i]
-      else
-        Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT', i];
-    end;
+      begin
+        if TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT',i] <> '' then
+          Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['FlT', i]
+        else
+          Time := TFGrid(FMain.MDIChildren[GridIdx]).Data['BlT', i];
+      end;
 
-    Hours := '0'; Minutes := ''; j := 1;
-    while (Time <> '') and (Time[j] <> ':') and (j <= length(Time)) do
-    begin
-      Hours := Hours + Time[j];
-      inc(j);
+      Hours := '0'; Minutes := ''; j := 1;
+      while (Time <> '') and (Time[j] <> ':') and (j <= length(Time)) do
+      begin
+        Hours := Hours + Time[j];
+        inc(j);
+      end;
+      Minutes := copy(Time,j+1,2);
+      if Minutes = '' then Minutes := '00';
+      GesStunden := GesStunden + StrToInt(Hours);
+      GesMinuten := GesMinuten + StrToInt(Minutes);
     end;
-    Minutes := copy(Time,j+1,2);
-    if Minutes = '' then Minutes := '00';
-    GesStunden := GesStunden + StrToInt(Hours);
-    GesMinuten := GesMinuten + StrToInt(Minutes);
-  end;
+  except end;
   GesStunden := GesStunden + (GesMinuten div 60);
   GesMinuten := (GesMinuten mod 60);
   GesStrMinuten := Inttostr(GesMinuten);
@@ -258,6 +260,8 @@ end;
 procedure ConvertColNames(GridCols: TSTrings);
 var i: Word;
 begin
+  if GridCols.Count = 0 then
+    Exit;
   for i := 0 to GridCols.Count-1 do
   begin
     if GridCols[i] = 'Mus' then GridCols[i] := 'ATy';

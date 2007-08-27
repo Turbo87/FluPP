@@ -839,14 +839,18 @@ end;
 // Write string object
 // ----------------------------------------------------------------
 procedure SetStringObject(StringList: TStrings; Name, ObjName, ObjValue: String);
+var
+  StringIndex: Integer;
 begin
-  if StringList.IndexOf(Name) = -1 then
-    StringList.Add(Name);
+  if (StringList.IndexOf(Name) = -1) then
+    StringIndex := StringList.IndexOfName(Name)
+  else
+    StringIndex := StringList.IndexOf(Name);
 
-  if not Assigned(StringList.Objects[StringList.IndexOf(Name)]) then
-    StringList.Objects[StringList.IndexOf(Name)] := TSTringList.Create;
+  if not Assigned(StringList.Objects[StringIndex]) then
+    StringList.Objects[StringIndex] := TSTringList.Create;
 
-  TStringList(StringList.Objects[StringList.IndexOf(Name)]).Values[ObjName] := ObjValue;
+  TStringList(StringList.Objects[StringIndex]).Values[ObjName] := ObjValue;
 end;
 
 // ----------------------------------------------------------------

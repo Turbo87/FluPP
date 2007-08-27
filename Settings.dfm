@@ -1,6 +1,6 @@
 object FSettings: TFSettings
-  Left = 495
-  Top = 266
+  Left = 610
+  Top = 213
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Settings'
@@ -102,7 +102,7 @@ object FSettings: TFSettings
     Top = 0
     Width = 512
     Height = 345
-    ActivePage = TabSheetCosts
+    ActivePage = TabSheetLicenses
     Align = alTop
     HotTrack = True
     MultiLine = True
@@ -1266,7 +1266,7 @@ object FSettings: TFSettings
           TabOrder = 0
           OnClick = AircraftListClick
         end
-        object GroupBox13: TGroupBox
+        object GroupBoxCosts: TGroupBox
           Left = 144
           Top = 14
           Width = 281
@@ -1378,7 +1378,7 @@ object FSettings: TFSettings
             OnChange = GECurrencyChange
           end
         end
-        object GroupBox15: TGroupBox
+        object GroupBoxSpez: TGroupBox
           Left = 144
           Top = 160
           Width = 281
