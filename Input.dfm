@@ -161,7 +161,7 @@ object FInput: TFInput
     Top = 33
     Width = 461
     Height = 425
-    ActivePage = TSFlugdaten
+    ActivePage = TabSheet3
     Align = alTop
     HotTrack = True
     TabOrder = 3
@@ -390,7 +390,7 @@ object FInput: TFInput
         Sorted = True
         TabOrder = 1
         OnEnter = CBAircraftIDEnter
-        OnExit = CBAircraftIDExit
+        OnExit = CBAircraftExit
       end
       object CBCoPilot: TComboBox
         Left = 222
@@ -409,7 +409,7 @@ object FInput: TFInput
         Width = 120
         Height = 21
         TabOrder = 2
-        OnExit = CBAircraftIDExit
+        OnExit = CBAircraftExit
       end
       object CBPilot: TComboBox
         Left = 72

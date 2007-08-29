@@ -2,7 +2,7 @@ unit Tools;
 
 interface
 
-uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, Windows, Dialogs, Grids, CheckLst;
+uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, Windows, Dialogs, Grids, CheckLst, StdCtrls;
 
 type
   TAirport = record
@@ -69,6 +69,8 @@ function GetFileVersion(FileName: WideString): String;
 function GetActualDir(Extract : boolean) : String;
 procedure StringsToCLB(var Cat: TStrings; Data: String; Grid: TStringGrid; CLB: TCheckListBox);  overload;
 procedure StringsToCLB(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
+procedure GrayCLB(var Cat: TStrings; Data: String; CLB: TCheckListBox);
+procedure StringToStringList(var List: TStrings; Data: String);
 
 implementation
 
@@ -829,10 +831,20 @@ end;
 // Read string object
 // ----------------------------------------------------------------
 function GetStringObject(StringList: TStrings; Name, ObjName: String): String;
+var
+  StringIndex: Integer;
 begin
+  StringIndex := -1;
+  if (StringList.IndexOf(Name) <> -1) then
+    StringIndex := StringList.IndexOf(Name)
+  else if (StringList.IndexOfName(Name) <> -1) then
+    StringIndex := StringList.IndexOfName(Name);
+  if StringIndex = -1 then
+    Exit;
+
   Result := '';
-  if Assigned(StringList.Objects[StringList.IndexOf(Name)]) then
-    Result := TStringList(StringList.Objects[StringList.IndexOf(Name)]).Values[ObjName];
+  if Assigned(StringList.Objects[StringIndex]) then
+    Result := TStringList(StringList.Objects[StringIndex]).Values[ObjName];
 end;
 
 // ----------------------------------------------------------------
@@ -842,13 +854,16 @@ procedure SetStringObject(StringList: TStrings; Name, ObjName, ObjValue: String)
 var
   StringIndex: Integer;
 begin
-  if (StringList.IndexOf(Name) = -1) then
-    StringIndex := StringList.IndexOfName(Name)
-  else
-    StringIndex := StringList.IndexOf(Name);
+  StringIndex := -1;
+  if (StringList.IndexOf(Name) <> -1) then
+    StringIndex := StringList.IndexOf(Name)
+  else if (StringList.IndexOfName(Name) <> -1) then
+    StringIndex := StringList.IndexOfName(Name);
+  if StringIndex = -1 then
+    Exit;
 
   if not Assigned(StringList.Objects[StringIndex]) then
-    StringList.Objects[StringIndex] := TSTringList.Create;
+    StringList.Objects[StringIndex] := TStringList.Create;
 
   TStringList(StringList.Objects[StringIndex]).Values[ObjName] := ObjValue;
 end;
@@ -956,7 +971,7 @@ end;
 // ----------------------------------------------------------------
 // Fill & Check CheckListBox with TSrings
 // ----------------------------------------------------------------
-procedure StringsToCLB(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
+procedure StringsToCLB(var Cat: TStrings; Data: String; CLB: TCheckListBox); overload;
 var
   i: Word;
   TempStr: String;
@@ -968,19 +983,69 @@ begin
   for i := 1 to length(Data) do
   begin
     if (Data[i] = '/') then
-    begin
       begin
-        if CLB.Items.IndexOf(TempStr) = -1 then
-        begin
-          Cat.Add(TempStr);
-          CLB.Items.Add(TempStr);
-        end;
-        CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
+      if CLB.Items.IndexOf(TempStr) = -1 then
+      begin
+        Cat.Add(TempStr);
+        CLB.Items.Add(TempStr);
       end;
+      CLB.Checked[CLB.Items.IndexOf(TempStr)] := True;
       TempStr := '';
     end
     else TempStr := TempStr + Data[i];
   end;
 end;
+
+// ----------------------------------------------------------------
+//
+// ----------------------------------------------------------------
+procedure GrayCLB(var Cat: TStrings; Data: String; CLB: TCheckListBox);
+var
+  i: Word;
+  TempStr: String;
+begin
+  if Data = '' then
+    Exit;
+
+  for i := 1 to length(Data) do
+  begin
+    if (Data[i] = '/') then
+    begin
+      if CLB.Items.IndexOf(TempStr) = -1 then
+      begin
+        Cat.Add(TempStr);
+        CLB.Items.Add(TempStr);
+      end;
+      CLB.State[CLB.Items.IndexOf(TempStr)] := cbGrayed;
+      CLB.ItemEnabled[CLB.Items.IndexOf(TempStr)] := False;
+      TempStr := '';
+    end
+    else TempStr := TempStr + Data[i];
+  end;
+end;
+
+// ----------------------------------------------------------------
+// convert "/"-seperated string list in TStringList
+// ----------------------------------------------------------------
+procedure StringToStringList(var List: TStrings; Data: String);
+var
+  i: Word;
+  TempStr: String;
+begin
+  if Data = '' then
+    Exit;
+
+  for i := 1 to length(Data) do
+  begin
+    if (Data[i] = '/') then
+    begin
+      List.Add(TempStr);
+      TempStr := '';
+    end
+    else TempStr := TempStr + Data[i];
+  end;
+end;
+
+
 
 end.

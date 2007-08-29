@@ -170,7 +170,7 @@ type
     procedure ButtonOKClick(Sender: TObject);
     procedure METimeExit(Sender: TObject);
     procedure ButtonNextClick(Sender: TObject);
-    procedure CBAircraftIDExit(Sender: TObject);
+    procedure CBAircraftExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonNeuFlugzeugClick(Sender: TObject);
@@ -626,7 +626,7 @@ begin
   CalcAvSpeed;
 
   { Initialize AutoComplete buttons}
-  CBAircraftIDExit(Self);
+  CBAircraftExit(Self);
   CBCrewExit(CBPilot);
   if CBCoPilot.Enabled then CBCrewExit(CBCoPilot);
   
@@ -917,9 +917,10 @@ end;
 // ----------------------------------------------------------------
 // CBAircraftID exit
 // ----------------------------------------------------------------
-procedure TFInput.CBAircraftIDExit(Sender: TObject);
+procedure TFInput.CBAircraftExit(Sender: TObject);
 var
-  Idx: Integer;
+  Idx, i: Integer;
+  ACCatList: String;
 begin
   CBAircraftID.Text := UpperCase(CBAircraftID.Text);
   if TabControl.ActivePage = TSFlugdaten then
@@ -940,9 +941,21 @@ begin
       end;
     end
     else
+    { known aircraft }
     begin
-      CBAircraftType.Text := GridActiveChild.ACAircrafts.Values[CBAircraftID.Text];
+      CBAircraftType.Text := GridActiveChild.ACAircrafts.ValueFromIndex[Idx];
       ActiveControl := FindNextControl(CBAircraftType,True,True,False);
+      { aircraft categories }
+      for i := 0  to CLBKat.Items.Count-1 do
+      begin
+        CLBKat.ItemEnabled[i] := true;
+        if CLBKat.State[i] = cbGrayed then
+          CLBKat.State[i] := cbUnchecked;
+      end;
+
+      ACCatList := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'AircraftCat');
+      GrayCLB(GridActiveChild.ACCategories, ACCatList, CLBKat);
+      CLBKat.Repaint;
     end;
   end;
 end;
@@ -1586,7 +1599,7 @@ begin
     if CBAircraftType.Text = '' then
     begin
       CBAircraftID.Text := IGCParseData.GliderID;
-      CBAircraftIDExit(Self);
+      CBAircraftExit(Self);
       CBPilot.Text := NormalCase(IGCParseData.Pilot);
       MEFlightTimeDep.Text := IGCParseData.StZ;
       MEFlightTimeArr.Text := IGCParseData.LaZ;

@@ -359,8 +359,7 @@ end;
 procedure TFAirports.GridFlpDrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 begin
-  DrawColorbands(Sender, ACol, ARow, Rect, State);
-  StringGridAlignment(TSTringGrid(Sender), Rect, ACol, ARow, taLeftJustify);
+  DrawColorbands(TSTringGrid(Sender), ACol, ARow, Rect, State, taLeftJustify);
 end;
 
 end.

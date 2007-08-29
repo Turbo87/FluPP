@@ -1473,6 +1473,7 @@ begin
       , ListBox);
 
     ListBox.Align := alClient;
+    ListBox.Sorted := True;
 
     InputBox.ActiveControl := ListBox;
     if InputBox.ShowModal = mrOK then

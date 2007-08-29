@@ -245,7 +245,7 @@ var
 
 implementation
 
-uses Main, Settings, Grid, StatGraph, Tools, ToolsGrid;
+uses Main, Settings, Grid, StatGraph, Tools, ToolsGrid, Debug;
 
 {$R *.DFM}
 
@@ -344,7 +344,7 @@ begin
   FStat_Graph.CBY1.ItemIndex := 0;
   FStat_Graph.CBY2.ItemIndex := 1;
 
-  { Categoriesn hinzuf�gen }
+  { add categories }
   LBFlu.Items.Clear;
   CLBKat.Clear;
   for i := 0 to FMain.MDIChildCount-1 do
@@ -530,6 +530,7 @@ var
   Distance: Real;
   YearNr: Word;
   TmpStrecke: Real;
+  TmpStrList: TStrings;
   Accept, prevAccept, ItsIn, ItsInNot, KatSel, KatSelNot, ItsInNotP, FlightsFound: Boolean;
   X,Faktor: Real;
   GridIdx: Word;
@@ -561,17 +562,21 @@ var
   procedure AddKat(var Kat: TKat);
   var
     l, TempKat: word;
-    TempStr: String;
   begin
-    for l := 1 to length(GridChild(GridIdx).data['Cat',i]) do
+    try
+      TmpStrList := TStringList.Create;
+      StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',i]);
+      StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',i], 'AircraftCat'));
+
+    if TmpStrList.Count = 0 then
+      Exit;
+    for l := 0 to TmpStrList.Count-1 do
     begin
-      if (GridChild(GridIdx).data['Cat',i][l] = '/') then
-      begin
-        TempKat := FindInKat(Kat,TempStr);
-        Kat[TempKat].Value := InttoStr(StrtoInt(Kat[TempKat].Value) + AnzahlStarts);
-        TempStr := '';
-      end
-      else TempStr := TempStr + GridChild(GridIdx).data['Cat',i][l];
+      TempKat := FindInKat(Kat,TmpStrList[l]);
+      Kat[TempKat].Value := InttoStr(StrtoInt(Kat[TempKat].Value) + AnzahlStarts);
+    end;
+    finally
+      TmpStrList.Free;
     end;
   end;
 {----------}
@@ -881,7 +886,7 @@ begin
   { Main loop }
         for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
         begin
-          { Auswahl nach Jahren }
+          { selected by years }
           if RBJahre.checked then
           begin
             Accept := False;
@@ -890,7 +895,7 @@ begin
             then  Accept := True;
           end;
 
-          { Auswahl nach Datum }
+          { selected by date }
           if RBDatum.checked then
           begin
             if (StrToDate(GridChild(GridIdx).Data['Dat',i]) >= CBDateFrom.Date)
@@ -899,7 +904,7 @@ begin
             else  Accept := False;
           end;
 
-          { Auswahl nach Flights }
+          { selected by flights }
           if RBStarts.checked then
           begin
             Accept := False;
@@ -908,7 +913,7 @@ begin
             then Accept := True;
           end;
 
-          { Seit Schein }
+          { since license }
           if RBSchein.checked then
           begin
             if (StrToDate(GridChild(GridIdx).Data['Dat',i]) > StrToDate(GridChild(GridIdx).Settings.Values['LicenseSince']))
@@ -916,51 +921,52 @@ begin
             else Accept := False;
           end;
 
-          { Categoriesn }
+          { Categories }
           ItsIn := False;
           ItsInNot := False;
           KatSel := False;
           KatSelNot := False;
           ItsInNotP := False;
-          if (Accept) and (CLBKat.Count > 0) then
-          for j := 0 to CLBKat.Count-1 do if (CLBKat.State[j] = cbChecked) or (CLBKat.State[j] = cbGrayed) then
-          begin
-            if CLBKat.State[j] = cbChecked then KatSel := True;
-            if CLBKat.State[j] = cbGrayed then KatSelNot := True;
-            if RBKatAnd.Checked then ItsIn := False;
-            if RBKatAnd.Checked then ItsInNot := False;
-            k := 0;
-            while k < length(GridChild(GridIdx).data['Cat',i]) do
+
+          try
+            TmpStrList := TStringList.Create;
+            StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',i]);
+            StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',i], 'AircraftCat'));
+
+            if (Accept) and (CLBKat.Count > 0) then
+            for j := 0 to CLBKat.Count-1 do if (CLBKat.State[j] = cbChecked) or (CLBKat.State[j] = cbGrayed) then
             begin
-              if (GridChild(GridIdx).data['Cat',i][k+1] = '/') then
+              if CLBKat.State[j] = cbChecked then KatSel := True;
+              if CLBKat.State[j] = cbGrayed then KatSelNot := True;
+              if RBKatAnd.Checked then ItsIn := False;
+              if RBKatAnd.Checked then ItsInNot := False;
+
+              if TmpStrList.IndexOf(CLBKat.Items.Strings[j]) > -1 then
               begin
-                if KatStr = CLBKat.Items.Strings[j] then
-                begin
-                  if CLBKat.State[j] = cbChecked then ItsIn := True;
-                  if CLBKat.State[j] = cbGrayed then ItsInNot := True;
-                end
-                else if RBKatOr.Checked and (CLBKat.State[j] = cbGrayed) then ItsInNotP := True;
-                KatStr := '';
+                if CLBKat.State[j] = cbChecked then ItsIn := True;
+                if CLBKat.State[j] = cbGrayed then ItsInNot := True;
               end
-              else KatStr := KatStr + GridChild(GridIdx).data['Cat',i][k+1];
-              inc(k);
+              else if RBKatOr.Checked and (CLBKat.State[j] = cbGrayed) then ItsInNotP := True;
+
+              if RBKatAnd.Checked then
+              begin
+                if (CLBKat.State[j] = cbChecked) and (not ItsIn) then Accept := False;
+                if (CLBKat.State[j] = cbGrayed) and (ItsinNot) then Accept := False;
+              end;
             end;
-            if RBKatAnd.Checked then
+            if RBKatOr.Checked then
             begin
-              if (CLBKat.State[j] = cbChecked) and (not ItsIn) then Accept := False;
-              if (CLBKat.State[j] = cbGrayed) and (ItsinNot) then Accept := False;
+              Accept := False;
+              if (KatSel and ItsIn) or (KatSelNot and not ItsInNot) then Accept := True;
+              if ItsInNotP then Accept := True;
+              if CLBKat.SelCount = 0 then Accept := True;
             end;
-          end;
-          if RBKatOr.Checked then
-          begin
-            Accept := False;
-            if (KatSel and ItsIn) or (KatSelNot and not ItsInNot) then Accept := True;
-            if ItsInNotP then Accept := True;
-            if CLBKat.SelCount = 0 then Accept := True;
+          finally
+            TmpStrList.Free;
           end;
 
-          { Start- und Endflug }
-          if accept and not prevaccept then //erster Flug
+          { first and last flight }
+          if accept and not prevaccept then //first flight
             LabelFrom.Caption := _('Start')+' '+GridChild(GridIdx).Data['Num',i]
                   +' '+_('on')+' '+GridChild(GridIdx).Data['Dat',i];
           if not accept and prevaccept and (i>1) then // letzter Flug
@@ -1038,7 +1044,6 @@ begin
             AddDetail(Pilot,'Pi1');
 
             { AddDetail CoPilot }
-            j:= 0;
             ItsIn := False;
             if GridChild(GridIdx).Data['Pi2',i] = '' then
               BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',i];
