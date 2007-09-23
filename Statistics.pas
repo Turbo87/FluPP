@@ -8,13 +8,15 @@ uses
   ImgList, StrUtils, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls,
   JvButton, JvCtrls;
 
+type TTrendType = (ttYear, ttMonth, ttWeek, ttNone);
+
 type
   TKat = array of record
     Name: String;
     Value: String;
     Value2: String;
   end;
-  TGraphData = array of record
+  TTrendData = array of record
     Flights: Word;
     Time: String;
     Passengers: Word;
@@ -27,7 +29,7 @@ type
     Contest: TKat;
   end;
   TStatData = array of record
-    GraphData: TGraphData;
+    GraphData: TTrendData;
     Name: String;
     Flights: Word;
     Time: String;
@@ -45,29 +47,25 @@ type
     StatusBar1: TStatusBar;
     Panel1: TPanel;
     BitBtn1: TJvImgBtn;
-    Panel2: TPanel;
-    Bevel1: TBevel;
-    Label23: TLabel;
-    Label37: TLabel;
-    PanelDatum: TPanel;
-    PanelSchein: TPanel;
-    PanelStarts: TPanel;
-    CBStFrom: TEdit;
-    CBStTo: TEdit;
-    PanelJahre: TPanel;
-    CBJFrom: TComboBox;
-    CBJTo: TComboBox;
-    RBJahre: TRadioButton;
-    RBStarts: TRadioButton;
-    RBSchein: TRadioButton;
-    RBDatum: TRadioButton;
-    LBFlu: TListBox;
+    PageControlStat: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel5: TPanel;
+    SGDetail: TJvStringGrid;
+    CBDetail: TComboBox;
+    TsStart: TTabSheet;
+    BitBtn2: TJvImgBtn;
+    PanelFoundFlights: TPanel;
+    Label26: TLabel;
+    Label21: TLabel;
+    LabelFrom: TLabel;
+    Label22: TLabel;
+    LabelTo: TLabel;
     Panel3: TPanel;
-    Bevel5: TBevel;
-    Bevel10: TBevel;
-    Bevel9: TBevel;
-    Bevel7: TBevel;
-    Bevel4: TBevel;
+    Bevel13: TBevel;
+    GroupBox1: TGroupBox;
+    Label14: TLabel;
+    LabelSName: TLabel;
     Label1: TLabel;
     LabelAlleine: TLabel;
     Label2: TLabel;
@@ -77,62 +75,11 @@ type
     Label9: TLabel;
     LabelDurchn: TLabel;
     LabelGesamt2: TLabel;
-    Label11: TLabel;
-    LabelSDurchn: TLabel;
-    LabelSGesZeit: TLabel;
-    Label13: TLabel;
-    Label12: TLabel;
-    LabelSGesStart: TLabel;
-    Label14: TLabel;
-    LabelSName: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    LabelSW: TLabel;
-    Label29: TLabel;
-    LabelSF: TLabel;
-    LabelSE: TLabel;
-    Label30: TLabel;
-    LabelSStrecke: TLabel;
-    Label31: TLabel;
-    LabelGStrecke: TLabel;
-    Label32: TLabel;
-    LabelSDGeschw: TLabel;
-    LabelGDGeschw: TLabel;
-    Label33: TLabel;
-    Label26: TLabel;
-    Label21: TLabel;
-    LabelFrom: TLabel;
-    Label22: TLabel;
-    LabelTo: TLabel;
-    Bevel8: TBevel;
-    Label15: TLabel;
-    Bevel2: TBevel;
-    Label16: TLabel;
-    CLBKat: TCheckListBox;
-    SGDetail: TJvStringGrid;
-    Label3: TLabel;
-    Label4: TLabel;
-    Panel4: TPanel;
-    RBKatAnd: TRadioButton;
-    RBKatOr: TRadioButton;
-    Bevel18: TBevel;
-    Label18: TLabel;
-    LabelSA: TLabel;
-    LabelSG: TLabel;
-    Label20: TLabel;
-    Label24: TLabel;
-    ButtonTabGesamt: TBitBtn;
-    ButtonGraphGesamt: TBitBtn;
-    ButtonTabDetail: TBitBtn;
-    ButtonGraphDetail: TBitBtn;
-    Bevel11: TBevel;
-    Bevel12: TBevel;
-    Bevel13: TBevel;
-    RGDistUnit: TRadioGroup;
-    BitBtn2: TJvImgBtn;
-    LabelCalcTime: TLabel;
-    Bevel3: TBevel;
-    Bevel6: TBevel;
+    Label17: TLabel;
+    LabelPIC: TLabel;
+    Label39: TLabel;
+    LabelPassenger: TLabel;
+    GroupBox2: TGroupBox;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -146,45 +93,50 @@ type
     LabelAuto: TLabel;
     LabelGummi: TLabel;
     Label35: TLabel;
-    Label17: TLabel;
-    LabelPIC: TLabel;
-    Bevel19: TBevel;
-    CBKatGes: TComboBox;
+    GroupBox3: TGroupBox;
+    CBKatGen: TComboBox;
     GridKatG: TJvStringGrid;
-    CBKatDetail: TComboBox;
-    GridKatDetail: TJvStringGrid;
-    CBDateFrom: TDateTimePicker;
-    CBDateTo: TDateTimePicker;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    Label31: TLabel;
+    LabelGStrecke: TLabel;
+    LabelGDGeschw: TLabel;
+    Label33: TLabel;
     Label25: TLabel;
     LabelPassengers: TLabel;
     Label36: TLabel;
     LabelAvPassengers: TLabel;
-    Bevel14: TBevel;
-    Label39: TLabel;
-    LabelPassenger: TLabel;
-    Label34: TLabel;
-    Label38: TLabel;
-    LabelSDPassengers: TLabel;
-    LabelSDAvPassengers: TLabel;
-    RGDefaultTime: TRadioGroup;
-    CBDetail: TComboBox;
-    CheckBox1: TCheckBox;
-    Bevel15: TBevel;
-    Label40: TLabel;
+    GroupBox7: TGroupBox;
+    ButtonGraphGesamt: TBitBtn;
+    ButtonTabGesamt: TBitBtn;
+    GroupBox6: TGroupBox;
+    ButtonTabDetail: TBitBtn;
+    ButtonGraphDetail: TBitBtn;
+    GroupBox8: TGroupBox;
+    Label27: TLabel;
+    Label28: TLabel;
+    LabelSW: TLabel;
+    Label29: TLabel;
+    LabelSF: TLabel;
+    LabelSE: TLabel;
+    Label18: TLabel;
+    LabelSA: TLabel;
+    LabelSG: TLabel;
+    Label20: TLabel;
+    Label12: TLabel;
+    LabelSGesStart: TLabel;
+    GroupBox9: TGroupBox;
     Label51: TLabel;
     Label52: TLabel;
     Label53: TLabel;
     Label54: TLabel;
     Label55: TLabel;
-    Label56: TLabel;
     TCSum: TLabel;
     TCEfF: TLabel;
     TCLaF: TLabel;
     TCCfC: TLabel;
     TCCfF: TLabel;
-    LabelSName2: TLabel;
-    Bevel16: TBevel;
-    Label41: TLabel;
+    GroupBox10: TGroupBox;
     Label42: TLabel;
     Label43: TLabel;
     Label44: TLabel;
@@ -194,7 +146,64 @@ type
     SCLaF: TLabel;
     SCEfF: TLabel;
     SCSum: TLabel;
+    Label40: TLabel;
+    Label11: TLabel;
+    Label13: TLabel;
+    LabelSDurchn: TLabel;
+    LabelSGesZeit: TLabel;
+    GroupBox11: TGroupBox;
+    Label30: TLabel;
+    LabelSStrecke: TLabel;
+    Label32: TLabel;
+    LabelSDGeschw: TLabel;
+    Label34: TLabel;
+    Label38: TLabel;
+    LabelSDPassengers: TLabel;
+    LabelSDAvPassengers: TLabel;
     LastStart: TLabel;
+    GroupBox12: TGroupBox;
+    CBKatDetail: TComboBox;
+    GridKatDetail: TJvStringGrid;
+    GroupBox13: TGroupBox;
+    CBTopListDetail: TComboBox;
+    GridTopDetail: TJvStringGrid;
+    GroupBox14: TGroupBox;
+    CBTopListGen: TComboBox;
+    GridTopG: TJvStringGrid;
+    RGDistUnit: TRadioGroup;
+    RGDefaultTime: TRadioGroup;
+    CBTrendGen: TComboBox;
+    CBTrendDetail: TComboBox;
+    GroupBox15: TGroupBox;
+    LBFlu: TListBox;
+    GroupBox16: TGroupBox;
+    Bevel18: TBevel;
+    Label4: TLabel;
+    Label3: TLabel;
+    PanelSchein: TPanel;
+    PanelJahre: TPanel;
+    CBJFrom: TComboBox;
+    CBJTo: TComboBox;
+    PanelStarts: TPanel;
+    CBStFrom: TEdit;
+    CBStTo: TEdit;
+    RBJahre: TRadioButton;
+    RBStarts: TRadioButton;
+    RBSchein: TRadioButton;
+    RBDatum: TRadioButton;
+    PanelDatum: TPanel;
+    CBDateFrom: TDateTimePicker;
+    CBDateTo: TDateTimePicker;
+    GroupBox17: TGroupBox;
+    Label24: TLabel;
+    CLBKat: TCheckListBox;
+    Panel4: TPanel;
+    RBKatAnd: TRadioButton;
+    RBKatOr: TRadioButton;
+    CheckBox1: TCheckBox;
+    LabelFoundFlights: TLabel;
+    LabelCalcTime: TLabel;
+    Label15: TLabel;
     procedure ButtonStatStartClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CBJFromChange(Sender: TObject);
@@ -206,7 +215,7 @@ type
     procedure ButtonJVClick(Sender: TObject);
     procedure DetailChange(Sender: TObject);
     procedure CLBKatClickCheck(Sender: TObject);
-    procedure CBKatGesChange(Sender: TObject);
+    procedure CBKatGenChange(Sender: TObject);
     procedure CBKatDetailChange(Sender: TObject);
     procedure SGDetailSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure SGDetailGetCellAlignment(Sender: TJvStringGrid; AColumn, ARow: Integer; State: TGridDrawState; var CellAlignment: TAlignment);
@@ -222,10 +231,11 @@ type
     AircraftID: TStatData;
     Startort: TStatData;
     Landeort: TStatData;
-    GraphData: TGraphData;
+    GraphData: TTrendData;
     CTime: TKat;
     Kat: TKat;
     Contest: TKat;
+    procedure CalcStats(TrendType: TTrendType);
     procedure DrawTab;
     procedure ClearDetail;
     procedure FillSGDetail(Data: TStatData);
@@ -240,8 +250,9 @@ var
   FStatistics: TFStatistics;
 
   StartYear, Years: Word;
-  DGraphData: TGraphData;
+  DGraphData: TTrendData;
   StatDistUnit: String;
+  LastTrendType: TTrendType;
 
 implementation
 
@@ -256,8 +267,13 @@ uses Main, Settings, Grid, StatGraph, Tools, ToolsGrid, Debug;
 procedure TFStatistics.FormCreate(Sender: TObject);
 begin
   TranslateComponent(Self);
-  CBKatGes.ItemIndex := 0;
+  CBKatGen.ItemIndex := 0;
   CBKatDetail.ItemIndex := 0;
+  CBTopListGen.ItemIndex := 0;
+  CBTopListDetail.ItemIndex := 0;
+  CBTrendDetail.ItemIndex := 0;
+  CBTrendGen.ItemIndex := 0;
+
   GridKatG.Selection := DeselectRect;
   GridKatDetail.Selection := DeselectRect;
   CBDetail.ItemIndex := 0;
@@ -270,6 +286,11 @@ procedure TFStatistics.FormShow(Sender: TObject);
 var
   i,j: Word;
 begin
+  Application.OnHint := onHint;
+  PageControlStat.TabIndex := 0;
+  PanelFoundFlights.Visible := False;
+
+  { costs }
   SCCfF.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
   SCCfC.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
   SCLaF.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
@@ -282,6 +303,7 @@ begin
   TCEfF.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
   TCSum.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
 
+  { general }
   LabelFluege.Caption := '0';
   LabelWinde.Caption := '0';
   LabelFSch.Caption := '0';
@@ -303,6 +325,7 @@ begin
   CBDateFrom.Date := now();
   CBDateTo.Date := now();
 
+  { grids }
   GridKatG.ColWidths[0] := 75;
   GridKatG.ColWidths[1] := 60;
   GridKatG.ColWidths[2] := 60;
@@ -334,8 +357,7 @@ begin
   SGDetail.ColWidths[2] := 50;
   SGDetail.ColWidths[3] := 40;
 
-  Application.OnHint := onHint;
-
+  { trend stats }
   ButtonGraphGesamt.Enabled:= False;
   ButtonGraphDetail.Enabled:= False;
   ButtonTabGesamt.Enabled:= False;
@@ -361,11 +383,13 @@ begin
   RGDistUnit.ItemIndex := RGDistUnit.Items.IndexOf(GridActiveChild.Settings.Values['DistUnit']);
   RGDefaultTime.ItemIndex := StrToInt(GridActiveChild.Settings.Values['DefaultTime']);
 
+  { units }
   LabelGStrecke.Caption := '0 '+RGDistUnit.Items[RGDistUnit.ItemIndex];
   LabelGDGeschw.Caption := '0 '+GetSpeedUnit(RGDistUnit.Items[RGDistUnit.ItemIndex]);
   LabelSStrecke.Caption := '0 '+RGDistUnit.Items[RGDistUnit.ItemIndex];
   LabelSDGeschw.Caption := '0 '+GetSpeedUnit(RGDistUnit.Items[RGDistUnit.ItemIndex]);
 
+  { select flightlog }
   LBFlu.Selected[0] := True;
   LBFluClick(self);
 end;
@@ -376,7 +400,7 @@ end;
 procedure TFStatistics.ClearDetail;
 begin
   LabelSName.Caption := '';
-  LabelSName2.Caption := '';
+  //LabelSName2.Caption := '';
   CBKatDetail.Enabled := False;
   LabelSW.Caption := '0';
   LabelSF.Caption := '0';
@@ -522,8 +546,16 @@ end;
 // Start statistics
 // ----------------------------------------------------------------
 procedure TFStatistics.ButtonStatStartClick(Sender: TObject);
+begin
+  CalcStats(ttNone);
+end;
+
+// ----------------------------------------------------------------
+// Calculate statistics
+// ----------------------------------------------------------------
+procedure TFStatistics.CalcStats(TrendType: TTrendType);
 var
-  i,j,k: Integer;
+  Row, j, k, FoundFlights: Integer;
   RCfF, RCfC, RLaF, REfF, RCalc : Real;
   ZGesamt, ZPIC, ZAlleine, ZBegleiter, BegleitTemp, DistanceTime, KatStr: String;
   ZWinde, ZFsch, ZEigen, ZAuto, ZGummi, StartDate, EndDate, Fluege, AnzahlStarts, Passengers: Integer;
@@ -535,6 +567,7 @@ var
   X,Faktor: Real;
   GridIdx: Word;
   tick_now: array[0..1] of Longint;
+  ProgressBar: TProgressBar;
 {----------}
   { Time categories }
   procedure AddCTime(var CTime: TKat);
@@ -542,19 +575,19 @@ var
     l: word;
     TempKat, TempStr: String;
   begin
-    for l := 1 to length(GridChild(GridIdx).data['CTi',i]) do
+    for l := 1 to length(GridChild(GridIdx).data['CTi',Row]) do
     begin
-      if (GridChild(GridIdx).data['CTi',i][l] = '|') then
+      if (GridChild(GridIdx).data['CTi',Row][l] = '|') then
       begin
         TempKat := TempStr;
         TempStr := '';
       end
-      else if (GridChild(GridIdx).data['CTi',i][l] = '/') then
+      else if (GridChild(GridIdx).data['CTi',Row][l] = '/') then
       begin
         CTime[FindInKat(CTime,TempKat)].Value := AddTime(CTime[FindInKat(CTime,TempKat)].Value,TempStr);
         TempStr := '';
       end
-      else TempStr := TempStr + GridChild(GridIdx).data['CTi',i][l];
+      else TempStr := TempStr + GridChild(GridIdx).data['CTi',Row][l];
     end;
   end;
 {----------}
@@ -565,8 +598,8 @@ var
   begin
     try
       TmpStrList := TStringList.Create;
-      StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',i]);
-      StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',i], 'AircraftCat'));
+      StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',Row]);
+      StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',Row], 'AircraftCat'));
 
     if TmpStrList.Count = 0 then
       Exit;
@@ -588,9 +621,9 @@ var
     tmpDistance: Real;
   begin
     pos := 0;
-    for l := 1 to length(GridChild(GridIdx).data['Con',i]) do
+    for l := 1 to length(GridChild(GridIdx).data['Con',Row]) do
     begin
-      if (GridChild(GridIdx).data['Con',i][l] = '|') then
+      if (GridChild(GridIdx).data['Con',Row][l] = '|') then
       begin
         if pos = 0 then
         begin
@@ -607,26 +640,26 @@ var
           tempStr := '';
         end;
       end
-      else if (GridChild(GridIdx).data['Con',i][l] = '/') then
+      else if (GridChild(GridIdx).data['Con',Row][l] = '/') then
       begin
         Contest[FindInKat(Contest,tempKat)].Value2 := FloatToStr(StrToFloat(Contest[FindInKat(Contest,tempKat)].Value2) + StrToFloat(tempStr));
         tempStr := '';
         pos := 0;
       end
-      else tempStr := tempStr + GridChild(GridIdx).data['Con',i][l];
+      else tempStr := tempStr + GridChild(GridIdx).data['Con',Row][l];
     end;
   end;
 {----------}
   { TStatData-Records ausfüllen }
   procedure AddData(var StatData: TStatData; j: Word);
   begin
-    StatData[j].Time := CalcTime(GridIdx, StatData[j].Time,i,i, RGDefaultTime.ItemIndex);
-    StatData[j].LastStart := GridChild(GridIdx).Data['Dat',i];
+    StatData[j].Time := CalcTime(GridIdx, StatData[j].Time,Row,Row, RGDefaultTime.ItemIndex);
+    StatData[j].LastStart := GridChild(GridIdx).Data['Dat',Row];
     inc(StatData[j].Flights,AnzahlStarts);
-    if GridChild(GridIdx).Data['Pas',i] <> '' then
+    if GridChild(GridIdx).Data['Pas',Row] <> '' then
     begin
-      inc(StatData[j].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',i]));
-      inc(StatData[j].GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',i]));
+      inc(StatData[j].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
+      inc(StatData[j].GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
     end;
     AddCTime(StatData[j].CTime);
     AddCTime(StatData[j].GraphData[YearNr].CTime);
@@ -634,63 +667,63 @@ var
     AddKat(StatData[j].GraphData[YearNr].Kat);
     AddContest(StatData[j].Contest);
     AddContest(StatData[j].GraphData[YearNr].Contest);
-    if GridChild(GridIdx).Data['ToS',i] = 'W' then
+    if GridChild(GridIdx).Data['ToS',Row] = 'W' then
     begin
       inc(StatData[j].W,AnzahlStarts);
       inc(StatData[j].GraphData[YearNr].W,AnzahlStarts);
     end;
-    if GridChild(GridIdx).Data['ToS',i] = 'F' then
+    if GridChild(GridIdx).Data['ToS',Row] = 'F' then
     begin
       inc(StatData[j].F,AnzahlStarts);
       inc(StatData[j].GraphData[YearNr].F,AnzahlStarts);
     end;
-    if GridChild(GridIdx).Data['ToS',i] = 'E' then
+    if GridChild(GridIdx).Data['ToS',Row] = 'E' then
     begin
       inc(StatData[j].E,AnzahlStarts);
       inc(StatData[j].GraphData[YearNr].E,AnzahlStarts);
     end;
-    if GridChild(GridIdx).Data['ToS',i] = 'A' then
+    if GridChild(GridIdx).Data['ToS',Row] = 'A' then
     begin
       inc(StatData[j].A,AnzahlStarts);
       inc(StatData[j].GraphData[YearNr].A,AnzahlStarts);
     end;
-    if GridChild(GridIdx).Data['ToS',i] = 'G' then
+    if GridChild(GridIdx).Data['ToS',Row] = 'G' then
     begin
       inc(StatData[j].G,AnzahlStarts);
       inc(StatData[j].GraphData[YearNr].G,AnzahlStarts);
     end;
-    if GridChild(GridIdx).Data['CfF',i] > '' then begin
+    if GridChild(GridIdx).Data['CfF',Row] > '' then begin
       try
-        StatData[j].CfF := StatData[j].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',i]);
-        StatData[j].GraphData[YearNr].CfF := StatData[j].GraphData[YearNr].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',i]);
+        StatData[j].CfF := StatData[j].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
+        StatData[j].GraphData[YearNr].CfF := StatData[j].GraphData[YearNr].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
       except end;
     end;
-    if GridChild(GridIdx).Data['CfC',i] > '' then begin
+    if GridChild(GridIdx).Data['CfC',Row] > '' then begin
       try
-        StatData[j].CfC := StatData[j].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',i]);
-        StatData[j].GraphData[YearNr].CfC := StatData[j].GraphData[YearNr].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',i]);
+        StatData[j].CfC := StatData[j].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
+        StatData[j].GraphData[YearNr].CfC := StatData[j].GraphData[YearNr].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
       except end;
     end;
-    if GridChild(GridIdx).Data['LaF',i] > '' then begin
+    if GridChild(GridIdx).Data['LaF',Row] > '' then begin
       try
-        StatData[j].LaF := StatData[j].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',i]);
-        StatData[j].GraphData[YearNr].LaF := StatData[j].GraphData[YearNr].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',i]);
+        StatData[j].LaF := StatData[j].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
+        StatData[j].GraphData[YearNr].LaF := StatData[j].GraphData[YearNr].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
       except end;
     end;
-    if GridChild(GridIdx).Data['EfF',i] > '' then begin
+    if GridChild(GridIdx).Data['EfF',Row] > '' then begin
       try
-        StatData[j].EfF := StatData[j].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',i]);
-        StatData[j].GraphData[YearNr].EfF := StatData[j].GraphData[YearNr].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',i]);
+        StatData[j].EfF := StatData[j].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
+        StatData[j].GraphData[YearNr].EfF := StatData[j].GraphData[YearNr].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
       except end;
     end;
 
     inc(StatData[j].GraphData[YearNr].Flights,AnzahlStarts);
-    StatData[j].GraphData[YearNr].Time := CalcTime(GridIdx, StatData[j].GraphData[YearNr].Time,i,i, RGDefaultTime.ItemIndex);
+    StatData[j].GraphData[YearNr].Time := CalcTime(GridIdx, StatData[j].GraphData[YearNr].Time,Row,Row, RGDefaultTime.ItemIndex);
     if TmpStrecke > 0 then
     begin
       StatData[j].Distance := StatData[j].Distance + TmpStrecke;
-      StatData[j].DistanceTime := CalcTime(GridIdx, StatData[j].DistanceTime,i,i, RGDefaultTime.ItemIndex);
-      StatData[j].GraphData[YearNr].DistanceTime := CalcTime(GridIdx, StatData[j].GraphData[YearNr].DistanceTime,i,i, RGDefaultTime.ItemIndex);
+      StatData[j].DistanceTime := CalcTime(GridIdx, StatData[j].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
+      StatData[j].GraphData[YearNr].DistanceTime := CalcTime(GridIdx, StatData[j].GraphData[YearNr].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
       StatData[j].GraphData[YearNr].Distance := StatData[j].GraphData[YearNr].Distance + TmpStrecke;
     end;
   end;
@@ -699,12 +732,12 @@ var
   procedure AddDetail(var StatData: TStatData; Data: String);
   var j: Integer;
   begin
-    if GridChild(GridIdx).data[Data,i] = '' then Exit;
+    if GridChild(GridIdx).data[Data,Row] = '' then Exit;
     ItsIn := False;
     if length(StatData)>0 then
       for j := 0 to length(StatData)-1 do
     begin
-      if GridChild(GridIdx).data[Data,i] = StatData[j].Name then
+      if GridChild(GridIdx).data[Data,Row] = StatData[j].Name then
       begin
         Itsin := True;
         AddData(StatData,j);
@@ -715,37 +748,37 @@ var
     begin
       SetLength(StatData,length(StatData)+1);
       SetLength(StatData[length(StatData)-1].GraphData,years);
-      StatData[length(StatData)-1].Name := GridChild(GridIdx).data[Data,i];
+      StatData[length(StatData)-1].Name := GridChild(GridIdx).data[Data,Row];
       AddData(StatData,length(StatData)-1);
     end;
   end;
 {----------}
   procedure Reset(var StatData: TStatData);
-  var i: Word;
+  var Row: Word;
   begin
     if length(StatData)=0 then
       Exit;
-    for i := 0 to length(StatData)-1 do
+    for Row := 0 to length(StatData)-1 do
     begin
-      StatData[i].Name := '';
-      StatData[i].Flights := 0;
-      StatData[i].Time := '00:00';
-      StatData[i].W := 0;
-      StatData[i].F := 0;
-      StatData[i].E := 0;
-      StatData[i].A := 0;
-      StatData[i].G := 0;
-      StatData[i].Distance := 0;
-      StatData[i].LastStart := '';
-      StatData[i].DistanceTime := '00:00';
-      StatData[i].CfF := 0;
-      StatData[i].CfC := 0;
-      StatData[i].LaF := 0;
-      StatData[i].EfF := 0;
-      SetLength(StatData[i].GraphData,0);
-      SetLength(StatData[i].CTime,0);
-      SetLength(StatData[i].Kat,0);
-      SetLength(StatData[i].Contest,0);
+      StatData[Row].Name := '';
+      StatData[Row].Flights := 0;
+      StatData[Row].Time := '00:00';
+      StatData[Row].W := 0;
+      StatData[Row].F := 0;
+      StatData[Row].E := 0;
+      StatData[Row].A := 0;
+      StatData[Row].G := 0;
+      StatData[Row].Distance := 0;
+      StatData[Row].LastStart := '';
+      StatData[Row].DistanceTime := '00:00';
+      StatData[Row].CfF := 0;
+      StatData[Row].CfC := 0;
+      StatData[Row].LaF := 0;
+      StatData[Row].EfF := 0;
+      SetLength(StatData[Row].GraphData,0);
+      SetLength(StatData[Row].CTime,0);
+      SetLength(StatData[Row].Kat,0);
+      SetLength(StatData[Row].Contest,0);
     end;
     SetLength(STatData,0);
   end;
@@ -753,6 +786,7 @@ var
 begin
   { Initialisierung }
   tick_now[0] := GetTickCount;
+  FoundFlights := 0;
   ZPIC := '00:00'; ZGesamt := '00:00'; ZAlleine := '00:00'; ZBegleiter := '00:00'; DistanceTime := '00:00';
   ZWinde := 0; ZFsch := 0; ZEigen := 0; ZAuto := 0; ZGummi := 0;
   Fluege := 0; Distance := 0; Faktor := 0; StartYear := 0; Passengers := 0;
@@ -783,7 +817,7 @@ begin
   GridKatG.Cells[0,0] := '';
   GridKatG.Cells[1,0] := '';
 
-  CBKatGes.ItemIndex := 0;
+  CBKatGen.ItemIndex := 0;
 
   SetLength(CoPilot, 1);
   CoPilot[0].Name := ' '+_('With passenger');
@@ -851,22 +885,38 @@ begin
 
     if (StartYear > ExtractYear(GridChild(GridIdx).Data['Dat',1])) or (StartYear = 0) then
       StartYear := ExtractYear(GridChild(GridIdx).Data['Dat',1]);
+
+
     if years < ExtractYear(GridChild(GridIdx).Data['Dat',GridChild(GridIdx).Grid.RowCount-1])
       - ExtractYear(GridChild(GridIdx).Data['Dat',1])+1 then
          Years := ExtractYear(GridChild(GridIdx).Data['Dat',GridChild(GridIdx).Grid.RowCount-1])
          - ExtractYear(GridChild(GridIdx).Data['Dat',1])+1;
-
+      { TODO : -> dynamic array, months, weeks }
       SetLength(GraphData,Length(GraphData)+years);
     end;
-  { Schleife über alle Flugbücher }
+
+    { progress bar }
+    PanelFoundFlights.Visible := True;
+    ProgressBar := TProgressBar.Create(FStatistics);
+    ProgressBar.Parent := TsStart;
+    ProgressBar.Left := PanelFoundFlights.Left;
+    ProgressBar.Top := PanelFoundFlights.Top;
+    ProgressBar.Width := PanelFoundFlights.Width;
+    ProgressBar.Height := PanelFoundFlights.Height;
+    ProgressBar.Max := 0;
+    ProgressBar.Step := 1;
+    for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
+      if LBFlu.Selected[GridIdx] then
+        ProgressBar.Max := ProgressBar.Max + GridChild(GridIdx).Grid.RowCount-1;
+
+  { loop over all flight logs }
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
     begin
       GSNr := GridIdx;
-      { für alle ausgewählten Scheine }
       if LBFlu.Selected[GridIdx] then
       if GridChild(GridIdx).Data['Num',1] <> '' then
       begin
-        { Wenn Seit Schein: "Schein Seit" ausgefüllt? }
+        { if "since license" check date}
         if RBSchein.checked then
         begin
           if GridChild(GridIdx).Settings.Values['LicenseSince'] = '  .  .    ' then
@@ -884,22 +934,23 @@ begin
         end;
 
   { Main loop }
-        for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
+        for Row := 1 to GridChild(GridIdx).Grid.RowCount-1 do
         begin
+          ProgressBar.StepIt;
           { selected by years }
           if RBJahre.checked then
           begin
             Accept := False;
-            if (ExtractYear(GridChild(GridIdx).Data['Dat',i]) >= StartDate)
-              and (ExtractYear(GridChild(GridIdx).Data['Dat',i]) < EndDate)
+            if (ExtractYear(GridChild(GridIdx).Data['Dat',Row]) >= StartDate)
+              and (ExtractYear(GridChild(GridIdx).Data['Dat',Row]) < EndDate)
             then  Accept := True;
           end;
 
           { selected by date }
           if RBDatum.checked then
           begin
-            if (StrToDate(GridChild(GridIdx).Data['Dat',i]) >= CBDateFrom.Date)
-              and (StrToDate(GridChild(GridIdx).Data['Dat',i]) <= CBDateTo.Date)
+            if (StrToDate(GridChild(GridIdx).Data['Dat',Row]) >= CBDateFrom.Date)
+              and (StrToDate(GridChild(GridIdx).Data['Dat',Row]) <= CBDateTo.Date)
             then  Accept := True
             else  Accept := False;
           end;
@@ -908,15 +959,15 @@ begin
           if RBStarts.checked then
           begin
             Accept := False;
-            if (StrtoInt(GridChild(GridIdx).Data['Num',i]) >= (StrtoInt(CBStFrom.Text)))
-              and (StrtoInt(GridChild(GridIdx).Data['Num',i]) <= (StrtoInt(CBStTo.Text)))
+            if (StrtoInt(GridChild(GridIdx).Data['Num',Row]) >= (StrtoInt(CBStFrom.Text)))
+              and (StrtoInt(GridChild(GridIdx).Data['Num',Row]) <= (StrtoInt(CBStTo.Text)))
             then Accept := True;
           end;
 
           { since license }
           if RBSchein.checked then
           begin
-            if (StrToDate(GridChild(GridIdx).Data['Dat',i]) > StrToDate(GridChild(GridIdx).Settings.Values['LicenseSince']))
+            if (StrToDate(GridChild(GridIdx).Data['Dat',Row]) > StrToDate(GridChild(GridIdx).Settings.Values['LicenseSince']))
             then Accept := True
             else Accept := False;
           end;
@@ -930,8 +981,8 @@ begin
 
           try
             TmpStrList := TStringList.Create;
-            StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',i]);
-            StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',i], 'AircraftCat'));
+            StringToStringList(TmpStrList, GridChild(GridIdx).data['Cat',Row]);
+            StringToStringList(TmpStrList, GetStringObject(GridChild(GridIdx).ACAircrafts, GridChild(GridIdx).data['AId',Row], 'AircraftCat'));
 
             if (Accept) and (CLBKat.Count > 0) then
             for j := 0 to CLBKat.Count-1 do if (CLBKat.State[j] = cbChecked) or (CLBKat.State[j] = cbGrayed) then
@@ -967,33 +1018,34 @@ begin
 
           { first and last flight }
           if accept and not prevaccept then //first flight
-            LabelFrom.Caption := _('Start')+' '+GridChild(GridIdx).Data['Num',i]
-                  +' '+_('on')+' '+GridChild(GridIdx).Data['Dat',i];
-          if not accept and prevaccept and (i>1) then // letzter Flug
-            LabelTo.Caption := _('Start')+' '+GridChild(GridIdx).Data['Num',i-1]
-                  +' '+_('on')+' '+GridChild(GridIdx).Data['Dat',i-1];
+            LabelFrom.Caption := _('Start')+' '+GridChild(GridIdx).Data['Num',Row]
+                  +', '+GridChild(GridIdx).Data['Dat',Row];
+          if not accept and prevaccept and (Row>1) then // last flight
+            LabelTo.Caption := _('Start')+' '+GridChild(GridIdx).Data['Num',Row-1]
+                  +', '+' '+GridChild(GridIdx).Data['Dat',Row-1];
           prevaccept := accept;
 
-  { Statistikerhebung }
+  { calc stats }
           if Accept then
           begin
+            inc(FoundFlights);
             FlightsFound := True;
-            AnzahlStarts := StrToInt(GridChild(GridIdx).Data['NoL',i]);
-            if GridChild(GridIdx).Data['Dst',i] <> '' then
-            TmpStrecke := ConvertDistUnits(StrtoInt(GridChild(GridIdx).Data['Dst',i]),GridChild(GridIdx).Settings.Values['DistUnit'],StatDistUnit)
+            AnzahlStarts := StrToInt(GridChild(GridIdx).Data['NoL',Row]);
+            if GridChild(GridIdx).Data['Dst',Row] <> '' then
+            TmpStrecke := ConvertDistUnits(StrtoInt(GridChild(GridIdx).Data['Dst',Row]),GridChild(GridIdx).Settings.Values['DistUnit'],StatDistUnit)
             else TmpStrecke := 0;
 
             { Allgemein }
             inc(Fluege,AnzahlStarts);
-            ZGesamt := CalcTime(GridIdx, ZGesamt,i,i, RGDefaultTime.ItemIndex);
-            YearNr  := ExtractYear(GridChild(GridIdx).Data['Dat',i])-StartYear;
+            ZGesamt := CalcTime(GridIdx, ZGesamt,Row,Row, RGDefaultTime.ItemIndex);
+            YearNr  := ExtractYear(GridChild(GridIdx).Data['Dat',Row])-StartYear;
             inc(GraphData[YearNr].Flights,AnzahlStarts);
-            if GridChild(GridIdx).Data['Pas',i] <> '' then
+            if GridChild(GridIdx).Data['Pas',Row] <> '' then
             begin
-              inc(Passengers, StrToInt(GridChild(GridIdx).Data['Pas',i]));
-              inc(GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',i]));
+              inc(Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
+              inc(GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
             end;
-            GraphData[YearNr].Time := CalcTime(GridIdx, GraphData[YearNr].Time,i,i, RGDefaultTime.ItemIndex);
+            GraphData[YearNr].Time := CalcTime(GridIdx, GraphData[YearNr].Time,Row,Row, RGDefaultTime.ItemIndex);
             AddCTime(CTime);
             AddCTime(GraphData[YearNr].CTime);
             AddKat(Kat);
@@ -1003,36 +1055,36 @@ begin
             if TmpStrecke > 0 then
             begin
               Distance := Distance + TmpStrecke;
-              DistanceTime := CalcTime(GridIdx, DistanceTime,i,i, RGDefaultTime.ItemIndex);
-              GraphData[YearNr].DistanceTime := CalcTime(GridIdx, GraphData[YearNr].DistanceTime,i,i, RGDefaultTime.ItemIndex);
+              DistanceTime := CalcTime(GridIdx, DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
+              GraphData[YearNr].DistanceTime := CalcTime(GridIdx, GraphData[YearNr].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
               GraphData[YearNr].Distance := GraphData[YearNr].Distance + TmpStrecke;
             end;
-            if GridChild(GridIdx).Data['Pi1',i] = GenSettings.Values['PilotName'] then
-              ZPIC := CalcTime(GridIdx, ZPIC,i,i, RGDefaultTime.ItemIndex);
-            if GridChild(GridIdx).Data['Pi2',i] = '' then ZAlleine := CalcTime(GridIdx, ZAlleine,i,i, RGDefaultTime.ItemIndex)
+            if GridChild(GridIdx).Data['Pi1',Row] = GenSettings.Values['PilotName'] then
+              ZPIC := CalcTime(GridIdx, ZPIC,Row,Row, RGDefaultTime.ItemIndex);
+            if GridChild(GridIdx).Data['Pi2',Row] = '' then ZAlleine := CalcTime(GridIdx, ZAlleine,Row,Row, RGDefaultTime.ItemIndex)
             else
-            if GridChild(GridIdx).Data['Pi2',i] <> '' then ZBegleiter := CalcTime(GridIdx, ZBegleiter,i,i, RGDefaultTime.ItemIndex);
-            if GridChild(GridIdx).Data['ToS',i] = 'W' then
+            if GridChild(GridIdx).Data['Pi2',Row] <> '' then ZBegleiter := CalcTime(GridIdx, ZBegleiter,Row,Row, RGDefaultTime.ItemIndex);
+            if GridChild(GridIdx).Data['ToS',Row] = 'W' then
             begin
               inc(ZWinde, AnzahlStarts);
               inc(GraphData[YearNr].W, AnzahlStarts)
             end;
-            if GridChild(GridIdx).Data['ToS',i] = 'F' then
+            if GridChild(GridIdx).Data['ToS',Row] = 'F' then
             begin
               inc(ZFsch,AnzahlStarts);
               inc(GraphData[YearNr].F,AnzahlStarts)
             end;
-            if GridChild(GridIdx).Data['ToS',i] = 'E' then
+            if GridChild(GridIdx).Data['ToS',Row] = 'E' then
             begin
               inc(ZEigen,AnzahlStarts);
               inc(GraphData[YearNr].E,AnzahlStarts)
             end;
-            if GridChild(GridIdx).Data['ToS',i] = 'A' then
+            if GridChild(GridIdx).Data['ToS',Row] = 'A' then
             begin
               inc(ZAuto,AnzahlStarts);
               inc(GraphData[YearNr].A,AnzahlStarts)
             end;
-            if GridChild(GridIdx).Data['ToS',i] = 'G' then
+            if GridChild(GridIdx).Data['ToS',Row] = 'G' then
             begin
               inc(ZGummi,AnzahlStarts);
               inc(GraphData[YearNr].G,AnzahlStarts)
@@ -1045,8 +1097,8 @@ begin
 
             { AddDetail CoPilot }
             ItsIn := False;
-            if GridChild(GridIdx).Data['Pi2',i] = '' then
-              BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',i];
+            if GridChild(GridIdx).Data['Pi2',Row] = '' then
+              BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',Row];
             if length(CoPilot) > 0 then
             begin
               for j := 0 to length(CoPilot)-1 do
@@ -1058,7 +1110,7 @@ begin
                 break;
               end;
             end;
-            if GridChild(GridIdx).Data['Pi2',i] <> '' then
+            if GridChild(GridIdx).Data['Pi2',Row] <> '' then
             begin
               SetLength(CoPilot[0].GraphData,years);
               AddData(CoPilot,0);
@@ -1073,13 +1125,13 @@ begin
             end;
 
             { Costs }
-            try if GridChild(GridIdx).Data['CfF',i] > '' then RCfF := RCfF + StrToFloat(GridChild(GridIdx).Data['CfF',i]) except end;
-            try if GridChild(GridIdx).Data['CfC',i] > '' then RCfC := RCfC + StrToFloat(GridChild(GridIdx).Data['CfC',i]) except end;
-            try if GridChild(GridIdx).Data['LaF',i] > '' then RLaF := RLaF + StrToFloat(GridChild(GridIdx).Data['LaF',i]) except end;
-            try if GridChild(GridIdx).Data['EfF',i] > '' then REfF := REfF + StrToFloat(GridChild(GridIdx).Data['EfF',i]) except end;
+            try if GridChild(GridIdx).Data['CfF',Row] > '' then RCfF := RCfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]) except end;
+            try if GridChild(GridIdx).Data['CfC',Row] > '' then RCfC := RCfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]) except end;
+            try if GridChild(GridIdx).Data['LaF',Row] > '' then RLaF := RLaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]) except end;
+            try if GridChild(GridIdx).Data['EfF',Row] > '' then REfF := REfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]) except end;
 
           end; { if Accept then }
-        end; { for i := 1 to GridChild(LBFlu.ItemIndex).Grid.RowCount-1 do }
+        end; { for Row := 1 to GridChild(LBFlu.ItemIndex).Grid.RowCount-1 do }
 
         if (CBJFrom.Text = _('Beginning')) and (RBJahre.checked) then
         begin
@@ -1107,7 +1159,8 @@ begin
       ButtontabGesamt.Enabled:= True;
     end;
 
-    if LBFlu.SelCount > 1 then //noch ï¿½ndern!!
+    LabelFoundFlights.Caption := IntToStr(FoundFlights);
+    if LBFlu.SelCount > 1 then { TODO : first, last flight }
     begin
       LabelFrom.Caption := '-';
       LabelTo.Caption := '-';
@@ -1115,10 +1168,9 @@ begin
     else
     { LabelTo oder LabelFrom leer --> letzter oder erster Flug }
     begin
-      if LabelFrom.Caption = '' then LabelFrom.Caption := _('Start')+' '+GridChild(LBFlu.ItemIndex).Data['Num',1]+' am '+GridChild(LBFlu.ItemIndex).Data['Dat',1];
-      if LabelTo.Caption = '' then LabelTo.Caption := _('Start')+' '
-        +GridChild(LBFlu.ItemIndex).Data['Num',GridChild(LBFlu.ItemIndex).Grid.RowCount-1]
-        +' '+_('on')+' '+GridChild(LBFlu.ItemIndex).Data['Dat',GridChild(LBFlu.ItemIndex).Grid.RowCount-1];
+      if LabelFrom.Caption = '' then LabelFrom.Caption := GridChild(LBFlu.ItemIndex).Data['Num',1]+', '+GridChild(LBFlu.ItemIndex).Data['Dat',1];
+      if LabelTo.Caption = '' then LabelTo.Caption := GridChild(LBFlu.ItemIndex).Data['Num',GridChild(LBFlu.ItemIndex).Grid.RowCount-1]+
+        ', '+GridChild(LBFlu.ItemIndex).Data['Dat',GridChild(LBFlu.ItemIndex).Grid.RowCount-1];
     end;
 
     CBDetail.ItemIndex := 0;
@@ -1147,12 +1199,13 @@ begin
     LabelGStrecke.Caption := FormatFloat('0',Distance)+' '+RGDistUnit.Items[RGDistUnit.ItemIndex];
     LabelGDGeschw.Caption := InttoStr(avgSpeed(Round(Distance),DistanceTime))+' '+GetSpeedUnit(RGDistUnit.Items[RGDistUnit.ItemIndex]);
 
-    CBKatGesChange(Self);
+    CBKatGenChange(Self);
     //CBKatDetailChange(Self);
     tick_now[1] := GetTickCount;
     LabelCalcTime.Caption := Format('%u ms', [tick_now[1] - tick_now[0]]);
   finally
     Screen.Cursor := crDefault;
+    ProgressBar.Free;
   end;
 end;
 
@@ -1272,7 +1325,7 @@ begin
   ButtonGraphDetail.Enabled:= True;
   ButtonTabDetail.Enabled:= True;
   LabelSName.Caption := SGDetail.Cells[1,ARow];
-  LabelSName2.Caption := SGDetail.Cells[1,ARow];
+  //LabelSName2.Caption := SGDetail.Cells[1,ARow];
   CBKatDetail.Enabled := True;
   LabelSW.Caption := SGDetail.Cells[4,ARow];
   LabelSF.Caption := SGDetail.Cells[5,ARow];
@@ -1315,35 +1368,38 @@ begin
   if (Sender = ButtonGraphDetail) or (Sender = ButtonTabDetail) then
   begin
     if SGDetailRow = 0 then
-    begin
        Exit;
-    end;
+    CalcStats(TTrendType(CBTrendDetail.ItemIndex));
     FStat_Graph.Caption := format(_('Statistics from -->''%s''<-- in selected area'),[LabelSName.Caption]);
     DGraphData := PStatData^[StrToInt(SGDetail.Cells[0,SGDetailRow])].GraphData;
   end;
 
-  { Gesamt }
+  { General }
   if (Sender = ButtonGraphGesamt) or (Sender = ButtonTabGesamt) then
   begin
+    CalcStats(TTrendType(CBTrendGen.ItemIndex));
     FStat_Graph.Caption := _('Selection of all flights in selected area');
     DGraphData := GraphData;
   end;
 
   { Tab }
-  if (Sender = ButtonTabGesamt) or (Sender = ButtonTabDetail) then DrawTab;
+  if (Sender = ButtonTabGesamt) or (Sender = ButtonTabDetail) then
+  begin
+    DrawTab;
+  end;
 
   { Graph }
   if (Sender = ButtonGraphGesamt) or (Sender = ButtonGraphDetail) then
   begin
-    { CB aufï¿½llen }
+    { fill CB }
     FSTat_Graph.CBY1.Clear;
     FSTat_Graph.CBY1.Items.Add(_('Flights'));
     FSTat_Graph.CBY1.Items.Add(_('Time'));
-    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Flight Time:'));
+    FSTat_Graph.CBY1.Items.Add(_('Ø-Flight Time:'));
     FSTat_Graph.CBY1.Items.Add(_('Distance'));
-    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Speed'));
+    FSTat_Graph.CBY1.Items.Add(_('Ø-Speed'));
     FSTat_Graph.CBY1.Items.Add(_('Passengers'));
-    FSTat_Graph.CBY1.Items.Add(_('ï¿½-Passengers'));
+    FSTat_Graph.CBY1.Items.Add(_('Ø-Passengers'));
     FSTat_Graph.CBY1.Items.Add('------------------------------');
     FSTat_Graph.CBY1.Items.Add(_('Costs:')+' '+_('Aircraft'));
     FSTat_Graph.CBY1.Items.Add(_('Costs:')+' '+_('Crew'));
@@ -1836,13 +1892,13 @@ begin
   end;
 end;
 
-procedure TFStatistics.CBKatGesChange(Sender: TObject);
+procedure TFStatistics.CBKatGenChange(Sender: TObject);
 var
   PKat: ^TKat;
   i: word;
 begin
   PKat := nil;
-  case CBKatGes.ItemIndex of
+  case CBKatGen.ItemIndex of
     0: PKat := @Kat;
     1: PKat := @CTime;
     2: PKat := @Contest;
@@ -1924,7 +1980,7 @@ procedure TFStatistics.GridKatDrawCell(Sender: TObject; ACol,
 begin
   with TStringGrid(Sender) do
   begin
-    Canvas.Brush.Color := clInfoBk;
+    //Canvas.Brush.Color := clInfoBk;
     Canvas.FillRect(Rect);
 
     if (ACol = 1) or (ACol = 2) then
