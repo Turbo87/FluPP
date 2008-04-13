@@ -1,366 +1,299 @@
 object FAirports: TFAirports
   Left = 664
+  Height = 536
   Top = 327
+  Width = 354
+  HorzScrollBar.Page = 353
+  VertScrollBar.Page = 535
+  ActiveControl = ButtonOK
   BorderStyle = bsDialog
   Caption = 'Airports'
-  ClientHeight = 527
-  ClientWidth = 353
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
+  ClientHeight = 536
+  ClientWidth = 354
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  Font.Style = []
-  OldCreateOrder = False
-  Position = poMainFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
-  TextHeight = 13
+  Position = poMainFormCenter
   object ButtonFlp: TSpeedButton
     Left = 177
+    Height = 33
     Top = 2
     Width = 170
-    Height = 33
-    GroupIndex = 1
     Caption = 'Airport database'
+    Color = clBtnFace
     Flat = True
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ParentFont = False
+    GroupIndex = 1
+    NumGlyphs = 0
     Transparent = False
     OnClick = ButtonFlpClick
   end
   object ButtonOwnFlp: TSpeedButton
     Left = 7
+    Height = 33
     Top = 2
     Width = 170
-    Height = 33
-    GroupIndex = 1
     Caption = 'Custom airports'
+    Color = clBtnFace
     Flat = True
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ParentFont = False
+    GroupIndex = 1
+    NumGlyphs = 0
     Transparent = False
     OnClick = ButtonOwnFlpClick
   end
   object Bevel1: TBevel
     Left = 4
+    Height = 7
     Top = 417
     Width = 343
-    Height = 7
     Shape = bsTopLine
   end
   object LabelGetAirports: TLabel
+    Cursor = crHandPoint
     Left = 8
+    Height = 13
     Top = 392
     Width = 337
-    Height = 13
-    Cursor = crHandPoint
     Alignment = taCenter
     AutoSize = False
     Caption = 'Get more airports or report missing or wrong airports'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsUnderline]
-    ParentFont = False
+    ParentColor = False
     OnClick = LabelGetAirportsClick
   end
   object Label4: TLabel
     Left = 4
+    Height = 17
     Top = 428
-    Width = 84
-    Height = 13
+    Width = 130
     Caption = 'Search for airport:'
+    ParentColor = False
   end
-  object GridFlp: TJvStringGrid
+  object GridFlp: TStringGrid
     Left = 4
+    Height = 342
     Top = 41
     Width = 343
-    Height = 342
     ColCount = 4
-    Ctl3D = False
     DefaultRowHeight = 16
+    FixedColor = clBtnFace
     FixedCols = 0
-    RowCount = 2
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = []
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
-    ParentCtl3D = False
-    ParentFont = False
+    RowCount = 2
     ScrollBars = ssVertical
     TabOrder = 3
+    TabStop = True
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
     OnDrawCell = GridFlpDrawCell
-    HintColor = clInfoBk
-    Alignment = taLeftJustify
-    FixedFont.Charset = DEFAULT_CHARSET
-    FixedFont.Color = clWindowText
-    FixedFont.Height = -11
-    FixedFont.Name = 'Tahoma'
-    FixedFont.Style = []
     ColWidths = (
       64
       64
       64
-      147)
+      147
+    )
   end
   object PanelOwnFlp: TPanel
     Left = 8
+    Height = 86
     Top = 324
     Width = 337
-    Height = 86
     BevelOuter = bvNone
+    ClientHeight = 86
+    ClientWidth = 337
     TabOrder = 1
     object Label2: TLabel
       Left = 14
+      Height = 17
       Top = 1
-      Width = 59
-      Height = 13
+      Width = 94
       Caption = 'Airport name'
+      ParentColor = False
     end
     object Label3: TLabel
       Left = 14
+      Height = 17
       Top = 41
-      Width = 53
-      Height = 13
+      Width = 85
       Caption = 'ICAO Code'
+      ParentColor = False
     end
     object Label1: TLabel
       Left = 172
+      Height = 17
       Top = 1
-      Width = 40
-      Height = 13
+      Width = 62
       Caption = 'Position:'
+      ParentColor = False
     end
-    object ButtonChange: TJvImgBtn
+    object ButtonChange: TBitBtn
       Left = 297
-      Top = 61
-      Width = 25
       Height = 25
       Hint = 'edit'
-      TabOrder = 0
-      OnClick = ButtonChangeClick
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'MS Sans Serif'
-      HotTrackFont.Style = []
-      Images = FMain.ImageList
-      ImageIndex = 14
-    end
-    object ButtonDelete: TJvImgBtn
-      Left = 297
-      Top = 35
+      Top = 61
       Width = 25
+      NumGlyphs = 0
+      OnClick = ButtonChangeClick
+      TabOrder = 0
+    end
+    object ButtonDelete: TBitBtn
+      Left = 297
       Height = 25
       Hint = 'remove'
-      TabOrder = 1
-      OnClick = ButtonDeleteClick
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'MS Sans Serif'
-      HotTrackFont.Style = []
-      Images = FMain.ImageList
-      ImageIndex = 19
-    end
-    object ButtonNeu: TJvImgBtn
-      Left = 297
-      Top = 9
+      Top = 35
       Width = 25
+      NumGlyphs = 0
+      OnClick = ButtonDeleteClick
+      TabOrder = 1
+    end
+    object ButtonNeu: TBitBtn
+      Left = 297
       Height = 25
       Hint = 'add'
-      TabOrder = 2
+      Top = 9
+      Width = 25
+      NumGlyphs = 0
       OnClick = ButtonNeuClick
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'MS Sans Serif'
-      HotTrackFont.Style = []
-      Images = FMain.ImageList
-      ImageIndex = 18
+      TabOrder = 2
     end
     object EditName: TEdit
       Left = 19
-      Top = 18
-      Width = 121
       Height = 21
       Hint = 'Name of the airport'
+      Top = 18
+      Width = 121
       TabOrder = 3
     end
     object EditICAO: TEdit
       Left = 19
-      Top = 57
-      Width = 121
       Height = 21
       Hint = 'ICAO Code'
+      Top = 57
+      Width = 121
       TabOrder = 4
-    end
-    object MEBreit: TMaskEdit
-      Left = 204
-      Top = 18
-      Width = 62
-      Height = 21
-      Hint = 'Latitude'
-      EditMask = '90\'#176'00\'#39'00\";1;_'
-      MaxLength = 9
-      TabOrder = 5
-      Text = '  '#176'  '#39'  "'
     end
     object RBBreitN: TRadioButton
       Left = 169
+      Height = 24
       Top = 16
-      Width = 33
-      Height = 12
+      Width = 36
       Caption = 'N'
       Checked = True
-      TabOrder = 6
-      TabStop = True
+      State = cbChecked
+      TabOrder = 5
     end
     object RBBreitS: TRadioButton
       Left = 169
+      Height = 24
       Top = 29
-      Width = 33
-      Height = 17
+      Width = 35
       Caption = 'S'
       TabOrder = 7
     end
     object Panel3: TPanel
       Left = 169
+      Height = 33
       Top = 50
       Width = 33
-      Height = 33
       BevelOuter = bvNone
-      TabOrder = 8
+      ClientHeight = 33
+      ClientWidth = 33
+      TabOrder = 6
       object RBLaengO: TRadioButton
-        Left = 0
+        Height = 24
         Top = 5
-        Width = 33
-        Height = 12
+        Width = 37
         Caption = 'O'
         Checked = True
+        State = cbChecked
         TabOrder = 0
-        TabStop = True
       end
       object RBLaengW: TRadioButton
-        Left = 0
+        Height = 24
         Top = 16
-        Width = 33
-        Height = 17
+        Width = 39
         Caption = 'W'
         TabOrder = 1
       end
     end
-    object MELaeng: TMaskEdit
-      Left = 204
-      Top = 57
-      Width = 60
-      Height = 21
-      Hint = 'Longitude'
-      EditMask = '990\'#176'00\'#39'00\";1;_'
-      MaxLength = 10
-      TabOrder = 9
-      Text = '   '#176'  '#39'  "'
-    end
   end
-  object GridOwnFlp: TJvStringGrid
+  object GridOwnFlp: TStringGrid
     Left = 4
+    Height = 274
     Top = 41
     Width = 343
-    Height = 274
     ColCount = 4
-    Ctl3D = True
     DefaultRowHeight = 17
+    FixedColor = clBtnFace
     FixedCols = 0
-    RowCount = 2
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = []
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
-    ParentCtl3D = False
-    ParentFont = False
+    RowCount = 2
     ScrollBars = ssVertical
     TabOrder = 2
+    TabStop = True
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
     OnClick = GridOwnFlpClick
     OnDrawCell = GridFlpDrawCell
-    HintColor = clInfoBk
-    Alignment = taLeftJustify
-    FixedFont.Charset = DEFAULT_CHARSET
-    FixedFont.Color = clWindowText
-    FixedFont.Height = -11
-    FixedFont.Name = 'Tahoma'
-    FixedFont.Style = []
     ColWidths = (
       64
       64
       64
-      147)
+      147
+    )
   end
   object Panel1: TPanel
-    Left = 0
-    Top = 468
-    Width = 353
     Height = 40
+    Top = 472
+    Width = 354
     Align = alBottom
     BevelInner = bvLowered
+    ClientHeight = 40
+    ClientWidth = 354
     TabOrder = 0
-    object ButtonOK: TJvImgBtn
+    object ButtonOK: TBitBtn
       Left = 92
+      Height = 25
       Top = 9
       Width = 79
-      Height = 25
       Caption = 'OK'
       Default = True
-      TabOrder = 0
+      NumGlyphs = 0
       OnClick = ButtonOKClick
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'MS Sans Serif'
-      HotTrackFont.Style = []
-      Images = FMain.ImageList
-      ImageIndex = 22
+      TabOrder = 0
     end
-    object ButtonBeenden: TJvImgBtn
+    object ButtonBeenden: TBitBtn
       Left = 184
+      Height = 25
       Top = 9
       Width = 83
-      Height = 25
       Cancel = True
       Caption = 'Abort'
-      ModalResult = 2
-      TabOrder = 1
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'MS Sans Serif'
-      HotTrackFont.Style = []
-      Images = FMain.ImageList
-      ImageIndex = 23
       Kind = bkCancel
+      ModalResult = 2
+      NumGlyphs = 0
+      TabOrder = 1
     end
   end
   object StatusBar1: TStatusBar
-    Left = 0
-    Top = 508
-    Width = 353
-    Height = 19
-    Panels = <
+    Height = 24
+    Top = 512
+    Width = 354
+    Panels = <    
       item
         Alignment = taCenter
         Bevel = pbNone
@@ -368,38 +301,38 @@ object FAirports: TFAirports
       end>
   end
   object PanelFindEingabe: TPanel
-    Left = 0
+    Height = 16
     Top = 450
     Width = 353
-    Height = 16
     BevelOuter = bvNone
-    TabOrder = 5
+    ClientHeight = 16
+    ClientWidth = 353
+    TabOrder = 4
     object RBName: TRadioButton
       Left = 186
+      Height = 24
       Top = 1
-      Width = 160
-      Height = 13
+      Width = 164
       Caption = 'Inherit airport name'
       TabOrder = 0
     end
     object RBKennung: TRadioButton
       Left = 10
-      Top = 0
-      Width = 160
-      Height = 14
+      Height = 24
+      Width = 153
       Caption = 'Inherit ICAO code'
       Checked = True
+      State = cbChecked
       TabOrder = 1
-      TabStop = True
     end
   end
   object EditFind: TEdit
     Left = 97
-    Top = 424
-    Width = 250
     Height = 21
     Hint = 'Name of the airport'
-    TabOrder = 6
+    Top = 424
+    Width = 250
     OnChange = EditFindChange
+    TabOrder = 5
   end
 end
