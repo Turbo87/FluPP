@@ -1,0 +1,79 @@
+object FNinetyDays: TFNinetyDays
+  Left = 630
+  Top = 217
+  BorderStyle = bsDialog
+  Caption = '90 Day Regulation'
+  ClientHeight = 387
+  ClientWidth = 294
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 2
+    Top = 4
+    Width = 131
+    Height = 16
+    Caption = 'Within the last 90 days'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 2
+    Top = 30
+    Width = 56
+    Height = 13
+    Caption = 'Licences:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 2
+    Top = 158
+    Width = 33
+    Height = 13
+    Caption = 'Type:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 328
+    Width = 294
+    Height = 40
+    Align = alBottom
+    BevelInner = bvLowered
+    TabOrder = 1
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 368
+    Width = 294
+    Height = 19
+    Panels = <
+      item
+        Alignment = taCenter
+        Bevel = pbNone
+        Width = 50
+      end>
+  end
+end

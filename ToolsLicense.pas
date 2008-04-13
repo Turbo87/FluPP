@@ -1,8 +1,10 @@
 unit ToolsLicense;
 
+{$MODE Delphi}
+
 interface
 
-uses JvSimpleXml, SysUtils, Dialogs, gnugettext;
+uses {JvSimpleXml,} SysUtils, Dialogs{, gnugettext};
 
 const
   ValueTypeStarts = ',Starts,FStarts,WStarts,EStarts,';

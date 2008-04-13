@@ -1,8 +1,10 @@
 unit Export;
 
+{$MODE Delphi}
+
 interface
 
-uses Classes, SysUtils, Math, gnugettext, Grids, Windows, ShellAPI, JvSimpleXml, Dialogs;
+uses Classes, SysUtils, Math, {gnugettext,} Grids, {Windows, ShellAPI, JvSimpleXml,} Dialogs;
 
 function SaveFluFile(FileName: String) : Boolean; // ZIP, XML-File
 

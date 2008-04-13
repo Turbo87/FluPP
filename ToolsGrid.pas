@@ -1,8 +1,10 @@
 unit ToolsGrid;
 
+{$MODE Delphi}
+
 interface
 
-uses SysUtils, Classes, Types, Grid, Grids, JvStringGrid, DateUtils, Windows, Messages, Graphics;
+uses SysUtils, Classes, Types, Grid, Grids, DateUtils, Messages, Graphics;
 
 const
   DeSelectRect: TGridRect = (Left:-1; Top:-1; Right:-1; Bottom:-1 );
@@ -11,7 +13,7 @@ function GridChild(Flb: Word): TFGrid;
 function GridActiveChild: TFGrid;
 function CalcTime(GridIdx: Word; StartTime: String; NrFrom, NrTo: Word; DefaultTime: Byte = 2): String;
 function CalcFlights(GridIdx: Word; Flights: Word; NrFrom: Word; NrTo: Word): Word;
-procedure SortGridByCols(ColOrder: array of Integer; Grid: TJvStringGrid);
+procedure SortGridByCols(ColOrder: array of Integer; Grid: TStringGrid);
 procedure DrawColorbands(Grid: TStringGrid; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState; Alignment: TAlignment);
 function SearchInGrid(Grid: TStringGrid; Str: String): Boolean; overload;
 function SearchInGrid(Grid: TStringGrid; Str: String; out aRow: Integer): Boolean; overload;
@@ -26,7 +28,7 @@ uses Main, Tools;
 // ----------------------------------------------------------------
 function GridChild(Flb: Word): TFGrid;
 begin
-  Result := TFGrid(FMain.MDIChildren[Flb]);
+  Result := TFGrid(FMain. MDIChildren[Flb]);
 end;
 
 // ----------------------------------------------------------------
@@ -119,7 +121,7 @@ end;
 // ----------------------------------------------------------------
 // Sort Grid
 // ----------------------------------------------------------------
-procedure SortGridByCols(ColOrder: array of Integer; Grid: TJvStringGrid);
+procedure SortGridByCols(ColOrder: array of Integer; Grid: TStringGrid);
 var
   I, J, FirstRow: Integer;
   Sorted: Boolean;

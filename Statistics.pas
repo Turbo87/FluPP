@@ -1,35 +1,27 @@
 unit Statistics;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, ComCtrls, Mask, CheckLst, Grids, Math,
-  ImgList, StrUtils, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls,
-  JvButton, JvCtrls;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, ExtCtrls, ComCtrls, {Mask,} CheckLst, Grids, Math,
+  ImgList, StrUtils{, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls,
+  JvButton, JvCtrls}, LResources;
 
 type TTrendType = (ttYear, ttMonth, ttWeek, ttNone);
 
 type
+
   TKat = array of record
     Name: String;
     Value: String;
     Value2: String;
   end;
-  TTrendData = array of record
-    Flights: Word;
-    Time: String;
-    Passengers: Word;
-    W,F,E,A,G: Word;
-    Distance: Real;
-    DistanceTime: String;
-    CfF, CfC, LaF, EfF : Real;
-    Kat: TKat;
-    CTime: TKat;
-    Contest: TKat;
-  end;
-  TStatData = array of record
-    GraphData: TTrendData;
+  
+  TStatStruct = class(TObject)
+  private
     Name: String;
     Flights: Word;
     Time: String;
@@ -43,6 +35,17 @@ type
     CTime: TKat;
     Contest: TKat;
   end;
+  TSTatTrendData = class(TStatStruct)
+  private
+    TrendData: array of TStatStruct;
+  end;
+  TSTatData = class(TStatTrendData)
+  private
+    StatItems: array of TStatTrendData;
+    procedure Add;
+    constructor Create;
+  end;
+
   TFStatistics = class(TForm)
     StatusBar1: TStatusBar;
     Panel1: TPanel;
@@ -87,7 +90,7 @@ type
     LabelFSch: TLabel;
     LabelEigen: TLabel;
     Label10: TLabel;
-    LabelFluege: TLabel;
+    LabelGenFlights: TLabel;
     LabelFluege2: TLabel;
     Label19: TLabel;
     LabelAuto: TLabel;
@@ -231,7 +234,7 @@ type
     AircraftID: TStatData;
     Startort: TStatData;
     Landeort: TStatData;
-    GraphData: TTrendData;
+    TrendData: TStatData;
     CTime: TKat;
     Kat: TKat;
     Contest: TKat;
@@ -250,7 +253,7 @@ var
   FStatistics: TFStatistics;
 
   StartYear, Years: Word;
-  DGraphData: TTrendData;
+  DGraphData: array of TStatStruct;
   StatDistUnit: String;
   LastTrendType: TTrendType;
 
@@ -258,7 +261,19 @@ implementation
 
 uses Main, Settings, Grid, StatGraph, Tools, ToolsGrid, Debug;
 
-{$R *.DFM}
+
+// ----------------------------------------------------------------
+// Functions for TSTatData
+// ----------------------------------------------------------------
+constructor TSTatData.Create;
+begin
+  inherited Create;
+end;
+
+procedure TSTatData.Add;
+begin
+
+end;
 
 
 // ----------------------------------------------------------------
@@ -273,7 +288,6 @@ begin
   CBTopListDetail.ItemIndex := 0;
   CBTrendDetail.ItemIndex := 0;
   CBTrendGen.ItemIndex := 0;
-
   GridKatG.Selection := DeselectRect;
   GridKatDetail.Selection := DeselectRect;
   CBDetail.ItemIndex := 0;
@@ -304,13 +318,12 @@ begin
   TCSum.Caption := '0'+DecimalSeparator+'00 '+GenSettings.Values['Currency'];
 
   { general }
-  LabelFluege.Caption := '0';
+  LabelGenFlights.Caption := '0';
   LabelWinde.Caption := '0';
   LabelFSch.Caption := '0';
   LabelEigen.Caption := '0';
   LabelAuto.Caption := '0';
   LabelGummi.Caption := '0';
-  LabelFluege.Caption := '0';
   LabelGesamt.Caption := '00:00';
   LabelGesamt2.Caption := '';
   LabelFluege2.Caption := '';
@@ -490,31 +503,31 @@ begin
   SGDetail.Cells[2,0]  := _('Time');
   SGDetail.Cells[3,0]  := _('Flights');
 
-  if length(Data) = 0 then
+  if length(Data.StatItems) = 0 then
     Exit;
-  for i := 0 to high(Data) do if Data[i].Name <> '' then
+  for i := 0 to high(Data.StatItems) do if Data.StatItems[i].Name <> '' then
   begin
     SGDetail.Cells[0,i+1] := InttoStr(i);
-    SGDetail.Cells[1,i+1] := Data[i].Name;
-    SGDetail.Cells[2,i+1] := Data[i].Time;
-    SGDetail.Cells[3,i+1] := InttoStr(Data[i].Flights);
+    SGDetail.Cells[1,i+1] := Data.StatItems[i].Name;
+    SGDetail.Cells[2,i+1] := Data.StatItems[i].Time;
+    SGDetail.Cells[3,i+1] := InttoStr(Data.StatItems[i].Flights);
 
-    SGDetail.Cells[4,i+1] := InttoStr(Data[i].W);
-    SGDetail.Cells[5,i+1] := InttoStr(Data[i].F);
-    SGDetail.Cells[6,i+1] := InttoStr(Data[i].E);
-    SGDetail.Cells[7,i+1] := InttoStr(Data[i].A);
-    SGDetail.Cells[8,i+1] := InttoStr(Data[i].G);
-    SGDetail.Cells[9,i+1] := FormatFloat('0',Data[i].Distance);
-    SGDetail.Cells[10,i+1] := Data[i].DistanceTime;
-    SGDetail.Cells[11,i+1] := InttoStr(Data[i].Passengers);
+    SGDetail.Cells[4,i+1] := InttoStr(Data.StatItems[i].W);
+    SGDetail.Cells[5,i+1] := InttoStr(Data.StatItems[i].F);
+    SGDetail.Cells[6,i+1] := InttoStr(Data.StatItems[i].E);
+    SGDetail.Cells[7,i+1] := InttoStr(Data.StatItems[i].A);
+    SGDetail.Cells[8,i+1] := InttoStr(Data.StatItems[i].G);
+    SGDetail.Cells[9,i+1] := FormatFloat('0',Data.StatItems[i].Distance);
+    SGDetail.Cells[10,i+1] := Data.StatItems[i].DistanceTime;
+    SGDetail.Cells[11,i+1] := InttoStr(Data.StatItems[i].Passengers);
 
-    SGDetail.Cells[12,i+1] := FormatFloat('0.00', Data[i].CfF);
-    SGDetail.Cells[13,i+1] := FormatFloat('0.00', Data[i].CfC);
-    SGDetail.Cells[14,i+1] := FormatFloat('0.00', Data[i].LaF);
-    SGDetail.Cells[15,i+1] := FormatFloat('0.00', Data[i].EfF);
-    SGDetail.Cells[16,i+1] := FormatFloat('0.00', Data[i].EfF-(Data[i].CfF+Data[i].CfC+Data[i].LaF));
+    SGDetail.Cells[12,i+1] := FormatFloat('0.00', Data.StatItems[i].CfF);
+    SGDetail.Cells[13,i+1] := FormatFloat('0.00', Data.StatItems[i].CfC);
+    SGDetail.Cells[14,i+1] := FormatFloat('0.00', Data.StatItems[i].LaF);
+    SGDetail.Cells[15,i+1] := FormatFloat('0.00', Data.StatItems[i].EfF);
+    SGDetail.Cells[16,i+1] := FormatFloat('0.00', Data.StatItems[i].EfF-(Data.StatItems[i].CfF+Data.StatItems[i].CfC+Data.StatItems[i].LaF));
 
-    SGDetail.Cells[17,i+1] := Data[i].LastStart;
+    SGDetail.Cells[17,i+1] := Data.StatItems[i].LastStart;
 
     if i > 0 then SGDetail.RowCount := i+2;
   end;
@@ -557,17 +570,18 @@ procedure TFStatistics.CalcStats(TrendType: TTrendType);
 var
   Row, j, k, FoundFlights: Integer;
   RCfF, RCfC, RLaF, REfF, RCalc : Real;
-  ZGesamt, ZPIC, ZAlleine, ZBegleiter, BegleitTemp, DistanceTime, KatStr: String;
-  ZWinde, ZFsch, ZEigen, ZAuto, ZGummi, StartDate, EndDate, Fluege, AnzahlStarts, Passengers: Integer;
+  GenTime, ZPIC, ZAlleine, ZBegleiter, BegleitTemp, DistanceTime, KatStr: String;
+  ZWinde, ZFsch, ZEigen, ZAuto, ZGummi, StartDate, EndDate, GenFlights, FlightCount, Passengers: Integer;
   Distance: Real;
-  YearNr: Word;
+  TrendIdx: Word;
   TmpStrecke: Real;
   TmpStrList: TStrings;
-  Accept, prevAccept, ItsIn, ItsInNot, KatSel, KatSelNot, ItsInNotP, FlightsFound: Boolean;
+  Accept, prevAccept, ItsIn, ItsInNot, KatSel, KatSelNot, ItsInNotP: Boolean;
   X,Faktor: Real;
   GridIdx: Word;
   tick_now: array[0..1] of Longint;
   ProgressBar: TProgressBar;
+
 {----------}
   { Time categories }
   procedure AddCTime(var CTime: TKat);
@@ -606,7 +620,7 @@ var
     for l := 0 to TmpStrList.Count-1 do
     begin
       TempKat := FindInKat(Kat,TmpStrList[l]);
-      Kat[TempKat].Value := InttoStr(StrtoInt(Kat[TempKat].Value) + AnzahlStarts);
+      Kat[TempKat].Value := InttoStr(StrtoInt(Kat[TempKat].Value) + FlightCount);
     end;
     finally
       TmpStrList.Free;
@@ -653,91 +667,91 @@ var
   { TStatData-Records ausfüllen }
   procedure AddData(var StatData: TStatData; j: Word);
   begin
-    StatData[j].Time := CalcTime(GridIdx, StatData[j].Time,Row,Row, RGDefaultTime.ItemIndex);
-    StatData[j].LastStart := GridChild(GridIdx).Data['Dat',Row];
-    inc(StatData[j].Flights,AnzahlStarts);
+    StatData.StatItems[j].Time := CalcTime(GridIdx, StatData.StatItems[j].Time,Row,Row, RGDefaultTime.ItemIndex);
+    StatData.StatItems[j].LastStart := GridChild(GridIdx).Data['Dat',Row];
+    inc(StatData.StatItems[j].Flights,FlightCount);
     if GridChild(GridIdx).Data['Pas',Row] <> '' then
     begin
-      inc(StatData[j].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
-      inc(StatData[j].GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
+      inc(StatData.StatItems[j].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
+      inc(StatData.StatItems[j].TrendData[TrendIdx].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
     end;
-    AddCTime(StatData[j].CTime);
-    AddCTime(StatData[j].GraphData[YearNr].CTime);
-    AddKat(StatData[j].Kat);
-    AddKat(StatData[j].GraphData[YearNr].Kat);
-    AddContest(StatData[j].Contest);
-    AddContest(StatData[j].GraphData[YearNr].Contest);
+    AddCTime(StatData.StatItems[j].CTime);
+    AddCTime(StatData.StatItems[j].TrendData[TrendIdx].CTime);
+    AddKat(StatData.StatItems[j].Kat);
+    AddKat(StatData.StatItems[j].TrendData[TrendIdx].Kat);
+    AddContest(StatData.StatItems[j].Contest);
+    AddContest(StatData.StatItems[j].TrendData[TrendIdx].Contest);
     if GridChild(GridIdx).Data['ToS',Row] = 'W' then
     begin
-      inc(StatData[j].W,AnzahlStarts);
-      inc(StatData[j].GraphData[YearNr].W,AnzahlStarts);
+      inc(StatData.StatItems[j].W,FlightCount);
+      inc(StatData.StatItems[j].TrendData[TrendIdx].W,FlightCount);
     end;
     if GridChild(GridIdx).Data['ToS',Row] = 'F' then
     begin
-      inc(StatData[j].F,AnzahlStarts);
-      inc(StatData[j].GraphData[YearNr].F,AnzahlStarts);
+      inc(StatData.StatItems[j].F,FlightCount);
+      inc(StatData.StatItems[j].TrendData[TrendIdx].F,FlightCount);
     end;
     if GridChild(GridIdx).Data['ToS',Row] = 'E' then
     begin
-      inc(StatData[j].E,AnzahlStarts);
-      inc(StatData[j].GraphData[YearNr].E,AnzahlStarts);
+      inc(StatData.StatItems[j].E,FlightCount);
+      inc(StatData.StatItems[j].TrendData[TrendIdx].E,FlightCount);
     end;
     if GridChild(GridIdx).Data['ToS',Row] = 'A' then
     begin
-      inc(StatData[j].A,AnzahlStarts);
-      inc(StatData[j].GraphData[YearNr].A,AnzahlStarts);
+      inc(StatData.StatItems[j].A,FlightCount);
+      inc(StatData.StatItems[j].TrendData[TrendIdx].A,FlightCount);
     end;
     if GridChild(GridIdx).Data['ToS',Row] = 'G' then
     begin
-      inc(StatData[j].G,AnzahlStarts);
-      inc(StatData[j].GraphData[YearNr].G,AnzahlStarts);
+      inc(StatData.StatItems[j].G,FlightCount);
+      inc(StatData.StatItems[j].TrendData[TrendIdx].G,FlightCount);
     end;
     if GridChild(GridIdx).Data['CfF',Row] > '' then begin
       try
-        StatData[j].CfF := StatData[j].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
-        StatData[j].GraphData[YearNr].CfF := StatData[j].GraphData[YearNr].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
+        StatData.StatItems[j].CfF := StatData.StatItems[j].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
+        StatData.StatItems[j].TrendData[TrendIdx].CfF := StatData.StatItems[j].TrendData[TrendIdx].CfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
       except end;
     end;
     if GridChild(GridIdx).Data['CfC',Row] > '' then begin
       try
-        StatData[j].CfC := StatData[j].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
-        StatData[j].GraphData[YearNr].CfC := StatData[j].GraphData[YearNr].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
+        StatData.StatItems[j].CfC := StatData.StatItems[j].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
+        StatData.StatItems[j].TrendData[TrendIdx].CfC := StatData.StatItems[j].TrendData[TrendIdx].CfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
       except end;
     end;
     if GridChild(GridIdx).Data['LaF',Row] > '' then begin
       try
-        StatData[j].LaF := StatData[j].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
-        StatData[j].GraphData[YearNr].LaF := StatData[j].GraphData[YearNr].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
+        StatData.StatItems[j].LaF := StatData.StatItems[j].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
+        StatData.StatItems[j].TrendData[TrendIdx].LaF := StatData.StatItems[j].TrendData[TrendIdx].LaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
       except end;
     end;
     if GridChild(GridIdx).Data['EfF',Row] > '' then begin
       try
-        StatData[j].EfF := StatData[j].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
-        StatData[j].GraphData[YearNr].EfF := StatData[j].GraphData[YearNr].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
+        StatData.StatItems[j].EfF := StatData.StatItems[j].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
+        StatData.StatItems[j].TrendData[TrendIdx].EfF := StatData.StatItems[j].TrendData[TrendIdx].EfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
       except end;
     end;
 
-    inc(StatData[j].GraphData[YearNr].Flights,AnzahlStarts);
-    StatData[j].GraphData[YearNr].Time := CalcTime(GridIdx, StatData[j].GraphData[YearNr].Time,Row,Row, RGDefaultTime.ItemIndex);
+    inc(StatData.StatItems[j].TrendData[TrendIdx].Flights,FlightCount);
+    StatData.StatItems[j].TrendData[TrendIdx].Time := CalcTime(GridIdx, StatData.StatItems[j].TrendData[TrendIdx].Time,Row,Row, RGDefaultTime.ItemIndex);
     if TmpStrecke > 0 then
     begin
-      StatData[j].Distance := StatData[j].Distance + TmpStrecke;
-      StatData[j].DistanceTime := CalcTime(GridIdx, StatData[j].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
-      StatData[j].GraphData[YearNr].DistanceTime := CalcTime(GridIdx, StatData[j].GraphData[YearNr].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
-      StatData[j].GraphData[YearNr].Distance := StatData[j].GraphData[YearNr].Distance + TmpStrecke;
+      StatData.StatItems[j].Distance := StatData.StatItems[j].Distance + TmpStrecke;
+      StatData.StatItems[j].DistanceTime := CalcTime(GridIdx, StatData.StatItems[j].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
+      StatData.StatItems[j].TrendData[TrendIdx].DistanceTime := CalcTime(GridIdx, StatData.StatItems[j].TrendData[TrendIdx].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
+      StatData.StatItems[j].TrendData[TrendIdx].Distance := StatData.StatItems[j].TrendData[TrendIdx].Distance + TmpStrecke;
     end;
   end;
 {----------}
   { Prüfen ob TStatData-Record schon vorhanden }
-  procedure AddDetail(var StatData: TStatData; Data: String);
+  procedure AddDetail(StatData: TStatData; Data: String);
   var j: Integer;
   begin
-    if GridChild(GridIdx).data[Data,Row] = '' then Exit;
+    if Data = '' then Exit;
     ItsIn := False;
-    if length(StatData)>0 then
-      for j := 0 to length(StatData)-1 do
+    if length(StatData.StatItems)>0 then
+      for j := 0 to length(StatData.StatItems)-1 do
     begin
-      if GridChild(GridIdx).data[Data,Row] = StatData[j].Name then
+      if Data = StatData.StatItems[j].Name then
       begin
         Itsin := True;
         AddData(StatData,j);
@@ -746,54 +760,54 @@ var
     end;
     if not ItsIn then
     begin
-      SetLength(StatData,length(StatData)+1);
-      SetLength(StatData[length(StatData)-1].GraphData,years);
-      StatData[length(StatData)-1].Name := GridChild(GridIdx).data[Data,Row];
-      AddData(StatData,length(StatData)-1);
+      StatData.Add;
+
+      //SetLength(StatData, length(StatData)+1);
+      //SetLength(StatData[length(StatData)-1].TrendData,years);
+      StatData.StatItems[length(StatData.StatItems)-1].Name := Data;
+      AddData(StatData,length(StatData.StatItems)-1);
     end;
   end;
 {----------}
   procedure Reset(var StatData: TStatData);
   var Row: Word;
   begin
-    if length(StatData)=0 then
+    if length(StatData.StatItems)=0 then
       Exit;
-    for Row := 0 to length(StatData)-1 do
+    for Row := 0 to length(StatData.StatItems)-1 do
     begin
-      StatData[Row].Name := '';
-      StatData[Row].Flights := 0;
-      StatData[Row].Time := '00:00';
-      StatData[Row].W := 0;
-      StatData[Row].F := 0;
-      StatData[Row].E := 0;
-      StatData[Row].A := 0;
-      StatData[Row].G := 0;
-      StatData[Row].Distance := 0;
-      StatData[Row].LastStart := '';
-      StatData[Row].DistanceTime := '00:00';
-      StatData[Row].CfF := 0;
-      StatData[Row].CfC := 0;
-      StatData[Row].LaF := 0;
-      StatData[Row].EfF := 0;
-      SetLength(StatData[Row].GraphData,0);
-      SetLength(StatData[Row].CTime,0);
-      SetLength(StatData[Row].Kat,0);
-      SetLength(StatData[Row].Contest,0);
+      StatData.StatItems[Row].Name := '';
+      StatData.StatItems[Row].Flights := 0;
+      StatData.StatItems[Row].Time := '00:00';
+      StatData.StatItems[Row].W := 0;
+      StatData.StatItems[Row].F := 0;
+      StatData.StatItems[Row].E := 0;
+      StatData.StatItems[Row].A := 0;
+      StatData.StatItems[Row].G := 0;
+      StatData.StatItems[Row].Distance := 0;
+      StatData.StatItems[Row].LastStart := '';
+      StatData.StatItems[Row].DistanceTime := '00:00';
+      StatData.StatItems[Row].CfF := 0;
+      StatData.StatItems[Row].CfC := 0;
+      StatData.StatItems[Row].LaF := 0;
+      StatData.StatItems[Row].EfF := 0;
+      SetLength(StatData.StatItems[Row].TrendData,0);
+      SetLength(StatData.StatItems[Row].CTime,0);
+      SetLength(StatData.StatItems[Row].Kat,0);
+      SetLength(StatData.StatItems[Row].Contest,0);
     end;
-    SetLength(STatData,0);
+    SetLength(STatData.StatItems,0);
   end;
 {----------}
 begin
-  { Initialisierung }
-  tick_now[0] := GetTickCount;
+  { Initialise }
   FoundFlights := 0;
-  ZPIC := '00:00'; ZGesamt := '00:00'; ZAlleine := '00:00'; ZBegleiter := '00:00'; DistanceTime := '00:00';
+  ZPIC := '00:00'; GenTime := '00:00'; ZAlleine := '00:00'; ZBegleiter := '00:00'; DistanceTime := '00:00';
   ZWinde := 0; ZFsch := 0; ZEigen := 0; ZAuto := 0; ZGummi := 0;
-  Fluege := 0; Distance := 0; Faktor := 0; StartYear := 0; Passengers := 0;
+  GenFlights := 0; Distance := 0; Faktor := 0; StartYear := 0; Passengers := 0;
   RCfF := 0; RCfC := 0; RLaF := 0; REfF := 0; RCalc := 0;
   LabelFluege2.Caption := ''; LabelGesamt2.Caption := '';
   LabelCalcTime.Caption := '';
-  FlightsFound := False;
   prevAccept := False;
   Accept := False;
   LabelFrom.Caption := '';
@@ -819,10 +833,8 @@ begin
 
   CBKatGen.ItemIndex := 0;
 
-  SetLength(CoPilot, 1);
-  CoPilot[0].Name := ' '+_('With passenger');
-
   try
+    tick_now[0] := GetTickCount;
     Screen.Cursor := crHourGlass;
     
     case RGDistUnit.ItemIndex of
@@ -836,7 +848,7 @@ begin
       exit;
     end;
 
-    { Gültiger Wert in Flights? }
+    { valid value in flights? }
     if RBStarts.checked then
     begin
       try StrToInt(CBSTFrom.Text)
@@ -861,7 +873,11 @@ begin
     end;
 
     { Startjahr für Statistik }
-    SetLength(GraphData,0);
+  //  if TrendType = ttNone then
+  //    PStatData := @
+
+
+    //SetLength(TrendData,0);
     Years := 0;
     for GridIdx := 0 to FMain.MDIChildCount do if GridIdx < LBFlu.Items.Count then
     if LBFlu.Selected[GridIdx] then
@@ -892,7 +908,7 @@ begin
          Years := ExtractYear(GridChild(GridIdx).Data['Dat',GridChild(GridIdx).Grid.RowCount-1])
          - ExtractYear(GridChild(GridIdx).Data['Dat',1])+1;
       { TODO : -> dynamic array, months, weeks }
-      SetLength(GraphData,Length(GraphData)+years);
+  //    SetLength(TrendData,Length(TrendData)+years);
     end;
 
     { progress bar }
@@ -1029,35 +1045,33 @@ begin
           if Accept then
           begin
             inc(FoundFlights);
-            FlightsFound := True;
-            AnzahlStarts := StrToInt(GridChild(GridIdx).Data['NoL',Row]);
-            if GridChild(GridIdx).Data['Dst',Row] <> '' then
-            TmpStrecke := ConvertDistUnits(StrtoInt(GridChild(GridIdx).Data['Dst',Row]),GridChild(GridIdx).Settings.Values['DistUnit'],StatDistUnit)
+            FlightCount := StrToInt(GridChild(GridIdx).Data['NoL', Row]);
+            if GridChild(GridIdx).Data['Dst', Row] <> '' then
+            TmpStrecke := ConvertDistUnits(StrtoInt(GridChild(GridIdx).Data['Dst',Row]), GridChild(GridIdx).Settings.Values['DistUnit'],StatDistUnit)
             else TmpStrecke := 0;
 
-            { Allgemein }
-            inc(Fluege,AnzahlStarts);
-            ZGesamt := CalcTime(GridIdx, ZGesamt,Row,Row, RGDefaultTime.ItemIndex);
-            YearNr  := ExtractYear(GridChild(GridIdx).Data['Dat',Row])-StartYear;
-            inc(GraphData[YearNr].Flights,AnzahlStarts);
+            inc(GenFlights, FlightCount);
+            GenTime := CalcTime(GridIdx, GenTime,Row,Row, RGDefaultTime.ItemIndex);
+            TrendIdx  := ExtractYear(GridChild(GridIdx).Data['Dat',Row])-StartYear; { TODO : Trend }
+            inc(TrendData.StatItems[TrendIdx].Flights,FlightCount);
             if GridChild(GridIdx).Data['Pas',Row] <> '' then
             begin
               inc(Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
-              inc(GraphData[YearNr].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
+              inc(TrendData.StatItems[TrendIdx].Passengers, StrToInt(GridChild(GridIdx).Data['Pas',Row]));
             end;
-            GraphData[YearNr].Time := CalcTime(GridIdx, GraphData[YearNr].Time,Row,Row, RGDefaultTime.ItemIndex);
+            TrendData.StatItems[TrendIdx].Time := CalcTime(GridIdx, TrendData.StatItems[TrendIdx].Time,Row,Row, RGDefaultTime.ItemIndex);
             AddCTime(CTime);
-            AddCTime(GraphData[YearNr].CTime);
+            AddCTime(TrendData.StatItems[TrendIdx].CTime);
             AddKat(Kat);
-            AddKat(GraphData[YearNr].Kat);
+            AddKat(TrendData.StatItems[TrendIdx].Kat);
             AddContest(Contest);
-            AddContest(GraphData[YearNr].Contest);
+            AddContest(TrendData.StatItems[TrendIdx].Contest);
             if TmpStrecke > 0 then
             begin
               Distance := Distance + TmpStrecke;
               DistanceTime := CalcTime(GridIdx, DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
-              GraphData[YearNr].DistanceTime := CalcTime(GridIdx, GraphData[YearNr].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
-              GraphData[YearNr].Distance := GraphData[YearNr].Distance + TmpStrecke;
+              TrendData.StatItems[TrendIdx].DistanceTime := CalcTime(GridIdx, TrendData.StatItems[TrendIdx].DistanceTime,Row,Row, RGDefaultTime.ItemIndex);
+              TrendData.StatItems[TrendIdx].Distance := TrendData.StatItems[TrendIdx].Distance + TmpStrecke;
             end;
             if GridChild(GridIdx).Data['Pi1',Row] = GenSettings.Values['PilotName'] then
               ZPIC := CalcTime(GridIdx, ZPIC,Row,Row, RGDefaultTime.ItemIndex);
@@ -1066,69 +1080,53 @@ begin
             if GridChild(GridIdx).Data['Pi2',Row] <> '' then ZBegleiter := CalcTime(GridIdx, ZBegleiter,Row,Row, RGDefaultTime.ItemIndex);
             if GridChild(GridIdx).Data['ToS',Row] = 'W' then
             begin
-              inc(ZWinde, AnzahlStarts);
-              inc(GraphData[YearNr].W, AnzahlStarts)
+              inc(ZWinde, FlightCount);
+              inc(TrendData.StatItems[TrendIdx].W, FlightCount)
             end;
             if GridChild(GridIdx).Data['ToS',Row] = 'F' then
             begin
-              inc(ZFsch,AnzahlStarts);
-              inc(GraphData[YearNr].F,AnzahlStarts)
+              inc(ZFsch,FlightCount);
+              inc(TrendData.StatItems[TrendIdx].F,FlightCount)
             end;
             if GridChild(GridIdx).Data['ToS',Row] = 'E' then
             begin
-              inc(ZEigen,AnzahlStarts);
-              inc(GraphData[YearNr].E,AnzahlStarts)
+              inc(ZEigen,FlightCount);
+              inc(TrendData.StatItems[TrendIdx].E,FlightCount)
             end;
             if GridChild(GridIdx).Data['ToS',Row] = 'A' then
             begin
-              inc(ZAuto,AnzahlStarts);
-              inc(GraphData[YearNr].A,AnzahlStarts)
+              inc(ZAuto,FlightCount);
+              inc(TrendData.StatItems[TrendIdx].A,FlightCount)
             end;
             if GridChild(GridIdx).Data['ToS',Row] = 'G' then
             begin
-              inc(ZGummi,AnzahlStarts);
-              inc(GraphData[YearNr].G,AnzahlStarts)
+              inc(ZGummi,FlightCount);
+              inc(TrendData.StatItems[TrendIdx].G,FlightCount)
             end;
-            AddDetail(Aircraft,'ATy');
-            AddDetail(AircraftID,'AId');
-            AddDetail(Startort,'StL');
-            AddDetail(Landeort,'LaL');
-            AddDetail(Pilot,'Pi1');
 
-            { AddDetail CoPilot }
-            ItsIn := False;
-            if GridChild(GridIdx).Data['Pi2',Row] = '' then
-              BegleitTemp := ' '+_('Solo') else BegleitTemp := GridChild(GridIdx).Data['Pi2',Row];
-            if length(CoPilot) > 0 then
-            begin
-              for j := 0 to length(CoPilot)-1 do
-            begin
-              if BegleitTemp = CoPilot[j].Name then
-              begin
-                Itsin := True;
-                AddData(CoPilot,j);
-                break;
-              end;
-            end;
+            AddDetail(Aircraft,GridChild(GridIdx).Data['ATy',Row]);
+            AddDetail(AircraftID,GridChild(GridIdx).Data['AId',Row]);
+            AddDetail(Startort,GridChild(GridIdx).Data['StL',Row]);
+            AddDetail(Landeort,GridChild(GridIdx).Data['LaL',Row]);
+            AddDetail(Pilot,GridChild(GridIdx).Data['Pi1',Row]);
+
             if GridChild(GridIdx).Data['Pi2',Row] <> '' then
             begin
-              SetLength(CoPilot[0].GraphData,years);
-              AddData(CoPilot,0);
-            end;
-            end;
-            if not ItsIn then
-            begin
-              SetLength(CoPilot,length(CoPilot)+1);
-              SetLength(CoPilot[length(CoPilot)-1].GraphData,years);
-              CoPilot[length(CoPilot)-1].Name := BegleitTemp;
-              AddData(CoPilot,length(CoPilot)-1);
-            end;
+              AddDetail(CoPilot,GridChild(GridIdx).Data['Pi2',Row]);
+              AddDetail(CoPilot,' '+_('With passenger'));
+            end
+            else
+              AddDetail(CoPilot,' '+_('Solo'));
 
             { Costs }
-            try if GridChild(GridIdx).Data['CfF',Row] > '' then RCfF := RCfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]) except end;
-            try if GridChild(GridIdx).Data['CfC',Row] > '' then RCfC := RCfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]) except end;
-            try if GridChild(GridIdx).Data['LaF',Row] > '' then RLaF := RLaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]) except end;
-            try if GridChild(GridIdx).Data['EfF',Row] > '' then REfF := REfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]) except end;
+            if GridChild(GridIdx).Data['CfF',Row] > '' then
+              RCfF := RCfF + StrToFloat(GridChild(GridIdx).Data['CfF',Row]);
+            if GridChild(GridIdx).Data['CfC',Row] > '' then
+              RCfC := RCfC + StrToFloat(GridChild(GridIdx).Data['CfC',Row]);
+            if GridChild(GridIdx).Data['LaF',Row] > '' then
+              RLaF := RLaF + StrToFloat(GridChild(GridIdx).Data['LaF',Row]);
+            if GridChild(GridIdx).Data['EfF',Row] > '' then
+              REfF := REfF + StrToFloat(GridChild(GridIdx).Data['EfF',Row]);
 
           end; { if Accept then }
         end; { for Row := 1 to GridChild(LBFlu.ItemIndex).Grid.RowCount-1 do }
@@ -1136,16 +1134,16 @@ begin
         if (CBJFrom.Text = _('Beginning')) and (RBJahre.checked) then
         begin
           if GridChild(GridIdx).Settings.Values['BFTime'] <> '00000:00' then
-            LabelGesamt2.Caption := '('+AddTime(ZGesamt,GridChild(GridIdx).Settings.Values['BFTime'])+')';
+            LabelGesamt2.Caption := '('+AddTime(GenTime,GridChild(GridIdx).Settings.Values['BFTime'])+')';
 
           if StrtoInt(GridChild(GridIdx).Settings.Values['BFStarts']) > 0 then
-            LabelFluege2.Caption := '('+InttoStr(Fluege + StrtoInt(GridChild(GridIdx).Settings.Values['BFStarts']))+')';
+            LabelFluege2.Caption := '('+InttoStr(GenFlights + StrtoInt(GridChild(GridIdx).Settings.Values['BFStarts']))+')';
         end;
       end; { if LBFlu.Selected[GridIdx] }
      end; { if GridIdx < LBFlu.Items.Count }
 
   { Auswertung  }
-    if not FlightsFound then
+    if FoundFlights = 0 then
     begin
       CBDetail.ItemIndex := 0;
       DetailChange(Self);
@@ -1182,19 +1180,19 @@ begin
     TCEfF.Caption := FormatFloat('0.00', REfF)+' '+GenSettings.Values['Currency'];
     TCSum.Caption := FormatFloat('0.00', REfF-(RCfF+RCfC+RLaF))+' '+GenSettings.Values['Currency'];
 
-    LabelGesamt.Caption := ZGesamt;
+    LabelGesamt.Caption := GenTime;
     LabelPIC.Caption := ZPIC;
     LabelAlleine.Caption := ZAlleine;
     LabelBegleiter.Caption := ZBegleiter;
     LabelPassengers.Caption := InttoStr(Passengers);
-    LabelAvPassengers.Caption := FormatFloat('0.00', Passengers/Fluege);
+    LabelAvPassengers.Caption := FormatFloat('0.00', Passengers/GenFlights);
     LabelWinde.Caption := InttoStr(ZWinde);
     LabelFsch.Caption := InttoStr(ZFsch);
     LabelEigen.Caption := InttoStr(ZEigen);
     LabelAuto.Caption := InttoStr(ZAuto);
     LabelGummi.Caption := InttoStr(ZGummi);
-    LabelDurchn.Caption := avgTime(ZGesamt,Fluege);
-    LabelFluege.Caption := InttoStr(Fluege);
+    LabelDurchn.Caption := avgTime(GenTime, GenFlights);
+    LabelGenFlights.Caption := InttoStr(GenFlights);
 
     LabelGStrecke.Caption := FormatFloat('0',Distance)+' '+RGDistUnit.Items[RGDistUnit.ItemIndex];
     LabelGDGeschw.Caption := InttoStr(avgSpeed(Round(Distance),DistanceTime))+' '+GetSpeedUnit(RGDistUnit.Items[RGDistUnit.ItemIndex]);
@@ -1341,7 +1339,7 @@ begin
 
   LabelSDurchn.Caption := avgTime(SGDetail.Cells[2,ARow], StrToInt(SGDetail.Cells[3,ARow]));
   LabelSGesZeit.Caption := CalcSGesZeit(SGDetail.Cells[2,ARow],LabelGesamt.Caption);
-  LabelSGesStart.Caption := CalcSGesStart(StrtoInt(SGDetail.Cells[3,ARow]),StrtoInt(LabelFluege.Caption));
+  LabelSGesStart.Caption := CalcSGesStart(StrtoInt(SGDetail.Cells[3,ARow]),StrtoInt(LabelGenFlights.Caption));
 
   SCCfF.Caption := SGDetail.Cells[12,ARow]+' '+GenSettings.Values['Currency'];
   SCCfC.Caption := SGDetail.Cells[13,ARow]+' '+GenSettings.Values['Currency'];
@@ -1371,7 +1369,7 @@ begin
        Exit;
     CalcStats(TTrendType(CBTrendDetail.ItemIndex));
     FStat_Graph.Caption := format(_('Statistics from -->''%s''<-- in selected area'),[LabelSName.Caption]);
-    DGraphData := PStatData^[StrToInt(SGDetail.Cells[0,SGDetailRow])].GraphData;
+ //   DGraphData := PStatData^[StrToInt(SGDetail.Cells[0,SGDetailRow])].TrendData;
   end;
 
   { General }
@@ -1379,7 +1377,7 @@ begin
   begin
     CalcStats(TTrendType(CBTrendGen.ItemIndex));
     FStat_Graph.Caption := _('Selection of all flights in selected area');
-    DGraphData := GraphData;
+    DGraphData := @TrendData;
   end;
 
   { Tab }
@@ -1467,7 +1465,7 @@ var
     YLabel: String;
 
   begin
-    { GraphData
+    { TrendData
        herausfinden des höchsten Datensatzes
        skalieren
        Text für Beschriftung erstellen }
@@ -1634,7 +1632,7 @@ var
     end; { case }
 
     MaxY := 0.001; // sonst evt. Division durch Null
-    { Hï¿½chsten Wert ermitteln }
+    { Höchsten Wert ermitteln }
     for i := StartIndex to EndIndex do
     if GraphDataY[i].Data > MaxY then MaxY := GraphDataY[i].Data;
 
@@ -1939,9 +1937,9 @@ begin
   Nr := StrtoInt(SGDetail.Cells[0, SGDetailRow]);
 
   case CBKatDetail.ItemIndex of
-    0: PKat := @PStatData^[Nr].Kat;
-    1: PKat := @PStatData^[Nr].CTime;
-    2: PKat := @PStatData^[Nr].Contest;
+    0: PKat := @PStatData^.StatItems[Nr].Kat;
+    1: PKat := @PStatData^.StatItems[Nr].CTime;
+    2: PKat := @PStatData^.StatItems[Nr].Contest;
   end;
 
   if not Assigned(PKat) then
@@ -1955,7 +1953,7 @@ begin
   GridKatDetail.Cells[1,0] := '';
   GridKatDetail.Cells[2,0] := '';
 
-  if PKat^ = PStatData^[nr].Contest then GridKatDetail.ColWidths[0] := 75
+  if PKat^ = PStatData^.StatItems[nr].Contest then GridKatDetail.ColWidths[0] := 75
   else GridKatDetail.ColWidths[0] := 135;
 
   GridKatDetail.RowCount := high(PKat^)+1;
@@ -1964,7 +1962,7 @@ begin
     GridKatDetail.Cells[0,i] := PKat^[i].Name;
     GridKatDetail.Cells[1,i] := PKat^[i].Value;
 
-    if PKat^ = PStatData^[nr].Contest then
+    if PKat^ = PStatData^.StatItems[nr].Contest then
     begin
       GridKatDetail.Cells[1,i] := FormatFloat('0',StrToFloat(PKat^[i].Value))+' '+RGDistUnit.Items[RGDistUnit.ItemIndex];
       GridKatDetail.Cells[2,i] := FormatFloat('0',StrToFloat(PKat^[i].Value2))+' pt';
@@ -1989,5 +1987,10 @@ begin
       DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect, DT_LEFT);
   end;
 end;
+
+initialization
+  {$i Statistics.lrs}
+  {$i Statistics.lrs}
+  {$i Statistics.lrs}
 
 end.

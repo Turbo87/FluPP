@@ -1,11 +1,14 @@
 unit Licenses;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, StdCtrls, Buttons, ExtCtrls, Mask, Grids, ImgList, VirtualTrees,
-  gnugettext, JvSimpleXml, JvExStdCtrls, JvButton, JvCtrls, DateUtils;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, StdCtrls, Buttons, ExtCtrls, {Mask,} Grids, ImgList, {VirtualTrees,
+  gnugettext, JvSimpleXml, JvExStdCtrls, JvButton, JvCtrls,} DateUtils,
+  LResources;
 
 type TTreeNodeType = (License, Condition, MedCondition, Currency, Validation, Medical);
 
@@ -70,7 +73,6 @@ implementation
 
 uses Main, Settings, Tools, ToolsGrid, ToolsLicense;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // Form create
@@ -672,5 +674,10 @@ begin
   NodeData := VST.GetNodeData(Node);
   MemoDesc.Lines.Text := NodeData.Desc;
 end;
+
+initialization
+  {$i Licenses.lrs}
+  {$i Licenses.lrs}
+  {$i Licenses.lrs}
 
 end.

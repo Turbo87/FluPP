@@ -1,17 +1,19 @@
 unit BasicSettings;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Buttons, ExtCtrls, Inifiles, registry, gnugettext,
-  JvExStdCtrls, JvButton, JvCtrls, Tools;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ComCtrls, Buttons, ExtCtrls, Inifiles, registry, {gnugettext,
+  JvExStdCtrls, JvButton, JvCtrls,} Tools, LResources;
 
 type
   TFBasicSettings = class(TForm)
     Panel1: TPanel;
-    ButtonOK: TJvImgBtn;
-    ButtonBeenden: TJvImgBtn;
+    ButtonOK: TBitBtn;
+    ButtonBeenden: TBitBtn;
     StatusBar1: TStatusBar;
     PageControl: TPageControl;
     TabSheet1: TTabSheet;
@@ -29,8 +31,8 @@ type
     Label5: TLabel;
     Bevel2: TBevel;
     GroupBox1: TGroupBox;
-    BitBtn1: TJvImgBtn;
-    BitBtn2: TJvImgBtn;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure ButtonOKClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -53,7 +55,6 @@ implementation
 
 uses Main, ToolsGrid;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // Form show
@@ -217,5 +218,10 @@ begin
   TP_Ignore(self,'LabelTransDate');
   TranslateComponent(self);
 end;
+
+initialization
+  {$i BasicSettings.lrs}
+  {$i BasicSettings.lrs}
+  {$i BasicSettings.lrs}
 
 end.

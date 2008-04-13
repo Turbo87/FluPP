@@ -1,8 +1,10 @@
 unit ToolsShell;
 
+{$MODE Delphi}
+
 interface
 
-uses ShellAPI, Forms;
+uses {ShellAPI,} Forms;
 
 function ShellCopyFile(const ASource, ADest: String;
  ARenameCheck: boolean = false): boolean;

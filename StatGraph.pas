@@ -1,11 +1,13 @@
 unit StatGraph;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, Buttons, ComCtrls, Grids, JvExGrids, JvStringGrid,
-  gnugettext, JvExStdCtrls, JvButton, JvCtrls, Statistics;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, Buttons, ComCtrls, Grids, {JvExGrids, JvStringGrid,
+  gnugettext, JvExStdCtrls, JvButton, JvCtrls,} Statistics, LResources;
 
 type
   TFStat_Graph = class(TForm)
@@ -48,7 +50,6 @@ implementation
 
 uses Main;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // create DrawArea
@@ -207,5 +208,10 @@ begin
   if not FMain.SaveDialog.Execute then exit;
   Tab.SaveToCSV(FMain.SaveDialog.FileName);
 end;
+
+initialization
+  {$i StatGraph.lrs}
+  {$i StatGraph.lrs}
+  {$i StatGraph.lrs}
 
 end.

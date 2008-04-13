@@ -1,8 +1,10 @@
 unit Import;
 
+{$MODE Delphi}
+
 interface
 
-uses Classes, StrUtils, SysUtils, Dialogs, gnugettext, Forms, JvSimpleXml;
+uses Classes, StrUtils, SysUtils, Dialogs, {gnugettext,} Forms{, JvSimpleXml};
 
 procedure OpenFlpFile7(XML : TJvSimpleXML); // ZIP, XML-File (FliPS & FileVersion = 7)
 procedure OpenFluFile1(XML : TJvSimpleXML); // ZIP, XML-File (FluPP | FileVersion = 1)
@@ -39,7 +41,6 @@ begin
       StringList.Values[XMLElem.Properties.Value('Name')] := XMLElem.Properties.Value('Value');
     for i := 0 to XMLElem.Properties.Count - 1 do
     begin
-      AddLogEntry('Name: '+XMLElem.Properties.Value('Name')+' - ObjName: '+XMLElem.Properties[i].Name+' - ObjValue: '+XMLElem.Properties[i].Value);
       if (XMLElem.Properties[i].Name <> 'Name') and (XMLElem.Properties[i].Name <> 'Value') then
         SetStringObject(StringList, XMLElem.Properties.Value('Name'), XMLElem.Properties[i].Name, XMLElem.Properties[i].Value);
       end;

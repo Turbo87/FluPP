@@ -1,11 +1,13 @@
 unit Info;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, shellapi, gnugettext, JvExStdCtrls,
-  JvButton, JvCtrls, JvGIF, DateUtils, Tools;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ExtCtrls, Buttons, {shellapi, gnugettext, JvExStdCtrls,
+  JvButton, JvCtrls, JvGIF,} DateUtils, Tools, LResources;
 
 type
   TFInfo = class(TForm)
@@ -39,7 +41,6 @@ implementation
 
 uses Main;
 
-{$R *.DFM}
 
 procedure TFInfo.HomepageClick(Sender: TObject);
 begin
@@ -83,5 +84,13 @@ begin
   if LabelCredits.Top + LabelCredits.Height < 0 then
     LabelCredits.Top := PanelCredits.Height;
 end;
+
+initialization
+  {$i Info.lrs}
+  {$i Info.lrs}
+  {$i Info.lrs}
+  {$i Info.lrs}
+  {$i Info.lrs}
+  {$i Info.lrs}
 
 end.

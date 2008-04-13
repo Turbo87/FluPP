@@ -1,0 +1,593 @@
+object FPrint: TFPrint
+  Left = 575
+  Height = 313
+  Top = 289
+  Width = 659
+  HorzScrollBar.Page = 658
+  VertScrollBar.Page = 312
+  ActiveControl = PrintFormatCB
+  BorderStyle = bsDialog
+  Caption = 'Print'
+  ClientHeight = 313
+  ClientWidth = 659
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  object Label1: TLabel
+    Left = 5
+    Height = 17
+    Top = 159
+    Width = 57
+    Caption = 'Format:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Bevel3: TBevel
+    Left = 8
+    Height = 9
+    Top = 111
+    Width = 587
+    Shape = bsTopLine
+  end
+  object Bevel1: TBevel
+    Left = 148
+    Height = 224
+    Top = 1
+    Width = 9
+    Shape = bsLeftLine
+  end
+  object Label23: TLabel
+    Left = 158
+    Height = 17
+    Top = 9
+    Width = 120
+    Caption = 'Choose data by:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Label37: TLabel
+    Left = 7
+    Height = 17
+    Top = 9
+    Width = 70
+    Caption = 'Flight log:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 268
+    Height = 17
+    Top = 71
+    Width = 24
+    Caption = 'To:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 263
+    Height = 17
+    Top = 39
+    Width = 43
+    Caption = 'From:'
+    ParentColor = False
+  end
+  object Bevel18: TBevel
+    Left = 253
+    Height = 67
+    Top = 32
+    Width = 8
+    Shape = bsLeftLine
+  end
+  object Label5: TLabel
+    Left = 158
+    Height = 17
+    Top = 117
+    Width = 40
+    Caption = 'View:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 246
+    Height = 17
+    Top = 117
+    Width = 60
+    Caption = 'Colums:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Label16: TLabel
+    Left = 387
+    Height = 17
+    Top = 9
+    Width = 71
+    Caption = 'Category:'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Label24: TLabel
+    Left = 557
+    Height = 17
+    Top = 7
+    Width = 39
+    Caption = '= not'
+    ParentColor = False
+  end
+  object Image1: TImage
+    Left = 541
+    Height = 11
+    Top = 9
+    Width = 11
+    Picture.Data = {
+      07544269746D6170CE000000424DCE0000000000000076000000280000000B00
+      00000B000000010004000000000058000000230B0000230B0000100000001000
+      000080808000C8D0D400FFFFFF00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000002121212120000000121012121000000021000121200
+      0000010000012100000002001000120000000101210001000000021212100200
+      0000012121210100000002121212120000000000000000000000
+    }
+    Transparent = False
+  end
+  object Bevel4: TBevel
+    Left = 372
+    Height = 110
+    Top = 2
+    Width = 9
+    Shape = bsLeftLine
+  end
+  object Label7: TLabel
+    Left = 5
+    Height = 17
+    Top = 117
+    Width = 60
+    Caption = 'Settings'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentColor = False
+  end
+  object Bevel5: TBevel
+    Left = 241
+    Height = 86
+    Top = 133
+    Width = 8
+    Shape = bsLeftLine
+  end
+  object Bevel2: TBevel
+    Left = 425
+    Height = 86
+    Top = 133
+    Width = 5
+    Shape = bsLeftLine
+  end
+  object Label8: TLabel
+    Left = 3
+    Height = 27
+    Top = 198
+    Width = 142
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Change column width in "PrinterSettings.Ini"'
+    Font.Color = clGray
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ParentColor = False
+    WordWrap = True
+  end
+  object ConCheckListBox: TCheckListBox
+    Left = 435
+    Height = 82
+    Top = 138
+    Width = 142
+    ItemHeight = 13
+    TabOrder = 29
+    TopIndex = -1
+  end
+  object CTiCheckListBox: TCheckListBox
+    Left = 435
+    Height = 82
+    Hint = 'Choose categories'
+    Top = 138
+    Width = 142
+    ItemHeight = 13
+    TabOrder = 25
+    TopIndex = -1
+  end
+  object PanelSchein: TPanel
+    Left = 258
+    Height = 76
+    Top = 35
+    Width = 113
+    BevelOuter = bvNone
+    TabOrder = 2
+    Visible = False
+  end
+  object PanelDatum: TPanel
+    Left = 291
+    Height = 76
+    Top = 35
+    Width = 77
+    BevelOuter = bvNone
+    TabOrder = 3
+    Visible = False
+  end
+  object PanelStarts: TPanel
+    Left = 291
+    Height = 76
+    Top = 35
+    Width = 77
+    BevelOuter = bvNone
+    ClientHeight = 76
+    ClientWidth = 77
+    TabOrder = 4
+    Visible = False
+    object CBStFrom: TEdit
+      Height = 21
+      Width = 73
+      TabOrder = 0
+    end
+    object CBStTo: TEdit
+      Height = 21
+      Top = 32
+      Width = 73
+      TabOrder = 1
+    end
+  end
+  object PanelJahre: TPanel
+    Left = 291
+    Height = 76
+    Top = 35
+    Width = 75
+    BevelOuter = bvNone
+    ClientHeight = 76
+    ClientWidth = 75
+    TabOrder = 5
+    object CBJFrom: TComboBox
+      Height = 21
+      Width = 72
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      Items.Strings = (
+        'Beginning'
+      )
+      MaxLength = 65535
+      OnChange = CBJFromChange
+      TabOrder = 0
+    end
+    object CBJTo: TComboBox
+      Height = 21
+      Top = 32
+      Width = 72
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      Items.Strings = (
+        'End'
+      )
+      MaxLength = 65535
+      OnChange = CBJToChange
+      TabOrder = 1
+    end
+    object Kummulieren: TCheckBox
+      Height = 24
+      Top = 56
+      Width = 94
+      Caption = 'Carryover'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+  end
+  object Panel1: TPanel
+    Height = 40
+    Top = 249
+    Width = 659
+    Align = alBottom
+    BevelInner = bvLowered
+    TabOrder = 0
+  end
+  object StatusBar1: TStatusBar
+    Height = 24
+    Top = 289
+    Width = 659
+    Panels = <    
+      item
+        Alignment = taCenter
+        Bevel = pbNone
+        Width = 50
+      end>
+  end
+  object PrintFormatCB: TComboBox
+    Left = 11
+    Height = 21
+    Top = 175
+    Width = 105
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    MaxLength = 65535
+    ParentCtl3D = False
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object RBJahre: TRadioButton
+    Left = 162
+    Height = 24
+    Top = 30
+    Width = 66
+    Caption = 'Years'
+    Checked = True
+    OnClick = RBClick
+    State = cbChecked
+    TabOrder = 6
+  end
+  object RBStarts: TRadioButton
+    Left = 162
+    Height = 24
+    Top = 50
+    Width = 67
+    Caption = 'Starts'
+    OnClick = RBClick
+    TabOrder = 7
+  end
+  object RBSchein: TRadioButton
+    Left = 162
+    Height = 24
+    Top = 90
+    Width = 118
+    Caption = 'Since licence'
+    OnClick = RBClick
+    TabOrder = 8
+  end
+  object RBDatum: TRadioButton
+    Left = 162
+    Height = 24
+    Top = 70
+    Width = 59
+    Caption = 'Date'
+    OnClick = RBClick
+    TabOrder = 9
+  end
+  object LBFlu: TListBox
+    Left = 12
+    Height = 65
+    Hint = 'Select licence. Hold ''CTRL'' for multiple selection'
+    Top = 24
+    Width = 126
+    Font.Color = clBlack
+    Font.Height = -15
+    Font.Name = 'MS Sans Serif'
+    ItemHeight = 16
+    MultiSelect = True
+    OnClick = LBFluClick
+    TabOrder = 10
+    TopIndex = -1
+  end
+  object CBPageNumber: TCheckBox
+    Left = 162
+    Height = 24
+    Top = 158
+    Width = 102
+    Caption = 'Pagecount'
+    TabOrder = 11
+  end
+  object CBFileName: TCheckBox
+    Left = 162
+    Height = 24
+    Top = 178
+    Width = 90
+    Caption = 'Filename'
+    TabOrder = 12
+  end
+  object CBHeadLine: TCheckBox
+    Left = 162
+    Height = 24
+    Top = 138
+    Width = 77
+    Caption = 'Header'
+    Checked = True
+    State = cbChecked
+    TabOrder = 13
+  end
+  object CBPrintNr: TCheckBox
+    Left = 250
+    Height = 24
+    Top = 138
+    Width = 45
+    Caption = 'Nr.'
+    Checked = True
+    State = cbChecked
+    TabOrder = 14
+  end
+  object CBPrintArt: TCheckBox
+    Left = 250
+    Height = 24
+    Top = 158
+    Width = 56
+    Caption = 'Kind'
+    TabOrder = 15
+  end
+  object CBPrintFlights: TCheckBox
+    Left = 250
+    Height = 24
+    Top = 178
+    Width = 81
+    Caption = 'Landing'
+    Checked = True
+    State = cbChecked
+    TabOrder = 16
+  end
+  object CLBKat: TCheckListBox
+    Left = 381
+    Height = 82
+    Hint = 'Filter category'
+    Top = 26
+    Width = 208
+    ItemHeight = 13
+    OnClickCheck = CLBKatClickCheck
+    Sorted = True
+    TabOrder = 17
+    TopIndex = -1
+  end
+  object Panel4: TPanel
+    Left = 450
+    Height = 19
+    Top = 6
+    Width = 86
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 19
+    ClientWidth = 86
+    TabOrder = 18
+    object RBKatAnd: TRadioButton
+      Left = 2
+      Height = 24
+      Hint = '[Cat1] and [Cat2] and...'
+      Top = 2
+      Width = 51
+      Caption = 'and'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object RBKatOr: TRadioButton
+      Left = 42
+      Height = 24
+      Hint = '[Cat1] or [Cat2] or...'
+      Top = 2
+      Width = 38
+      Caption = 'or'
+      TabOrder = 1
+    end
+  end
+  object CBPrintKat: TCheckBox
+    Left = 336
+    Height = 24
+    Top = 138
+    Width = 90
+    Caption = 'Category'
+    TabOrder = 19
+  end
+  object CBPrintBem: TCheckBox
+    Left = 250
+    Height = 24
+    Top = 198
+    Width = 96
+    Caption = 'Comment'
+    Checked = True
+    State = cbChecked
+    TabOrder = 20
+  end
+  object CBPrintVia: TCheckBox
+    Left = 336
+    Height = 24
+    Top = 158
+    Width = 47
+    Caption = 'Via'
+    TabOrder = 21
+  end
+  object CBPrintCTi: TCheckBox
+    Left = 336
+    Height = 24
+    Top = 178
+    Width = 127
+    Caption = 'Time category'
+    TabOrder = 22
+  end
+  object PrintSettingsCB: TComboBox
+    Left = 11
+    Height = 21
+    Top = 135
+    Width = 105
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    MaxLength = 65535
+    OnChange = PrintSettingsCBChange
+    ParentCtl3D = False
+    Style = csDropDownList
+    TabOrder = 23
+  end
+  object CBPrintCon: TCheckBox
+    Left = 336
+    Height = 24
+    Top = 198
+    Width = 111
+    Caption = 'Competition'
+    TabOrder = 24
+  end
+  object KatSelPanel: TPanel
+    Left = 437
+    Height = 19
+    Top = 115
+    Width = 84
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 19
+    ClientWidth = 84
+    TabOrder = 26
+    object KatSelCTiRB: TRadioButton
+      Left = 2
+      Height = 24
+      Hint = 'Time category'
+      Top = 2
+      Width = 42
+      Caption = 'Tc'
+      Checked = True
+      OnClick = KatSelCTiRBClick
+      State = cbChecked
+      TabOrder = 0
+    end
+    object KatSelConRB: TRadioButton
+      Left = 41
+      Height = 24
+      Hint = 'Competition category'
+      Top = 2
+      Width = 48
+      Caption = 'Wb'
+      OnClick = KatSelConRBClick
+      TabOrder = 1
+    end
+  end
+  object CBPrintStr: TCheckBox
+    Left = 336
+    Height = 24
+    Top = 119
+    Width = 87
+    Caption = 'Distance'
+    TabOrder = 30
+  end
+  object CBDateTime: TCheckBox
+    Left = 162
+    Height = 24
+    Top = 198
+    Width = 106
+    Caption = 'Date&&Time'
+    TabOrder = 27
+  end
+  object PICOnly: TCheckBox
+    Left = 12
+    Height = 24
+    Top = 92
+    Width = 142
+    Caption = 'Only PIC-entries'
+    Checked = True
+    State = cbChecked
+    TabOrder = 28
+  end
+end

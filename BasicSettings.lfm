@@ -1,0 +1,185 @@
+object FBasicSettings: TFBasicSettings
+  Left = 449
+  Height = 364
+  Top = 308
+  Width = 427
+  HorzScrollBar.Page = 426
+  VertScrollBar.Page = 363
+  ActiveControl = CBAutoLoad
+  BorderStyle = bsDialog
+  Caption = 'Basic settings'
+  ClientHeight = 364
+  ClientWidth = 427
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  object Panel1: TPanel
+    Height = 40
+    Top = 300
+    Width = 427
+    Align = alBottom
+    BevelInner = bvLowered
+    TabOrder = 0
+  end
+  object StatusBar1: TStatusBar
+    Height = 24
+    Top = 340
+    Width = 427
+    Panels = <    
+      item
+        Alignment = taCenter
+        Bevel = pbNone
+        Width = 50
+      end>
+  end
+  object PageControl: TPageControl
+    Height = 300
+    Width = 427
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'General'
+      ClientHeight = 266
+      ClientWidth = 423
+      object Label1: TLabel
+        Left = 64
+        Height = 14
+        Top = 62
+        Width = 4
+        Color = clBtnFace
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        Transparent = False
+      end
+      object Bevel2: TBevel
+        Left = 64
+        Height = 6
+        Top = 115
+        Width = 300
+        Shape = bsTopLine
+      end
+      object CBAutoLoad: TCheckBox
+        Left = 16
+        Height = 24
+        Top = 13
+        Width = 194
+        Caption = 'Load flightlog at startup'
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        TabOrder = 0
+      end
+      object Button1: TButton
+        Left = 112
+        Height = 22
+        Top = 39
+        Width = 73
+        Caption = 'Browse [...]'
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        OnClick = Button1Click
+        TabOrder = 1
+      end
+      object Button2: TButton
+        Left = 24
+        Height = 22
+        Top = 40
+        Width = 73
+        Caption = 'Current'
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        OnClick = Button2Click
+        TabOrder = 2
+      end
+      object Panel2: TPanel
+        Left = 16
+        Height = 22
+        Top = 74
+        Width = 385
+        BevelOuter = bvLowered
+        ClientHeight = 22
+        ClientWidth = 385
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        TabOrder = 3
+        object LabelAutoload: TLabel
+          Left = 5
+          Height = 13
+          Top = 5
+          Width = 372
+          AutoSize = False
+          Color = clBtnFace
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          Transparent = False
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 16
+        Height = 84
+        Top = 128
+        Width = 123
+        Caption = 'Shortcut'
+        TabOrder = 4
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Languages'
+      ClientHeight = 266
+      ClientWidth = 423
+      ImageIndex = 2
+      object Label3: TLabel
+        Left = 18
+        Height = 17
+        Top = 16
+        Width = 81
+        Caption = 'Languages'
+        ParentColor = False
+      end
+      object LabelTranslator: TLabel
+        Left = 112
+        Height = 17
+        Top = 42
+        Width = 112
+        Caption = 'LabelTranslator'
+        ParentColor = False
+      end
+      object LabelTransDate: TLabel
+        Left = 112
+        Height = 17
+        Top = 58
+        Width = 159
+        Caption = 'LabelTranslation Date'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 114
+        Height = 17
+        Top = 16
+        Width = 73
+        Caption = 'Translator'
+        ParentColor = False
+      end
+      object LBLanguages: TListBox
+        Left = 18
+        Height = 209
+        Top = 40
+        Width = 79
+        ItemHeight = 16
+        OnClick = LBLanguagesClick
+        TabOrder = 0
+        TopIndex = -1
+      end
+    end
+  end
+end

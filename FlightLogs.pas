@@ -1,18 +1,21 @@
 unit FlightLogs;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, JvExStdCtrls, JvButton, JvCtrls, ExtCtrls, gnugettext;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, StdCtrls, {JvExStdCtrls, JvButton, JvCtrls,} ExtCtrls{, gnugettext},
+  LResources;
 
 type
   TFFlightLogs = class(TForm)
     Panel1: TPanel;
-    ButtonNew: TJvImgBtn;
-    ButtonDelete: TJvImgBtn;
-    ButtonEdit: TJvImgBtn;
-    ButtonOK: TJvImgBtn;
+    ButtonNew: TBitBtn;
+    ButtonDelete: TBitBtn;
+    ButtonEdit: TBitBtn;
+    ButtonOK: TBitBtn;
     Label12: TLabel;
     LBFlu: TListBox;
     procedure FormShow(Sender: TObject);
@@ -37,7 +40,6 @@ implementation
 
 uses Main, Tools, ToolsGrid;
 
-{$R *.dfm}
 
 // ----------------------------------------------------------------
 // On Create
@@ -156,5 +158,10 @@ begin
   InflateRect(Rect, 0, -2);
   DrawText(LBFlu.Canvas.Handle, PChar(LBFlu.Items[Index]), StrLen(PChar(LBFlu.Items[Index])), Rect,DT_CENTER);
 end;
+
+initialization
+  {$i FlightLogs.lrs}
+  {$i FlightLogs.lrs}
+  {$i FlightLogs.lrs}
 
 end.

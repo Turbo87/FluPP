@@ -3,24 +3,26 @@
 
 unit Input;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, ExtCtrls, Buttons, ComCtrls, Spin, CheckLst,
-  Grids, scFileDrop, shellapi, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
-  JvCtrls, JvGIF, JvEdit, JvValidateEdit;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, MaskEdit, ExtCtrls, Buttons, ComCtrls, Spin, CheckLst,
+  Grids{, scFileDrop, shellapi, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
+  JvCtrls, JvGIF, JvEdit, JvValidateEdit}, LResources;
 
 type
   TFInput = class(TForm)
     Panel1: TPanel;
-    ButtonCancel: TJvImgBtn;
-    ButtonOK: TJvImgBtn;
+    ButtonCancel: TBitBtn;
+    ButtonOK: TBitBtn;
     StatusBar1: TStatusBar;
     Panel3: TPanel;
     Label1: TLabel;
     LabelFlugNr: TLabel;
-    ButtonNext: TJvImgBtn;
+    ButtonNext: TBitBtn;
     TabControl: TPageControl;
     TSFlugdaten: TTabSheet;
     TSStreckenflug: TTabSheet;
@@ -48,13 +50,13 @@ type
     RBG: TRadioButton;
     Panel2: TPanel;
     Label16: TLabel;
-    ButtonFindViaOrt: TJvImgBtn;
+    ButtonFindViaOrt: TBitBtn;
     CBViaOrt: TComboBox;
-    ButtonWPAdd: TJvImgBtn;
-    ButtonWPRem: TJvImgBtn;
-    ButtonViaUp: TJvImgBtn;
-    ButtonViaDown: TJvImgBtn;
-    GridVia: TJvStringGrid;
+    ButtonWPAdd: TBitBtn;
+    ButtonWPRem: TBitBtn;
+    ButtonViaUp: TBitBtn;
+    ButtonViaDown: TBitBtn;
+    GridVia: TStringGrid;
     TabSheet1: TTabSheet;
     Label27: TLabel;
     LabelViaDist: TLabel;
@@ -63,18 +65,18 @@ type
     Panel4: TPanel;
     Label32: TLabel;
     CLBKatTime: TCheckListBox;
-    ButtonKatTimeAdd: TJvImgBtn;
-    GridKatTime: TJvStringGrid;
+    ButtonKatTimeAdd: TBitBtn;
+    GridKatTime: TStringGrid;
     Panel5: TPanel;
     LBFiles: TListBox;
-    ButtonFileAdd: TJvImgBtn;
-    ButtonFileRem: TJvImgBtn;
+    ButtonFileAdd: TBitBtn;
+    ButtonFileRem: TBitBtn;
     Label23: TLabel;
     Panel6: TPanel;
     Label31: TLabel;
-    ButtonContestAdd: TJvImgBtn;
+    ButtonContestAdd: TBitBtn;
     CLBContest: TCheckListBox;
-    GridContest: TJvStringGrid;
+    GridContest: TStringGrid;
     Panel7: TPanel;
     Label17: TLabel;
     Label18: TLabel;
@@ -85,13 +87,13 @@ type
     PanelFlightTime: TPanel;
     Label8: TLabel;
     Label29: TLabel;
-    MEFlightTimeDep: TMaskEdit;
+    MEFlightTimeDep: TEdit;
     PanelBlockTime: TPanel;
     Label15: TLabel;
     Label19: TLabel;
     Label20: TLabel;
     MEBlockTimeDep: TMaskEdit;
-    MEBlockTimeArr: TMaskEdit;
+    MEBlockTimeArr: TEdit;
     MEBlockTime: TMaskEdit;
     PanelFromTo: TPanel;
     Label12: TLabel;
@@ -102,8 +104,8 @@ type
     Label4: TLabel;
     ImageAccNotDist: TImage;
     ImageAccDist: TImage;
-    ButtonFindLandeOrt: TJvImgBtn;
-    ButtonFindStartOrt: TJvImgBtn;
+    ButtonFindLandeOrt: TBitBtn;
+    ButtonFindStartOrt: TBitBtn;
     CBAPFrom: TComboBox;
     CBAPTo: TComboBox;
     PanelRemarks: TPanel;
@@ -111,16 +113,15 @@ type
     EditRemarks: TEdit;
     CBStartType: TComboBox;
     TimerKennung: TTimer;
-    FileDrop: TscFileDrop;
     OpenDialogFiles: TOpenDialog;
     Bevel2: TBevel;
-    ButtonKatAdd: TJvImgBtn;
+    ButtonKatAdd: TBitBtn;
     CLBKat: TCheckListBox;
-    ButtonNeuFlugzeug: TJvImgBtn;
-    ButtonNeuPilot: TJvImgBtn;
-    ButtonNeuBegleiter: TJvImgBtn;
-    ButtonNeuLandeOrt: TJvImgBtn;
-    ButtonNeuStartOrt: TJvImgBtn;
+    ButtonNeuFlugzeug: TBitBtn;
+    ButtonNeuPilot: TBitBtn;
+    ButtonNeuBegleiter: TBitBtn;
+    ButtonNeuLandeOrt: TBitBtn;
+    ButtonNeuStartOrt: TBitBtn;
     Label11: TLabel;
     Label9: TLabel;
     PanelLandings: TPanel;
@@ -133,7 +134,6 @@ type
     Label28: TLabel;
     Label10: TLabel;
     MEFlightTime: TMaskEdit;
-    DTPDate: TDateTimePicker;
     TabSheet2: TTabSheet;
     Panel9: TPanel;
     TabSheet3: TTabSheet;
@@ -146,10 +146,10 @@ type
     CurLabel2: TLabel;
     Label36: TLabel;
     CurLabel4: TLabel;
-    CfF: TJvValidateEdit;
-    LaF: TJvValidateEdit;
-    CfC: TJvValidateEdit;
-    EfF: TJvValidateEdit;
+    CfF: TEdit;
+    LaF: TEdit;
+    CfC: TEdit;
+    EfF: TEdit;
     CAVOK: TCheckBox;
     INTENSITY: TComboBox;
     DESCRIPTOR: TComboBox;
@@ -208,7 +208,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure NoRowSelect(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure GridGetCellAlignment(Sender: TJvStringGrid; AColumn,
+    procedure GridGetCellAlignment(Sender: TStringGrid; AColumn,
       ARow: Integer; State: TGridDrawState; var CellAlignment: TAlignment);
     procedure MEBlockTimeDepKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -253,7 +253,6 @@ implementation
 
 uses Main, Grid, Airports, InputBox, Tools, ToolsShell, ToolsGrid, ToolsIGCParse;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // Form create
@@ -2024,5 +2023,10 @@ begin
     end;
   except end;
 end;
+
+initialization
+  {$i Input.lrs}
+  {$i Input.lrs}
+  {$i Input.lrs}
 
 end.

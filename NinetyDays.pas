@@ -1,12 +1,14 @@
 unit NinetyDays;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls,
-  Grids, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
-  JvCtrls, DateUtils;
+  Grids, {JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
+  JvCtrls,} DateUtils, LResources;
 
 type
   TNinetyDays = array of record
@@ -42,7 +44,6 @@ implementation
 
 uses Main, Grid, Settings, Tools, ToolsGrid;
 
-{$R *.dfm}
 
 
 // ----------------------------------------------------------------
@@ -198,5 +199,13 @@ begin
     DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect,DT_LEFT);
   end;
 end;
+
+initialization
+  {$i NinetyDays.lrs}
+  {$i NinetyDays.lrs}
+  {$i NinetyDays.lrs}
+  {$i NinetyDays.lrs}
+  {$i NinetyDays.lrs}
+  {$i NinetyDays.lrs}
 
 end.

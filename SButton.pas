@@ -1,10 +1,12 @@
 unit SButton;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, gnugettext;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls{, gnugettext}, LResources;
 
 type
   TFSButton = class(TFrame)
@@ -29,7 +31,6 @@ implementation
 
 uses Main, Licenses, Grid;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // Press Button
@@ -69,5 +70,13 @@ procedure TFSButton.PanelTDblClick(Sender: TObject);
 begin
   FMain.MMTrainBaroClick(Sender);
 end;
+
+initialization
+  {$i SButton.lrs}
+  {$i SButton.lrs}
+  {$i SButton.lrs}
+  {$i SButton.lrs}
+  {$i SButton.lrs}
+  {$i SButton.lrs}
 
 end.

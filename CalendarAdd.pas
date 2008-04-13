@@ -1,11 +1,13 @@
 unit CalendarAdd;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, JvExStdCtrls, JvButton, JvCtrls, ExtCtrls, ComCtrls,
-  gnugettext;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, {JvExStdCtrls, JvButton, JvCtrls,} ExtCtrls, ComCtrls{,
+  gnugettext}, LResources;
 
 type
   TFCalendarAdd = class(TForm)
@@ -42,7 +44,6 @@ implementation
 
 uses Main,ToolsGrid;
 
-{$R *.dfm}
 
 // ----------------------------------------------------------------
 // Form create
@@ -94,5 +95,10 @@ begin
     end;
   end;
 end;
+
+initialization
+  {$i CalendarAdd.lrs}
+  {$i CalendarAdd.lrs}
+  {$i CalendarAdd.lrs}
 
 end.

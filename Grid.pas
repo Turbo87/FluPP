@@ -1,13 +1,17 @@
 unit Grid;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, Menus, StdCtrls, Buttons, shellapi, JvExGrids, JvStringGrid,
-  gnugettext, SButton;
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Grids, Menus, StdCtrls, Buttons, SButton, LResources;
 
 type
+
+  { TFGrid }
+
   TFGrid = class(TForm)
     PopupMenu: TPopupMenu;
     PUFlightEdit: TMenuItem;
@@ -21,11 +25,11 @@ type
     KatRem: TMenuItem;
     PUSepFiles: TMenuItem;
     PUFiles: TMenuItem;
-    Grid: TJvStringGrid;
     PopupMenuCols: TPopupMenu;
     N1: TMenuItem;
     PUGoogleMap: TMenuItem;
     PUGoogleEarth: TMenuItem;
+    Grid: TStringGrid;
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure GridDblClick(Sender: TObject);
@@ -83,7 +87,6 @@ implementation
 
 uses Main, Input, Tools, ToolsGrid, Export;
 
-{$R *.DFM}
 
 {
 Num: Flight number
@@ -776,4 +779,6 @@ begin
   end;
 end;
 
+initialization
+  {$i Grid.lrs}
 end.

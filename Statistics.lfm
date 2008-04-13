@@ -507,7 +507,7 @@ object FStatistics: TFStatistics
       Caption = 'General'
       ImageIndex = 1
       object GroupBox1: TGroupBox
-        Left = 58
+        Left = 60
         Top = 25
         Width = 200
         Height = 133
@@ -639,7 +639,7 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox2: TGroupBox
-        Left = 58
+        Left = 60
         Top = 167
         Width = 200
         Height = 139
@@ -706,7 +706,7 @@ object FStatistics: TFStatistics
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object LabelFluege: TLabel
+        object LabelGenFlights: TLabel
           Left = 105
           Top = 107
           Width = 90
@@ -771,10 +771,10 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox3: TGroupBox
-        Left = 475
+        Left = 476
         Top = 25
         Width = 250
-        Height = 377
+        Height = 399
         Caption = 'Categories'
         TabOrder = 2
         object CBKatGen: TComboBox
@@ -802,9 +802,9 @@ object FStatistics: TFStatistics
         end
         object GridKatG: TJvStringGrid
           Left = 9
-          Top = 46
+          Top = 45
           Width = 230
-          Height = 323
+          Height = 348
           BorderStyle = bsNone
           ColCount = 3
           Ctl3D = True
@@ -838,7 +838,7 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox4: TGroupBox
-        Left = 266
+        Left = 268
         Top = 25
         Width = 200
         Height = 106
@@ -940,7 +940,7 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox5: TGroupBox
-        Left = 59
+        Left = 61
         Top = 311
         Width = 200
         Height = 114
@@ -1036,7 +1036,7 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox7: TGroupBox
-        Left = 267
+        Left = 268
         Top = 367
         Width = 200
         Height = 58
@@ -1115,7 +1115,7 @@ object FStatistics: TFStatistics
         end
       end
       object GroupBox14: TGroupBox
-        Left = 264
+        Left = 268
         Top = 136
         Width = 200
         Height = 225

@@ -1,13 +1,15 @@
 unit Settings;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, StdCtrls, Buttons, ExtCtrls, Mask, Inifiles, CheckLst,
-  gnugettext, JvExStdCtrls, JvButton, JvCtrls, ToolsLicense, JvSimpleXML,                               
-  Grids, ValEdit, ShellAPI, VirtualTrees, StrUtils, JvEdit, JvValidateEdit,
-  Menus;
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, StdCtrls, Buttons, ExtCtrls, Maskedit, Inifiles, CheckLst,
+  {gnugettext,} ToolsLicense, {JvSimpleXML,}
+  Grids, {ValEdit, ShellAPI, VirtualTrees,} StrUtils, {JvEdit, JvValidateEdit,}
+  Menus, LResources;
 
 type
   PTreeData = ^TTreeData;
@@ -17,6 +19,9 @@ type
   end;
 
 type
+
+  { TFSettings }
+
   TFSettings = class(TForm)
     StatusBar1: TStatusBar;
     Panel1: TPanel;
@@ -181,6 +186,8 @@ type
     procedure ButtonContestAddClick(Sender: TObject);
     procedure ButtonContestRemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure TabSheetCostsContextPopup(Sender: TObject; MousePos: TPoint;
+      var Handled: Boolean);
     procedure VLEGetDateEditMask(Sender: TObject; ACol,
       ARow: Integer; var Value: String);
     procedure VLEExit(Sender: TObject);
@@ -240,7 +247,6 @@ implementation
 
 uses Main, Tools, ToolsGrid, Export, InputBox;
 
-{$R *.DFM}
 
 
 // ----------------------------------------------------------------
@@ -250,6 +256,12 @@ procedure TFSettings.FormCreate(Sender: TObject);
 begin
   TranslateComponent(Self);
   LabelGetAirports.Hint := FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)));
+end;
+
+procedure TFSettings.TabSheetCostsContextPopup(Sender: TObject;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+
 end;
 
 // ----------------------------------------------------------------
@@ -1491,6 +1503,11 @@ begin
     InputBox.Free;
   end;
 end;
+
+initialization
+  {$i Settings.lrs}
+  {$i Settings.lrs}
+  {$i Settings.lrs}
 
 end.
 

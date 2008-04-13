@@ -6,10 +6,12 @@
 
 unit Debug;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Contnrs, Windows, Classes, SysUtils, Dialogs, DateUtils;
+  Contnrs, {Windows,} Classes, SysUtils, Dialogs, DateUtils;
 
 // Map-file analysis and evaluation
   function LoadAndParseMapFile: Boolean;

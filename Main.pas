@@ -1,82 +1,57 @@
 unit Main;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ComCtrls, StdCtrls, Buttons, IniFiles, Grids,
-  ToolWin, SButton, ExtCtrls, JvStringGrid, gnugettext,
+  ToolWin, SButton, ExtCtrls, {JvStringGrid, gnugettext,
   JvImageList, JvExStdCtrls, JvButton, JvCtrls, JvExControls, JvComponent,
-  XPMan, JvZlibMultiple, JclFileUtils, Grid, ShellApi, ActnList,
-  XPStyleActnCtrls, ActnMan, ActnMenus, ActnCtrls, ImgList, Tools,
-  JvExGrids, DateUtils, JvSimpleXml, GetWindowsVersion, JvComponentBase;
+  XPMan, JvZlibMultiple, JclFileUtils,} Grid, {ShellApi,} ActnList,
+  {ActnMan, ActnMenus, ActnCtrls,} ImgList, Tools,
+  {JvExGrids,} DateUtils {JvSimpleXml,} {, JvComponentBase},
+  LResources;
 
 const
   {$I FluPP.inc}
 
 type
+
+  { TFMain }
+
   TFMain = class(TForm)
-    OpenDialog: TOpenDialog;
-    SaveDialog: TSaveDialog;
-    StartTimer: TTimer;
-    ActionManager: TActionManager;
-    ActionExit: TAction;
-    ActionToolBar: TActionToolBar;
-    ActionMainMenuBar: TActionMainMenuBar;
-    ActionFileNew: TAction;
     ActionFileOpen: TAction;
-    ActionFileSave: TAction;
-    ActionFileSaveAs: TAction;
-    ActionPrint: TAction;
-    ActionSettings: TAction;
-    ActionClose: TAction;
-    LF1: TAction;
-    LF2: TAction;
-    LF3: TAction;
-    LF4: TAction;
-    LF5: TAction;
+    ActionFileNew: TAction;
+    ActionList1: TActionList;
+    HeaderControl1: THeaderControl;
+    ImageList: TImageList;
+    MainMenu1: TMainMenu;
+    MiFile: TMenuItem;
+    MiFlight: TMenuItem;
+    MIFileOpen: TMenuItem;
+    MIFileNew: TMenuItem;
+    OpenDialog: TOpenDialog;
     Panel1: TPanel;
     PanelSButtons: TPanel;
-    ActionFlightNew: TAction;
-    ActionFlightEdit: TAction;
-    ActionFlightInsert: TAction;
-    ActionFlightDelete: TAction;
-    ActionFlightDeleteUndo: TAction;
-    ActionScheduler: TAction;
-    ActionNinetyDays: TAction;
-    ActionStatistic: TAction;
-    ActionLicense: TAction;
-    ActionTrainBaro: TAction;
-    ImageList: TImageList;
-    ActionAirports: TAction;
-    ActionSortFlights: TAction;
-    ActionInfo: TAction;
-    StatusBar1: TStatusBar;
-    ActionBasicSettings: TAction;
-    XPManifest: TXPManifest;
-    JvZlib: TJvZlibMultiple;
-    ActionFlightLogs: TAction;
-    ActionFileImport: TAction;
-    ActionHelpOnline: TAction;
-    ActionHP: TAction;
-    ActionHPAirports: TAction;
-    ActionHPLicenses: TAction;
-    ActionHPLanguages: TAction;
-    ActionHPBugs: TAction;
-    ActionHPRFE: TAction;
-    ActionHPSupport: TAction;
+    SaveDialog: TSaveDialog;
+    StartTimer: TTimer;
     PanelScheduler: TPanel;
-    GridSched: TJvStringGrid;
     ActionFileExport: TAction;
     ActionExportGoogleMap: TAction;
     ActionExportGoogleEarth: TAction;
     ActionResetColumns: TAction;
+    StatusBar1: TStatusBar;
     procedure ExitClick(Sender: TObject);
     procedure FileSave(Sender: TObject);
     procedure FileOpen(Sender: TObject);
     procedure FileNew(Sender: TObject);
+    procedure IpHtmlPanel1Click(Sender: TObject);
     procedure MMStatisticsClick(Sender: TObject);
     procedure InfoClick(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem3Click(Sender: TObject);
     procedure SettingsClick(Sender: TObject);
     procedure FileSaveAsClick(Sender: TObject);
     procedure FlightEdit(Sender: TObject);
@@ -85,7 +60,7 @@ type
     procedure StartTimerTimer(Sender: TObject);
     procedure LicenseClick(Sender: TObject);
     procedure Print(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormClose(Sender: TObject; var ActionFileNew: TCloseAction);
     procedure CloseClick(Sender: TObject);
     procedure FlightNew(Sender: TObject);
     procedure FlightDeleteUndo(Sender: TObject);
@@ -113,6 +88,7 @@ type
     procedure ActionExportGoogleEarthExecute(Sender: TObject);
     procedure ActionResetColumnsExecute(Sender: TObject);
     procedure ActionFileImportExecute(Sender: TObject);
+    procedure TIPropertyGrid1Click(Sender: TObject);
   private
     ProgressBar: TProgressBar;
     procedure LoadFluFile;
@@ -153,7 +129,6 @@ uses
   Airports, BasicSettings, TrainBaro, NinetyDays, FlightLogs,
   ToolsGrid, ToolsShell, Calendar, Import, Export, Debug;
 
-{$R *.DFM}
 
 // ----------------------------------------------------------------
 // WaitCursor
@@ -473,6 +448,11 @@ begin
   CreateSButtons;
 end;
 
+procedure TFMain.IpHtmlPanel1Click(Sender: TObject);
+begin
+
+end;
+
 // ----------------------------------------------------------------
 // Create new flight log MDI-child
 // ----------------------------------------------------------------
@@ -571,9 +551,9 @@ end;
 // ----------------------------------------------------------------
 // Form close
 // ----------------------------------------------------------------
-procedure TFMain.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFMain.FormClose(Sender: TObject; var ActionFileNew: TCloseAction);
 begin
-  Action := caNone;
+  ActionFileNew := caNone;
   ExitClick(self);
 end;
 
@@ -929,6 +909,16 @@ begin
   finally
     Release;
   end;
+end;
+
+procedure TFMain.MenuItem1Click(Sender: TObject);
+begin
+
+end;
+
+procedure TFMain.MenuItem3Click(Sender: TObject);
+begin
+
 end;
 
 // ----------------------------------------------------------------
@@ -1392,7 +1382,18 @@ begin
   InsertData;
 end;
 
+procedure TFMain.TIPropertyGrid1Click(Sender: TObject);
+begin
+
+end;
+
 initialization
+  {$i Main.lrs}
+  {$i Main.lrs}
+  {$i Main.lrs}
+  {$i Main.lrs}
+  {$i Main.lrs}
+  {$i Main.lrs}
   LoadAndParseMapFile;
   Application.OnException := TFMain.GlobalExceptionHandler;
 finalization

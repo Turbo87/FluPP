@@ -1,21 +1,17 @@
 object FInfo: TFInfo
   Left = 500
   Top = 271
-  AlphaBlend = True
-  AlphaBlendValue = 230
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Infos about FluPP'
   ClientHeight = 504
   ClientWidth = 442
   Color = 9868950
-  TransparentColorValue = clMaroon
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
   Position = poMainFormCenter
   ShowHint = True
   OnCreate = FormCreate
@@ -158,30 +154,6 @@ object FInfo: TFInfo
     ParentColor = False
     ParentFont = False
     Transparent = True
-  end
-  object ButtonExit: TJvImgBtn
-    Left = 175
-    Top = 460
-    Width = 93
-    Height = 33
-    Cancel = True
-    Caption = 'Exit'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBtnText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ModalResult = 1
-    ParentFont = False
-    TabOrder = 0
-    Flat = True
-    HotTrackFont.Charset = DEFAULT_CHARSET
-    HotTrackFont.Color = clWindowText
-    HotTrackFont.Height = -11
-    HotTrackFont.Name = 'MS Sans Serif'
-    HotTrackFont.Style = []
-    Images = FMain.ImageList
-    ImageIndex = 8
   end
   object PanelCredits: TPanel
     Left = 71

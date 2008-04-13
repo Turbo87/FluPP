@@ -1,0 +1,426 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="/"/>
+    <Version Value="6"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=""/>
+      <Title Value="FluPP"/>
+      <ActiveEditorIndexAtStart Value="11"/>
+    </General>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="po/"/>
+    </i18n>
+    <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <CurrentVersionNr Value="2"/>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="4">
+      <Item1>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="RunTimeTypeInfoControls"/>
+        <MinVersion Minor="1" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="TAChartLazarusPkg"/>
+        <MinVersion Valid="True"/>
+      </Item4>
+    </RequiredPackages>
+    <Units Count="35">
+      <Unit0>
+        <Filename Value="FluPP.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="21" Y="37"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Main.pas"/>
+        <ComponentName Value="FMain"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Main.lrs"/>
+        <UnitName Value="Main"/>
+        <CursorPos X="31" Y="11"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Info.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Info.lrs"/>
+        <UnitName Value="Info"/>
+        <CursorPos X="16" Y="89"/>
+        <TopLine Value="42"/>
+        <UsageCount Value="24"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Grid.pas"/>
+        <ComponentName Value="FGrid"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Grid.lrs"/>
+        <UnitName Value="Grid"/>
+        <CursorPos X="16" Y="783"/>
+        <TopLine Value="728"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="SButton.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="SButton.lrs"/>
+        <UnitName Value="SButton"/>
+        <CursorPos X="19" Y="75"/>
+        <TopLine Value="28"/>
+        <UsageCount Value="24"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="TrainBaro.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="TrainBaro.lrs"/>
+        <UnitName Value="TrainBaro"/>
+        <CursorPos X="21" Y="217"/>
+        <TopLine Value="170"/>
+        <UsageCount Value="24"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="InputBox.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="InputBox.lrs"/>
+        <UnitName Value="InputBox"/>
+        <CursorPos X="20" Y="30"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="24"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="NinetyDays.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="NinetyDays.lrs"/>
+        <UnitName Value="NinetyDays"/>
+        <CursorPos X="22" Y="204"/>
+        <TopLine Value="157"/>
+        <UsageCount Value="24"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="Tools.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tools"/>
+        <CursorPos X="1" Y="69"/>
+        <TopLine Value="46"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="ToolsShell.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="24"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="Print.pas"/>
+        <ComponentName Value="FPrint"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Print.lrs"/>
+        <UnitName Value="Print"/>
+        <CursorPos X="28" Y="20"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="Airports.pas"/>
+        <ComponentName Value="FAirports"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Airports.lrs"/>
+        <UnitName Value="Airports"/>
+        <CursorPos X="15" Y="37"/>
+        <TopLine Value="16"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="Input.pas"/>
+        <ComponentName Value="FInput"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Input.lrs"/>
+        <UnitName Value="Input"/>
+        <CursorPos X="45" Y="211"/>
+        <TopLine Value="190"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="Settings.pas"/>
+        <ComponentName Value="FSettings"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Settings.lrs"/>
+        <UnitName Value="Settings"/>
+        <CursorPos X="21" Y="279"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="BasicSettings.pas"/>
+        <ComponentName Value="FBasicSettings"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="BasicSettings.lrs"/>
+        <UnitName Value="BasicSettings"/>
+        <CursorPos X="21" Y="35"/>
+        <TopLine Value="14"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="Licenses.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Licenses.lrs"/>
+        <UnitName Value="Licenses"/>
+        <CursorPos X="20" Y="679"/>
+        <TopLine Value="629"/>
+        <UsageCount Value="24"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="Statistics.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Statistics.lrs"/>
+        <UnitName Value="Statistics"/>
+        <CursorPos X="22" Y="1992"/>
+        <TopLine Value="1942"/>
+        <UsageCount Value="24"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="StatGraph.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="StatGraph.lrs"/>
+        <UnitName Value="StatGraph"/>
+        <CursorPos X="21" Y="213"/>
+        <TopLine Value="163"/>
+        <UsageCount Value="24"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="ToolsLicense.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="24"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="FlightLogs.pas"/>
+        <ComponentName Value="FFlightLogs"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="FlightLogs.lrs"/>
+        <UnitName Value="FlightLogs"/>
+        <CursorPos X="21" Y="28"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="ToolsGrid.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ToolsGrid"/>
+        <CursorPos X="16" Y="157"/>
+        <TopLine Value="32"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="Calendar.pas"/>
+        <ComponentName Value="FCalendar"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="Calendar.lrs"/>
+        <UnitName Value="Calendar"/>
+        <CursorPos X="27" Y="18"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="CalendarAdd.pas"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="CalendarAdd.lrs"/>
+        <UnitName Value="CalendarAdd"/>
+        <CursorPos X="23" Y="100"/>
+        <TopLine Value="50"/>
+        <UsageCount Value="24"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="Import.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="24"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="Export.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="24"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="Debug.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="24"/>
+        <SyntaxHighlighter Value="Text"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="GetWindowsVersion.pas"/>
+        <UnitName Value="GetWindowsVersion"/>
+        <CursorPos X="1" Y="4"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="/usr/share/lazarus/components/printers/printer4lazarus.pas"/>
+        <UnitName Value="Printer4Lazarus"/>
+        <CursorPos X="20" Y="21"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="/usr/share/lazarus/lcl/include/bitmap.inc"/>
+        <CursorPos X="4" Y="501"/>
+        <TopLine Value="479"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="/usr/share/lazarus/lcl/forms.pp"/>
+        <UnitName Value="Forms"/>
+        <CursorPos X="34" Y="37"/>
+        <TopLine Value="13"/>
+        <UsageCount Value="11"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="Grid.lfm"/>
+        <CursorPos X="23" Y="22"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="Calendar.lfm"/>
+        <CursorPos X="1" Y="229"/>
+        <TopLine Value="188"/>
+        <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="BasicSettings.lfm"/>
+        <CursorPos X="34" Y="22"/>
+        <TopLine Value="13"/>
+        <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="FlightLogs.lfm"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="11"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="Settings.lfm"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="LFM"/>
+      </Unit34>
+    </Units>
+    <JumpHistory Count="5" HistoryIndex="4">
+      <Position1>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="12" Column="23" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="Settings.pas"/>
+        <Caret Line="25" Column="3" TopLine="22"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ToolsGrid.pas"/>
+        <Caret Line="20" Column="34" TopLine="10"/>
+      </Position3>
+      <Position4>
+        <Filename Value="ToolsGrid.pas"/>
+        <Caret Line="31" Column="27" TopLine="2"/>
+      </Position4>
+      <Position5>
+        <Filename Value="ToolsGrid.pas"/>
+        <Caret Line="191" Column="12" TopLine="171"/>
+      </Position5>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <SearchPaths>
+      <LCLWidgetType Value="gtk2"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

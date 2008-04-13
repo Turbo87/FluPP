@@ -1,11 +1,13 @@
 unit TrainBaro;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, ComCtrls, StdCtrls, Buttons, Grids, gnugettext,
-  JvExStdCtrls, JvButton, JvCtrls;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, ComCtrls, StdCtrls, Buttons, Grids{, gnugettext,
+  JvExStdCtrls, JvButton, JvCtrls}, LResources;
 
 type
   TFTrainBaro = class(TForm)
@@ -38,7 +40,6 @@ var
 
 implementation
 
-{$R *.dfm}
 
 uses Grid, Main, Tools, ToolsGrid;
 
@@ -211,5 +212,13 @@ begin
   InflateRect(Rect, 0, -4);
   DrawText(LBFlu.Canvas.Handle, PChar(LBFlu.Items[Index]), StrLen(PChar(LBFlu.Items[Index])), Rect,DT_CENTER);
 end;
+
+initialization
+  {$i TrainBaro.lrs}
+  {$i TrainBaro.lrs}
+  {$i TrainBaro.lrs}
+  {$i TrainBaro.lrs}
+  {$i TrainBaro.lrs}
+  {$i TrainBaro.lrs}
 
 end.

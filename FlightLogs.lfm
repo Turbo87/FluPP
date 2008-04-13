@@ -1,0 +1,101 @@
+object FFlightLogs: TFFlightLogs
+  Left = 528
+  Height = 240
+  Top = 313
+  Width = 229
+  HorzScrollBar.Page = 228
+  VertScrollBar.Page = 239
+  ActiveControl = ButtonOK
+  BorderStyle = bsDialog
+  Caption = 'Manage flight logs'
+  ClientHeight = 240
+  ClientWidth = 229
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  object Label12: TLabel
+    Height = 28
+    Top = 172
+    Width = 229
+    Align = alBottom
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'You can add or remove fllight logs here.'
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ParentColor = False
+    WordWrap = True
+  end
+  object Panel1: TPanel
+    Height = 40
+    Top = 200
+    Width = 229
+    Align = alBottom
+    BevelInner = bvLowered
+    ClientHeight = 40
+    ClientWidth = 229
+    TabOrder = 0
+    object ButtonOK: TBitBtn
+      Left = 75
+      Height = 25
+      Top = 9
+      Width = 79
+      Anchors = [akTop]
+      Default = True
+      Kind = bkOK
+      ModalResult = 1
+      NumGlyphs = 0
+      OnClick = ButtonOKClick
+      TabOrder = 0
+    end
+  end
+  object ButtonNew: TBitBtn
+    Left = 67
+    Height = 25
+    Hint = 'add'
+    Top = 126
+    Width = 25
+    NumGlyphs = 0
+    OnClick = ButtonNewClick
+    TabOrder = 1
+  end
+  object ButtonDelete: TBitBtn
+    Left = 94
+    Height = 25
+    Hint = 'remove'
+    Top = 126
+    Width = 25
+    NumGlyphs = 0
+    OnClick = ButtonDeleteClick
+    TabOrder = 2
+  end
+  object ButtonEdit: TBitBtn
+    Left = 121
+    Height = 25
+    Hint = 'edit'
+    Top = 126
+    Width = 25
+    NumGlyphs = 0
+    OnClick = ButtonEditClick
+    TabOrder = 3
+  end
+  object LBFlu: TListBox
+    Height = 120
+    Hint = 'Select flight log'
+    Width = 229
+    Align = alTop
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ItemHeight = 23
+    OnDrawItem = LBFluDrawItem
+    Style = lbOwnerDrawFixed
+    TabOrder = 4
+    TopIndex = -1
+  end
+end

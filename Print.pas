@@ -1,12 +1,14 @@
 unit Print;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, ComCtrls, PrintDrv, Mask, inifiles,
-   Printers, CheckLst, gnugettext, JvExStdCtrls, JvButton,
-  JvCtrls, TypInfo;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, ExtCtrls, ComCtrls, {PrintDrv, Mask,} inifiles,
+   Printers, CheckLst, {gnugettext, JvExStdCtrls, JvButton,
+  JvCtrls,} TypInfo, LResources;
 
 const
   numFixedCols = 22;
@@ -122,7 +124,6 @@ implementation
 
 uses Settings, Main, Grid, BasicSettings, Grids, Tools, ToolsGrid;
 
-{$R *.DFM}
 
 procedure TFPrint.FormShow(Sender: TObject);
 var
@@ -1101,5 +1102,13 @@ begin
   x := _('page');
   x := _('pages');
 end;
+
+initialization
+  {$i Print.lrs}
+  {$i Print.lrs}
+  {$i Print.lrs}
+  {$i Print.lrs}
+  {$i Print.lrs}
+  {$i Print.lrs}
 
 end.

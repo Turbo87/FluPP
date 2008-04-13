@@ -1,0 +1,83 @@
+object FGrid: TFGrid
+  Left = 528
+  Height = 441
+  Top = 298
+  Width = 563
+  HorzScrollBar.Page = 562
+  VertScrollBar.Page = 440
+  ActiveControl = Grid
+  BorderStyle = bsNone
+  Caption = 'FGrid'
+  ClientHeight = 441
+  ClientWidth = 563
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PopupMenu = PopupMenu
+  Position = poDefault
+  Visible = True
+  object Grid: TStringGrid
+    Height = 441
+    Width = 563
+    Align = alClient
+    ColCount = 5
+    FixedColor = clBtnFace
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goSmoothScroll]
+    RowCount = 5
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+    TabStop = True
+  end
+  object PopupMenu: TPopupMenu
+    AutoPopup = False
+    left = 40
+    top = 422
+    object PUFlightNew: TMenuItem
+    end
+    object PUFlightEdit: TMenuItem
+      Default = True
+    end
+    object PUFlugEinfuegen: TMenuItem
+    end
+    object PUFlugloeschen: TMenuItem
+    end
+    object PUloeschrueck: TMenuItem
+    end
+    object N5: TMenuItem
+      Caption = '-'
+    end
+    object PUKategorieZuordnen: TMenuItem
+      Caption = 'Categories'
+      object KatAdd: TMenuItem
+        Caption = 'Add'
+        ImageIndex = 18
+      end
+      object KatRem: TMenuItem
+        Caption = 'Remove'
+        ImageIndex = 19
+      end
+    end
+    object PUSepFiles: TMenuItem
+      Caption = '-'
+    end
+    object PUFiles: TMenuItem
+      Caption = 'Files'
+      Hint = 'Attached files'
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object PUGoogleMap: TMenuItem
+    end
+    object PUGoogleEarth: TMenuItem
+    end
+  end
+  object PopupMenuCols: TPopupMenu
+    left = 8
+    top = 422
+  end
+end

@@ -1,25 +1,27 @@
 unit Calendar;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Mask, StdCtrls, Buttons, Grids, ComCtrls, ExtCtrls,
-  JvExGrids, JvStringGrid, JvExStdCtrls, JvButton, JvCtrls, GNUGetText,
-  JvExExtCtrls, JvComponent, JvTMTimeLine, DateUtils,
-  JvExtComponent;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, {Mask,} StdCtrls, Buttons, Grids, ComCtrls, ExtCtrls,
+  {JvExGrids, JvStringGrid, JvExStdCtrls, JvButton, JvCtrls, GNUGetText,
+  JvExExtCtrls, JvComponent, JvTMTimeLine,} DateUtils{,
+  JvExtComponent}, LResources;
 
 type
   TFCalendar = class(TForm)
     Panel1: TPanel;
     StatusBar1: TStatusBar;
-    GridSched: TJvStringGrid;
-    ButtonDelete: TJvImgBtn;
-    ButtonNew: TJvImgBtn;
+    GridSched: TStringGrid;
+    ButtonDelete: TBitBtn;
+    ButtonNew: TBitBtn;
     JvTMTimeline: TJvTMTimeline;
-    ButtonExtend: TJvImgBtn;
-    ButtonOK: TJvImgBtn;
-    ButtonCancel: TJvImgBtn;
+    ButtonExtend: TBitBtn;
+    ButtonOK: TBitBtn;
+    ButtonCancel: TBitBtn;
     CBViewSchedules: TCheckBox;
     CBViewEvents: TCheckBox;
     procedure ButtonAddClick(Sender: TObject);
@@ -48,7 +50,6 @@ implementation
 
 uses Main, Tools, ToolsGrid, InputBox, Export, CalendarAdd;
 
-{$R *.dfm}
 
 // ----------------------------------------------------------------
 // Form create
@@ -377,5 +378,10 @@ begin
       FMain.ImageList.Draw(Canvas, Rect.Left+5, Rect.Top-1, StrToInt(Cells[0, ARow]));
   end;
 end;
+
+initialization
+  {$i Calendar.lrs}
+  {$i Calendar.lrs}
+  {$i Calendar.lrs}
 
 end.

@@ -1,11 +1,13 @@
 unit InputBox;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, Buttons, ExtCtrls, gnugettext, JvExStdCtrls,
-  JvButton, JvCtrls;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, {Mask,} Buttons, ExtCtrls{, gnugettext, JvExStdCtrls,
+  JvButton, JvCtrls}, LResources;
 
 type
   TFInputBox = class(TForm)
@@ -23,6 +25,13 @@ var
 
 implementation
 
-{$R *.dfm}
+
+initialization
+  {$i InputBox.lrs}
+  {$i InputBox.lrs}
+  {$i InputBox.lrs}
+  {$i InputBox.lrs}
+  {$i InputBox.lrs}
+  {$i InputBox.lrs}
 
 end.
