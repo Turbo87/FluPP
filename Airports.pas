@@ -1,17 +1,19 @@
 unit Airports;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, Mask, Buttons, Grids, ComCtrls, shellapi, JvExGrids,
-  JvStringGrid, gnugettext, JvExStdCtrls, JvButton, JvCtrls;
+  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, MaskEdit, Buttons, Grids, ComCtrls{, shellapi, JvExGrids,
+  JvStringGrid, gnugettext, JvExStdCtrls, JvButton, JvCtrls}, LResources;
 
 type
   TFAirports = class(TForm)
     Panel1: TPanel;
-    ButtonOK: TJvImgBtn;
-    ButtonBeenden: TJvImgBtn;
+    ButtonOK: TBitBtn;
+    ButtonBeenden: TBitBtn;
     StatusBar1: TStatusBar;
     ButtonFlp: TSpeedButton;
     ButtonOwnFlp: TSpeedButton;
@@ -19,9 +21,9 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label1: TLabel;
-    ButtonChange: TJvImgBtn;
-    ButtonDelete: TJvImgBtn;
-    ButtonNeu: TJvImgBtn;
+    ButtonChange: TBitBtn;
+    ButtonDelete: TBitBtn;
+    ButtonNeu: TBitBtn;
     EditName: TEdit;
     EditICAO: TEdit;
     MEBreit: TMaskEdit;
@@ -31,8 +33,8 @@ type
     RBLaengO: TRadioButton;
     RBLaengW: TRadioButton;
     MELaeng: TMaskEdit;
-    GridOwnFlp: TJvStringGrid;
-    GridFlp: TJvStringGrid;
+    GridOwnFlp: TStringGrid;
+    GridFlp: TStringGrid;
     Bevel1: TBevel;
     LabelGetAirports: TLabel;
     PanelFindEingabe: TPanel;
@@ -68,7 +70,6 @@ implementation
 
 uses Main, Input, Tools, ToolsGrid;
 
-{$R *.DFM}
 
 
 // ----------------------------------------------------------------
@@ -361,5 +362,10 @@ procedure TFAirports.GridFlpDrawCell(Sender: TObject; ACol,
 begin
   DrawColorbands(TSTringGrid(Sender), ACol, ARow, Rect, State, taLeftJustify);
 end;
+
+initialization
+  {$i Airports.lrs}
+  {$i Airports.lrs}
+  {$i Airports.lrs}
 
 end.
