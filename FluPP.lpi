@@ -8,7 +8,7 @@
       <IconPath Value="./"/>
       <TargetFileExt Value=""/>
       <Title Value="FluPP"/>
-      <ActiveEditorIndexAtStart Value="11"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -33,19 +33,19 @@
     </RunParams>
     <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="RunTimeTypeInfoControls"/>
-        <MinVersion Minor="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="LCL"/>
-      </Item3>
-      <Item4>
         <PackageName Value="TAChartLazarusPkg"/>
         <MinVersion Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="RunTimeTypeInfoControls"/>
+        <MinVersion Minor="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item4>
     </RequiredPackages>
     <Units Count="35">
@@ -89,7 +89,7 @@
         <ResourceFilename Value="Grid.lrs"/>
         <UnitName Value="Grid"/>
         <CursorPos X="16" Y="783"/>
-        <TopLine Value="728"/>
+        <TopLine Value="724"/>
         <EditorIndex Value="11"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
@@ -378,28 +378,7 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit34>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
-      <Position1>
-        <Filename Value="Settings.pas"/>
-        <Caret Line="12" Column="23" TopLine="1"/>
-      </Position1>
-      <Position2>
-        <Filename Value="Settings.pas"/>
-        <Caret Line="25" Column="3" TopLine="22"/>
-      </Position2>
-      <Position3>
-        <Filename Value="ToolsGrid.pas"/>
-        <Caret Line="20" Column="34" TopLine="10"/>
-      </Position3>
-      <Position4>
-        <Filename Value="ToolsGrid.pas"/>
-        <Caret Line="31" Column="27" TopLine="2"/>
-      </Position4>
-      <Position5>
-        <Filename Value="ToolsGrid.pas"/>
-        <Caret Line="191" Column="12" TopLine="171"/>
-      </Position5>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
