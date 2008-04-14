@@ -27,8 +27,6 @@ uses
   ToolsLicense in 'ToolsLicense.pas',
   FlightLogs in 'FlightLogs.pas' {FFlightLogs},
   ToolsGrid in 'ToolsGrid.pas',
-// Calendar in 'Calendar.pas' {FCalendar},
-// CalendarAdd in 'CalendarAdd.pas' {FCalendarAdd},
   Import in 'Import.pas',
   Export in 'Export.pas',
 //  Debug in 'Debug.pas',

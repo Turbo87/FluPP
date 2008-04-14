@@ -887,12 +887,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.SchedulerClick(Sender: TObject);
 begin
-  with TFCalendar.Create(Application) do try
+{  with TFCalendar.Create(Application) do try
     ShowModal;
   finally
     Release;
   end;
-  UpdateScheduleGrid;
+  UpdateScheduleGrid;    }
 end;
 
 // ----------------------------------------------------------------
@@ -900,11 +900,11 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.MMNinetyDaysClick(Sender: TObject);
 begin
-  with TFNinetyDays.Create(Application) do try
+{  with TFNinetyDays.Create(Application) do try
     ShowModal;
   finally
     Release;
-  end;
+  end;    }
 end;
 
 // ----------------------------------------------------------------
@@ -912,7 +912,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.MMStatisticsClick(Sender: TObject);
 begin
-  with TFStatistics.Create(Application) do
+{  with TFStatistics.Create(Application) do
   try
     ShowModal;
   finally
@@ -930,7 +930,7 @@ begin
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------
@@ -951,12 +951,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.Print(Sender: TObject);
 begin
-  with TFPrint.Create(Application) do
+{  with TFPrint.Create(Application) do
   try
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------

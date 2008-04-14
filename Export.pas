@@ -55,7 +55,7 @@ begin
     end;
 }end;
 
-procedure writeFlight(XMLElem: TDOMElement; GridIdx, Row: Word);
+procedure writeFlight(XMLDoc: TXMLDocument; RootNode: TDOMNode; ItemName: String; GridIdx, Row: Word);
 var Col: Word;
 begin
 {  for Col := 1 to GridChild(GridIdx).GridCols.Count-1 do
@@ -63,7 +63,7 @@ begin
       XMLElem.Properties.Add(GridChild(GridIdx).GridCols[Col], GridChild(GridIdx).Grid.Cells[Col,Row]);
 }end;
 
-procedure writeColumns(XMLElem: TDOMElement; GridIdx: Word);
+procedure writeColumns(XMLDoc: TXMLDocument; RootNode: TDOMNode; GridIdx: Word);
 var XMLSubElem: TDOMElement;
     i: Word;
 begin
@@ -106,40 +106,37 @@ begin
     { Settings }
     for GridIdx := 0 to FMain.FlWindows.Count-1 do
     begin
-      FLElem := Root.Items.Add('FlightLog');
-      with FLElem do
-      begin
-        Properties.Add('Name', GridChild(GridIdx).Caption);
+      XMLNode := XMLDoc.CreateElement('FlightLog');
+      TDOMElement(XMLRoot).SetAttribute('Name', GridChild(GridIdx).Caption);
 
-        { Settings }
-        writeValStrings(Items.Add('Settings'), GridChild(GridIdx).Settings);
+      { Settings }
+      writeValStrings(XMLDoc, XMLNode, 'Settings', GridChild(GridIdx).Settings);
 
-        { AutoComplete }
-        writeObjStrings(FLElem, 'Aircraft', GridChild(GridIdx).ACAircrafts);
-        writeObjStrings(FLElem, 'Pilot', GridChild(GridIdx).ACPilots);
-        writeObjStrings(FLElem, 'Airport', GridChild(GridIdx).ACAirports);
+      { AutoComplete }
+      writeObjStrings(XMLDoc, XMLNode, 'Aircraft', GridChild(GridIdx).ACAircrafts);
+      writeObjStrings(XMLDoc, XMLNode, 'Pilot', GridChild(GridIdx).ACPilots);
+      writeObjStrings(XMLDoc, XMLNode, 'Airport', GridChild(GridIdx).ACAirports);
 
-        { Categories }
-        writeObjStrings(FLElem, 'CatTime', GridChild(GridIdx).ACTimeCat);
-        writeObjStrings(FLElem, 'Category', GridChild(GridIdx).ACCategories);
-        writeObjStrings(FLElem, 'EventCat', GridChild(GridIdx).ACEventCat);
-        writeObjStrings(FLElem, 'Contest', GridChild(GridIdx).ACContestCat);
+      { Categories }
+      writeObjStrings(XMLDoc, XMLNode, 'CatTime', GridChild(GridIdx).ACTimeCat);
+      writeObjStrings(XMLDoc, XMLNode, 'Category', GridChild(GridIdx).ACCategories);
+      writeObjStrings(XMLDoc, XMLNode, 'EventCat', GridChild(GridIdx).ACEventCat);
+      writeObjStrings(XMLDoc, XMLNode, 'Contest', GridChild(GridIdx).ACContestCat);
 
-        { License Data }
-        writeObjStrings(FLElem, 'LicenseCat', GridChild(GridIdx).LicenseCategories);
-        writeObjStrings(FLElem, 'LicenseTimeCat', GridChild(GridIdx).LicenseTimeCat);
-        writeObjStrings(FLElem, 'LicenseDates', GridChild(GridIdx).LicenseDates);
-        writeObjStrings(FLElem, 'AccLicenses', GridChild(GridIdx).AccLicenses);
-        writeObjStrings(FLElem, 'OptConditions', GridChild(GridIdx).OptConditions);
-        writeObjStrings(FLElem, 'Events', GridChild(GridIdx).Events);
+      { License Data }
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseCat', GridChild(GridIdx).LicenseCategories);
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseTimeCat', GridChild(GridIdx).LicenseTimeCat);
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseDates', GridChild(GridIdx).LicenseDates);
+      writeObjStrings(XMLDoc, XMLNode, 'AccLicenses', GridChild(GridIdx).AccLicenses);
+      writeObjStrings(XMLDoc, XMLNode, 'OptConditions', GridChild(GridIdx).OptConditions);
+      writeObjStrings(XMLDoc, XMLNode, 'Events', GridChild(GridIdx).Events);
 
-        { Columns }
-        writeColumns(FLElem, GridIdx);
+      { Columns }
+      writeColumns(XMLDoc, XMLNode, GridIdx);
 
-        { Flight data }
-        for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
-          writeFlight(FLElem.Items.Add('Flight'), GridIdx, i);
-      end;
+      { Flight data }
+      for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
+        writeFlight(XMLDoc, XMLNode, 'Flight', GridIdx, i);
     end;
     writeXMLFile(XMLDoc, FlpTempDir+'\'+'flightlog.xml');
   finally
@@ -156,7 +153,7 @@ begin
     ProgressBar.Height := FMain.StatusBar1.Height - 2;
     FMain.StatusBar1.Repaint;
     Screen.Cursor := crHourGlass;
-    try
+{    try
       FMain.JvZlib.CompressDirectory(FlpTempDir,True,FileName);
     except
       on E: Exception do
@@ -164,7 +161,7 @@ begin
         MessageDlg(E.Message, mtWarning, [mbOK], 0);
         Result := False;
       end;
-    end;
+    end;}
   finally
     ProgressBar.Free;
     Screen.Cursor := crDefault;
@@ -182,7 +179,7 @@ begin
     for Count := 0 to GridCols.Count - 1 do
       Grid.Cells[Count, 0] := GridCols[Count];
 
-    Grid.SaveToCSV(FileName);
+    Grid.SaveToFile(FileName); { TODO: Which format??}
     NameCols;
   end;
 end;
@@ -200,7 +197,7 @@ begin
   ScheduleList := TSTringList.Create;
   try
     ScheduleList.AddStrings(Schedules);
-    for GridIdx := 0 to FMain.MdiChildCount-1 do
+    for GridIdx := 0 to FMain.FlWindows.Count-1 do
       ScheduleList.AddStrings(GridChild(GridIdx).LicenseDates);
     ScheduleList.AddStrings(Medicals);
 
@@ -243,7 +240,8 @@ begin
         begin
           Randomize;
           writeln(aFile,'BEGIN:VEVENT');
-          writeln(aFile,'UID:'+ICalDateTime(now)+'-'+IntToStr(RandomRange(10000000,99999999))+'-'+AppName+'-'+IntToStr(i));
+          writeln(aFile,'UID:'+ICalDateTime(now)+'-'+IntToStr(1)+'-'+AppName+'-'+IntToStr(i));
+          { TODO: RandomRange(10000000,99999999}
           writeln(aFile,'CATEGORIES:FluPP');
           writeln(aFile,'SUMMARY:'+UTF8Encode(ScheduleList.Names[i]));
           writeln(aFile,'DTSTART;VALUE=DATE:'+ICalDate(StrToDate(ScheduleList.ValueFromIndex[i])));
@@ -290,21 +288,20 @@ begin
   finally
     DecimalSeparator := TmpDecimalSeparator;
   end;
-  ShellExecute(FMain.Handle, 'open', PChar(FLuPPDomain+'/gmaps/'+Params), nil, nil, SW_NORMAL);
+  { TODO: ShellExecute(FMain.Handle, 'open', PChar(FLuPPDomain+'/gmaps/'+Params), nil, nil, SW_NORMAL);}
 end;
 
 // ----------------------------------------------------------------
 // Export KMl file
 // ----------------------------------------------------------------
 procedure ExportGoogleEarth;
-{----------}
-  procedure AddPoint(Airport: TAirport; XMLElem: TJvSimpleXMLElem);
+{  procedure AddPoint(Airport: TAirport; XMLElem: TJvSimpleXMLElem);
   begin
     XMLElem.Items.Add('Point').Items.Add('coordinates',
       FloatToStr(PosToDeg(Airport.Lon))+','+
       FloatToStr(PosToDeg(Airport.Lat))+','+'0');
   end;
-{----------}
+
   procedure AddLine(Airport1, Airport2: TAirport; XMLElem: TJvSimpleXMLElem);
   var SubElem: TJvSimpleXMLElem;
   begin
@@ -316,9 +313,9 @@ procedure ExportGoogleEarth;
       FloatToStr(PosToDeg(Airport2.Lon))+','+
       FloatToStr(PosToDeg(Airport2.Lat))+','+'0');
   end;
-{----------}
+
   function GetFlightDescription(Row: Word): String;
-  {----------}
+
     function Description(Name: String; Row: Word): String;
     begin
       if GridActiveChild.Data[Name, Row] = '' then
@@ -326,7 +323,7 @@ procedure ExportGoogleEarth;
       else
         Result := GridActiveChild.Data[Name, 0] +': '+ GridActiveChild.Data[Name, Row] +'<br>';
     end;
-  {----------}
+
   begin
     Result :=
         Description('Num', Row)
@@ -360,16 +357,16 @@ procedure ExportGoogleEarth;
       + Description('EfF', Row)
       + Description('Del', Row);
 end;
-{----------}
+
 var
   DocElem, FolElem, PlaceMElem, StyleElem, StyleSubElem: TJvSimpleXMLElem;
   GridRect: TGridRect;
   ViaTmp: string;
   Row: Word;
   DestAirport, ActualAirport, TargetAirport: TAirport;
-  TmpDecimalSeparator: Char;
+  TmpDecimalSeparator: Char; }
 begin
-  GridREct := GridActiveChild.Grid.Selection;
+{  GridREct := GridActiveChild.Grid.Selection;
   TmpDecimalSeparator := DecimalSeparator;
   DecimalSeparator := '.';
   with TJvSimpleXML.Create(FMain) do
@@ -380,10 +377,10 @@ begin
     Root.Name := 'kml';
     Root.Properties.Add('xmlns', 'http://earth.google.com/kml/2.0');
 
-    { Document }
+    // Document
     DocElem := Root.Items.Add('Document');
 
-    { Styles }
+    // Styles
     StyleElem := DocElem.Items.Add('Style');
     StyleElem.Properties.Add('id', 'DefaultStyles');
 
@@ -398,7 +395,7 @@ begin
     StyleSubElem.Items.Add('w', '32');
     StyleSubElem.Items.Add('h', '32');
 
-    { Placemarks }
+    // Placemarks
     for Row := GridRect.Top to GridRect.Bottom do
     begin
       if AirportData.Find(GridActiveChild.Data['StL', Row], DestAirport)
@@ -454,7 +451,7 @@ begin
   finally
     Free;
     DecimalSeparator := TmpDecimalSeparator;
-  end;
+  end; }
 end;
 
 end.
