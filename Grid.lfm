@@ -1,18 +1,17 @@
 object FGrid: TFGrid
-  Left = 528
-  Height = 441
-  Top = 298
+  Left = 457
+  Height = 454
+  Top = 252
   Width = 563
   HorzScrollBar.Page = 562
-  VertScrollBar.Page = 440
+  VertScrollBar.Page = 453
   ActiveControl = Grid
   BorderStyle = bsNone
   Caption = 'FGrid'
-  ClientHeight = 441
+  ClientHeight = 454
   ClientWidth = 563
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  FormStyle = fsMDIChild
   KeyPreview = True
   OnActivate = FormActivate
   OnCreate = FormCreate
@@ -21,7 +20,7 @@ object FGrid: TFGrid
   Position = poDefault
   Visible = True
   object Grid: TStringGrid
-    Height = 441
+    Height = 454
     Width = 563
     Align = alClient
     ColCount = 5
@@ -35,7 +34,7 @@ object FGrid: TFGrid
   object PopupMenu: TPopupMenu
     AutoPopup = False
     left = 40
-    top = 422
+    top = 414
     object PUFlightNew: TMenuItem
     end
     object PUFlightEdit: TMenuItem
@@ -78,6 +77,9 @@ object FGrid: TFGrid
   end
   object PopupMenuCols: TPopupMenu
     left = 8
-    top = 422
+    top = 414
+    object MenuItem1: TMenuItem
+      Caption = 'New Item1'
+    end
   end
 end

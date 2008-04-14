@@ -13,6 +13,7 @@ type
   { TFGrid }
 
   TFGrid = class(TForm)
+    MenuItem1: TMenuItem;
     PopupMenu: TPopupMenu;
     PUFlightEdit: TMenuItem;
     PUFlugEinfuegen: TMenuItem;

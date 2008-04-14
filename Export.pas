@@ -4,7 +4,7 @@ unit Export;
 
 interface
 
-uses Classes, SysUtils, Math, {gnugettext,} Grids, {Windows, ShellAPI, JvSimpleXml,} Dialogs;
+uses Forms, ComCtrls, Controls, Classes, SysUtils, Math, Grids, XMLRead, XMLWrite, DOM, Dialogs;
 
 function SaveFluFile(FileName: String) : Boolean; // ZIP, XML-File
 
@@ -18,25 +18,30 @@ procedure ExportGoogleEarth;
 
 implementation
 
-uses Forms, ComCtrls, Controls, Main, Tools, ToolsGrid;
+uses Main, Tools, ToolsGrid;
 
 //*******************************************************
 // Standard XML procedures
 //*******************************************************
 
-procedure writeValStrings(XMLElem: TJvSimpleXMLElem; StringList: TStrings);
+procedure writeValStrings(XMLDoc: TXMLDocument; RootNode: TDOMNode; ItemName: String; StringList: TStrings);
 var i: Word;
+    XMLNode: TDOMNode;
 begin
   if StringList.Count > 0 then
+  begin
+    XMLNode := XMLDoc.CreateElement(ItemName);
     for i := 0 to StringList.Count - 1 do
-      XMLElem.Properties.Add(StringList.Names[i], StringList.ValueFromIndex[i]);
+      TDOMElement(XMLNode).SetAttribute(StringList.Names[i], StringList.ValueFromIndex[i]);
+    XMLDoc.AppendChild(RootNode);
+  end;
 end;
 
-procedure writeObjStrings(XMLElem: TJvSimpleXMLElem; ItemName: String; var StringList: TStrings);
-var XMLSubElem: TJvSimpleXMLElem;
+procedure writeObjStrings(XMLDoc: TXMLDocument; RootNode: TDOMNode; ItemName: String; var StringList: TStrings);
+var XMLSubElem: TDOMElement;
     i: Word;
 begin
-  if StringList.Count > 0 then
+{  if StringList.Count > 0 then
     for i := 0 to StringList.Count - 1 do begin
       XMLSubElem := XMLElem.Items.Add(ItemName);
       if pos(StringList.NameValueSeparator, StringList.Strings[i]) = 0 then
@@ -48,26 +53,26 @@ begin
       if Assigned(StringList.Objects[i]) then
         writeValStrings(XMLSubElem, TStrings(StringList.Objects[i]));
     end;
-end;
+}end;
 
-procedure writeFlight(XMLElem: TJvSimpleXMLElem; GridIdx, Row: Word);
+procedure writeFlight(XMLElem: TDOMElement; GridIdx, Row: Word);
 var Col: Word;
 begin
-  for Col := 1 to GridChild(GridIdx).GridCols.Count-1 do
+{  for Col := 1 to GridChild(GridIdx).GridCols.Count-1 do
     if GridChild(GridIdx).Grid.Cells[Col,Row] <> '' then
       XMLElem.Properties.Add(GridChild(GridIdx).GridCols[Col], GridChild(GridIdx).Grid.Cells[Col,Row]);
-end;
+}end;
 
-procedure writeColumns(XMLElem: TJvSimpleXMLElem; GridIdx: Word);
-var XMLSubElem: TJvSimpleXMLElem;
+procedure writeColumns(XMLElem: TDOMElement; GridIdx: Word);
+var XMLSubElem: TDOMElement;
     i: Word;
 begin
-  XMLSubElem := XMLElem.Items.Add('Columns');
+{  XMLSubElem := XMLElem.Items.Add('Columns');
   if not (FMain.ActionResetColumns.Checked) then
     for i := 1 to GridChild(GridIdx).Grid.ColCount-1 do
       XMLSubElem.Properties.Add(GridChild(GridIdx).GridCols[i],
         InttoStr(GridChild(GridIdx).Grid.ColWidths[i]));
-end;
+}end;
 
 
 //*******************************************************
@@ -75,25 +80,31 @@ end;
 //*******************************************************
 
 function SaveFluFile(FileName: String) : Boolean;
-var GridIdx, i: Integer;
-    FLElem: TJvSimpleXMLElem;
-    ProgressBar: TProgressBar;
+var
+  XMLDoc: TXMLDocument;
+  XMLRoot: TDOMNode;
+  XMLNode: TDOMNode;
+  GridIdx, i: Integer;
+  FLElem: TDOMElement;
+  ProgressBar: TProgressBar;
 begin
-  with TJvSimpleXML.Create(Application) do
+  XMLDoc := TXMLDocument.create;
+//  XMLNode := TDOMNode.create;
   try
-    Prolog.Encoding := 'UTF-8';
-    Prolog.Version := '1.0';
+//    Prolog.Encoding := 'UTF-8';
+//    Prolog.Version := '1.0';
 
-    Root.Name := 'FluPP';
-    Root.Properties.Add('Version', FileVersion);
-    Root.Properties.Add('Program', 'FluPP '+GetFileVersion(ParamStr(0)));
+    XMLRoot := XMLDoc.CreateElement('FluPP');
+    TDOMElement(XMLRoot).SetAttribute('Version', FileVersion);
+    TDOMElement(XMLRoot).SetAttribute('Program', 'FluPP ');
+    XMLDoc.AppendChild(XMLRoot);
 
-    writeValStrings(Root.Items.Add('GenSettings'), GenSettings);
-    writeObjStrings(Root, 'Medicals', Medicals);
-    writeObjStrings(Root, 'Schedules', Schedules);
+    writeValStrings(XMLDoc, XMLRoot, 'GenSettings', GenSettings);
+    writeObjStrings(XMLDoc, XMLRoot,'Medicals' , Medicals);
+    writeObjStrings(XMLDoc, XMLRoot, 'Schedules', Schedules);
 
     { Settings }
-    for GridIdx := 0 to FMain.MDIChildCount-1 do
+    for GridIdx := 0 to FMain.FlWindows.Count-1 do
     begin
       FLElem := Root.Items.Add('FlightLog');
       with FLElem do
@@ -130,9 +141,9 @@ begin
           writeFlight(FLElem.Items.Add('Flight'), GridIdx, i);
       end;
     end;
-    SaveToFile(FlpTempDir+'\'+'flightlog.xml');
+    writeXMLFile(XMLDoc, FlpTempDir+'\'+'flightlog.xml');
   finally
-    Free;
+    XMLDoc.free;
   end;
 
   { Compress }

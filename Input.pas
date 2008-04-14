@@ -11,10 +11,14 @@ uses
   {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, MaskEdit, ExtCtrls, Buttons, ComCtrls, Spin, CheckLst,
   Grids{, scFileDrop, shellapi, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
-  JvCtrls, JvGIF, JvEdit, JvValidateEdit}, LResources;
+  JvCtrls, JvGIF, JvEdit, JvValidateEdit}, LResources, EditBtn;
 
 type
+
+  { TFInput }
+
   TFInput = class(TForm)
+    DTPDate: TDateEdit;
     Panel1: TPanel;
     ButtonCancel: TBitBtn;
     ButtonOK: TBitBtn;
@@ -259,7 +263,7 @@ uses Main, Grid, Airports, InputBox, Tools, ToolsShell, ToolsGrid, ToolsIGCParse
 // ----------------------------------------------------------------
 procedure TFInput.FormCreate(Sender: TObject);
 begin
-  TranslateComponent(Self);
+ // TranslateComponent(Self);
   FileQueue := TStringList.Create;
   GridContest.Selection := DeSelectRect;
   GridKatTime.Selection := DeSelectRect;
@@ -350,7 +354,7 @@ begin
   Application.OnHint := FMain.onHint;
   if GridActiveChild.Grid.RowCount > 2 then
   begin
-    if (Status = 'Neu') and (ModalResult = mrCancel) then GridActiveChild.Grid.RemoveRow(InputRow);
+    if (Status = 'Neu') and (ModalResult = mrCancel) then GridActiveChild.Grid.DeleteColRow(False,InputRow);
     GridActiveChild.ReCalcGridNr;
   end;
 end;
@@ -385,7 +389,7 @@ begin
 
   CheckPanelVis;
   FileQueue.Clear;
-  DTPDate.Color := clWindow;
+//  DTPDate.Color := clWindow;
   MEFlightTimeDep.Text := '';
   MEFlightTimeArr.Text := '';
   MEBlockTimeDep.Text := '';
@@ -415,7 +419,7 @@ begin
   ImageAccDist.visible := True;
 
   InsertAutoComplete;
-  if Active then ActiveControl := DTPDate;
+//  if Active then ActiveControl := DTPDate;
 
   CBAPFrom.Text := CBAPTo.Text;
   CBAPTo.Text := '';
@@ -1815,6 +1819,12 @@ procedure TFInput.NoRowSelect(Sender: TObject; ACol, ARow: Integer;
   var CanSelect: Boolean);
 begin
   CanSelect := False;
+end;
+
+procedure TFInput.GridGetCellAlignment(Sender: TStringGrid; AColumn,
+  ARow: Integer; State: TGridDrawState; var CellAlignment: TAlignment);
+begin
+
 end;
 
 procedure TFInput.GridGetCellAlignment(Sender: TJvStringGrid; AColumn,

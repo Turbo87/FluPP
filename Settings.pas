@@ -7,7 +7,7 @@ interface
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ComCtrls, StdCtrls, Buttons, ExtCtrls, Maskedit, Inifiles, CheckLst,
-  {gnugettext,} ToolsLicense, {JvSimpleXML,}
+  gettext, ToolsLicense, {JvSimpleXML,}
   Grids, {ValEdit, ShellAPI, VirtualTrees,} StrUtils, {JvEdit, JvValidateEdit,}
   Menus, LResources;
 

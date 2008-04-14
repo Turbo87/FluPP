@@ -19,10 +19,10 @@ implementation
 // ----------------------------------------------------------------
 function ShellCopyFile(const ASource, ADest: String;
  ARenameCheck: boolean = false): boolean;
-var
-  sh: TSHFileOpStruct;
+//var
+//  sh: TSHFileOpStruct;
 begin
-  sh.Wnd := Application.Handle;
+{  sh.Wnd := Application.Handle;
   sh.wFunc := FO_COPY;
 
   sh.pFrom := PChar(ASource + #0);
@@ -30,24 +30,24 @@ begin
   sh.fFlags := fof_Silent or fof_MultiDestFiles;
   if ARenameCheck then
     sh.fFlags := sh.fFlags or fof_RenameOnCollision;
-  Result:=ShFileOperation(sh)=0;
+  Result:=ShFileOperation(sh)=0; }
 end;
 
 // ----------------------------------------------------------------
 // Copy Directory
 // ----------------------------------------------------------------
 function ShellCopyDir(const fromDir, toDir: string): Boolean;
-var
-  fos: TSHFileOpStruct;
+//var
+//  fos: TSHFileOpStruct;
 begin
-  with fos do
+{  with fos do
   begin
     wFunc  := FO_COPY;
     fFlags := FOF_FILESONLY;
     pFrom  := PChar(fromDir + #0);
     pTo    := PChar(toDir)
   end;
-  Result := (0 = ShFileOperation(fos));
+  Result := (0 = ShFileOperation(fos));}
 end;
 
 // ----------------------------------------------------------------
@@ -55,10 +55,10 @@ end;
 // ----------------------------------------------------------------
 function ShellMoveFile(FormHandle : THandle; StrFrom, StrTo : string;
   BlnSilent : Boolean = False) : Boolean;
-var
-  F : TShFileOpStruct;
+//var
+//  F : TShFileOpStruct;
 begin
-  F.Wnd:=FormHandle;
+{  F.Wnd:=FormHandle;
   F.wFunc:=FO_MOVE;
   F.pFrom:=PChar(StrFrom+#0);
   F.pTo:=PChar(StrTo+#0);
@@ -68,7 +68,7 @@ begin
   if ShFileOperation(F) <> 0 then
     result:=False
   else
-    result:=True;
+    result:=True;}
 end;
 
 end.

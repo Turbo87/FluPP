@@ -71,6 +71,7 @@ procedure StringsToCLB(var Cat: TStrings; Data: String; Grid: TStringGrid; CLB: 
 procedure StringsToCLB(var Cat: TStrings; Data:String; CLB: TCheckListBox); overload;
 procedure GrayCLB(var Cat: TStrings; Data: String; CLB: TCheckListBox);
 procedure StringToStringList(var List: TStrings; Data: String);
+function _(Text: String): String;
 
 implementation
 
@@ -144,6 +145,11 @@ begin
 end;
 
 {--/\-- TAirportList --/\--}
+
+function _(Text: String): String;
+begin
+  Result := Text;
+end;
 
 // ----------------------------------------------------------------
 // Calc % of ctime

@@ -12,8 +12,8 @@ uses
 type
   TFInputBox = class(TForm)
     Panel1: TPanel;
-    ButtonCancel: TJvImgBtn;
-    ButtonOK: TJvImgBtn;
+    ButtonCancel: TBitBtn;
+    ButtonOK: TBitBtn;
   private
     { Private-Deklarationen }
   public
@@ -27,11 +27,6 @@ implementation
 
 
 initialization
-  {$i InputBox.lrs}
-  {$i InputBox.lrs}
-  {$i InputBox.lrs}
-  {$i InputBox.lrs}
-  {$i InputBox.lrs}
   {$i InputBox.lrs}
 
 end.

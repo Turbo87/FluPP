@@ -2,7 +2,7 @@ unit ToolsIGCParse;
 
 interface
 
-uses ShellAPI, SysUtils, Tools;
+uses SysUtils, Tools;
 
 type
   TIGCStreamData = record

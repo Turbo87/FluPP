@@ -7,15 +7,8 @@ interface
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ComCtrls, StdCtrls, Buttons, IniFiles, Grids,
-  ToolWin, SButton, ExtCtrls, {JvStringGrid, gnugettext,
-  JvImageList, JvExStdCtrls, JvButton, JvCtrls, JvExControls, JvComponent,
-  XPMan, JvZlibMultiple, JclFileUtils,} Grid, {ShellApi,} ActnList,
-  {ActnMan, ActnMenus, ActnCtrls,} ImgList, Tools,
-  {JvExGrids,} DateUtils {JvSimpleXml,} {, JvComponentBase},
-  LResources;
-
-const
-  {$I FluPP.inc}
+  ToolWin, SButton, ExtCtrls, Grid, ActnList,ImgList, Tools,
+  DateUtils, LResources, Contnrs, gettext, XMLRead, XMLWrite, DOM;
 
 type
 
@@ -24,25 +17,31 @@ type
   TFMain = class(TForm)
     ActionFileOpen: TAction;
     ActionFileNew: TAction;
-    ActionList1: TActionList;
-    HeaderControl1: THeaderControl;
-    ImageList: TImageList;
-    MainMenu1: TMainMenu;
+    ActionList: TActionList;
+    ImageList32: TImageList;
+    ImageList16: TImageList;
+    MainMenu: TMainMenu;
     MiFile: TMenuItem;
     MiFlight: TMenuItem;
     MIFileOpen: TMenuItem;
     MIFileNew: TMenuItem;
     OpenDialog: TOpenDialog;
-    Panel1: TPanel;
+    Panel2: TPanel;
     PanelSButtons: TPanel;
+    PanelScheduler: TPanel;
     SaveDialog: TSaveDialog;
     StartTimer: TTimer;
-    PanelScheduler: TPanel;
     ActionFileExport: TAction;
     ActionExportGoogleMap: TAction;
     ActionExportGoogleEarth: TAction;
     ActionResetColumns: TAction;
     StatusBar1: TStatusBar;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
     procedure ExitClick(Sender: TObject);
     procedure FileSave(Sender: TObject);
     procedure FileOpen(Sender: TObject);
@@ -96,7 +95,6 @@ type
     procedure LoadDefaultGenSettings;
     procedure LoadDefaultSettings(Grid: TFGrid);
   public
-    class procedure GlobalExceptionHandler(Sender: TObject; E: Exception);
     procedure CreateNewWindow(Name, GridCols: String); overload;
     procedure CreateNewWindow(Name: String); overload;
     function SpeichernAbfrage: Boolean;
@@ -109,6 +107,8 @@ type
     procedure CreateSButtons;
     procedure ActivateSButton;
     procedure UpdateSButtons;
+    FlWindows: TObjectList;
+    ActiveFlWindow: Word;
   end;
 
 var
@@ -121,106 +121,16 @@ var
   SchedValidity: TSTrings;
   FluFileName: String;
   FlpTempDir: String;
+  
+const
+  {$I FluPP.lrs}
 
 implementation
 
 uses
-  Input, Info, Settings, Statistics, Licenses, Print,
-  Airports, BasicSettings, TrainBaro, NinetyDays, FlightLogs,
-  ToolsGrid, ToolsShell, Calendar, Import, Export, Debug;
-
-
-// ----------------------------------------------------------------
-// WaitCursor
-// ----------------------------------------------------------------
-function WaitCursor: IUnknown;
-const
-  WaitCount: Integer = -1;
-
-  procedure SetCursor(Cursor: TCursor);
-  begin
-    Screen.Cursor := Cursor;
-  end;
-
-  procedure WaitIntf;
-  begin
-    asm
-           DD    @VTable                 // Zeiger auf die Interface Virtuelle Methoden Tabelle
-
-    @VTable:
-           DD    @QueryInterface         // hier unsere 3 wichtigsten Methodenzeiger von IUnknown
-           DD    @_AddRef
-           DD    @_Release
-
-    @QueryInterface:                     // QueryInterface gibt E_NOINTERFACE zurück
-           MOV   EAX,080004002h
-           RET   12                      // natürlich die 3 Parameter bei stdcall vom Stack holen
-
-    @_AddRef:
-           INC   WaitCount               // Zähler hochsetzen, und eventuell das Stundenglass
-           JNZ   @Exit                   // sichtbar machen
-           MOV   EAX,crHourglass
-           PUSH  OFFSET @Exit
-           JMP   SetCursor
-
-    @_Release:                           // Zähler runter, und bei -1 Stundenglass unsichtbar
-           DEC   WaitCount
-           JNS   @Exit
-           MOV   EAX,crDefault
-           CALL  SetCursor
-
-    @Exit:
-           MOV   EAX,1                   // Resultat von  ._AddRef und ._Release immer 1
-           RET   4
-    end;
-  end;
-
-begin
-  Result := IUnknown(@WaitIntf);
-end;
-
-// ----------------------------------------------------------------
-// class GlobalExceptionHandler
-// ----------------------------------------------------------------
-class procedure TFMain.GlobalExceptionHandler(Sender: TObject; E: Exception);
-var
-  MapFileAddress: DWORD;
-  UnitName,
-  ProcedureName,
-  LineNumber: string;
-const
-  CrLf = #10#13;
-begin
-  WaitCursor;
-
-  MapFileAddress := GetMapAddressFromAddress(DWORD(ExceptAddr));
-  UnitName := GetModuleNameFromAddress(MapFileAddress);
-  ProcedureName := GetProcNameFromAddress(MapFileAddress);
-  LineNumber := GetLineNumberFromAddress(MapFileAddress);
-
-// Log File Information
-  AddLogAlert(_('Exception ' + #13#10 + E.Message));
-  AddLogEntry('');
-  AddLogComment(_('Exception in file: ' + UnitName +
-    ', procedure: ' + ProcedureName + ', line: '
-    + LineNumber));
-  AddLogEntry(_('OS-Version: '+ GetWinVersion));
-  AddLogEntry(_('FluPP-Version: '+ GetFileVersion(ParamStr(0))));
-  AddLogComment('------------------------------------------------------------');
-
-// Error Message
-{ TODO -ounPoint : Bug-Handling auf der HP }
- { if MessageDlg(
-    'Exception ' + E.Message + CrLf +
-    'File: ' + UnitName + ', '  +
-    'Procedure: ' + ProcedureName + ', ' +
-    'Line: ' + LineNumber + CrLf + CrLf +
-    'Do you want to report this bug (completly anoymous) via internet now ?',
-    mtError, [mbYes, mbNo], 0) = mrYes then
-    begin
-      ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0))+'/'+UnitName+'/'+ProcedureName+'/'+LineNumber)),nil,nil,SW_NORMAL);
-    end; }
-end;
+  Input, Settings, BasicSettings, FlightLogs,
+  ToolsGrid, ToolsShell, Import, Export, Debug;
+//  Info, Calendar, NinetyDays, TrainBaro, Airports, Print, Statistics, Licenses;
 
 // ----------------------------------------------------------------
 // Form create
@@ -265,6 +175,8 @@ begin
   Schedules := TStringList.Create;
   SchedValidity := TStringList.Create;
   AirportData := TAirportList.Create;
+  
+  FlWindows := TObjectList.create;
 
   with GridSched do
   begin
@@ -474,6 +386,9 @@ var
 begin
   ChWindow := TFGrid.create(self);
   ChWindow.Caption := Name;
+  Chwindow.Parent := FMain;
+  
+  FlWindows.Add(ChWindow);
 
   with GridActiveChild do
   begin

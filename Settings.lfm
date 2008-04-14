@@ -5,7 +5,7 @@ object FSettings: TFSettings
   Width = 501
   HorzScrollBar.Page = 500
   VertScrollBar.Page = 448
-  ActiveControl = CalcByBT
+  ActiveControl = ButtonKatAdd
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Settings'
@@ -73,7 +73,7 @@ object FSettings: TFSettings
     object TabSheetGeneral: TTabSheet
       Caption = 'General'
       ClientHeight = 345
-      ClientWidth = 512
+      ClientWidth = 501
       ImageIndex = 3
       OnHide = TabSheetGeneralHide
       OnShow = TabSheetGeneralShow
@@ -217,7 +217,7 @@ object FSettings: TFSettings
     object TabSheetFlightLog: TTabSheet
       Caption = 'Flight Log'
       ClientHeight = 345
-      ClientWidth = 512
+      ClientWidth = 501
       ImageIndex = 5
       object GroupBox12: TGroupBox
         Left = 43
@@ -449,8 +449,8 @@ object FSettings: TFSettings
     end
     object TabSheetLicenses: TTabSheet
       Caption = 'Licences'
-      ClientHeight = 311
-      ClientWidth = 497
+      ClientHeight = 345
+      ClientWidth = 501
       ImageIndex = 2
       object LabelGetAirports: TLabel
         Cursor = crHandPoint
@@ -473,8 +473,8 @@ object FSettings: TFSettings
         Height = 75
         Width = 177
         Caption = 'Flight data before FluPP'
-        ClientHeight = 54
-        ClientWidth = 173
+        ClientHeight = 75
+        ClientWidth = 177
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 1
@@ -510,8 +510,8 @@ object FSettings: TFSettings
         Top = 80
         Width = 498
         Caption = 'Licences'
-        ClientHeight = 196
-        ClientWidth = 494
+        ClientHeight = 217
+        ClientWidth = 498
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 2
@@ -528,8 +528,8 @@ object FSettings: TFSettings
           TabOrder = 0
           object TSLInfo: TTabSheet
             Caption = 'Info'
-            ClientHeight = 146
-            ClientWidth = 319
+            ClientHeight = 180
+            ClientWidth = 323
             ImageIndex = 5
             object MemoLicInfo: TMemo
               Left = 20
@@ -651,8 +651,8 @@ object FSettings: TFSettings
         Height = 75
         Width = 185
         Caption = 'General'
-        ClientHeight = 54
-        ClientWidth = 181
+        ClientHeight = 75
+        ClientWidth = 185
         TabOrder = 0
         object Label6: TLabel
           Left = 10
@@ -666,8 +666,8 @@ object FSettings: TFSettings
     end
     object TabSheetMedicals: TTabSheet
       Caption = 'Medicals'
-      ClientHeight = 311
-      ClientWidth = 497
+      ClientHeight = 345
+      ClientWidth = 501
       ImageIndex = 6
       object GroupBox10: TGroupBox
         Left = 8
@@ -675,8 +675,8 @@ object FSettings: TFSettings
         Top = 8
         Width = 489
         Caption = 'Medicals'
-        ClientHeight = 284
-        ClientWidth = 485
+        ClientHeight = 305
+        ClientWidth = 489
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 0
@@ -715,16 +715,16 @@ object FSettings: TFSettings
     end
     object TabSheetAutoComplete: TTabSheet
       Caption = 'AutoComplete'
-      ClientHeight = 311
-      ClientWidth = 497
+      ClientHeight = 345
+      ClientWidth = 501
       object GroupBox5: TGroupBox
         Left = 8
         Height = 305
         Top = 8
         Width = 489
         Caption = 'AutoComplete'
-        ClientHeight = 284
-        ClientWidth = 485
+        ClientHeight = 305
+        ClientWidth = 489
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 0
@@ -851,8 +851,8 @@ object FSettings: TFSettings
     end
     object TabSheetCat: TTabSheet
       Caption = 'Categories'
-      ClientHeight = 311
-      ClientWidth = 497
+      ClientHeight = 345
+      ClientWidth = 501
       ImageIndex = 3
       object PageControl1: TPageControl
         Left = 9
@@ -867,8 +867,8 @@ object FSettings: TFSettings
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = 'Categories'
-          ClientHeight = 269
-          ClientWidth = 484
+          ClientHeight = 303
+          ClientWidth = 488
           object Bevel3: TBevel
             Left = 5
             Height = 266
@@ -1051,8 +1051,8 @@ object FSettings: TFSettings
     end
     object TabSheetCosts: TTabSheet
       Caption = 'Aircraft / Costs'
-      ClientHeight = 311
-      ClientWidth = 497
+      ClientHeight = 345
+      ClientWidth = 501
       ImageIndex = 6
       OnContextPopup = TabSheetCostsContextPopup
       object GroupBox14: TGroupBox
@@ -1061,8 +1061,8 @@ object FSettings: TFSettings
         Top = 8
         Width = 489
         Caption = 'Aircraft'
-        ClientHeight = 284
-        ClientWidth = 485
+        ClientHeight = 305
+        ClientWidth = 489
         TabOrder = 0
         object AircraftList: TListBox
           Left = 8
@@ -1082,8 +1082,8 @@ object FSettings: TFSettings
           Top = 14
           Width = 281
           Caption = 'Costs'
-          ClientHeight = 110
-          ClientWidth = 277
+          ClientHeight = 131
+          ClientWidth = 281
           TabOrder = 1
           object Bevel4: TBevel
             Left = 8
@@ -1167,8 +1167,8 @@ object FSettings: TFSettings
           Top = 160
           Width = 281
           Caption = 'Spezification (for personal information only)'
-          ClientHeight = 116
-          ClientWidth = 277
+          ClientHeight = 137
+          ClientWidth = 281
           TabOrder = 2
           object Label22: TLabel
             Left = 8

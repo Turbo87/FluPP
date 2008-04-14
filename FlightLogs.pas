@@ -161,7 +161,5 @@ end;
 
 initialization
   {$i FlightLogs.lrs}
-  {$i FlightLogs.lrs}
-  {$i FlightLogs.lrs}
 
 end.

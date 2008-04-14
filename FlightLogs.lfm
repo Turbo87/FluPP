@@ -1,14 +1,14 @@
 object FFlightLogs: TFFlightLogs
   Left = 528
-  Height = 240
+  Height = 222
   Top = 313
   Width = 229
   HorzScrollBar.Page = 228
-  VertScrollBar.Page = 239
+  VertScrollBar.Page = 221
   ActiveControl = ButtonOK
   BorderStyle = bsDialog
   Caption = 'Manage flight logs'
-  ClientHeight = 240
+  ClientHeight = 222
   ClientWidth = 229
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -18,7 +18,7 @@ object FFlightLogs: TFFlightLogs
   Position = poMainFormCenter
   object Label12: TLabel
     Height = 28
-    Top = 172
+    Top = 154
     Width = 229
     Align = alBottom
     Alignment = taCenter
@@ -32,7 +32,7 @@ object FFlightLogs: TFFlightLogs
   end
   object Panel1: TPanel
     Height = 40
-    Top = 200
+    Top = 182
     Width = 229
     Align = alBottom
     BevelInner = bvLowered

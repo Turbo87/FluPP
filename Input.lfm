@@ -20,7 +20,7 @@ object FInput: TFInput
   Position = poMainFormCenter
   object Panel1: TPanel
     Height = 41
-    Top = 455
+    Top = 462
     Width = 464
     Align = alBottom
     BevelInner = bvLowered
@@ -63,8 +63,8 @@ object FInput: TFInput
     end
   end
   object StatusBar1: TStatusBar
-    Height = 24
-    Top = 496
+    Height = 17
+    Top = 503
     Width = 464
     Panels = <    
       item
@@ -143,12 +143,12 @@ object FInput: TFInput
     OnPageChanged = TabControlChange
     object TSFlugdaten: TTabSheet
       Caption = 'Flightdata'
-      ClientHeight = 391
-      ClientWidth = 460
+      ClientHeight = 392
+      ClientWidth = 458
       object Bevel5: TBevel
         Left = 6
         Height = 33
-        Top = 4
+        Top = 6
         Width = 446
         Shape = bsFrame
       end
@@ -168,43 +168,43 @@ object FInput: TFInput
       end
       object Label2: TLabel
         Left = 12
-        Height = 17
+        Height = 20
         Top = 14
-        Width = 40
+        Width = 35
         Caption = 'Date:'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 199
-        Height = 17
+        Height = 20
         Top = 45
-        Width = 92
+        Width = 81
         Alignment = taRightJustify
         Caption = 'Aircraft type:'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 12
-        Height = 17
+        Height = 20
         Top = 45
-        Width = 77
+        Width = 66
         Caption = 'Aircraft ID:'
         ParentColor = False
       end
       object Label6: TLabel
         Left = 178
-        Height = 17
+        Height = 20
         Top = 76
-        Width = 55
+        Width = 48
         Alignment = taRightJustify
         Caption = 'Copilot:'
         ParentColor = False
       end
       object Label25: TLabel
         Left = 12
-        Height = 17
+        Height = 20
         Top = 76
-        Width = 36
+        Width = 32
         Caption = 'Pilot:'
         ParentColor = False
       end
@@ -225,9 +225,9 @@ object FInput: TFInput
       end
       object Label28: TLabel
         Left = 323
-        Height = 17
+        Height = 20
         Top = 76
-        Width = 90
+        Width = 78
         Alignment = taRightJustify
         Caption = 'Passengers:'
         ParentColor = False
@@ -571,6 +571,7 @@ object FInput: TFInput
           Top = 24
           Width = 16
           Stretch = True
+          Transparent = False
           Visible = False
         end
         object ImageAccDist: TImage
@@ -580,6 +581,7 @@ object FInput: TFInput
           Top = 24
           Width = 16
           Stretch = True
+          Transparent = False
           Visible = False
         end
         object ButtonFindLandeOrt: TBitBtn
@@ -641,17 +643,17 @@ object FInput: TFInput
         TabOrder = 9
         object Label7: TLabel
           Left = 6
-          Height = 17
+          Height = 20
           Top = 6
-          Width = 76
+          Width = 67
           Caption = 'Start type:'
           ParentColor = False
         end
         object RBW: TRadioButton
           Left = 80
-          Height = 24
+          Height = 21
           Top = 6
-          Width = 68
+          Width = 60
           Caption = 'Winch'
           Checked = True
           State = cbChecked
@@ -659,33 +661,33 @@ object FInput: TFInput
         end
         object RBF: TRadioButton
           Left = 153
-          Height = 24
+          Height = 21
           Top = 6
-          Width = 69
+          Width = 61
           Caption = 'Airtow'
           TabOrder = 1
         end
         object RBE: TRadioButton
           Left = 226
-          Height = 24
+          Height = 21
           Top = 6
-          Width = 89
+          Width = 80
           Caption = 'Self start'
           TabOrder = 2
         end
         object RBA: TRadioButton
           Left = 299
-          Height = 24
+          Height = 21
           Top = 6
-          Width = 87
+          Width = 78
           Caption = 'Car start'
           TabOrder = 3
         end
         object RBG: TRadioButton
           Left = 364
-          Height = 24
+          Height = 21
           Top = 6
-          Width = 113
+          Width = 99
           Caption = 'Rubberband'
           TabOrder = 4
         end
@@ -800,11 +802,44 @@ object FInput: TFInput
         Max = 999
         Position = 1
       end
+      object DTPDate: TDateEdit
+        Left = 78
+        Height = 22
+        Top = 9
+        Width = 88
+        CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+        OKCaption = 'OK'
+        CancelCaption = 'Cancel'
+        ReadOnly = False
+        ButtonWidth = 23
+        Glyph.Data = {
+          2F0200002F2A2058504D202A2F0A7374617469632063686172202A63616C656E
+          6461725B5D203D207B0A2F2A20636F6C756D6E7320726F777320636F6C6F7273
+          2063686172732D7065722D706978656C202A2F0A223134203132203137203122
+          2C0A2220206320626C61636B222C0A222E20632023383030303030222C0A2258
+          20632023303038303030222C0A226F20632023383038303030222C0A224F2063
+          206E617679222C0A222B20632023383030303830222C0A224020632023303038
+          303830222C0A222320632023383038303830222C0A2224206320234330433043
+          30222C0A2225206320726564222C0A2226206320677265656E222C0A222A2063
+          2079656C6C6F77222C0A223D206320626C7565222C0A222D2063206D6167656E
+          7461222C0A223B2063206379616E222C0A223A20632067726179313030222C0A
+          223E2063204E6F6E65222C0A2F2A20706978656C73202A2F0A223E3E20202020
+          2020202020203E3E222C0A223E3E3A24242424242424243A4F23222C0A223E3E
+          3A3A3A3A3A3A3A3A3A3A4F23222C0A223E3E3A3A203A3A202020203A4F23222C
+          0A223E3E3A20203A3A203A3A3A3A4F23222C0A223E3E3A3A203A3A202020243A
+          4F23222C0A223E3E3A3A203A3A3A3A3A203A4F23222C0A223E3E3A3A203A3A24
+          3A24203A4F23222C0A223E3E3A2020203A202020243A4F23222C0A223E3E3A3A
+          3A3A3A3A3A3A3A3A4F23222C0A223E3E20204F204F4F204F20204F23222C0A22
+          3E3E3E2323232323232323232323220A7D3B0A
+        }
+        NumGlyphs = 1
+        TabOrder = 13
+      end
     end
     object TSStreckenflug: TTabSheet
       Caption = 'Distance flight'
-      ClientHeight = 391
-      ClientWidth = 460
+      ClientHeight = 392
+      ClientWidth = 458
       ImageIndex = 1
       object Panel7: TPanel
         Left = 6
@@ -1129,8 +1164,8 @@ object FInput: TFInput
     end
     object TabSheet1: TTabSheet
       Caption = 'Categories'
-      ClientHeight = 391
-      ClientWidth = 460
+      ClientHeight = 392
+      ClientWidth = 458
       ImageIndex = 2
       object Panel4: TPanel
         Left = 6
@@ -1196,8 +1231,8 @@ object FInput: TFInput
     end
     object TabSheet2: TTabSheet
       Caption = 'Weather'
-      ClientHeight = 391
-      ClientWidth = 460
+      ClientHeight = 392
+      ClientWidth = 458
       ImageIndex = 3
       object Panel9: TPanel
         Left = 6
@@ -1442,8 +1477,8 @@ object FInput: TFInput
     end
     object TabSheet3: TTabSheet
       Caption = 'Budget'
-      ClientHeight = 391
-      ClientWidth = 460
+      ClientHeight = 392
+      ClientWidth = 458
       ImageIndex = 4
       object Panel8: TPanel
         Left = 6

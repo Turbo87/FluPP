@@ -18,7 +18,7 @@ type
     GridSched: TStringGrid;
     ButtonDelete: TBitBtn;
     ButtonNew: TBitBtn;
-    JvTMTimeline: TJvTMTimeline;
+ //   JvTMTimeline: TJvTMTimeline;
     ButtonExtend: TBitBtn;
     ButtonOK: TBitBtn;
     ButtonCancel: TBitBtn;
