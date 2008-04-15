@@ -6,8 +6,8 @@ interface
 
 uses
   {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Buttons, ExtCtrls, Inifiles, registry, {gnugettext,
-  JvExStdCtrls, JvButton, JvCtrls,} Tools, LResources;
+  StdCtrls, ComCtrls, Buttons, ExtCtrls, Inifiles, registry, gnugettext,
+  Tools, LResources;
 
 type
   TFBasicSettings = class(TForm)
@@ -75,10 +75,10 @@ begin
   DefaultInstance.GetListOfLanguages('default',Languages);
   LBLanguages.Items := Languages;
 
-  DefaultInstance.BindTextDomainToFile ('languagecodes',GetActualDir(true)+'\locale\languagecodes.mo');
-  DefaultInstance.TranslateProperties(LBLanguages,'languagecodes');
+//  DefaultInstance.BindTextDomainToFile ('languagecodes',GetActualDir(true)+'\locale\languagecodes.mo');
+//  DefaultInstance.TranslateProperties(LBLanguages,'languagecodes');
 
-  LBLanguages.ItemIndex := Languages.IndexOf(copy(DefaultInstance.GetCurrentLanguage,1,2));
+//  LBLanguages.ItemIndex := Languages.IndexOf(copy(DefaultInstance.GetCurrentLanguage,1,2));
   if LBLanguages.ItemIndex = -1 then LBLanguages.ItemIndex := Languages.IndexOf(defaultLanguage);
   LBLanguagesClick(self);
 
@@ -110,8 +110,8 @@ procedure TFBasicSettings.ButtonOKClick(Sender: TObject);
 var
   IniFile: TIniFile;
 begin
-  if Languages[LBLanguages.ItemIndex] <> copy(DefaultInstance.GetCurrentLanguage,1,2) then
-    MessageDlg(_('Please restart FluPP for changes to apply'),mtInformation,[mbOK],0);
+//  if Languages[LBLanguages.ItemIndex] <> copy(DefaultInstance.GetCurrentLanguage,1,2) then
+//    MessageDlg(_('Please restart FluPP for changes to apply'),mtInformation,[mbOK],0);
 
   Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
   Inifile.WriteBool('General','AutoLoad',CBAutoLoad.checked);
@@ -120,7 +120,7 @@ begin
   Inifile.WriteString('General','Language',Languages[LBLanguages.ItemIndex]);
   Inifile.Free;
 
-  If FMain.MDIChildCount > 0 then
+  If FMain.FlWindows.Count > 0 then
   begin
    FMain.UpdateSButtons;
    GridActiveChild.ReCalcGridNr;
@@ -220,8 +220,6 @@ begin
 end;
 
 initialization
-  {$i BasicSettings.lrs}
-  {$i BasicSettings.lrs}
   {$i BasicSettings.lrs}
 
 end.

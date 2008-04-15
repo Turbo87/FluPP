@@ -19,6 +19,8 @@ type
 
   TFInput = class(TForm)
     DTPDate: TDateEdit;
+    EditLandings: TSpinEdit;
+    EditPassengers: TSpinEdit;
     Panel1: TPanel;
     ButtonCancel: TBitBtn;
     ButtonOK: TBitBtn;
@@ -130,11 +132,7 @@ type
     Label9: TLabel;
     PanelLandings: TPanel;
     Label30: TLabel;
-    EditLandings: TEdit;
-    LandingsUpDown: TUpDown;
     MEFlightTimeArr: TMaskEdit;
-    EditPassengers: TEdit;
-    PassengersUpDown: TUpDown;
     Label28: TLabel;
     Label10: TLabel;
     MEFlightTime: TMaskEdit;
@@ -396,8 +394,8 @@ begin
   MEBlockTimeArr.Text := '';
   MEFlightTime.Text := '00:00';
   MEBlockTime.Text := '00:00';
-  LandingsUpDown.Position := 1;
-  PassengersUpDown.Position := 0;
+  EditLandings.Value := 1;
+  EditPassengers.Value := 0;
   EditRemarks.Text := '';
   EditDistance.text := '';
   LabelAvSpeed.caption := '0 '+GetSpeedUnit(GridActiveChild.Settings.Values['DistUnit']);
@@ -552,12 +550,12 @@ begin
   CBCoPilot.Text := GridActiveChild.data['Pi2',InputRow];
 
   if GridActiveChild.data['Pas',InputRow] <> '' then
-    PassengersUpDown.Position := StrToInt(GridActiveChild.data['Pas',InputRow])
-  else PassengersUpDown.Position := 0;
+    EditPassengers.Value := StrToInt(GridActiveChild.data['Pas',InputRow])
+  else EditPassengers.Value := 0;
 
   if GridActiveChild.data['NoL',InputRow] <> '' then
-    LandingsUpDown.Position := StrToInt(GridActiveChild.data['NoL',InputRow])
-  else LandingsUpDown.Position := 1;
+    EditLandings.Value := StrToInt(GridActiveChild.data['NoL',InputRow])
+  else EditLandings.Value := 1;
 
   If GridActiveChild.data['ToS',InputRow] = 'W' Then RBW.Checked := True;
   If GridActiveChild.data['ToS',InputRow] = 'F' Then RBF.Checked := True;
@@ -602,7 +600,7 @@ begin
   if (GridActiveChild.data['Via',InputRow][i] = '/')
     or (i = length(GridActiveChild.data['Via',InputRow])) then
   begin
-    GridVia.InsertRow(GridVia.RowCount-1);
+    GridVia.InsertColRow(False, GridVia.RowCount-1);
     GridVia.Cells[1,GridVia.RowCount-2] := TempStr;
     TempStr := '';
   end
@@ -770,7 +768,7 @@ begin
   end;
   SaveData;
   FMain.InsertData;
-  GridActiveChild.Grid.InsertRow(InputRow+1);
+  GridActiveChild.Grid.InsertColRow(False, InputRow+1);
   inc(InputRow);
 
   ResetInput;
@@ -951,9 +949,10 @@ begin
       { aircraft categories }
       for i := 0  to CLBKat.Items.Count-1 do
       begin
-        CLBKat.ItemEnabled[i] := true;
+        {CLBKat.ItemEnabled[i] := true;
         if CLBKat.State[i] = cbGrayed then
-          CLBKat.State[i] := cbUnchecked;
+          CLBKat.State[i] := cbUnchecked;}
+        CLBKat.Checked[i]:=False;
       end;
 
       ACCatList := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'AircraftCat');
@@ -1129,10 +1128,10 @@ begin
     end;
   end;
 
-  If TEdit(Sender) = EditLandings then begin
-    if StrtoInt(TEdit(Sender).Text) < 1 then TEdit(Sender).Text := '1'
+  If TSpinEdit(Sender) = EditLandings then begin
+    if StrtoInt(TSpinEdit(Sender).Text) < 1 then TEdit(Sender).Text := '1'
   end else
-    if StrtoInt(TEdit(Sender).Text) < 0 then TEdit(Sender).Text := '0'
+    if StrtoInt(TSpinEdit(Sender).Text) < 0 then TEdit(Sender).Text := '0'
 end;
 
 // ----------------------------------------------------------------
@@ -1376,7 +1375,7 @@ begin
     MessageDlg(_('Airport not found in the database'+#10#13+
       'The distance cannot be calculated'),mtInformation,[mbOK],0);
   end;
-  GridVia.InsertRow(GridVia.RowCount-1);
+  GridVia.InsertColRow(False, GridVia.RowCount-1);
   GridVia.Cells[1,GridVia.RowCount-2] := CBViaOrt.Text;
   RenumberVia;
   CalcViaDist;
@@ -1389,7 +1388,7 @@ end;
 procedure TFInput.ButtonWPRemClick(Sender: TObject);
 begin
   if (GridVia.Row > 1) and (GridVia.Row < GridVia.RowCount -1) then
-    GridVia.RemoveRow(GridVia.Row);
+    GridVia.DeleteColRow(False, GridVia.Row);
   RenumberVia;
   CalcViaDist;
   CalcAvSpeed;
@@ -1624,11 +1623,12 @@ begin
   ForceDirectories(FlpTempDir+'\Files\'+IntToStr(InputRow));
   for i := 0 to FileQueue.Count-1 do begin
     if LBFiles.Items.IndexOf(ExtractFilename(FileQueue.Strings[i])) > -1 then begin
-      if not CopyFile(pChar(FileQueue.Strings[i]), pChar(FlpTempDir+'\Files\'+IntToStr(InputRow)+'\'+ExtractFilename(FileQueue.Strings[i])), False) then
+{ TODO: Copy File }
+{      if not CopyFile(pChar(FileQueue.Strings[i]), pChar(FlpTempDir+'\Files\'+IntToStr(InputRow)+'\'+ExtractFilename(FileQueue.Strings[i])), False) then
       begin
         MessageDlg(format(_('File ''%s'' could not be copied'),[FileQueue.Strings[i]]),mtError,[mbOK],0);
         Exit;
-      end;
+      end;}
     end;
   end;
 end;
@@ -1638,7 +1638,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFInput.onFileDrop(Sender: TObject; X, Y: Integer);
 begin
-  AddFiles(FileDrop.Files);
+{ TODO: Drag&Drop  AddFiles(FileDrop.Files);}
 end;
 
 // ----------------------------------------------------------------
@@ -1679,7 +1679,7 @@ end;
 procedure TFInput.ButtonFileRemClick(Sender: TObject);
 begin
   DeleteFile(FlpTempDir+'\Files\'+IntToStr(InputRow)+'\'+LBFiles.Items[LBFiles.ItemIndex]);
-  LBFiles.DeleteSelected;
+{ TODO:  LBFiles.DeleteSelected;}
 
   If LBFiles.Count = 0 then begin
     ButtonFileRem.Enabled := False;
@@ -1694,11 +1694,11 @@ procedure TFInput.LBFilesDblClick(Sender: TObject);
 var FileName: String;
 begin
   FileName := LBFiles.Items[LBFiles.ItemIndex];
-
-  if FileExists(FlpTempDir+'\Files\'+IntToStr(InputRow)+'\'+FileName) then
+{ TODO: Shellexecute }
+{  if FileExists(FlpTempDir+'\Files\'+IntToStr(InputRow)+'\'+FileName) then
     ShellExecute(self.handle, 'open', PChar(FileName),nil, PChar(FlpTempDir+'\Files\'+IntToStr(InputRow)),SW_SHOWNORMAL)
   else if FileExists(FlpTempDir+'\Files\'+FileName) then
-    ShellExecute(self.handle, 'open', PChar(FileName),nil, PChar(FlpTempDir+'\Files'),SW_SHOWNORMAL);
+    ShellExecute(self.handle, 'open', PChar(FileName),nil, PChar(FlpTempDir+'\Files'),SW_SHOWNORMAL);}
 end;
 
 // ----------------------------------------------------------------
@@ -1822,12 +1822,6 @@ begin
 end;
 
 procedure TFInput.GridGetCellAlignment(Sender: TStringGrid; AColumn,
-  ARow: Integer; State: TGridDrawState; var CellAlignment: TAlignment);
-begin
-
-end;
-
-procedure TFInput.GridGetCellAlignment(Sender: TJvStringGrid; AColumn,
   ARow: Integer; State: TGridDrawState; var CellAlignment: TAlignment);
 begin
   if Sender = GridVia then

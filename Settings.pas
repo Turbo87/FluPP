@@ -7,9 +7,7 @@ interface
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ComCtrls, StdCtrls, Buttons, ExtCtrls, Maskedit, Inifiles, CheckLst,
-  gettext, ToolsLicense, {JvSimpleXML,}
-  Grids, {ValEdit, ShellAPI, VirtualTrees,} StrUtils, {JvEdit, JvValidateEdit,}
-  Menus, LResources;
+  gettext, Grids, StrUtils, Menus, LResources;
 
 type
   PTreeData = ^TTreeData;
@@ -25,8 +23,8 @@ type
   TFSettings = class(TForm)
     StatusBar1: TStatusBar;
     Panel1: TPanel;
-    ButtonOK: TJvImgBtn;
-    ButtonExit: TJvImgBtn;
+    ButtonOK: TBitBtn;
+    ButtonExit: TBitBtn;
     PageControl: TPageControl;
     TabSheetAutoComplete: TTabSheet;
     TabSheetGeneral: TTabSheet;
@@ -41,8 +39,8 @@ type
     TabSheetCat: TTabSheet;
     GroupBox5: TGroupBox;
     LabelAC: TLabel;
-    ButtonRem: TJvImgBtn;
-    ButtonAdd: TJvImgBtn;
+    ButtonRem: TBitBtn;
+    ButtonAdd: TBitBtn;
     PanelFlugz: TPanel;
     LabelTyp: TLabel;
     EditTyp: TEdit;
@@ -65,21 +63,21 @@ type
     GroupBox10: TGroupBox;
     CLBMedicals: TCheckListBox;
     VLEMedicals: TValueListEditor;
-    ButtonNext: TJvImgBtn;
+    ButtonNext: TBitBtn;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     CLBKat: TListBox;
-    ButtonKatAdd: TJvImgBtn;
-    ButtonKatRem: TJvImgBtn;
+    ButtonKatAdd: TBitBtn;
+    ButtonKatRem: TBitBtn;
     LBCTi: TListBox;
-    ButtonCTiAdd: TJvImgBtn;
-    ButtonCTiRem: TJvImgBtn;
+    ButtonCTiAdd: TBitBtn;
+    ButtonCTiRem: TBitBtn;
     Label14: TLabel;
     LBContest: TListBox;
-    ButtonContestAdd: TJvImgBtn;
-    ButtonContestRem: TJvImgBtn;
+    ButtonContestAdd: TBitBtn;
+    ButtonContestRem: TBitBtn;
     Label15: TLabel;
     Label17: TLabel;
     GroupBox3: TGroupBox;
@@ -169,7 +167,7 @@ type
     GroupBox11: TGroupBox;
     CBExportICal: TCheckBox;
     Label1: TLabel;
-    ButtonAirCat: TJvImgBtn;
+    ButtonAirCat: TBitBtn;
     procedure LBKatACClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LBKatDetailClick(Sender: TObject);

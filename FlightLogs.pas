@@ -5,7 +5,7 @@ unit FlightLogs;
 interface
 
 uses
-  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Buttons, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, {JvExStdCtrls, JvButton, JvCtrls,} ExtCtrls{, gnugettext},
   LResources;
 
@@ -46,7 +46,7 @@ uses Main, Tools, ToolsGrid;
 // ----------------------------------------------------------------
 procedure TFFlightLogs.FormCreate(Sender: TObject);
 begin
-  TranslateComponent(Self);
+//  TranslateComponent(Self);
 end;
 
 // ----------------------------------------------------------------
@@ -66,9 +66,9 @@ var
   i: word;
 begin
   LBFlu.Items.Clear;
-  if FMain.MDIChildCount > 0 then
+  if FMain.FlWindows.Count > 0 then
   begin
-    for i := 0 to FMain.MDIChildCount-1 do
+    for i := 0 to FMain.FlWindows.Count-1 do
       LBFlu.Items.Add(GridChild(i).caption);
     LBFlu.ItemIndex := 0;
   end;
@@ -131,7 +131,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFFlightLogs.ButtonOKClick(Sender: TObject);
 begin
-  if FMain.MDIChildCount = 0 then
+  if FMain.FlWindows.Count = 0 then
   begin
     MessageDlg(_('Please create at least one flightlog'),mtError,[mbOK],0);
     ModalResult := mrNone;
@@ -144,7 +144,7 @@ end;
 procedure TFFlightLogs.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if FMain.MDIChildCount = 0 then
+  if FMain.FlWindows.Count = 0 then
   begin
     MessageDlg(_('Please create at least one flightlog'),mtError,[mbOK],0);
     Action := caNone;
@@ -155,8 +155,8 @@ procedure TFFlightLogs.LBFluDrawItem(Control: TWinControl; Index: Integer;
   Rect: TRect; State: TOwnerDrawState);
 begin
   TListBox(Control).Canvas.FillRect(Rect);
-  InflateRect(Rect, 0, -2);
-  DrawText(LBFlu.Canvas.Handle, PChar(LBFlu.Items[Index]), StrLen(PChar(LBFlu.Items[Index])), Rect,DT_CENTER);
+//  InflateRect(Rect, 0, -2);
+//  DrawText(LBFlu.Canvas.Handle, PChar(LBFlu.Items[Index]), StrLen(PChar(LBFlu.Items[Index])), Rect,DT_CENTER);
 end;
 
 initialization

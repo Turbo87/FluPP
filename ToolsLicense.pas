@@ -4,7 +4,7 @@ unit ToolsLicense;
 
 interface
 
-uses {JvSimpleXml,} SysUtils, Dialogs{, gnugettext};
+uses SysUtils, Dialogs;
 
 const
   ValueTypeStarts = ',Starts,FStarts,WStarts,EStarts,';

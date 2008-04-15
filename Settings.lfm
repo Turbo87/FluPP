@@ -1,16 +1,16 @@
 object FSettings: TFSettings
   Left = 610
-  Height = 449
+  Height = 485
   Top = 213
-  Width = 501
-  HorzScrollBar.Page = 500
-  VertScrollBar.Page = 448
+  Width = 548
+  HorzScrollBar.Page = 547
+  VertScrollBar.Page = 484
   ActiveControl = ButtonKatAdd
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 449
-  ClientWidth = 501
+  ClientHeight = 485
+  ClientWidth = 548
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnClose = FormClose
@@ -18,9 +18,9 @@ object FSettings: TFSettings
   OnShow = FormShow
   Position = poMainFormCenter
   object StatusBar1: TStatusBar
-    Height = 24
-    Top = 425
-    Width = 501
+    Height = 17
+    Top = 468
+    Width = 548
     Panels = <    
       item
         Alignment = taCenter
@@ -30,12 +30,12 @@ object FSettings: TFSettings
   end
   object Panel1: TPanel
     Height = 40
-    Top = 385
-    Width = 501
+    Top = 428
+    Width = 548
     Align = alBottom
     BevelInner = bvLowered
     ClientHeight = 40
-    ClientWidth = 501
+    ClientWidth = 548
     TabOrder = 1
     object ButtonOK: TBitBtn
       Left = 174
@@ -64,68 +64,68 @@ object FSettings: TFSettings
     end
   end
   object PageControl: TPageControl
-    Height = 345
-    Width = 501
-    ActivePage = TabSheetCat
+    Height = 360
+    Width = 548
+    ActivePage = TabSheetLicenses
     Align = alTop
-    TabIndex = 5
+    TabIndex = 2
     TabOrder = 0
     object TabSheetGeneral: TTabSheet
       Caption = 'General'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       ImageIndex = 3
       OnHide = TabSheetGeneralHide
       OnShow = TabSheetGeneralShow
       object GroupBox17: TGroupBox
-        Left = 43
-        Height = 177
-        Top = 70
+        Left = 29
+        Height = 204
+        Top = 42
         Width = 417
-        ClientHeight = 177
-        ClientWidth = 417
+        ClientHeight = 188
+        ClientWidth = 411
         TabOrder = 0
         object GroupBox4: TGroupBox
           Left = 13
-          Height = 144
+          Height = 161
           Top = 16
           Width = 190
           Caption = 'Personal data'
-          ClientHeight = 144
-          ClientWidth = 190
+          ClientHeight = 145
+          ClientWidth = 184
           TabOrder = 0
           object Label3: TLabel
-            Left = 21
-            Height = 13
+            Left = 11
+            Height = 20
             Top = 62
-            Width = 31
+            Width = 41
             Alignment = taRightJustify
             Caption = 'Name:'
             ParentColor = False
           end
           object Label4: TLabel
-            Left = 17
-            Height = 13
+            Left = 4
+            Height = 20
             Top = 89
-            Width = 35
+            Width = 48
             Alignment = taRightJustify
             Caption = 'Adress:'
             ParentColor = False
           end
           object Label5: TLabel
-            Left = 32
-            Height = 13
-            Top = 116
-            Width = 20
+            Left = 26
+            Height = 20
+            Top = 114
+            Width = 26
             Alignment = taRightJustify
             Caption = 'City:'
             ParentColor = False
           end
           object Label7: TLabel
-            Left = 29
-            Height = 13
+            Left = 20
+            Height = 16
             Top = 21
-            Width = 23
+            Width = 32
             Alignment = taRightJustify
             Caption = 'Pilot:'
             Font.Height = -11
@@ -133,10 +133,10 @@ object FSettings: TFSettings
             ParentColor = False
           end
           object Label19: TLabel
-            Left = 64
-            Height = 13
+            Left = 21
+            Height = 16
             Top = 43
-            Width = 103
+            Width = 144
             Alignment = taCenter
             Caption = '(Default entry for pilot)'
             Font.Color = clNavy
@@ -176,17 +176,17 @@ object FSettings: TFSettings
         end
         object GroupBox7: TGroupBox
           Left = 213
-          Height = 69
+          Height = 105
           Top = 16
           Width = 190
           Caption = 'Warning'
-          ClientHeight = 69
-          ClientWidth = 190
+          ClientHeight = 89
+          ClientWidth = 184
           TabOrder = 1
           object Label21: TLabel
-            Left = 7
-            Height = 51
-            Top = 13
+            Left = 45
+            Height = 72
+            Top = 2
             Width = 128
             AutoSize = False
             Caption = 'months warning before licence or medical extension:'
@@ -197,17 +197,17 @@ object FSettings: TFSettings
         object GroupBox11: TGroupBox
           Left = 213
           Height = 52
-          Top = 108
+          Top = 125
           Width = 190
           Caption = 'General'
-          ClientHeight = 52
-          ClientWidth = 190
+          ClientHeight = 36
+          ClientWidth = 184
           TabOrder = 2
           object CBExportICal: TCheckBox
-            Left = 8
-            Height = 17
-            Top = 15
-            Width = 129
+            Left = 21
+            Height = 21
+            Top = 5
+            Width = 126
             Caption = 'Export iCalendar'
             TabOrder = 0
           end
@@ -216,20 +216,20 @@ object FSettings: TFSettings
     end
     object TabSheetFlightLog: TTabSheet
       Caption = 'Flight Log'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       ImageIndex = 5
       object GroupBox12: TGroupBox
         Left = 43
-        Height = 233
-        Top = 42
+        Height = 257
+        Top = 22
         Width = 418
-        ClientHeight = 233
-        ClientWidth = 418
+        ClientHeight = 241
+        ClientWidth = 412
         TabOrder = 0
         object RGNumeration: TRadioGroup
           Left = 273
-          Height = 55
+          Height = 56
           Top = 15
           Width = 128
           AutoFill = True
@@ -242,8 +242,8 @@ object FSettings: TFSettings
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 55
-          ClientWidth = 128
+          ClientHeight = 40
+          ClientWidth = 122
           ItemIndex = 0
           Items.Strings = (
             'Continuous'
@@ -258,15 +258,15 @@ object FSettings: TFSettings
           Top = 16
           Width = 127
           Caption = 'General'
-          ClientHeight = 55
-          ClientWidth = 127
+          ClientHeight = 39
+          ClientWidth = 121
           TabOrder = 1
           OnExit = GEExit
           object Label31: TLabel
             Left = 8
-            Height = 13
-            Top = 15
-            Width = 42
+            Height = 20
+            Top = 1
+            Width = 55
             Caption = 'ID prefix:'
             ParentColor = False
           end
@@ -274,7 +274,7 @@ object FSettings: TFSettings
             Left = 8
             Height = 21
             Hint = 'Part of aircraft id always staying identical'
-            Top = 28
+            Top = 14
             Width = 113
             OnExit = GEExit
             TabOrder = 0
@@ -295,8 +295,8 @@ object FSettings: TFSettings
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 70
-          ClientWidth = 108
+          ClientHeight = 52
+          ClientWidth = 102
           ItemIndex = 0
           Items.Strings = (
             'km'
@@ -312,14 +312,14 @@ object FSettings: TFSettings
           Top = 80
           Width = 264
           Caption = 'Input'
-          ClientHeight = 70
-          ClientWidth = 264
+          ClientHeight = 54
+          ClientWidth = 258
           TabOrder = 4
           OnExit = GEExit
           object Bevel6: TBevel
-            Left = 96
+            Left = 118
             Height = 9
-            Top = 39
+            Top = 24
             Width = 11
             Shape = bsTopLine
           end
@@ -332,58 +332,58 @@ object FSettings: TFSettings
           end
           object CBStartType: TCheckBox
             Left = 8
-            Height = 17
-            Top = 15
-            Width = 129
+            Height = 21
+            Top = -2
+            Width = 100
             Caption = 'Type of start'
             TabOrder = 0
           end
           object CBBlockTime: TCheckBox
             Left = 8
-            Height = 17
-            Top = 32
-            Width = 85
+            Height = 21
+            Top = 15
+            Width = 87
             Caption = 'Block time'
             OnClick = CBTimeClick
             TabOrder = 1
           end
           object CBFlightTime: TCheckBox
             Left = 8
-            Height = 17
-            Top = 49
-            Width = 85
+            Height = 21
+            Top = 33
+            Width = 88
             Caption = 'Flight time'
             OnClick = CBTimeClick
             TabOrder = 2
           end
           object GroupBox8: TGroupBox
-            Left = 105
-            Height = 43
-            Top = 24
-            Width = 77
-            ClientHeight = 43
-            ClientWidth = 77
+            Left = 131
+            Height = 50
+            Top = -2
+            Width = 120
+            ClientHeight = 34
+            ClientWidth = 114
             TabOrder = 3
             object LabelDefTime: TLabel
-              Left = 18
-              Height = 13
-              Top = 16
-              Width = 34
+              Left = 45
+              Height = 20
+              Top = 2
+              Width = 46
               Caption = 'Default'
               ParentColor = False
             end
             object RBDefTimeBlock: TRadioButton
-              Left = 2
-              Height = 17
-              Top = 8
-              Width = 15
+              Left = 13
+              Height = 21
+              Top = 1
+              Width = 23
               TabOrder = 0
             end
             object RBDefTimeFlight: TRadioButton
-              Left = 2
-              Height = 17
-              Top = 24
-              Width = 15
+              Left = 13
+              Height = 21
+              Top = 16
+              Width = 23
               Checked = True
               State = cbChecked
               TabOrder = 1
@@ -405,8 +405,8 @@ object FSettings: TFSettings
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 55
-          ClientWidth = 108
+          ClientHeight = 37
+          ClientWidth = 102
           ItemIndex = 0
           Items.Strings = (
             'Pilot'
@@ -417,30 +417,30 @@ object FSettings: TFSettings
         end
         object GroupBox16: TGroupBox
           Left = 17
-          Height = 55
+          Height = 69
           Top = 160
           Width = 384
           Caption = 'JAR-FCL (History)'
-          ClientHeight = 55
-          ClientWidth = 384
+          ClientHeight = 53
+          ClientWidth = 378
           Color = clBtnFace
           ParentColor = False
           TabOrder = 5
           OnExit = GEExit
           object DisallowChange: TCheckBox
             Left = 8
-            Height = 17
+            Height = 21
             Top = 15
-            Width = 233
+            Width = 257
             Caption = 'Disallow change / deletion (strikeout)'
             OnClick = DisallowChangeClick
             TabOrder = 0
           end
           object AllowLastEdit: TCheckBox
             Left = 26
-            Height = 17
+            Height = 21
             Top = 31
-            Width = 215
+            Width = 238
             Caption = 'except changing of last visible row'
             TabOrder = 1
           end
@@ -449,8 +449,8 @@ object FSettings: TFSettings
     end
     object TabSheetLicenses: TTabSheet
       Caption = 'Licences'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       ImageIndex = 2
       object LabelGetAirports: TLabel
         Cursor = crHandPoint
@@ -473,24 +473,24 @@ object FSettings: TFSettings
         Height = 75
         Width = 177
         Caption = 'Flight data before FluPP'
-        ClientHeight = 75
-        ClientWidth = 177
+        ClientHeight = 57
+        ClientWidth = 171
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 1
         object Label8: TLabel
           Left = 9
-          Height = 17
+          Height = 20
           Top = 23
-          Width = 70
+          Width = 61
           Caption = 'Landings:'
           ParentColor = False
         end
         object Label9: TLabel
           Left = 11
-          Height = 17
+          Height = 20
           Top = 50
-          Width = 85
+          Width = 72
           Caption = 'Flight Time:'
           ParentColor = False
         end
@@ -510,8 +510,8 @@ object FSettings: TFSettings
         Top = 80
         Width = 498
         Caption = 'Licences'
-        ClientHeight = 217
-        ClientWidth = 498
+        ClientHeight = 201
+        ClientWidth = 492
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 2
@@ -520,16 +520,16 @@ object FSettings: TFSettings
           Height = 180
           Top = 21
           Width = 323
-          ActivePage = TSLInfo
+          ActivePage = TSLTimeCat
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentShowHint = False
-          TabIndex = 0
+          TabIndex = 3
           TabOrder = 0
           object TSLInfo: TTabSheet
             Caption = 'Info'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             ImageIndex = 5
             object MemoLicInfo: TMemo
               Left = 20
@@ -542,8 +542,8 @@ object FSettings: TFSettings
           end
           object TSLDate: TTabSheet
             Caption = 'Date'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             object Label12: TLabel
               Left = 18
               Height = 26
@@ -560,8 +560,8 @@ object FSettings: TFSettings
           end
           object TSLCat: TTabSheet
             Caption = 'Categories'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             ImageIndex = 1
             object Label2: TLabel
               Left = 18
@@ -579,8 +579,8 @@ object FSettings: TFSettings
           end
           object TSLTimeCat: TTabSheet
             Caption = 'Time Cat'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             ImageIndex = 4
             object Label13: TLabel
               Left = 18
@@ -598,8 +598,8 @@ object FSettings: TFSettings
           end
           object TSLAccLic: TTabSheet
             Caption = 'Flight logs'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             ImageIndex = 2
             object Label11: TLabel
               Left = 18
@@ -617,8 +617,8 @@ object FSettings: TFSettings
           end
           object TSLOptCon: TTabSheet
             Caption = 'Ratings'
-            ClientHeight = 180
-            ClientWidth = 323
+            ClientHeight = 147
+            ClientWidth = 317
             ImageIndex = 3
             object Label18: TLabel
               Left = 18
@@ -651,14 +651,14 @@ object FSettings: TFSettings
         Height = 75
         Width = 185
         Caption = 'General'
-        ClientHeight = 75
-        ClientWidth = 185
+        ClientHeight = 57
+        ClientWidth = 179
         TabOrder = 0
         object Label6: TLabel
           Left = 10
-          Height = 17
+          Height = 20
           Top = 24
-          Width = 125
+          Width = 109
           Caption = 'Licence received:'
           ParentColor = False
         end
@@ -666,8 +666,8 @@ object FSettings: TFSettings
     end
     object TabSheetMedicals: TTabSheet
       Caption = 'Medicals'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       ImageIndex = 6
       object GroupBox10: TGroupBox
         Left = 8
@@ -675,8 +675,8 @@ object FSettings: TFSettings
         Top = 8
         Width = 489
         Caption = 'Medicals'
-        ClientHeight = 305
-        ClientWidth = 489
+        ClientHeight = 289
+        ClientWidth = 483
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 0
@@ -715,24 +715,24 @@ object FSettings: TFSettings
     end
     object TabSheetAutoComplete: TTabSheet
       Caption = 'AutoComplete'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       object GroupBox5: TGroupBox
         Left = 8
         Height = 305
         Top = 8
         Width = 489
         Caption = 'AutoComplete'
-        ClientHeight = 305
-        ClientWidth = 489
+        ClientHeight = 289
+        ClientWidth = 483
         Ctl3D = True
         ParentCtl3D = False
         TabOrder = 0
         object LabelAC: TLabel
           Left = 224
-          Height = 17
+          Height = 20
           Top = 199
-          Width = 6
+          Width = 5
           Caption = '-'
           ParentColor = False
         end
@@ -799,9 +799,9 @@ object FSettings: TFSettings
           TabOrder = 2
           object LabelTyp: TLabel
             Left = 3
-            Height = 17
+            Height = 20
             Top = 2
-            Width = 92
+            Width = 81
             Caption = 'Aircraft type:'
             ParentColor = False
           end
@@ -851,24 +851,24 @@ object FSettings: TFSettings
     end
     object TabSheetCat: TTabSheet
       Caption = 'Categories'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 327
+      ClientWidth = 542
       ImageIndex = 3
       object PageControl1: TPageControl
         Left = 9
         Height = 303
         Top = 10
         Width = 488
-        ActivePage = TabSheet1
+        ActivePage = TabSheet2
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = 'Categories'
-          ClientHeight = 303
-          ClientWidth = 488
+          ClientHeight = 270
+          ClientWidth = 482
           object Bevel3: TBevel
             Left = 5
             Height = 266
@@ -927,8 +927,8 @@ object FSettings: TFSettings
         end
         object TabSheet2: TTabSheet
           Caption = 'Time categories'
-          ClientHeight = 303
-          ClientWidth = 488
+          ClientHeight = 270
+          ClientWidth = 482
           ImageIndex = 1
           object Bevel2: TBevel
             Left = 5
@@ -988,8 +988,8 @@ object FSettings: TFSettings
         end
         object TabSheet3: TTabSheet
           Caption = 'Competition categories'
-          ClientHeight = 303
-          ClientWidth = 488
+          ClientHeight = 270
+          ClientWidth = 482
           ImageIndex = 2
           object Bevel1: TBevel
             Left = 5
@@ -1051,8 +1051,8 @@ object FSettings: TFSettings
     end
     object TabSheetCosts: TTabSheet
       Caption = 'Aircraft / Costs'
-      ClientHeight = 345
-      ClientWidth = 501
+      ClientHeight = 312
+      ClientWidth = 495
       ImageIndex = 6
       OnContextPopup = TabSheetCostsContextPopup
       object GroupBox14: TGroupBox
@@ -1061,8 +1061,8 @@ object FSettings: TFSettings
         Top = 8
         Width = 489
         Caption = 'Aircraft'
-        ClientHeight = 305
-        ClientWidth = 489
+        ClientHeight = 287
+        ClientWidth = 483
         TabOrder = 0
         object AircraftList: TListBox
           Left = 8
@@ -1082,8 +1082,8 @@ object FSettings: TFSettings
           Top = 14
           Width = 281
           Caption = 'Costs'
-          ClientHeight = 131
-          ClientWidth = 281
+          ClientHeight = 113
+          ClientWidth = 275
           TabOrder = 1
           object Bevel4: TBevel
             Left = 8
@@ -1167,8 +1167,8 @@ object FSettings: TFSettings
           Top = 160
           Width = 281
           Caption = 'Spezification (for personal information only)'
-          ClientHeight = 137
-          ClientWidth = 281
+          ClientHeight = 119
+          ClientWidth = 275
           TabOrder = 2
           object Label22: TLabel
             Left = 8
@@ -1325,20 +1325,20 @@ object FSettings: TFSettings
   end
   object PanelFligtLogs: TPanel
     Height = 40
-    Top = 345
-    Width = 501
+    Top = 388
+    Width = 548
     Align = alBottom
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 40
-    ClientWidth = 501
+    ClientWidth = 548
     TabOrder = 2
     object LBFlu: TListBox
       Left = 8
       Height = 27
       Hint = 'Select flight log'
       Top = 6
-      Width = 485
+      Width = 532
       Anchors = [akTop, akLeft, akRight]
       Color = clBtnFace
       Columns = 2

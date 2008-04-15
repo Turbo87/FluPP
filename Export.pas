@@ -4,7 +4,7 @@ unit Export;
 
 interface
 
-uses Forms, ComCtrls, Controls, Classes, SysUtils, Math, Grids, XMLRead, XMLWrite, DOM, Dialogs;
+uses Forms, ComCtrls, Controls, Classes, SysUtils, Math, Grids, XMLWrite, DOM, Dialogs;
 
 function SaveFluFile(FileName: String) : Boolean; // ZIP, XML-File
 

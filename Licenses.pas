@@ -29,7 +29,7 @@ type
 type
   TFLicenses = class(TForm)
     Panel1: TPanel;
-    ButtonExit: TJvImgBtn;
+    ButtonExit: TBitBtn;
     StatusBar1: TStatusBar;
     VST: TVirtualStringTree;
     ImageListLicenses: TImageList;

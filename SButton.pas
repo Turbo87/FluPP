@@ -29,7 +29,7 @@ type
 
 implementation
 
-uses Main, Licenses, Grid;
+uses Main, Grid; //Licenses;
 
 
 // ----------------------------------------------------------------

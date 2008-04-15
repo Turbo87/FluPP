@@ -126,7 +126,7 @@ Met: Meteo-Information
 // ----------------------------------------------------------------
 procedure TFGrid.FormCreate(Sender: TObject);
 begin
-  TranslateComponent(Self);
+//  TranslateComponent(Self);
 
   ACAircrafts := TStringList.Create;
   ACPilots := TStringList.Create;
@@ -336,11 +336,11 @@ begin
     { Files }
     TempStr := ''; Idx := 0;
     PUFiles.Clear;
-    if length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) = 0 then
-      PUFiles.Enabled := False
-    else
-    for i := 1 to length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) do
-    if (TFGrid(FMain.ActiveMDIChild).data['Fil',Row][i] = ',') then
+//    if length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) = 0 then
+//      PUFiles.Enabled := False
+//    else
+    for i := 1 to length(TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row]) do
+    if (TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row][i] = ',') then
     begin
       FilesMenuItem := TMenuItem.create(self);
       FilesMenuItem.Name := 'Files_'+InttoStr(Idx);
@@ -349,7 +349,7 @@ begin
       PUFiles.Add(FilesMenuItem);
       TempStr := '';
     end
-    else TempStr := TempStr + TFGrid(FMain.ActiveMDIChild).data['Fil',Row][i];
+    else TempStr := TempStr + TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row][i];
 
     PopupMenu.Popup(Mouse.CursorPos.x,Mouse.CursorPos.Y);
   end;
@@ -391,9 +391,9 @@ begin
       PosIdx := pos(TMenuItem(Sender).Caption+'/',data['Cat',Row]);
       if PosIdx > 0 then
       begin
-          TmpStr := TFGrid(FMain.ActiveMDIChild).data['Cat',Row];
+          TmpStr := TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Cat',Row];
           delete(TmpStr,PosIdx,length(TMenuItem(Sender).Caption)+1);
-          TFGrid(FMain.ActiveMDIChild).data['Cat',Row] := TmpStr;
+          TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Cat',Row] := TmpStr;
           DataChanged := True;
       end;
     end;
@@ -407,7 +407,7 @@ procedure TFGrid.FilesClick(Sender: TObject);
 var FileName: String;
 begin
   FileName := TMenuItem(Sender).Caption;
-  shellexecute(self.handle, 'open', PChar(FileName), nil, PChar(FlpTempDir+'\Files'), SW_SHOWNORMAL);
+//  shellexecute(self.handle, 'open', PChar(FileName), nil, PChar(FlpTempDir+'\Files'), SW_SHOWNORMAL);
 end;
 
 // ----------------------------------------------------------------
@@ -464,7 +464,7 @@ begin
       Grid.Cells[i, Grid.Row] := Grid.Cells[i, Grid.Row];
   end else begin
     if Grid.RowCount > 2 then
-      Grid.RemoveRow(Grid.Row)
+      Grid.DeleteColRow(False, Grid.Row)
     else
       for i := 0 to Grid.ColCount-1 do
         Grid.Cells[i,1] := '';
@@ -490,8 +490,8 @@ begin
       Grid.Cells[i, StrToInt(Undo[0])] := Grid.Cells[i, StrToInt(Undo[0])];
   end
   else begin
-    if TFGrid(FMain.ActiveMDIChild).Data['Num',1] <> '' then
-    Grid.InsertRow(StrToInt(Undo[0]));
+    if TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).Data['Num',1] <> '' then
+    Grid.InsertColRow(False, StrToInt(Undo[0]));
 
     for i := 0 to Grid.ColCount-1 do
       Grid.Cells[i,StrToInt(Undo[0])] := Undo[i];

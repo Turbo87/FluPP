@@ -8,7 +8,7 @@ uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ComCtrls, StdCtrls, Buttons, IniFiles, Grids,
   ToolWin, SButton, ExtCtrls, Grid, ActnList,ImgList, Tools,
-  DateUtils, LResources, Contnrs, gettext, XMLRead, XMLWrite, DOM;
+  DateUtils, LResources, Contnrs, XMLRead, DOM, gnugettext, interfaces;
 
 type
 
@@ -18,6 +18,7 @@ type
     ActionFileOpen: TAction;
     ActionFileNew: TAction;
     ActionList: TActionList;
+    GridSched: TStringGrid;
     ImageList32: TImageList;
     ImageList16: TImageList;
     MainMenu: TMainMenu;
@@ -128,9 +129,9 @@ const
 implementation
 
 uses
-  Input, Settings, BasicSettings, FlightLogs,
+  Input, BasicSettings, FlightLogs,
   ToolsGrid, ToolsShell, Import, Export, Debug;
-//  Info, Calendar, NinetyDays, TrainBaro, Airports, Print, Statistics, Licenses;
+//  Info, Calendar, NinetyDays, TrainBaro, Airports, Print, Statistics, Licenses, Settings;
 
 // ----------------------------------------------------------------
 // Form create
@@ -138,7 +139,7 @@ uses
 procedure TFMain.FormCreate(Sender: TObject);
 var IniFile: TIniFile;
 begin
-  Caption := 'FluPP - ' + GetFileVersion(ParamStr(0));
+  Caption := 'FluPP';
   FluFileName := '';
 
   ShortTimeFormat := 'hh:mm';
@@ -149,12 +150,12 @@ begin
 
   { read inifile }
   Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
-  LF1.Caption := Inifile.ReadString('LastFife', '1', '');
+{  LF1.Caption := Inifile.ReadString('LastFife', '1', '');
   LF2.Caption := Inifile.ReadString('LastFife', '2', '');
   LF3.Caption := Inifile.ReadString('LastFife', '3', '');
   LF4.Caption := Inifile.ReadString('LastFife', '4', '');
   LF5.Caption := Inifile.ReadString('LastFife', '5', '');
-  if Inifile.ReadBool('General', 'AutoLoad', False) = True then
+}  if Inifile.ReadBool('General', 'AutoLoad', False) = True then
   begin
     FluFileName := Inifile.ReadString('General', 'AutoLoadFile', '');
     StartTimer.Enabled := True;
@@ -165,7 +166,7 @@ begin
   if IniFile.ReadBool('General', 'WMaximized', False) then
     WindowState := wsMaximized;
 
-  DefaultInstance.UseLanguage(Inifile.ReadString('General', 'Language', copy(DefaultInstance.GetCurrentLanguage,1,2)));
+//  DefaultInstance.UseLanguage(Inifile.ReadString('General', 'Language', copy(DefaultInstance.GetCurrentLanguage,1,2)));
   Inifile.Free;
 
   GenSettings := TSTringList.Create;
@@ -192,19 +193,19 @@ begin
 
   Application.OnHint := onHint;
 
-  LF1.visible := LF1.Caption <> '';
+{  LF1.visible := LF1.Caption <> '';
   LF2.visible := LF2.Caption <> '';
   LF3.visible := LF3.Caption <> '';
   LF4.visible := LF4.Caption <> '';
   LF5.visible := LF5.Caption <> '';
-
+}
   { Load with params }
   if (ParamStr(1) <> '') and (ExtractFileExt(ParamStr(1)) = '.flu') then
   begin
     FluFileName := ParamStr(1);
     StartTimer.Enabled := True;
   end;
-  ReadAirportData;
+  //ReadAirportData;
 end;
 
 // ----------------------------------------------------------------
@@ -313,14 +314,14 @@ var
 begin
   { FluPP 1.08 -> 1.09 }
   if FileExists(GetActualDir(true)+'\Eigene Flugplaetze.txt') then
-    MoveFile(PChar(GetActualDir(true)+'\Eigene Flugplaetze.txt'), PChar(GetActualDir(true)+'airports\airports.txt'));
+{ TODO:    MoveFile(PChar(GetActualDir(true)+'\Eigene Flugplaetze.txt'), PChar(GetActualDir(true)+'airports\airports.txt'));}
 
   Found := FindFirst(GetActualDir(true)+'\airports\airports*.txt', faAnyFile, SearchRec);
-  while Found = 0 do
+{  while Found = 0 do
   begin
     GetData(GetActualDir(true)+'\airports\'+SearchRec.Name);
     Found := FindNext(SearchRec);
-  end;
+  end;}
   FindClose(SearchRec);
 end;
 
@@ -332,7 +333,7 @@ begin
   if not SpeichernAbfrage then Exit;
   CloseClick(Sender);
 
-  FlpTempDir := FileGetTempName('Flp');
+{ TODO:  FlpTempDir := FileGetTempName('Flp');}
   DeleteFile(FlpTempDir);
   CreateDir(FlpTempDir);
   CreateDir(FlpTempDir+'\Files');
@@ -349,12 +350,12 @@ begin
   UpdateButtonState;
   CreateSButtons;
 
-  with TFSettings.Create(Application) do
+{  with TFSettings.Create(Application) do
   try
     NewFlightLog;
   finally
     Release;
-  end;
+  end;}
 
   UpdateButtonState;
   CreateSButtons;
@@ -407,28 +408,29 @@ procedure TFMain.UpdateButtonState;
 var State, GridAssigned: Boolean;
 begin
   State := False;
-  if Assigned(TFGrid(ActiveMDIChild)) then
+  if FlWindows.Count >0 then
+  if Assigned(TFGrid(FlWindows[ActiveFlWindow])) then
     if (GridActiveChild.Data['Dat',1] <> '') then
       State := True;
 
   { Undo }
-  ActionFlightDeleteUndo.Enabled := False;
+//  ActionFlightDeleteUndo.Enabled := False;
   if State then
   begin
     if length(GridActiveChild.Undo) > 0 then
       if GridActiveChild.Undo[1] <> '' then
-        ActionFlightDeleteUndo.Enabled := True;
+//        ActionFlightDeleteUndo.Enabled := True;
   end;
 
   { Enable when data available }
-  ActionFlightEdit.Enabled := State;
+{  ActionFlightEdit.Enabled := State;
   ActionFlightInsert.Enabled := State;
   ActionFlightDelete.Enabled := State;
   ActionPrint.Enabled := State;
   ActionExportGoogleMap.Enabled := State;
-  ActionExportGoogleEarth.Enabled := State;
+  ActionExportGoogleEarth.Enabled := State;}
 
-  if Assigned(TFGrid(ActiveMDIChild)) then
+{  if Assigned(TFGrid(ActiveMDIChild)) then
   begin
     GridActiveChild.PUFlightEdit.Enabled := State;
     GridActiveChild.PUFlugEinfuegen.Enabled := State;
@@ -438,9 +440,9 @@ begin
     ActionFlightEdit.Enabled := FInput.CanEdit(State);
     GridActiveChild.PUFlightEdit.Enabled := FInput.CanEdit(State);
   end;
-
+}
   { Enable when flight log available }
-  GridAssigned := Assigned(TFGrid(ActiveMDIChild));
+{  GridAssigned := Assigned(TFGrid(ActiveMDIChild));
   ActionFileSave.Enabled := GridAssigned;
   ActionFileSaveAs.Enabled := GridAssigned;
   ActionFileImport.Enabled := GridAssigned;
@@ -459,7 +461,7 @@ begin
   ActionAirports.Enabled := GridAssigned;
   ActionSortFlights.Enabled := GridAssigned;
   ActionResetColumns.Enabled := GridAssigned;
-
+}
   UpdateScheduleGrid;
 end;
 
@@ -479,7 +481,7 @@ procedure TFMain.ExitClick(Sender: TObject);
 var
   IniFile: TIniFile;
 begin
-  if MdiChildCount = 0 then
+  if FlWindows.Count = 0 then
     Application.Terminate
   else
     if SpeichernAbfrage then
@@ -487,14 +489,14 @@ begin
     else
       Exit;
 
-  DelTree(FlpTempDir);
+{ TODO:  DelTree(FlpTempDir); }
 
   Inifile := Tinifile.create(GetActualDir(false)+'\FluPP.Ini');
-  Inifile.WriteString('LastFife', '1', LF1.Caption);
+{  Inifile.WriteString('LastFife', '1', LF1.Caption);
   Inifile.WriteString('LastFife', '2', LF2.Caption);
   Inifile.WriteString('LastFife', '3', LF3.Caption);
   Inifile.WriteString('LastFife', '4', LF4.Caption);
-  Inifile.WriteString('LastFife', '5', LF5.Caption);
+  Inifile.WriteString('LastFife', '5', LF5.Caption);}
   Inifile.WriteBool('General', 'WMaximized', WindowState = wsMaximized);
   if not (WindowState = wsMaximized) then
   begin
@@ -520,10 +522,10 @@ begin
   if (Sender <> ActionFileNew) then
     if not SpeichernAbfrage then Exit;
 
-  for i:= MdiChildCount - 1 downto 0 do
+  for i:= FlWindows.Count - 1 downto 0 do
     GridChild(i).Free;
 
-  DelTree(FlpTempDir);
+{ TODO:  DelTree(FlpTempDir);}
 
   GenSettings.Clear;
   Medicals.Clear;
@@ -560,8 +562,8 @@ var
   SLastFife: Array[0..4] of String;
   Found: Boolean;
 begin
-  { is file already in list -> move to 1st position }
-  found := False;
+  //is file already in list -> move to 1st position
+{  found := False;
   SLastFife[0] := LF1.Caption;
   SLastFife[1] := LF2.Caption;
   SLastFife[2] := LF3.Caption;
@@ -581,14 +583,14 @@ begin
     end;
     inc(i);
   end;
-  { Not in list yet }
+  //Not in list yet
   if not found then
   begin
     for i := 3 downto 0 do SLastFife[i+1] := SLastFife[i];
     SLastFife[0] := FileName;
   end;
 
-  { Hide empty entries }
+  //Hide empty entries
   LF1.Caption := SLastFife[0];
   LF2.Caption := SLastFife[1];
   LF3.Caption := SLastFife[2];
@@ -600,7 +602,7 @@ begin
   LF3.visible := LF3.Caption <> '';
   LF4.visible := LF4.Caption <> '';
   LF5.visible := LF5.Caption <> '';
-end;
+}end;
 
 // ----------------------------------------------------------------
 // Insert data
@@ -630,7 +632,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.LoadFluFile;
 var IGCDir, TempFileName: String;
-    XML : TJvSimpleXML;
+    XMLDoc: TXMLDocument;
     i : Word;
 begin
   if not FileExists(FluFileName) then
@@ -650,11 +652,11 @@ begin
   SchedValidity.Clear;
   LoadDefaultGenSettings;
 
-  FlpTempDir := FileGetTempName('Flu');
+{  FlpTempDir := FileGetTempName('Flu');
   DeleteFile(FlpTempDir);
   CreateDir(FlpTempDir);
   CreateDir(FlpTempDir+'\Files');
-  TempFileName := FlpTempDir+'\flightlog.xml';
+  TempFileName := FlpTempDir+'\flightlog.xml';}
 
   try
     ProgressBar := TProgressBar.Create(FMain);
@@ -665,11 +667,11 @@ begin
     StatusBar1.Repaint;
     Screen.Cursor := crHourGlass;
     try
-      JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
+//      JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
     except
       on E: Exception do
       begin
-        CopyFile(pChar(FluFileName), pChar(TempFileName), False);
+//        CopyFile(pChar(FluFileName), pChar(TempFileName), False);
         IGCDir := copy(FluFileName, 1, length(FluFileName)-length(ExtractFileExt(FluFileName)));
         if DirectoryExists(IGCDir) then
           ShellCopyFile(IGCDir+'\*.*', FlpTempDir+'\Files', False);
@@ -683,10 +685,10 @@ begin
     StatusBar1.Repaint;
   end;
 
-  XML := TJvSimpleXML.Create(Application);
-  with XML do try
+  XMLDoc := TXMLDocument.Create;
+  with XMLDoc do try
     try
-      LoadFromFile(TempFileName);
+       ReadXMLFile(XMLDoc, TempFileName);
     except
       on E: Exception do begin
         OpenOldFile5;
@@ -694,20 +696,20 @@ begin
       end;
     end;
 
-    if (Root.Name = 'FluPP') then begin
-      case StrToInt(Root.Properties.Value('Version')) of
-        1 : OpenFluFile1(XML);
+    if (XMLDoc.DocumentElement.FirstChild.NodeName = 'FluPP') then begin
+      case StrToInt(XMLDoc.DocumentElement.FirstChild.Attributes.GetNamedItem('Version').NodeValue) of
+        1 : OpenFluFile1(XMLDoc);
       end;
     end;
 
-    if (Root.Name = 'FliPS') then
-      OpenFlpFile7(XML);
+    if (XMLDoc.DocumentElement.FirstChild.NodeName = 'FliPS') then
+      OpenFlpFile7(XMLDoc);
 
   finally
-    XML.Free;
+    XMLDoc.Free;
   end;
 
-  for i := 0 to MDIChildCount-1 do
+  for i := 0 to FlWindows.Count-1 do
   begin
     GridChild(i).ReCalcGridNr;
     GridChild(i).Grid.FixedCols := 1;
@@ -716,7 +718,7 @@ begin
     GridChild(i).NameCols;
   end;
 
-  MDIChildren[MDIChildCount-1].show;
+{TODO:  MDIChildren[FlWindows.Count-1].show; }
   GridActiveChild.ReCalcGridTime;
 
   UpdateButtonState;
@@ -818,12 +820,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.InfoClick(Sender: TObject);
 begin
-  with TFInfo.Create(Application) do
+{  with TFInfo.Create(Application) do
   try
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 procedure TFMain.MenuItem1Click(Sender: TObject);
@@ -842,7 +844,7 @@ end;
 procedure TFMain.SettingsClick(Sender: TObject);
 var LastFile : string;
 begin
-  with TFSettings.Create(Application) do
+{  with TFSettings.Create(Application) do
   try
     TabSheetGeneral.TabVisible := True;
     TabSheetLicenses.TabVisible := True;
@@ -854,19 +856,9 @@ begin
     ButtonExit.Visible := True;
 
     ShowModal;
-
-   { if ModalResult = idOK then
-      FileSave(self)
-    else begin
-      LastFile := FluFileName;
-      CloseClick(Self);
-
-      FluFileName := LastFile;
-      LoadFluFile;
-    end;    }  { TODO -ounPoint : wieso? }
   finally
     Release;
-  end;
+  end; }
 end;
 
 // ----------------------------------------------------------------
@@ -938,12 +930,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.LicenseClick(Sender: TObject);
 begin
-  with TFLicenses.Create(Application) do
+{  with TFLicenses.Create(Application) do
   try
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------
@@ -979,13 +971,13 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.AirportsClick(Sender: TObject);
 begin
-  with TFAirports.Create(Application) do
+{  with TFAirports.Create(Application) do
   try
     PanelFindEingabe.Visible := False;
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------
@@ -993,8 +985,14 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.SortAllFlightsClick(Sender: TObject);
 begin
-  SortGridByCols([GridActiveChild.GridCols.IndexOf('Dat'),GridActiveChild.GridCols.IndexOf('StB'),GridActiveChild.GridCols.IndexOf('StT')], GridActiveChild.Grid);
+{ TODO: sort}
+{  SortGridByCols([GridActiveChild.GridCols.IndexOf('Dat'),GridActiveChild.GridCols.IndexOf('StB'),GridActiveChild.GridCols.IndexOf('StT')], GridActiveChild.Grid);
   GridActiveChild.ReCalcGridNr;
+}end;
+
+procedure TFMain.MMTrainBaroClick(Sender: TObject);
+begin
+
 end;
 
 // ----------------------------------------------------------------
@@ -1014,7 +1012,7 @@ begin
     FInput.Neu(1)
   else
   begin
-    GridActiveChild.Grid.InsertRow(GridActiveChild.Grid.RowCount);
+    GridActiveChild.Grid.InsertColRow(False, GridActiveChild.Grid.RowCount);
     FInput.Neu(GridActiveChild.Grid.RowCount-1);
   end;
 end;
@@ -1024,7 +1022,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FlightInsert(Sender: TObject);
 begin
-  GridActiveChild.Grid.InsertRow(GridActiveChild.Grid.Row);
+  GridActiveChild.Grid.InsertColRow(False, GridActiveChild.Grid.Row);
   FInput.Neu(GridActiveChild.Grid.Row);
   GridActiveChild.ReCalcGridNr;
 end;
@@ -1052,7 +1050,7 @@ procedure TFMain.CreateSButtons;
 var
   i: Word;
 begin
-  for i:= 0 to MdiChildCount -1 do
+  for i:= 0 to FlWindows.Count -1 do
   begin
     if not Assigned(GridChild(i).SButton) then
     begin
@@ -1072,7 +1070,7 @@ begin
     GridChild(i).SButton.LabelHeading.Caption := GridChild(i).Caption;
     UpdateSButtons;
   end;
-  if MdiChildCount > 0 then PanelSButtons.width := MdiChildCount*94+4;
+  if FlWindows.Count > 0 then PanelSButtons.width := FlWindows.Count*94+4;
   ActivateSButton;
   UpdateSButtons;
 end;
@@ -1084,7 +1082,7 @@ procedure TFMain.ActivateSButton;
 var
   i: Word;
 begin
-  for i:= 0 to MdiChildCount -1 do
+  for i:= 0 to FlWindows.Count -1 do
     if Assigned(GridChild(i).SButton) then
       GridChild(i).SButton.Color := clBtnFace;
 
@@ -1101,7 +1099,7 @@ var
   TotalPoints : Real;
   Flights, GridIdx, Row: Word;
 begin
-  for GridIdx := 0 to MdiChildCount -1 do
+  for GridIdx := 0 to FlWindows.Count -1 do
     if Assigned(GridChild(GridIdx).SButton) then
       with GridChild(GridIdx).SButton do
       begin
@@ -1177,20 +1175,20 @@ procedure TFMain.UpdateScheduleGrid;
 var
   GridIdx: Integer;
 begin
-  if MdiChildCount = 0 then Exit;
+  if FlWindows.Count = 0 then Exit;
   GridSched.RowCount := 1;
   GridSched.Clear;
 
-  with TFLicenses.Create(Application) do
+{  with TFLicenses.Create(Application) do
   try
     FillVST;
   finally
     Release;
-  end;
+  end;}
 
   { Load Schedules }
   LoadSchedule(Schedules);
-  for GridIdx := 0 to MdiChildCount-1 do begin
+  for GridIdx := 0 to FlWindows.Count-1 do begin
     LoadSchedule(GridChild(GridIdx).LicenseDates);
     LoadSchedule(GridChild(GridIdx).Events);
   end;
@@ -1202,7 +1200,7 @@ begin
   else
   begin
     PanelScheduler.Visible := True;
-    SortGridByCols([0], GridSched);
+//    SortGridByCols([0], GridSched);
   end;
 end;
 
@@ -1225,7 +1223,7 @@ begin
         Canvas.Brush.Color := clFRed;
     end;
     Canvas.FillRect(Rect);
-    DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect,DT_LEFT);
+//    DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect,DT_LEFT);
   end;
 end;
 
@@ -1246,37 +1244,37 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.ActionHPExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',FluPPDomain,nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',FluPPDomain,nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPAirportsExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPLicensesExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/licenses/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/licenses/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPLanguagesExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/languages/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/languages/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPRFEExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/request/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/request/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPBugsExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionHPSupportExecute(Sender: TObject);
 begin
-  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/support/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
+//  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/support/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
 procedure TFMain.ActionResetColumnsExecute(Sender: TObject);
@@ -1304,13 +1302,5 @@ end;
 
 initialization
   {$i Main.lrs}
-  {$i Main.lrs}
-  {$i Main.lrs}
-  {$i Main.lrs}
-  {$i Main.lrs}
-  {$i Main.lrs}
-  LoadAndParseMapFile;
-  Application.OnException := TFMain.GlobalExceptionHandler;
-finalization
-  CleanUpMapFile;
+
 end.
