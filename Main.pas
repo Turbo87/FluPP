@@ -7,7 +7,7 @@ interface
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ComCtrls, StdCtrls, Buttons, IniFiles, Grids,
-  ToolWin, SButton, ExtCtrls, Grid, ActnList,ImgList, Tools,
+  SButton, ExtCtrls, Grid, ActnList, Tools,
   DateUtils, LResources, Contnrs, XMLRead, DOM, gnugettext, interfaces;
 
 type
@@ -22,25 +22,52 @@ type
     ImageList32: TImageList;
     ImageList16: TImageList;
     MainMenu: TMainMenu;
+    MenuItem1: TMenuItem;
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem20: TMenuItem;
+    MenuItem21: TMenuItem;
+    MenuItem22: TMenuItem;
+    MenuItem23: TMenuItem;
+    MenuItem24: TMenuItem;
+    MenuItem25: TMenuItem;
+    MenuItem26: TMenuItem;
+    MenuItem27: TMenuItem;
+    MenuItem28: TMenuItem;
+    MenuItem29: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem30: TMenuItem;
+    MenuItem31: TMenuItem;
+    MenuItem32: TMenuItem;
+    MenuItem33: TMenuItem;
+    MenuItem34: TMenuItem;
+    MenuItem35: TMenuItem;
+    MenuItem36: TMenuItem;
+    MenuItem4: TMenuItem;
     MiFile: TMenuItem;
-    MiFlight: TMenuItem;
-    MIFileOpen: TMenuItem;
-    MIFileNew: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
     OpenDialog: TOpenDialog;
     Panel2: TPanel;
     PanelSButtons: TPanel;
     PanelScheduler: TPanel;
     SaveDialog: TSaveDialog;
     StartTimer: TTimer;
-    ActionFileExport: TAction;
-    ActionExportGoogleMap: TAction;
-    ActionExportGoogleEarth: TAction;
-    ActionResetColumns: TAction;
     StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
-    ToolButton1: TToolButton;
     ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
     procedure ExitClick(Sender: TObject);
@@ -88,6 +115,7 @@ type
     procedure ActionExportGoogleEarthExecute(Sender: TObject);
     procedure ActionResetColumnsExecute(Sender: TObject);
     procedure ActionFileImportExecute(Sender: TObject);
+    procedure StatusBar1DblClick(Sender: TObject);
     procedure TIPropertyGrid1Click(Sender: TObject);
   private
     ProgressBar: TProgressBar;
@@ -209,7 +237,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Timer for param file opening
+// Timer for param MiFile opening
 // ----------------------------------------------------------------
 procedure TFMain.StartTimerTimer(Sender: TObject);
 begin
@@ -475,7 +503,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Exit, write ini-file
+// Exit, write ini-MiFile
 // ----------------------------------------------------------------
 procedure TFMain.ExitClick(Sender: TObject);
 var
@@ -522,6 +550,7 @@ begin
   if (Sender <> ActionFileNew) then
     if not SpeichernAbfrage then Exit;
 
+  if FlWindows.Count > 0 then
   for i:= FlWindows.Count - 1 downto 0 do
     GridChild(i).Free;
 
@@ -543,7 +572,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Opens a file from LastFife
+// Opens a MiFile from LastFife
 // ----------------------------------------------------------------
 procedure TFMain.LastFifeClick(Sender: TObject);
 begin
@@ -554,7 +583,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Add "File" to LastFife
+// Add "MiFile" to LastFife
 // ----------------------------------------------------------------
 procedure TFMain.LastFife(FileName: String);
 var
@@ -562,7 +591,7 @@ var
   SLastFife: Array[0..4] of String;
   Found: Boolean;
 begin
-  //is file already in list -> move to 1st position
+  //is MiFile already in list -> move to 1st position
 {  found := False;
   SLastFife[0] := LF1.Caption;
   SLastFife[1] := LF2.Caption;
@@ -808,7 +837,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Export KMl file
+// Export KMl MiFile
 // ----------------------------------------------------------------
 procedure TFMain.ActionExportGoogleEarthExecute(Sender: TObject);
 begin
@@ -1279,13 +1308,13 @@ end;
 
 procedure TFMain.ActionResetColumnsExecute(Sender: TObject);
 begin
-  if ActionResetColumns.Checked then
+{  if ActionResetColumns.Checked then
     ActionResetColumns.Checked := false
   else begin
     MessageDlg('Please save your flightlog and restart FliPS so that'+#13+#10+'restoring of default column values can take place.', mtInformation, [mbOK], 0);
     ActionResetColumns.Checked := true;
   end;
-end;
+}end;
 
 procedure TFMain.ActionFileImportExecute(Sender: TObject);
 begin
@@ -1293,6 +1322,11 @@ begin
   if not OpenDialog.Execute then Exit;
   ImportCSV(OpenDialog.FileName);
   InsertData;
+end;
+
+procedure TFMain.StatusBar1DblClick(Sender: TObject);
+begin
+
 end;
 
 procedure TFMain.TIPropertyGrid1Click(Sender: TObject);

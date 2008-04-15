@@ -1,7 +1,7 @@
 object FMain: TFMain
-  Left = 464
+  Left = 332
   Height = 364
-  Top = 308
+  Top = 482
   Width = 641
   HorzScrollBar.Page = 640
   VertScrollBar.Page = 342
@@ -18,13 +18,6 @@ object FMain: TFMain
   Position = poDefault
   ShowHint = True
   Visible = True
-  object PanelSButtons: TPanel
-    Left = 567
-    Height = 52
-    Width = 61
-    BevelOuter = bvNone
-    TabOrder = 0
-  end
   object StatusBar1: TStatusBar
     Height = 17
     Top = 326
@@ -46,6 +39,7 @@ object FMain: TFMain
       item
         Width = 50
       end>
+    OnDblClick = StatusBar1DblClick
   end
   object Panel2: TPanel
     Height = 54
@@ -53,43 +47,31 @@ object FMain: TFMain
     Align = alTop
     ClientHeight = 54
     ClientWidth = 641
-    TabOrder = 1
+    TabOrder = 0
     object ToolBar1: TToolBar
       Left = 1
       Height = 40
       Top = 1
       Width = 162
       Align = alCustom
-      ButtonHeight = 33
-      ButtonWidth = 33
+      ButtonHeight = 36
+      ButtonWidth = 36
       Caption = 'ToolBar'
       ChildSizing.ControlsPerLine = 1
       Images = ImageList32
       TabOrder = 0
-      object ToolButton1: TToolButton
-        Left = 1
-        Top = 2
-        Action = ActionFileNew
-      end
       object ToolButton2: TToolButton
-        Left = 37
+        Left = 1
         Top = 2
         Action = ActionFileOpen
       end
-      object ToolButton3: TToolButton
-        Left = 73
-        Top = 2
-        Width = 23
-        Caption = 'ToolButton3'
-        Style = tbsSeparator
-      end
       object ToolButton4: TToolButton
-        Left = 96
+        Left = 37
         Top = 2
         Caption = 'ToolButton4'
       end
       object ToolButton5: TToolButton
-        Left = 129
+        Left = 73
         Top = 2
         Caption = 'ToolButton5'
       end
@@ -114,7 +96,6 @@ object FMain: TFMain
         Color = clBtnFace
         ColCount = 4
         DefaultColWidth = 50
-        DefaultDrawing = False
         DefaultRowHeight = 11
         FixedColor = clBtnFace
         FixedCols = 0
@@ -140,6 +121,15 @@ object FMain: TFMain
         )
       end
     end
+  end
+  object PanelSButtons: TPanel
+    Left = 567
+    Height = 52
+    Top = 1
+    Width = 61
+    BevelOuter = bvNone
+    Caption = 'SButtons'
+    TabOrder = 1
   end
   object OpenDialog: TOpenDialog
     Title = 'Vorhandene Datei öffnen'
@@ -1262,90 +1252,128 @@ object FMain: TFMain
     top = 64
     object MiFile: TMenuItem
       Caption = 'File'
-      OnClick = FileNew
-      object MIFileNew: TMenuItem
-        Action = ActionFileNew
-        Bitmap.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          200000000000000400006400000064000000000000000000000042768E003256
-          6500335F740028455A00315369005EA2B80039546000629EB100568A9F005F82
-          7D003B443600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF009C9C9CFF8484
-          84FF848484FF848484FF848484FF848484FF848484FF848484FF848484FF8484
-          84FF848484FF848484FF848484FF9C9C9CFFFFFFFF00FFFFFF00848484FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFF848484FFFFFFFF00FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFF7F7F7FFF7F7F7FFF7F7
-          F7FFF7F7F7FFF7F7F7FFFFFFFFFF848484FFFFFFFF00FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFF7F7F7FFF7F7F7FFF7F7
-          F7FFF7F7F7FFF7F7F7FFFFFFFFFF848484FFFFFFFF00FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFF7F7F7FFF7F7
-          F7FFF7F7F7FFF7F7F7FFFFFFFFFF848484FFFFFFFF00FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEF
-          EFFFF7F7F7FFF7F7F7FFFFFFFFFF848484FF36564F00FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEF
-          EFFFEFEFEFFFF7F7F7FFFFFFFFFF848484FF303C3900FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFE7EF
-          EFFFB5F7F7FF94F7F7FF9CF7F7FF739494FF31464100FFFFFF00848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFE7EFEFFF94EF
-          F7FF63F7FFFF42F7FFFF42F7FFFF5AEFF7FF31DEE7FF00F7FFFF848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFB5EFF7FF63F7
-          FFFF42F7FFFF73F7FFFF73F7FFFF42F7FFFF21EFF7FF08F7FFFF848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFF9CEFF7FF4AF7
-          FFFF6BF7FFFFBDFFFFFFBDFFFFFF6BF7FFFF21F7FFFF08F7FFFF848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFF9CEFF7FF4AF7
-          FFFF63F7FFFFB5FFFFFFBDFFFFFF6BF7FFFF21EFFFFF08F7FFFF848484FFFFFF
-          FFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFB5EFF7FF6BF7
-          F7FF39F7FFFF6BF7FFFF6BF7FFFF39F7FFFF18EFFFFF08F7FFFF848484FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9CEF
-          F7FF6BF7F7FF4AF7FFFF42EFF7FF29EFF7FF08F7FFFF00F7FFFF9C9C9CFF8484
-          84FF848484FF848484FF848484FF848484FF848484FF848484FF848484FF7B8C
-          8CFF739C9CFF6BADADFF31E7EFFF08F7FFFF00F7FFFFFFFFFF00
-        }
-        OnClick = FileNew
+      object MenuItem3: TMenuItem
+        Caption = 'New'
       end
-      object MIFileOpen: TMenuItem
-        Action = ActionFileOpen
-        Bitmap.Data = {
-          36040000424D3604000000000000360000002800000010000000100000000100
-          20000000000000040000640000006400000000000000000000006B736BFF6B73
-          6BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B73
-          6BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFFDEDE
-          DEFFDEDEDEFFDEDEDEFFDEDEDEFFD6D6D6FFD6D6D6FFCECECEFFCECECEFFCECE
-          CEFFCECECEFFCECECEFFCECECEFFCECECEFFCECECEFF6B736BFF6B736BFFCECE
-          CEFFC6C6C6FFADADADFFB5B5B5FFC6C6C6FFC6C6C6FFCECECEFFCECECEFFADA5
-          ADFFD6D6D6FFA5A5ADFFD6D6D6FFB5B5B5FFCECECEFF6B736BFF6B736BFFCECE
-          CEFFC6C6C6FF9C9C9CFFADADADFFBDBDBDFFC6C6C6FFCECECEFFD6D6D6FFADAD
-          ADFFD6D6D6FFADADADFFD6D6D6FFBDBDBDFFCECECEFF6B736BFF6B736BFFCECE
-          CEFFCECECEFFCECECEFFCECECEFFCECECEFFC6C6C6FFCECECEFFCECECEFFC6C6
-          C6FFC6C6C6FFC6C6C6FFC6C6C6FFC6C6C6FFD6D6D6FF6B736BFF6B736BFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7
-          F7FFF7F7F7FFEFEFEFFFEFEFEFFFE7E7E7FFF7F7F7FF6B736BFF6B736BFFF7F7
-          F7FFE7E7E7FFEFEFEFFFFFFFFFFFFFFFFFFFCED6CEFF8C6B39FF8C6339FFB5AD
-          9CFFFFFFFFFFFFFFFFFFEFEFEFFFE7E7E7FFF7F7F7FF6B736BFF6B736BFFFFFF
-          FFFFEFEFEFFFFFFFFFFFE7E7E7FFBDCEC6FF8C6339FFE7CEADFFDEBD9CFF8C6B
-          39FFADA594FFE7E7E7FFFFFFFFFFEFEFEFFFF7F7F7FF6B736BFF6B736BFFFFFF
-          FFFFFFFFFFFFE7E7E7FFBDCEC6FF8C6339FFDEBD9CFFC69C73FFC69C73FFDECE
-          ADFF8C6339FFADA594FFE7E7E7FFF7F7F7FFF7F7F7FF6B736BFF6B736BFFFFFF
-          FFFFEFEFEFFFC6CECEFF8C6339FFDEBD9CFFBD9C73FFBD9C73FFBD9C73FFC69C
-          73FFDEBD94FF8C6339FFADAD94FFEFEFEFFFF7F7F7FF6B736BFF6B736BFFFFFF
-          FFFFEFEFEFFF8C6339FF8C6339FF8C6339FF8C6339FFCEA57BFFBD945AFF8C63
-          39FF8C6339FF8C6339FF8C6339FFEFEFEFFFF7F7F7FF6B736BFF6B7373FFFFFF
-          FFFFEFEFEFFFEFEFEFFFDEE7DEFFB59C73FF8C6339FFCEA57BFFCEB58CFF8C6B
-          39FFC6BDADFFEFEFEFFFEFEFEFFFEFEFEFFFF7F7F7FF6B736BFF6B736BFFDEE7
-          E7FFFFFFFFFFD6E7DEFFDED6CEFFB59C6BFF8C6339FFE7CEADFFD6B594FF9C7B
-          52FFE7DED6FFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7FF6B736BFF8C7B6BFF7373
-          63FF737363FF846B4AFF9C7342FF9C7B42FFDEBD9CFFEFDEC6FFAD8452FF7B6B
-          4AFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF6B736BFF947342FFBD94
-          63FFD6AD84FFE7CEB5FFEFDED6FFEFDEC6FFDEC69CFFA58C6BFF8C6B42FF5A7B
-          6BFF000000FF000000FF000000FF000000FF000000FF000000FF73846BFF947B
-          4AFF8C6339FF8C6339FF8C6339FF8C6339FF8C6B39FF84734AFF7B7B5AFF0000
-          00FF000000FF000000FF000000FF000000FF000000FF000000FF
-        }
-        OnClick = FileOpen
+      object MenuItem4: TMenuItem
+        Caption = 'Open ...'
+        ShortCut = 16463
+      end
+      object MenuItem5: TMenuItem
+        Caption = 'Save'
+        ShortCut = 16467
+      end
+      object MenuItem9: TMenuItem
+        Caption = 'Save as ...'
+      end
+      object MenuItem8: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem7: TMenuItem
+        Caption = 'Import'
+      end
+      object MenuItem6: TMenuItem
+        Caption = 'Export'
+      end
+      object MenuItem12: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem11: TMenuItem
+        Caption = 'Print ...'
+        ShortCut = 16464
+      end
+      object MenuItem10: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem13: TMenuItem
+        Caption = 'Flight Logs ...'
+      end
+      object MenuItem15: TMenuItem
+        Caption = 'Basic Settings ...'
+      end
+      object MenuItem14: TMenuItem
+        Caption = 'Settings ...'
+      end
+      object MenuItem19: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem18: TMenuItem
+        Caption = 'Close'
+        ShortCut = 16471
+      end
+      object MenuItem17: TMenuItem
+        Caption = 'Exit'
+        ShortCut = 16472
       end
     end
-    object MiFlight: TMenuItem
+    object MenuItem2: TMenuItem
       Caption = 'Flight'
+      object MenuItem16: TMenuItem
+        Caption = 'New ...'
+        ShortCut = 113
+      end
+      object MenuItem27: TMenuItem
+        Caption = 'Edit ...'
+        ShortCut = 114
+      end
+      object MenuItem26: TMenuItem
+        Caption = 'Insert'
+      end
+      object MenuItem25: TMenuItem
+        Caption = 'Delete'
+      end
+      object MenuItem24: TMenuItem
+        Caption = 'Undo Delete'
+      end
+    end
+    object MenuItem1: TMenuItem
+      Caption = 'Tools'
+      object MenuItem21: TMenuItem
+        Caption = 'Calendar ...'
+        ShortCut = 118
+      end
+      object MenuItem32: TMenuItem
+        Caption = '90 day regulation ...'
+        ShortCut = 119
+      end
+      object MenuItem31: TMenuItem
+        Caption = 'Statistic ...'
+        ShortCut = 120
+      end
+      object MenuItem30: TMenuItem
+        Caption = 'License extension ...'
+        ShortCut = 121
+      end
+      object MenuItem29: TMenuItem
+        Caption = 'Training barometer ...'
+        ShortCut = 122
+      end
+      object MenuItem28: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem23: TMenuItem
+        Caption = 'Airports ...'
+        ShortCut = 123
+      end
+      object MenuItem22: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem33: TMenuItem
+        Caption = 'Sort all flights'
+      end
+    end
+    object MenuItem20: TMenuItem
+      Caption = 'Help'
+      object MenuItem34: TMenuItem
+        Caption = 'Online'
+        object MenuItem35: TMenuItem
+          Caption = 'New Item47'
+        end
+      end
+      object MenuItem36: TMenuItem
+        Caption = 'About ...'
+        ShortCut = 112
+      end
     end
   end
   object ActionList: TActionList
@@ -1363,7 +1391,7 @@ object FMain: TFMain
       Category = 'File'
       Caption = 'Open File...'
       DisableIfNoHandler = True
-      ImageIndex = 2
+      ImageIndex = 1
       OnExecute = FileOpen
     end
   end

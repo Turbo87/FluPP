@@ -5,9 +5,8 @@ unit Airports;
 interface
 
 uses
-  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, MaskEdit, Buttons, Grids, ComCtrls{, shellapi, JvExGrids,
-  JvStringGrid, gnugettext, JvExStdCtrls, JvButton, JvCtrls}, LResources;
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, MaskEdit, Buttons, Grids, ComCtrls, LResources;
 
 type
   TFAirports = class(TForm)
@@ -364,8 +363,6 @@ begin
 end;
 
 initialization
-  {$i Airports.lrs}
-  {$i Airports.lrs}
   {$i Airports.lrs}
 
 end.

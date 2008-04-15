@@ -73,10 +73,5 @@ end;
 
 initialization
   {$i SButton.lrs}
-  {$i SButton.lrs}
-  {$i SButton.lrs}
-  {$i SButton.lrs}
-  {$i SButton.lrs}
-  {$i SButton.lrs}
 
 end.

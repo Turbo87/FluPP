@@ -4,7 +4,7 @@ unit ToolsGrid;
 
 interface
 
-uses SysUtils, Classes, Types, Grid, Grids, DateUtils, Messages, Graphics;
+uses SysUtils, Classes, Types, Grid, Grids, Graphics;
 
 const
   DeSelectRect: TGridRect = (Left:-1; Top:-1; Right:-1; Bottom:-1 );
