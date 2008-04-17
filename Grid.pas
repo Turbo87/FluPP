@@ -71,6 +71,7 @@ type
     GridCols: TSTrings;
     Undo: Array of String;
     SButton: TFSButton;
+    FlName: String;
     property Data[Name: String; Row: Word]: String read GetData write SetData;
     procedure ReCalcGridNr;
     procedure ReCalcGridtime;
@@ -81,9 +82,9 @@ type
     function KeyInKat(key: String; Kat: String; Row: Word; var Value: Array of String): Boolean; overload;
   end;
 
+
 var
   FGrid: TFGrid;
-
 implementation
 
 uses Main, Input, Tools, ToolsGrid, Export;
@@ -337,7 +338,7 @@ begin
     TempStr := ''; Idx := 0;
     PUFiles.Clear;
 //    if length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) = 0 then
-//      PUFiles.Enabled := False
+//      PUFiles.checked := False
 //    else
     for i := 1 to length(TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row]) do
     if (TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row][i] = ',') then

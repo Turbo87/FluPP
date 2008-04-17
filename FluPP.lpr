@@ -23,11 +23,6 @@ uses
   TurboPowerIPro,
   TAChartLazarusPkg;
 
-{GlobalExceptionHandler, Logfile}
-
-
-
-
 begin
   Application.Initialize;
   Application.HelpFile := '';

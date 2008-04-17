@@ -4,7 +4,7 @@ unit Tools;
 
 interface
 
-uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, {Windows,} Dialogs, Grids, CheckLst, StdCtrls;
+uses SysUtils, Math, StrUtils, DateUtils, Classes, Types, Dialogs, Grids, CheckLst, StdCtrls;
 
 type
   TAirport = record

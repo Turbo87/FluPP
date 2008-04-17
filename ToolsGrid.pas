@@ -36,7 +36,7 @@ end;
 // ----------------------------------------------------------------
 function GridActiveChild: TFGrid;
 begin
-  Result := TFGrid(FMain.ActiveFlWindow);
+  Result := TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]);
 end;
 
 // ----------------------------------------------------------------

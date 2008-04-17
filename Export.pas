@@ -107,7 +107,7 @@ begin
     for GridIdx := 0 to FMain.FlWindows.Count-1 do
     begin
       XMLNode := XMLDoc.CreateElement('FlightLog');
-      TDOMElement(XMLRoot).SetAttribute('Name', GridChild(GridIdx).Caption);
+      TDOMElement(XMLRoot).SetAttribute('Name', GridChild(GridIdx).Name);
 
       { Settings }
       writeValStrings(XMLDoc, XMLNode, 'Settings', GridChild(GridIdx).Settings);

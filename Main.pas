@@ -7,20 +7,33 @@ interface
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ComCtrls, StdCtrls, Buttons, IniFiles, Grids,
-  SButton, ExtCtrls, Grid, ActnList, Tools,
-  DateUtils, LResources, Contnrs, XMLRead, DOM, gnugettext, interfaces;
+  SButton, ExtCtrls, Grid, ActnList, Tools, DateUtils,
+  LResources, Contnrs, XMLRead, DOM, gnugettext, interfaces;
 
 type
 
   { TFMain }
 
   TFMain = class(TForm)
-    ActionFileOpen: TAction;
-    ActionFileNew: TAction;
+    ABasicSettings: TAction;
+    AClose: TAction;
+    AFlightNew: TAction;
+    AExit: TAction;
+    ASettings: TAction;
+    AFlightLogs: TAction;
+    APrint: TAction;
+    AEFilexport: TAction;
+    AFileImport: TAction;
+    AFileSaveAs: TAction;
+    AFileSave: TAction;
+    AFileOpen: TAction;
+    AFileNew: TAction;
     ActionList: TActionList;
     GridSched: TStringGrid;
     ImageList32: TImageList;
     ImageList16: TImageList;
+    KatAdd: TMenuItem;
+    KatRem: TMenuItem;
     MainMenu: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem10: TMenuItem;
@@ -52,6 +65,7 @@ type
     MenuItem34: TMenuItem;
     MenuItem35: TMenuItem;
     MenuItem36: TMenuItem;
+    MenuItem37: TMenuItem;
     MenuItem4: TMenuItem;
     MiFile: TMenuItem;
     MenuItem5: TMenuItem;
@@ -59,47 +73,65 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
+    N1: TMenuItem;
+    N5: TMenuItem;
     OpenDialog: TOpenDialog;
     Panel2: TPanel;
     PanelSButtons: TPanel;
-    PanelScheduler: TPanel;
+    PUFiles: TMenuItem;
+    PUFlightEdit: TMenuItem;
+    PUFlightNew: TMenuItem;
+    PUFlugEinfuegen: TMenuItem;
+    PUFlugloeschen: TMenuItem;
+    PUGoogleEarth: TMenuItem;
+    PUGoogleMap: TMenuItem;
+    PUKategorieZuordnen: TMenuItem;
+    PUloeschrueck: TMenuItem;
+    PUSepFiles: TMenuItem;
     SaveDialog: TSaveDialog;
     StartTimer: TTimer;
     StatusBar1: TStatusBar;
     ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
     ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
-    procedure ExitClick(Sender: TObject);
-    procedure FileSave(Sender: TObject);
-    procedure FileOpen(Sender: TObject);
-    procedure FileNew(Sender: TObject);
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
+    ToolButton9: TToolButton;
+    procedure ASettingsExecute(Sender: TObject);
+    procedure ActionExit(Sender: TObject);
+    procedure ActionFileSave(Sender: TObject);
+    procedure ActionFileOpen(Sender: TObject);
+    procedure ActionFileNew(Sender: TObject);
     procedure IpHtmlPanel1Click(Sender: TObject);
     procedure MMStatisticsClick(Sender: TObject);
     procedure InfoClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
-    procedure SettingsClick(Sender: TObject);
-    procedure FileSaveAsClick(Sender: TObject);
+    procedure ActionSettings(Sender: TObject);
+    procedure ActionFileSaveAs(Sender: TObject);
     procedure FlightEdit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LastFifeClick(Sender: TObject);
     procedure StartTimerTimer(Sender: TObject);
     procedure LicenseClick(Sender: TObject);
-    procedure Print(Sender: TObject);
-    procedure FormClose(Sender: TObject; var ActionFileNew: TCloseAction);
-    procedure CloseClick(Sender: TObject);
-    procedure FlightNew(Sender: TObject);
+    procedure ActionPrint(Sender: TObject);
+    procedure FormClose(Sender: TObject; var AFileNew: TCloseAction);
+    procedure ActionClose(Sender: TObject);
+    procedure ActionFlightNew(Sender: TObject);
     procedure FlightDeleteUndo(Sender: TObject);
     procedure FlightDelete(Sender: TObject);
-    procedure BasicSettingsClick(Sender: TObject);
+    procedure ActionBasicSettings(Sender: TObject);
     procedure AirportsClick(Sender: TObject);
     procedure FlightInsert(Sender: TObject);
     procedure SortAllFlightsClick(Sender: TObject);
     procedure MMTrainBaroClick(Sender: TObject);
     procedure MMNinetyDaysClick(Sender: TObject);
     procedure SchedulerClick(Sender: TObject);
-    procedure FlightLogsClick(Sender: TObject);
+    procedure ActionFlightLogs(Sender: TObject);
     procedure ActionHPExecute(Sender: TObject);
     procedure ActionHPAirportsExecute(Sender: TObject);
     procedure ActionHPLicensesExecute(Sender: TObject);
@@ -109,14 +141,14 @@ type
     procedure ActionHPSupportExecute(Sender: TObject);
     procedure GridSchedDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
-    procedure ActionFileExportExecute(Sender: TObject);
+    procedure ActionFileExport(Sender: TObject);
     procedure JvZlibProgress(Sender: TObject; Position, Total: Integer);
     procedure ActionExportGoogleMapExecute(Sender: TObject);
     procedure ActionExportGoogleEarthExecute(Sender: TObject);
     procedure ActionResetColumnsExecute(Sender: TObject);
     procedure ActionFileImportExecute(Sender: TObject);
-    procedure StatusBar1DblClick(Sender: TObject);
     procedure TIPropertyGrid1Click(Sender: TObject);
+    procedure ToolButton5Click(Sender: TObject);
   private
     ProgressBar: TProgressBar;
     procedure LoadFluFile;
@@ -150,6 +182,7 @@ var
   SchedValidity: TSTrings;
   FluFileName: String;
   FlpTempDir: String;
+  ChWindow: TFGrid;
   
 const
   {$I FluPP.lrs}
@@ -356,15 +389,15 @@ end;
 // ----------------------------------------------------------------
 // create new flightlog
 // ----------------------------------------------------------------
-procedure TFMain.FileNew(Sender: TObject);
+procedure TFMain.ActionFileNew(Sender: TObject);
 begin
-  if not SpeichernAbfrage then Exit;
-  CloseClick(Sender);
+//  if not SpeichernAbfrage then Exit;
+//  ActionClose(Sender);
 
 { TODO:  FlpTempDir := FileGetTempName('Flp');}
-  DeleteFile(FlpTempDir);
+{  DeleteFile(FlpTempDir);
   CreateDir(FlpTempDir);
-  CreateDir(FlpTempDir+'\Files');
+  CreateDir(FlpTempDir+'\Files');}
 
   LoadDefaultGenSettings;
 
@@ -375,8 +408,8 @@ begin
   finally
     Release;
   end;
-  UpdateButtonState;
-  CreateSButtons;
+//  UpdateButtonState;
+//  CreateSButtons;
 
 {  with TFSettings.Create(Application) do
   try
@@ -385,8 +418,8 @@ begin
     Release;
   end;}
 
-  UpdateButtonState;
-  CreateSButtons;
+//  UpdateButtonState;
+//  CreateSButtons;
 end;
 
 procedure TFMain.IpHtmlPanel1Click(Sender: TObject);
@@ -410,21 +443,18 @@ end;
 // create new mdi-window
 // ----------------------------------------------------------------
 procedure TFMain.CreateNewWindow(Name: String);
-var
-  ChWindow: TFGrid;
 begin
-  ChWindow := TFGrid.create(self);
-  ChWindow.Caption := Name;
+  ChWindow := TFGrid.create(FMain);
+  ChWindow.Name := 'FGrid' + IntToStr(FlWindows.Count);
+  ChWindow.FlName := Name;
   Chwindow.Parent := FMain;
+  ChWindow.Align := alClient;
   
-  FlWindows.Add(ChWindow);
+  ActiveFlWindow := FlWindows.Add(ChWindow);
 
-  with GridActiveChild do
-  begin
-    Grid.ColCount := NumberOfGridRows + 1;
-    GridActiveChild.setColWidth(DefaultColWidth);
-    WindowState := wsMaximized;
-  end;
+  GridActiveChild.Grid.ColCount := NumberOfGridRows + 1;
+  GridActiveChild.setColWidth(DefaultColWidth);
+//  GridActiveChild.WindowState := wsMaximized;
 
   LoadDefaultSettings(GridActiveChild);
 end;
@@ -471,7 +501,7 @@ begin
 }
   { Enable when flight log available }
 {  GridAssigned := Assigned(TFGrid(ActiveMDIChild));
-  ActionFileSave.Enabled := GridAssigned;
+  AFileSave.Enabled := GridAssigned;
   ActionFileSaveAs.Enabled := GridAssigned;
   ActionFileImport.Enabled := GridAssigned;
   ActionFileExport.Enabled := GridAssigned;
@@ -496,16 +526,16 @@ end;
 // ----------------------------------------------------------------
 // Form close
 // ----------------------------------------------------------------
-procedure TFMain.FormClose(Sender: TObject; var ActionFileNew: TCloseAction);
+procedure TFMain.FormClose(Sender: TObject; var AFileNew: TCloseAction);
 begin
-  ActionFileNew := caNone;
-  ExitClick(self);
+  AFileNew := caNone;
+  ActionExit(self);
 end;
 
 // ----------------------------------------------------------------
 // Exit, write ini-MiFile
 // ----------------------------------------------------------------
-procedure TFMain.ExitClick(Sender: TObject);
+procedure TFMain.ActionExit(Sender: TObject);
 var
   IniFile: TIniFile;
 begin
@@ -540,14 +570,19 @@ begin
   AirportData.Free;
 end;
 
+procedure TFMain.ASettingsExecute(Sender: TObject);
+begin
+
+end;
+
 // ----------------------------------------------------------------
 // Closes all flight logs
 // ----------------------------------------------------------------
-procedure TFMain.CloseClick(Sender: TObject);
+procedure TFMain.ActionClose(Sender: TObject);
 var
   i: Integer;
 begin
-  if (Sender <> ActionFileNew) then
+  if (Sender <> AFileNew) then
     if not SpeichernAbfrage then Exit;
 
   if FlWindows.Count > 0 then
@@ -561,7 +596,7 @@ begin
   Schedules.Clear;
   GridSched.Clear;
   SchedValidity.Clear;
-  PanelScheduler.Visible := False;
+  GridSched.Visible := False;
 
   DataChanged := False;
   StatusBar1.Panels[0].Text := '';
@@ -577,7 +612,7 @@ end;
 procedure TFMain.LastFifeClick(Sender: TObject);
 begin
  if not SpeichernAbfrage then Exit;
- CloseClick(Self);
+ ActionClose(Self);
  FluFileName := TAction(Sender).Caption;
  LoadFluFile;
 end;
@@ -647,9 +682,9 @@ end;
 // ----------------------------------------------------------------
 // Open flightlog
 // ----------------------------------------------------------------
-procedure TFMain.FileOpen(Sender: TObject);
+procedure TFMain.ActionFileOpen(Sender: TObject);
 begin
-  CloseClick(Self);
+  ActionClose(Self);
   OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
   if not OpenDialog.Execute then Exit;
   FluFileName := OpenDialog.FileName;
@@ -768,14 +803,14 @@ begin
     answer := MessageDlg(format(_('Do you want to save the file ''%s''?'),
       [extractFilename(FluFileName)]),mtConfirmation,[mbYes,mbNo,mbCancel],0);
 
-  if answer = mrYes then FileSave(self);
+  if answer = mrYes then ActionFileSave(self);
   if answer = mrCancel then result := false;
 end;
 
 // ----------------------------------------------------------------
 // Save
 // ----------------------------------------------------------------
-procedure TFMain.FileSave(Sender: TObject);
+procedure TFMain.ActionFileSave(Sender: TObject);
 begin
   if FluFileName = '' then
   begin
@@ -792,7 +827,7 @@ end;
 // ----------------------------------------------------------------
 // Save as
 // ----------------------------------------------------------------
-procedure TFMain.FileSaveAsClick(Sender: TObject);
+procedure TFMain.ActionFileSaveAs(Sender: TObject);
 begin
   SaveDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu';
   if not SaveDialog.Execute then Exit;
@@ -821,7 +856,7 @@ end;
 // ----------------------------------------------------------------
 // Export
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileExportExecute(Sender: TObject);
+procedure TFMain.ActionFileExport(Sender: TObject);
 begin
   SaveDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
   if not SaveDialog.Execute then exit;
@@ -870,7 +905,7 @@ end;
 // ----------------------------------------------------------------
 // Settings
 // ----------------------------------------------------------------
-procedure TFMain.SettingsClick(Sender: TObject);
+procedure TFMain.ActionSettings(Sender: TObject);
 var LastFile : string;
 begin
 {  with TFSettings.Create(Application) do
@@ -893,7 +928,7 @@ end;
 // ----------------------------------------------------------------
 // Basic settings
 // ----------------------------------------------------------------
-procedure TFMain.BasicSettingsClick(Sender: TObject);
+procedure TFMain.ActionBasicSettings(Sender: TObject);
 begin
   with TFBasicSettings.Create(Application) do
   try
@@ -970,7 +1005,7 @@ end;
 // ----------------------------------------------------------------
 // Printing
 // ----------------------------------------------------------------
-procedure TFMain.Print(Sender: TObject);
+procedure TFMain.ActionPrint(Sender: TObject);
 begin
 {  with TFPrint.Create(Application) do
   try
@@ -983,7 +1018,7 @@ end;
 // ----------------------------------------------------------------
 // Manage flight logs
 // ----------------------------------------------------------------
-procedure TFMain.FlightLogsClick(Sender: TObject);
+procedure TFMain.ActionFlightLogs(Sender: TObject);
 begin
   with TFFlightLogs.Create(Application) do
   try
@@ -1035,7 +1070,7 @@ end;
 // ----------------------------------------------------------------
 // New flight
 // ----------------------------------------------------------------
-procedure TFMain.FlightNew(Sender: TObject);
+procedure TFMain.ActionFlightNew(Sender: TObject);
 begin
   if GridActiveChild.Grid.Cells[0,1] = '' then
     FInput.Neu(1)
@@ -1083,7 +1118,7 @@ begin
   begin
     if not Assigned(GridChild(i).SButton) then
     begin
-      GridChild(i).SButton := TFSButton.create(GridChild(i));
+      GridChild(i).SButton := TFSButton.create(FMain); //
       GridChild(i).SButton.Parent := PanelSButtons;
 
       GridChild(i).SButton.Top := 2;
@@ -1096,7 +1131,7 @@ begin
       TranslateComponent(GridChild(i).SButton);
     end;
     GridChild(i).SButton.Left := i*94+2;
-    GridChild(i).SButton.LabelHeading.Caption := GridChild(i).Caption;
+    GridChild(i).SButton.LabelHeading.Caption := GridChild(i).Name;
     UpdateSButtons;
   end;
   if FlWindows.Count > 0 then PanelSButtons.width := FlWindows.Count*94+4;
@@ -1225,10 +1260,10 @@ begin
   LoadSchedule(SchedValidity);
 
   if GridSched.Cells[0,0] = '' then
-    PanelScheduler.Visible := False
+    GridSched.Visible := False
   else
   begin
-    PanelScheduler.Visible := True;
+    GridSched.Visible := True;
 //    SortGridByCols([0], GridSched);
   end;
 end;
@@ -1324,15 +1359,16 @@ begin
   InsertData;
 end;
 
-procedure TFMain.StatusBar1DblClick(Sender: TObject);
-begin
-
-end;
-
 procedure TFMain.TIPropertyGrid1Click(Sender: TObject);
 begin
 
 end;
+
+procedure TFMain.ToolButton5Click(Sender: TObject);
+begin
+
+end;
+
 
 initialization
   {$i Main.lrs}

@@ -1,5 +1,7 @@
 inherited FSButton: TFSButton
+  Left = 535
   Height = 48
+  Top = 382
   Width = 115
   HorzScrollBar.Page = 114
   VertScrollBar.Page = 47

@@ -1,7 +1,7 @@
 object FGrid: TFGrid
-  Left = 457
+  Left = 684
   Height = 454
-  Top = 252
+  Top = 186
   Width = 563
   HorzScrollBar.Page = 562
   VertScrollBar.Page = 453
@@ -16,7 +16,6 @@ object FGrid: TFGrid
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  PopupMenu = PopupMenu
   Position = poDefault
   Visible = True
   object Grid: TStringGrid
@@ -25,16 +24,24 @@ object FGrid: TFGrid
     Align = alClient
     ColCount = 5
     FixedColor = clBtnFace
+    Flat = True
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goSmoothScroll]
     RowCount = 5
     ScrollBars = ssAutoBoth
     TabOrder = 0
     TabStop = True
   end
+  object PopupMenuCols: TPopupMenu
+    left = 35
+    top = 243
+    object MenuItem37: TMenuItem
+      Caption = 'New Item1'
+    end
+  end
   object PopupMenu: TPopupMenu
     AutoPopup = False
-    left = 40
-    top = 414
+    left = 67
+    top = 243
     object PUFlightNew: TMenuItem
     end
     object PUFlightEdit: TMenuItem
@@ -73,13 +80,6 @@ object FGrid: TFGrid
     object PUGoogleMap: TMenuItem
     end
     object PUGoogleEarth: TMenuItem
-    end
-  end
-  object PopupMenuCols: TPopupMenu
-    left = 8
-    top = 414
-    object MenuItem1: TMenuItem
-      Caption = 'New Item1'
     end
   end
 end

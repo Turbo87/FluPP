@@ -1,15 +1,15 @@
 object FFlightLogs: TFFlightLogs
   Left = 528
-  Height = 222
+  Height = 237
   Top = 313
-  Width = 229
-  HorzScrollBar.Page = 228
-  VertScrollBar.Page = 221
+  Width = 266
+  HorzScrollBar.Page = 265
+  VertScrollBar.Page = 236
   ActiveControl = ButtonOK
   BorderStyle = bsDialog
   Caption = 'Manage flight logs'
-  ClientHeight = 222
-  ClientWidth = 229
+  ClientHeight = 237
+  ClientWidth = 266
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnClose = FormClose
@@ -18,8 +18,8 @@ object FFlightLogs: TFFlightLogs
   Position = poMainFormCenter
   object Label12: TLabel
     Height = 28
-    Top = 154
-    Width = 229
+    Top = 169
+    Width = 266
     Align = alBottom
     Alignment = taCenter
     AutoSize = False
@@ -32,19 +32,21 @@ object FFlightLogs: TFFlightLogs
   end
   object Panel1: TPanel
     Height = 40
-    Top = 182
-    Width = 229
+    Top = 197
+    Width = 266
     Align = alBottom
-    BevelInner = bvLowered
+    BevelOuter = bvNone
+    BorderWidth = 1
     ClientHeight = 40
-    ClientWidth = 229
+    ClientWidth = 266
     TabOrder = 0
     object ButtonOK: TBitBtn
-      Left = 75
+      Left = 93
       Height = 25
       Top = 9
       Width = 79
       Anchors = [akTop]
+      Caption = 'OK'
       Default = True
       Kind = bkOK
       ModalResult = 1
@@ -54,30 +56,30 @@ object FFlightLogs: TFFlightLogs
     end
   end
   object ButtonNew: TBitBtn
-    Left = 67
+    Left = 96
     Height = 25
     Hint = 'add'
-    Top = 126
+    Top = 128
     Width = 25
     NumGlyphs = 0
     OnClick = ButtonNewClick
     TabOrder = 1
   end
   object ButtonDelete: TBitBtn
-    Left = 94
+    Left = 123
     Height = 25
     Hint = 'remove'
-    Top = 126
+    Top = 128
     Width = 25
     NumGlyphs = 0
     OnClick = ButtonDeleteClick
     TabOrder = 2
   end
   object ButtonEdit: TBitBtn
-    Left = 121
+    Left = 150
     Height = 25
     Hint = 'edit'
-    Top = 126
+    Top = 128
     Width = 25
     NumGlyphs = 0
     OnClick = ButtonEditClick
@@ -86,14 +88,13 @@ object FFlightLogs: TFFlightLogs
   object LBFlu: TListBox
     Height = 120
     Hint = 'Select flight log'
-    Width = 229
+    Width = 266
     Align = alTop
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ItemHeight = 23
-    OnDrawItem = LBFluDrawItem
     Style = lbOwnerDrawFixed
     TabOrder = 4
     TopIndex = -1

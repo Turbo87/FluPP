@@ -5,8 +5,8 @@ unit SButton;
 interface
 
 uses
-  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls{, gnugettext}, LResources;
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, gnugettext, LResources;
 
 type
   TFSButton = class(TFrame)

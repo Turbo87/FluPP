@@ -1,7 +1,7 @@
 object FBasicSettings: TFBasicSettings
-  Left = 449
+  Left = 488
   Height = 364
-  Top = 308
+  Top = 367
   Width = 427
   HorzScrollBar.Page = 426
   VertScrollBar.Page = 363

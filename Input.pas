@@ -474,7 +474,7 @@ begin
     else LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Settings.Values['BFStarts'])+1);
   end
   else LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Settings.Values['BFStarts'])+1);
-  LabelFlbArt.caption := GridActiveChild.caption;
+  LabelFlbArt.caption := GridActiveChild.Name;
   DTPDate.Date := now;
   CBAircraftID.Text := GridActiveChild.Settings.Values['IDPrefix'];
 
@@ -542,7 +542,7 @@ begin
   Metar.Text := GridActiveChild.data['Met',InputRow];
 
   LabelFlugNr.caption := GridActiveChild.data['Num',InputRow];
-  LabelFlbArt.caption := GridActiveChild.Caption;
+  LabelFlbArt.caption := GridActiveChild.Name;
   DTPDate.Date := StrToDate(GridActiveChild.data['Dat',InputRow]);
   CBAircraftType.Text:= GridActiveChild.data['ATy',InputRow];
   CBAircraftID.Text := GridActiveChild.data['AId',InputRow];

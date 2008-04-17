@@ -803,7 +803,7 @@ object FInput: TFInput
     object TSStreckenflug: TTabSheet
       Caption = 'Distance flight'
       ClientHeight = 392
-      ClientWidth = 458
+      ClientWidth = 509
       ImageIndex = 1
       object Panel7: TPanel
         Left = 6
