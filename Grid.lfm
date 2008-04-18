@@ -1,19 +1,17 @@
 object FGrid: TFGrid
-  Left = 684
+  Left = 575
   Height = 454
-  Top = 186
+  Top = 254
   Width = 563
   HorzScrollBar.Page = 562
   VertScrollBar.Page = 453
   ActiveControl = Grid
-  BorderStyle = bsNone
   Caption = 'FGrid'
   ClientHeight = 454
   ClientWidth = 563
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   KeyPreview = True
-  OnActivate = FormActivate
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefault
@@ -22,14 +20,16 @@ object FGrid: TFGrid
     Height = 454
     Width = 563
     Align = alClient
-    ColCount = 5
+    ColCount = 2
+    DefaultRowHeight = 17
     FixedColor = clBtnFace
-    Flat = True
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goSmoothScroll]
-    RowCount = 5
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect, goThumbTracking]
+    RowCount = 2
     ScrollBars = ssAutoBoth
     TabOrder = 0
     TabStop = True
+    OnMouseDown = GridMouseDown
+    OnMouseUp = GridMouseUp
   end
   object PopupMenuCols: TPopupMenu
     left = 35

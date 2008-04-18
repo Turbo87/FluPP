@@ -120,7 +120,7 @@ begin
   Inifile.WriteString('General','Language',Languages[LBLanguages.ItemIndex]);
   Inifile.Free;
 
-  If FMain.FlWindows.Count > 0 then
+  If FlWindow.Count > 0 then
   begin
    FMain.UpdateSButtons;
    GridActiveChild.ReCalcGridNr;

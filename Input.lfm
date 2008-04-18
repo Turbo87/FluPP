@@ -1,7 +1,7 @@
 object FInput: TFInput
-  Left = 420
+  Left = 426
   Height = 520
-  Top = 224
+  Top = 243
   Width = 515
   HorzScrollBar.Page = 514
   VertScrollBar.Page = 519
@@ -50,7 +50,7 @@ object FInput: TFInput
       TabOrder = 1
     end
     object ButtonNext: TBitBtn
-      Left = 376
+      Left = 368
       Height = 25
       Hint = 'Next flight. Or just press RETURN!'
       Top = 8
@@ -83,26 +83,26 @@ object FInput: TFInput
     ClientWidth = 515
     TabOrder = 1
     object Label1: TLabel
-      Left = 29
-      Height = 23
-      Top = 8
-      Width = 105
+      Left = 8
+      Height = 20
+      Top = 5
+      Width = 89
       Alignment = taRightJustify
       Caption = 'Flight no.:'
-      Font.Height = -16
+      Font.Height = -14
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
     end
     object LabelFlugNr: TLabel
-      Left = 113
-      Height = 23
-      Top = 8
-      Width = 123
+      Left = 107
+      Height = 20
+      Top = 5
+      Width = 104
       Caption = 'LabelFlugNr'
       Color = clBtnFace
       Font.Color = clNavy
-      Font.Height = -16
+      Font.Height = -14
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
@@ -111,13 +111,13 @@ object FInput: TFInput
     object LabelFlbArt: TLabel
       Left = 261
       Height = 20
-      Top = 8
+      Top = 6
       Width = 170
       Alignment = taCenter
       AutoSize = False
       Caption = 'LabelFlbArt'
       Color = clBtnFace
-      Font.Height = -16
+      Font.Height = -14
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
@@ -438,6 +438,48 @@ object FInput: TFInput
           Caption = 'Duration:'
           ParentColor = False
         end
+        object MEFlightTimeDep: TMaskEdit
+          Left = 79
+          Height = 21
+          Hint = 'Enter start time'
+          Top = 6
+          Width = 39
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 0
+          Text = '  :  '
+          OnExit = METimeExit
+          OnKeyUp = MEFlightTimeDepKeyUp
+        end
+        object MEFlightTimeArr: TMaskEdit
+          Left = 127
+          Height = 21
+          Hint = 'Enter landing time'
+          Top = 6
+          Width = 40
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 1
+          Text = '  :  '
+          OnExit = METimeExit
+          OnKeyUp = MEFlightTimeArrKeyUp
+        end
+        object MEFlightTime: TMaskEdit
+          Left = 261
+          Height = 21
+          Hint = 'Enter flight time for cumulative entries'
+          Top = 6
+          Width = 41
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 2
+          TabStop = False
+          Text = '  :  '
+          OnKeyUp = MEFlightTimeKeyUp
+        end
       end
       object PanelBlockTime: TPanel
         Left = 130
@@ -474,6 +516,48 @@ object FInput: TFInput
           Font.Height = -13
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+        end
+        object MEBlockTimeDep: TMaskEdit
+          Left = 79
+          Height = 21
+          Hint = 'Enter start time'
+          Top = 6
+          Width = 39
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 0
+          Text = '  :  '
+          OnExit = METimeExit
+          OnKeyUp = MEBlockTimeDepKeyUp
+        end
+        object MEBlockTimeArr: TMaskEdit
+          Left = 127
+          Height = 21
+          Hint = 'Enter landing time'
+          Top = 6
+          Width = 40
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 1
+          Text = '  :  '
+          OnExit = METimeExit
+          OnKeyUp = MEBlockTimeArrKeyUp
+        end
+        object MEBlockTime: TMaskEdit
+          Left = 261
+          Height = 21
+          Hint = 'Enter flight time for cumulative entries'
+          Top = 6
+          Width = 41
+          EditMask = '!90:00;1;_'
+          MaxLength = 5
+          ParentColor = False
+          TabOrder = 2
+          TabStop = False
+          Text = '  :  '
+          OnKeyUp = MEFlightTimeKeyUp
         end
       end
       object PanelFromTo: TPanel
@@ -767,9 +851,9 @@ object FInput: TFInput
         end
       end
       object DTPDate: TDateEdit
-        Left = 78
-        Height = 22
-        Top = 9
+        Left = 72
+        Height = 21
+        Top = 11
         Width = 88
         CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
         OKCaption = 'OK'

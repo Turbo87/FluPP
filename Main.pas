@@ -13,7 +13,6 @@ uses
 type
 
   { TFMain }
-
   TFMain = class(TForm)
     ABasicSettings: TAction;
     AClose: TAction;
@@ -106,7 +105,6 @@ type
     procedure ActionFileSave(Sender: TObject);
     procedure ActionFileOpen(Sender: TObject);
     procedure ActionFileNew(Sender: TObject);
-    procedure IpHtmlPanel1Click(Sender: TObject);
     procedure MMStatisticsClick(Sender: TObject);
     procedure InfoClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
@@ -154,10 +152,7 @@ type
     procedure LoadFluFile;
     procedure SaveFile(SaveFileName: String);
     procedure LoadDefaultGenSettings;
-    procedure LoadDefaultSettings(Grid: TFGrid);
   public
-    procedure CreateNewWindow(Name, GridCols: String); overload;
-    procedure CreateNewWindow(Name: String); overload;
     function SpeichernAbfrage: Boolean;
     procedure InsertData;
     procedure onHint(Sender: TObject);
@@ -166,10 +161,19 @@ type
     procedure UpdateScheduleGrid;
     procedure LastFife(FileName: String);
     procedure CreateSButtons;
-    procedure ActivateSButton;
     procedure UpdateSButtons;
-    FlWindows: TObjectList;
+
     ActiveFlWindow: Word;
+  end;
+  
+    { TFlWindow }
+  TFlWindow = class(TObjectList)
+  private
+    ActiveFlWindow: Integer;
+  public
+    function Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
+    function GetActive: TFGrid;
+    procedure SetActive(Index: Integer);
   end;
 
 var
@@ -182,10 +186,12 @@ var
   SchedValidity: TSTrings;
   FluFileName: String;
   FlpTempDir: String;
+  FlWindow: TFlWindow;
   ChWindow: TFGrid;
   
 const
-  {$I FluPP.lrs}
+
+{$I FluPP.lrs}
 
 implementation
 
@@ -193,6 +199,70 @@ uses
   Input, BasicSettings, FlightLogs,
   ToolsGrid, ToolsShell, Import, Export, Debug;
 //  Info, Calendar, NinetyDays, TrainBaro, Airports, Print, Statistics, Licenses, Settings;
+
+{--\/-- TFlWindow --\/--}
+
+// ----------------------------------------------------------------
+// Add new FlWindow
+//   hides TObjectList.Add
+//   returns the added FGrid
+// ----------------------------------------------------------------
+function TFlWindow.Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
+begin
+  ChWindow := TFGrid.Create(Application);
+  
+  ActiveFlWindow := inherited Add(ChWindow);
+
+  ChWindow.Name := 'ChWindow' + IntToStr(FlWindow.Count);  { TODO: bad, when deleting}
+  ChWindow.FlName := Name;
+//  ChWindow.Parent := FMain;
+  ChWindow.Align := alClient;
+  ChWindow.Show;;
+
+  ChWindow.Grid.ColCount := NumberOfGridRows + 1;
+  ChWindow.setColWidth(DefaultColWidth);
+
+  ChWindow.LoadDefaultSettings;
+
+  ReadTStrings(GridCols, ChWindow.GridCols);
+  ChWindow.Grid.ColCount := ChWindow.GridCols.Count;
+  ChWindow.NameCols;
+  SetLength(ChWindow.Undo, ChWindow.GridCols.Count);
+
+  Result := TFGrid(FlWindow[ActiveFlWindow]);
+
+//  FMain.CreateSButtons;
+//  FMain.UpdateSButtons;
+end;
+
+// ----------------------------------------------------------------
+// Returns the active FlWindow
+// ----------------------------------------------------------------
+function TFlWindow.GetActive: TFGrid;
+begin
+  Result := TFGrid(Items[ActiveFlWindow]);
+end;
+
+// ----------------------------------------------------------------
+// Sets the active FlWindow
+// ----------------------------------------------------------------
+procedure TFlWindow.SetActive(Index: Integer);
+var i: Integer;
+begin
+  ActiveFlWindow := Index;
+  for i:= 0 to FlWindow.Count -1 do
+    if i = Index then
+    begin
+      TFGRid(FlWindow.Items[i]).Visible := True;
+      TFGRid(FlWindow.Items[i]).SButton.PanelSB.Color := clFOrange;
+    end
+    else begin
+      TFGRid(FlWindow.Items[i]).Visible := False;
+      TFGRid(FlWindow.Items[i]).SButton.PanelSB.Color := clSilver;
+    end;
+end;
+
+{--/\-- TFlWindow --/\--}
 
 // ----------------------------------------------------------------
 // Form create
@@ -227,7 +297,7 @@ begin
   if IniFile.ReadBool('General', 'WMaximized', False) then
     WindowState := wsMaximized;
 
-//  DefaultInstance.UseLanguage(Inifile.ReadString('General', 'Language', copy(DefaultInstance.GetCurrentLanguage,1,2)));
+  DefaultInstance.UseLanguage(Inifile.ReadString('General', 'Language', copy(DefaultInstance.GetCurrentLanguage,1,2)));
   Inifile.Free;
 
   GenSettings := TSTringList.Create;
@@ -238,7 +308,7 @@ begin
   SchedValidity := TStringList.Create;
   AirportData := TAirportList.Create;
   
-  FlWindows := TObjectList.create;
+  FlWindow := TFlWindow.create;
 
   with GridSched do
   begin
@@ -283,7 +353,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.onHint(Sender: TObject);
 begin
-  StatusBar1.Panels[1].text := GetLongHint(Application.Hint);
+  //StatusBar1.Panels[1].text := GetLongHint(Application.Hint);
 end;
 
 // ----------------------------------------------------------------
@@ -293,31 +363,6 @@ procedure TFMain.LoadDefaultGenSettings;
 begin
   GenSettings.Values['WarningMonth'] := '2';
   GenSettings.Values['ExportICal'] := '0';
-end;
-
-// ----------------------------------------------------------------
-// Load default Settings
-// ----------------------------------------------------------------
-procedure TFMain.LoadDefaultSettings(Grid: TFGrid);
-begin
-  with Grid do
-  begin
-    Settings.Values['BFStarts'] := '0';
-    Settings.Values['BFTime'] := '00000:00';
-    Settings.Values['LicenseSince'] := '  .  .    ';
-    Settings.Values['IDPrefix'] := '';
-    Settings.Values['DistUnit'] := 'nm';
-    Settings.Values['License'] := '';
-    Settings.Values['Numeration'] := '0'; // Continuous
-    Settings.Values['ShowFlightTime'] := 'False';
-    Settings.Values['ShowBlockTime'] := 'True';
-    Settings.Values['ShowStartType'] := 'False';
-    Settings.Values['DefaultTime'] := '0'; // BlockTime
-    Settings.Values['DefPosition'] := '0'; // Pilot
-
-    Settings.Values['DisallowChange'] := '0';
-    Settings.Values['AllowLastEdit'] := '0';
-  end;
 end;
 
 // ----------------------------------------------------------------
@@ -422,63 +467,26 @@ begin
 //  CreateSButtons;
 end;
 
-procedure TFMain.IpHtmlPanel1Click(Sender: TObject);
-begin
-
-end;
-
-// ----------------------------------------------------------------
-// Create new flight log MDI-child
-// ----------------------------------------------------------------
-procedure TFMain.CreateNewWindow(Name, GridCols: String);
-begin
-  CreateNewWindow(Name);
-  ReadTStrings(GridCols, GridActiveChild.GridCols);
-  GridActiveChild.Grid.ColCount := GridActiveChild.GridCols.Count;
-  GridActiveChild.NameCols;
-  SetLength(GridActiveChild.Undo, GridActiveChild.GridCols.Count);
-end;
-
-// ----------------------------------------------------------------
-// create new mdi-window
-// ----------------------------------------------------------------
-procedure TFMain.CreateNewWindow(Name: String);
-begin
-  ChWindow := TFGrid.create(FMain);
-  ChWindow.Name := 'FGrid' + IntToStr(FlWindows.Count);
-  ChWindow.FlName := Name;
-  Chwindow.Parent := FMain;
-  ChWindow.Align := alClient;
-  
-  ActiveFlWindow := FlWindows.Add(ChWindow);
-
-  GridActiveChild.Grid.ColCount := NumberOfGridRows + 1;
-  GridActiveChild.setColWidth(DefaultColWidth);
-//  GridActiveChild.WindowState := wsMaximized;
-
-  LoadDefaultSettings(GridActiveChild);
-end;
-
 // ----------------------------------------------------------------
 // Set button state
 // ----------------------------------------------------------------
 procedure TFMain.UpdateButtonState;
 var State, GridAssigned: Boolean;
 begin
-  State := False;
-  if FlWindows.Count >0 then
-  if Assigned(TFGrid(FlWindows[ActiveFlWindow])) then
+{  State := False;
+  if FlWindow.Count >0 then
+  if Assigned(TFGrid(FlWindow[ActiveFlWindow])) then
     if (GridActiveChild.Data['Dat',1] <> '') then
       State := True;
-
+ }
   { Undo }
 //  ActionFlightDeleteUndo.Enabled := False;
-  if State then
+{  if State then
   begin
     if length(GridActiveChild.Undo) > 0 then
       if GridActiveChild.Undo[1] <> '' then
-//        ActionFlightDeleteUndo.Enabled := True;
-  end;
+        ActionFlightDeleteUndo.Enabled := True;
+  end;}
 
   { Enable when data available }
 {  ActionFlightEdit.Enabled := State;
@@ -519,9 +527,9 @@ begin
   ActionAirports.Enabled := GridAssigned;
   ActionSortFlights.Enabled := GridAssigned;
   ActionResetColumns.Enabled := GridAssigned;
-}
+
   UpdateScheduleGrid;
-end;
+}end;
 
 // ----------------------------------------------------------------
 // Form close
@@ -539,7 +547,7 @@ procedure TFMain.ActionExit(Sender: TObject);
 var
   IniFile: TIniFile;
 begin
-  if FlWindows.Count = 0 then
+  if FlWindow.Count = 0 then
     Application.Terminate
   else
     if SpeichernAbfrage then
@@ -585,9 +593,9 @@ begin
   if (Sender <> AFileNew) then
     if not SpeichernAbfrage then Exit;
 
-  if FlWindows.Count > 0 then
-  for i:= FlWindows.Count - 1 downto 0 do
-    GridChild(i).Free;
+//  if FlWindow.Count > 0 then
+//  for i:= FlWindow.Count - 1 downto 0 do
+//    GridChild(i).Free;
 
 { TODO:  DelTree(FlpTempDir);}
 
@@ -596,12 +604,12 @@ begin
   Schedules.Clear;
   GridSched.Clear;
   SchedValidity.Clear;
-  GridSched.Visible := False;
+//  GridSched.Visible := False;
 
   DataChanged := False;
-  StatusBar1.Panels[0].Text := '';
+{  StatusBar1.Panels[0].Text := '';
   StatusBar1.Panels[2].Text := '';
-  StatusBar1.Panels[3].Text := '';
+  StatusBar1.Panels[3].Text := '';}
   FluFileName := '';
   UpdateButtonState;
 end;
@@ -685,9 +693,10 @@ end;
 procedure TFMain.ActionFileOpen(Sender: TObject);
 begin
   ActionClose(Self);
-  OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
-  if not OpenDialog.Execute then Exit;
-  FluFileName := OpenDialog.FileName;
+//  OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
+//  if not OpenDialog.Execute then Exit;
+//  FluFileName := OpenDialog.FileName;
+  FluFileName := '/home/momme/Daten/Programming/Delphi/FluPP/flightlog.flu';
   LoadFluFile;
 end;
 
@@ -705,11 +714,11 @@ begin
     Exit;
   end;
 
-  LastFife(FluFileName);
+//  LastFife(FluFileName);
   DataChanged := False;
-  StatusBar1.Panels[2].Text := '';
+{  StatusBar1.Panels[2].Text := '';
   Statusbar1.Panels[3].Text := FluFileName;
-
+}
   GenSettings.Clear;
   Medicals.Clear;
   Schedules.Clear;
@@ -722,7 +731,7 @@ begin
   CreateDir(FlpTempDir+'\Files');
   TempFileName := FlpTempDir+'\flightlog.xml';}
 
-  try
+{  try
     ProgressBar := TProgressBar.Create(FMain);
     ProgressBar.Parent := StatusBar1;
     ProgressBar.Top := 2;
@@ -731,11 +740,11 @@ begin
     StatusBar1.Repaint;
     Screen.Cursor := crHourGlass;
     try
-//      JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
+      JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
     except
       on E: Exception do
       begin
-//        CopyFile(pChar(FluFileName), pChar(TempFileName), False);
+        CopyFile(pChar(FluFileName), pChar(TempFileName), False);
         IGCDir := copy(FluFileName, 1, length(FluFileName)-length(ExtractFileExt(FluFileName)));
         if DirectoryExists(IGCDir) then
           ShellCopyFile(IGCDir+'\*.*', FlpTempDir+'\Files', False);
@@ -747,12 +756,12 @@ begin
     ProgressBar.Free;
     Screen.Cursor := crDefault;
     StatusBar1.Repaint;
-  end;
+  end;}
 
   XMLDoc := TXMLDocument.Create;
   with XMLDoc do try
     try
-       ReadXMLFile(XMLDoc, TempFileName);
+       ReadXMLFile(XMLDoc, FluFileName);
     except
       on E: Exception do begin
         OpenOldFile5;
@@ -760,20 +769,22 @@ begin
       end;
     end;
 
-    if (XMLDoc.DocumentElement.FirstChild.NodeName = 'FluPP') then begin
-      case StrToInt(XMLDoc.DocumentElement.FirstChild.Attributes.GetNamedItem('Version').NodeValue) of
+    if ((XMLDoc.DocumentElement.NodeName = 'FluPP')) and
+      (assigned(XMLDoc.DocumentElement.Attributes.GetNamedItem('Version'))) then begin
+      case StrToInt(XMLDoc.DocumentElement.Attributes.GetNamedItem('Version').NodeValue) of
         1 : OpenFluFile1(XMLDoc);
       end;
     end;
 
-    if (XMLDoc.DocumentElement.FirstChild.NodeName = 'FliPS') then
+    if (XMLDoc.DocumentElement.NodeName = 'FliPS') then
       OpenFlpFile7(XMLDoc);
 
   finally
     XMLDoc.Free;
   end;
 
-  for i := 0 to FlWindows.Count-1 do
+  if FlWindow.Count > 0 then
+  for i := 0 to FlWindow.Count-1 do
   begin
     GridChild(i).ReCalcGridNr;
     GridChild(i).Grid.FixedCols := 1;
@@ -782,11 +793,11 @@ begin
     GridChild(i).NameCols;
   end;
 
-{TODO:  MDIChildren[FlWindows.Count-1].show; }
-  GridActiveChild.ReCalcGridTime;
+{TODO:  MDIChildren[FlWindow.Count-1].show; }
+//  GridActiveChild.ReCalcGridTime;
 
-  UpdateButtonState;
-  CreateSButtons;
+//  UpdateButtonState;
+//  CreateSButtons;
 end;
 
 // ----------------------------------------------------------------
@@ -1114,15 +1125,16 @@ procedure TFMain.CreateSButtons;
 var
   i: Word;
 begin
-  for i:= 0 to FlWindows.Count -1 do
+  for i:= 0 to FlWindow.Count -1 do
   begin
     if not Assigned(GridChild(i).SButton) then
     begin
-      GridChild(i).SButton := TFSButton.create(FMain); //
+      GridChild(i).SButton := TFSButton.create(GridChild(i)); //
       GridChild(i).SButton.Parent := PanelSButtons;
 
       GridChild(i).SButton.Top := 2;
       GridChild(i).SButton.Width := 94;
+      GridChild(i).SButton.Height := 50;
 
       GridChild(i).SButton.PanelSB.ControlStyle := ControlStyle - [csParentBackground];
       GridChild(i).SButton.Panel90.ControlStyle := ControlStyle - [csParentBackground];
@@ -1134,24 +1146,8 @@ begin
     GridChild(i).SButton.LabelHeading.Caption := GridChild(i).Name;
     UpdateSButtons;
   end;
-  if FlWindows.Count > 0 then PanelSButtons.width := FlWindows.Count*94+4;
-  ActivateSButton;
+  if FlWindow.Count > 0 then PanelSButtons.width := FlWindow.Count*94+4;
   UpdateSButtons;
-end;
-
-// ----------------------------------------------------------------
-// Activate SButton
-// ----------------------------------------------------------------
-procedure TFMain.ActivateSButton;
-var
-  i: Word;
-begin
-  for i:= 0 to FlWindows.Count -1 do
-    if Assigned(GridChild(i).SButton) then
-      GridChild(i).SButton.Color := clBtnFace;
-
-  if Assigned(GridActiveChild.SButton) then
-    GridActiveChild.SButton.Color := clFOrange;
 end;
 
 // ----------------------------------------------------------------
@@ -1163,7 +1159,7 @@ var
   TotalPoints : Real;
   Flights, GridIdx, Row: Word;
 begin
-  for GridIdx := 0 to FlWindows.Count -1 do
+  for GridIdx := 0 to FlWindow.Count -1 do
     if Assigned(GridChild(GridIdx).SButton) then
       with GridChild(GridIdx).SButton do
       begin
@@ -1239,7 +1235,7 @@ procedure TFMain.UpdateScheduleGrid;
 var
   GridIdx: Integer;
 begin
-  if FlWindows.Count = 0 then Exit;
+  if FlWindow.Count = 0 then Exit;
   GridSched.RowCount := 1;
   GridSched.Clear;
 
@@ -1251,8 +1247,8 @@ begin
   end;}
 
   { Load Schedules }
-  LoadSchedule(Schedules);
-  for GridIdx := 0 to FlWindows.Count-1 do begin
+{  LoadSchedule(Schedules);
+  for GridIdx := 0 to FlWindow.Count-1 do begin
     LoadSchedule(GridChild(GridIdx).LicenseDates);
     LoadSchedule(GridChild(GridIdx).Events);
   end;
@@ -1264,8 +1260,8 @@ begin
   else
   begin
     GridSched.Visible := True;
-//    SortGridByCols([0], GridSched);
-  end;
+    SortGridByCols([0], GridSched);
+  end;                        }
 end;
 
 // ----------------------------------------------------------------

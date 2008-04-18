@@ -9,7 +9,7 @@ uses
   Forms,
   Main in 'Main.pas' {FMain},
   Grid in 'Grid.pas' {FGrid},
-  SButton in 'SButton.pas' {FSButton: TFrame},
+  SButton in 'SButton.pas' {FSButton},
   InputBox in 'InputBox.pas' {FInputBox},
   Tools in 'Tools.pas',
   ToolsShell in 'ToolsShell.pas',

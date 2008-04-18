@@ -4,7 +4,7 @@ unit Import;
 
 interface
 
-uses Classes, StrUtils, SysUtils, Dialogs, gnugettext, Forms, XMLRead, DOM;
+uses Classes, SysUtils, Dialogs, gnugettext, Forms, DOM;
 
 procedure OpenFlpFile7(XMLDoc : TXMLDocument); // ZIP, XML-File (FliPS & FileVersion = 7)
 procedure OpenFluFile1(XMLDoc : TXMLDocument); // ZIP, XML-File (FluPP | FileVersion = 1)
@@ -35,7 +35,7 @@ procedure readObjStrings(XMLChild: TDOMNode; var StringList: TStrings);
 var i: Word;
 begin
   if XMLChild.HasAttributes then begin
-    if XMLChild.Attributes.GetNamedItem('Value').NodeValue = '' then
+    if not assigned(XMLChild.Attributes.GetNamedItem('Value')) then
       StringList.Add(XMLChild.Attributes.GetNamedItem('Name').NodeValue)
     else
       StringList.Values[XMLChild.Attributes.GetNamedItem('Name').NodeValue]
@@ -72,75 +72,15 @@ begin
   GridActiveChild.GridCols.Add('Num');
   GridActiveChild.Grid.ColWidths[0] := 40;
   if XMLChild.HasAttributes then
+
     for i := 0 to XMLChild.Attributes.Length -1 do
-      if GridActiveChild.GridCols.IndexOf(XMLChild.Attributes.Item[i].NodeName) = -1 then begin
+      if GridActiveChild.GridCols.IndexOf(XMLChild.Attributes.Item[i].NodeName) = -1 then
+      begin
         Col := GridActiveChild.GridCols.Add(XMLChild.Attributes.Item[i].NodeName);
         GridActiveChild.Grid.ColWidths[Col] := StrToInt(XMLChild.Attributes.Item[i].NodeValue);
       end;
 end;
 
-//*******************************************************
-// FliPS FileVersion = 7
-//*******************************************************
-
-procedure OpenFlpFile7(XMLDoc : TXMLDocument);
-var XMLRootIdx, XMLIdx: Word;
-    XMLChild, XMLFlChild: TDOMNode;
-    FlightLogName : String;
-begin
-  XMLChild := XMLDoc.DocumentElement.FirstChild;
-  while Assigned(XMLChild) do
-  begin
-    { General Settings }
-    if XMLChild.NodeName = 'GenSettings' then readValStrings(XMLChild, GenSettings);
-    if XMLChild.NodeName = 'Medicals' then readObjStrings(XMLChild, Medicals);
-    if XMLChild.NodeName = 'Schedules' then readObjStrings(XMLChild, Schedules);
-
-    { Flightlog }
-    if XMLChild.NodeName = 'FlightLog' then
-    begin
-      if XMLChild.Attributes.GetNamedItem('Name').NodeValue <> '' then
-        FlightLogName := XMLChild.Attributes.GetNamedItem('Name').NodeValue
-      else FlightLogName := 'Fligtlog'+IntToStr(1); { TODO: Random}
-
-      FMain.CreateNewWindow(FlightLogName);
-      XMLFlChild := XMLChild.FirstChild;
-
-      while Assigned(XMLFlChild) do
-      begin
-        { Settings }
-        if XMLFlChild.NodeName = 'Settings' then readValStrings(XMLFlChild, GridActiveChild.Settings);
-
-        { AutoComplete }
-        if XMLFlChild.NodeName = 'Aircraft' then readObjStrings(XMLFlChild, GridActiveChild.ACAircrafts);
-        if XMLFlChild.NodeName = 'Pilot' then readObjStrings(XMLFlChild, GridActiveChild.ACPilots);
-        if XMLFlChild.NodeName = 'Airport' then readObjStrings(XMLFlChild, GridActiveChild.ACAirports);
-
-        { Categories }
-        if XMLFlChild.NodeName = 'TimeCat' then readObjStrings(XMLFlChild, GridActiveChild.ACTimeCat);
-        if XMLFlChild.NodeName = 'Category' then readObjStrings(XMLFlChild, GridActiveChild.ACCategories);
-        if XMLFlChild.NodeName = 'EventCat' then readObjStrings(XMLFlChild, GridActiveChild.ACEventCat);
-        if XMLFlChild.NodeName = 'ContestCat' then readObjStrings(XMLFlChild, GridActiveChild.ACContestCat);
-
-        { License Data }
-        if XMLFlChild.NodeName = 'LicenseCat' then readObjStrings(XMLFlChild, GridActiveChild.LicenseCategories);
-        if XMLFlChild.NodeName = 'LicenseTimeCat' then readObjStrings(XMLFlChild, GridActiveChild.LicenseTimeCat);
-        if XMLFlChild.NodeName = 'LicenseDates' then readObjStrings(XMLFlChild, GridActiveChild.LicenseDates);
-        if XMLFlChild.NodeName = 'AccLicenses' then readObjStrings(XMLFlChild, GridActiveChild.AccLicenses);
-        if XMLFlChild.NodeName = 'OptConditions' then readObjStrings(XMLFlChild, GridActiveChild.OptConditions);
-        if XMLFlChild.NodeName = 'Events' then readObjStrings(XMLFlChild, GridActiveChild.Events);
-
-        { Columns }
-        if XMLFlChild.NodeName = 'Columns' then readColumns(XMLFlChild);
-
-        { Flights }
-        if XMLFlChild.NodeName = 'Flight' then readFlight(XMLFlChild);
-      end;
-      XMLFlChild := XMLFlChild.NextSibling;
-    end;
-  end;
-  XMLChild := XMLChild.NextSibling;
-end;
 
 
 //*******************************************************
@@ -167,7 +107,7 @@ begin
         FlightLogName := XMLChild.Attributes.GetNamedItem('Name').NodeValue
       else FlightLogName := 'Fligtlog'+IntToStr(1); { TODO: Random}
 
-      FMain.CreateNewWindow(FlightLogName);
+      FlWindow.Add(FlightLogName);
       XMLFlChild := XMLChild.FirstChild;
 
       while Assigned(XMLFlChild) do
@@ -185,6 +125,73 @@ begin
         if XMLFlChild.NodeName = 'Category' then readObjStrings(XMLFlChild, GridActiveChild.ACCategories);
         if XMLFlChild.NodeName = 'EventCat' then readObjStrings(XMLFlChild, GridActiveChild.ACEventCat);
         if XMLFlChild.NodeName = 'Contest' then readObjStrings(XMLFlChild, GridActiveChild.ACContestCat);
+
+        { License Data }
+        if XMLFlChild.NodeName = 'LicenseCat' then readObjStrings(XMLFlChild, GridActiveChild.LicenseCategories);
+        if XMLFlChild.NodeName = 'LicenseTimeCat' then readObjStrings(XMLFlChild, GridActiveChild.LicenseTimeCat);
+        if XMLFlChild.NodeName = 'LicenseDates' then readObjStrings(XMLFlChild, GridActiveChild.LicenseDates);
+        if XMLFlChild.NodeName = 'AccLicenses' then readObjStrings(XMLFlChild, GridActiveChild.AccLicenses);
+        if XMLFlChild.NodeName = 'OptConditions' then readObjStrings(XMLFlChild, GridActiveChild.OptConditions);
+        if XMLFlChild.NodeName = 'Events' then readObjStrings(XMLFlChild, GridActiveChild.Events);
+
+        { Columns }
+        if XMLFlChild.NodeName = 'Columns' then readColumns(XMLFlChild);
+
+        { Flights }
+        if XMLFlChild.NodeName = 'Flight' then
+          readFlight(XMLFlChild);
+        
+        XMLFlChild := XMLFlChild.NextSibling;
+      end;
+
+    end;
+    XMLChild := XMLChild.NextSibling;
+  end;
+
+end;
+
+//*******************************************************
+// FliPS FileVersion = 7
+//*******************************************************
+
+procedure OpenFlpFile7(XMLDoc : TXMLDocument);
+var XMLRootIdx, XMLIdx: Word;
+    XMLChild, XMLFlChild: TDOMNode;
+    FlightLogName : String;
+begin
+  XMLChild := XMLDoc.DocumentElement.FirstChild;
+  while Assigned(XMLChild) do
+  begin
+    { General Settings }
+    if XMLChild.NodeName = 'GenSettings' then readValStrings(XMLChild, GenSettings);
+    if XMLChild.NodeName = 'Medicals' then readObjStrings(XMLChild, Medicals);
+    if XMLChild.NodeName = 'Schedules' then readObjStrings(XMLChild, Schedules);
+
+    { Flightlog }
+    if XMLChild.NodeName = 'FlightLog' then
+    begin
+      if XMLChild.Attributes.GetNamedItem('Name').NodeValue <> '' then
+        FlightLogName := XMLChild.Attributes.GetNamedItem('Name').NodeValue
+      else FlightLogName := 'Fligtlog'+IntToStr(1); { TODO: Random}
+
+      FlWindow.Add(FlightLogName);
+      XMLFlChild := XMLChild.FirstChild;
+
+      while Assigned(XMLFlChild) do
+      begin
+        { Settings }
+        if XMLFlChild.NodeName = 'Settings' then readValStrings(XMLFlChild, GridActiveChild.Settings);
+
+        { AutoComplete }
+        if XMLFlChild.NodeName = 'Aircraft' then readObjStrings(XMLFlChild, GridActiveChild.ACAircrafts);
+        if XMLFlChild.NodeName = 'Pilot' then readObjStrings(XMLFlChild, GridActiveChild.ACPilots);
+        if XMLFlChild.NodeName = 'Airport' then readObjStrings(XMLFlChild, GridActiveChild.ACAirports);
+
+        { Categories }
+        if XMLFlChild.NodeName = 'TimeCat' then readObjStrings(XMLFlChild, GridActiveChild.ACTimeCat);
+        if XMLFlChild.NodeName = 'Category' then readObjStrings(XMLFlChild, GridActiveChild.ACCategories);
+        if XMLFlChild.NodeName = 'EventCat' then readObjStrings(XMLFlChild, GridActiveChild.ACEventCat);
+        if XMLFlChild.NodeName = 'ContestCat' then readObjStrings(XMLFlChild, GridActiveChild.ACContestCat);
 
         { License Data }
         if XMLFlChild.NodeName = 'LicenseCat' then readObjStrings(XMLFlChild, GridActiveChild.LicenseCategories);
@@ -278,7 +285,7 @@ begin
 
     { Flight logs }
     repeat
-      FMain.CreateNewWindow(copy(RowData,2,length(RowData)-2));
+      FlWindow.Add(copy(RowData,2,length(RowData)-2));
       repeat
         Readln(aFile,RowData);
         getSettLine(RowData,TmpCat,Data);
@@ -355,7 +362,7 @@ begin
     AircraftType.Free;
   end;
 
-  for i := 0 to FMain.FlWindows.Count -1 do
+  for i := 0 to FlWindow.Count -1 do
   begin
     GridChild(i).ReCalcGridNr;
     GridChild(i).Grid.FixedCols := 1;
@@ -364,7 +371,7 @@ begin
     GridChild(i).NameCols;
   end;
 
-{ TODO:  FMain.FlWindows[FMain.FlWindows.Count -1].show;}
+{ TODO:  FlWindow[FlWindow.Count -1].show;}
   GridActiveChild.ReCalcGridTime;
   FMain.UpdateButtonState;
   FMain.CreateSButtons;
@@ -439,14 +446,14 @@ var
 {----------}
   procedure CreateFlightlog(RowText: String);
   begin
-    if FMain.FlWindows.Count <> 0 then
+    if FlWindow.Count <> 0 then
     begin
       GridActiveChild.NameCols;
       GridActiveChild.Grid.RowCount := Row;
       GridActiveChild.Grid.FixedCols := 1;
       GridActiveChild.Grid.Row := GridActiveChild.Grid.RowCount-1;
     end;
-    FMain.CreateNewWindow(copy(RowText,2,pos(';',RowText)-2));
+    FlWindow.Add(copy(RowText,2,pos(';',RowText)-2));
   end;
 {----------}
   procedure GetSettLine(RowText: String; var TmpCat, Data: String);
@@ -570,13 +577,13 @@ begin
   GridActiveChild.NameCols;
   GridActiveChild.ReCalcGridTime;
   GridActiveChild.ReCalcGridNr;
-{ TODO:  FMain.MDIChildren[FMain.FlWindows.Count-1].show; }
+{ TODO:  FMain.MDIChildren[FlWindow.Count-1].show; }
   FMain.UpdateButtonState;
   FMain.CreateSButtons;
 
   { DF4 -> DF5 }
   
-  for i := 0 to FMain.FlWindows.Count-1 do
+  for i := 0 to FlWindow.Count-1 do
   for Row := 1 to GridChild(i).Grid.RowCount-1 do
   begin
     GridChild(i).Data['Cat',Row] := ReplaceString(GridChild(i).Data['Cat',Row],',','/');
@@ -586,7 +593,7 @@ begin
     GridChild(i).Data['Con',Row] := ReplaceString(GridChild(i).Data['Con',Row],',','/');
   end;
 
-  for i := 0 to FMain.FlWindows.Count-1 do
+  for i := 0 to FlWindow.Count-1 do
   begin
     GridChild(i).Settings.Values['ShowBlockTime'] := 'False';
     GridChild(i).Settings.Values['ShowFlightTime'] := 'True';
@@ -705,14 +712,14 @@ begin
     Readln(AFile,RowText);
     if length(RowText) > 2 then If RowText[1] = ':' then // ":" = new Flightlog
     begin
-      if FMain.FlWindows.Count <> 0 then
+      if FlWindow.Count <> 0 then
       begin
         GridActiveChild.Grid.RowCount := Row;
         GridActiveChild.Grid.Row := GridActiveChild.Grid.RowCount-1;
         GridActiveChild.ReCalcGridNr;
       end;
       FType := copy(RowText,pos(';',RowText)+1,length(RowText)-1);
-      FMain.CreateNewWindow(copy(RowText,2,pos(';',RowText)-2));
+      FlWindow.Add(copy(RowText,2,pos(';',RowText)-2));
 
       GridActiveChild.GridCols.Delimiter := ';';
       GridActiveChild.GridCols.QuoteChar := '"';
@@ -815,7 +822,7 @@ begin
 
   GridActiveChild.Grid.RowCount := Row;
 
-  for i := 0 to FMain.FlWindows.Count-1 do
+  for i := 0 to FlWindow.Count-1 do
   for Row := 1 to GridChild(i).Grid.RowCount-1 do
   begin
     GridChild(i).Data['Cat',Row] := ReplaceString(GridChild(i).Data['Cat',Row],',','/');
@@ -830,11 +837,11 @@ begin
 
   GridActiveChild.ReCalcGridTime;
   GridActiveChild.ReCalcGridNr;
-{ TODO:  FMain.MDIChildren[FMain.FlWindows.Count-1].show; }
+{ TODO:  FMain.MDIChildren[FlWindow.Count-1].show; }
   FMain.UpdateButtonState;
   FMain.CreateSButtons;
 
-  for i := 0 to FMain.FlWindows.Count-1 do
+  for i := 0 to FlWindow.Count-1 do
     if GridChild(i).GridCols.IndexOf('ToS') = -1 then
     begin
       GridChild(i).GridCols.Add('ToS');

@@ -9,7 +9,7 @@ uses
   ExtCtrls, StdCtrls, gnugettext, LResources;
 
 type
-  TFSButton = class(TFrame)
+  TFSButton = class(TForm)
     PanelSB: TPanel;
     LabelHeading: TLabel;
     Panel90: TPanel;
@@ -57,7 +57,7 @@ begin
     BevelSB.Shape := bsFrame;
     PanelSB.Top := 2;
     PanelSB.Left := 2;
-    TFGrid(Self.Owner).Show;
+    FlWindow.SetActive(FlWindow.IndexOf(Self.Owner));
   end;
 end;
 

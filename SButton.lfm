@@ -1,12 +1,14 @@
-inherited FSButton: TFSButton
+object FSButton: TFSButton
   Left = 535
   Height = 48
   Top = 382
   Width = 115
   HorzScrollBar.Page = 114
   VertScrollBar.Page = 47
+  Caption = 'FSButton'
   ClientHeight = 48
   ClientWidth = 115
+  Visible = True
   object BevelSB: TBevel
     Height = 48
     Width = 94
@@ -39,11 +41,12 @@ inherited FSButton: TFSButton
       OnMouseUp = MouseUp
     end
     object Panel90: TPanel
-      Left = 16
+      Left = 14
       Height = 17
       Top = 24
       Width = 20
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
       Caption = '90'
       TabOrder = 0
       OnDblClick = Panel90DblClick
@@ -55,7 +58,8 @@ inherited FSButton: TFSButton
       Height = 17
       Top = 24
       Width = 20
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
       Caption = 'T'
       TabOrder = 1
       OnDblClick = PanelTDblClick

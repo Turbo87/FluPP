@@ -6,12 +6,15 @@ interface
 
 uses
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, Menus, StdCtrls, Buttons, SButton, LResources;
+  Grids, Menus, StdCtrls, Buttons, SButton, LResources, Contnrs;
+
+const
+
+{$I FluPP.lrs}
 
 type
 
   { TFGrid }
-
   TFGrid = class(TForm)
     MenuItem1: TMenuItem;
     PopupMenu: TPopupMenu;
@@ -80,11 +83,14 @@ type
     procedure SetColWidth(S: String);
     function KeyInKat(Key: String; Kat: String; Row: Word): Boolean; overload;
     function KeyInKat(key: String; Kat: String; Row: Word; var Value: Array of String): Boolean; overload;
+    procedure LoadDefaultSettings;
   end;
+  
 
 
 var
   FGrid: TFGrid;
+  
 implementation
 
 uses Main, Input, Tools, ToolsGrid, Export;
@@ -121,6 +127,8 @@ CfC: Costs for crew
 EfF: Earnings for flight
 Met: Meteo-Information
 }
+
+
 
 // ----------------------------------------------------------------
 // From create
@@ -180,8 +188,7 @@ end;
 // Read table row
 // ----------------------------------------------------------------
 function TFGrid.GetData(Name: String; Row: Word): String;
-var
-  Index: Integer;
+var Index: Integer;
 begin
   Index := GridCols.IndexOf(Name);
   if Index = -1 then
@@ -196,8 +203,7 @@ end;
 // write table row
 // ----------------------------------------------------------------
 procedure TFGrid.SetData(Name: String; Row: Word; Value: String);
-var
-  Index: Integer;
+var Index: Integer;
 begin
   Index := GridCols.IndexOf(Name);
   if Index = -1 then Exit;
@@ -209,13 +215,34 @@ end;
 // ----------------------------------------------------------------
 procedure TFGrid.GridMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
-var
-  Col,Row: Integer;
+var Col,Row: Integer;
 begin
   Grid.MouseToCell(X,Y,Col,Row);
 
   if (Row > 0) and (data['Num',1] <> '') and (ssDouble in Shift) then
     if (FInput.CanEdit(true)) then FInput.Change(Grid.Row);
+end;
+
+// ----------------------------------------------------------------
+// Load default Settings
+// ----------------------------------------------------------------
+procedure TFGrid.LoadDefaultSettings;
+begin
+  Settings.Values['BFStarts'] := '0';
+  Settings.Values['BFTime'] := '00000:00';
+  Settings.Values['LicenseSince'] := '  .  .    ';
+  Settings.Values['IDPrefix'] := '';
+  Settings.Values['DistUnit'] := 'nm';
+  Settings.Values['License'] := '';
+  Settings.Values['Numeration'] := '0'; // Continuous
+  Settings.Values['ShowFlightTime'] := 'False';
+  Settings.Values['ShowBlockTime'] := 'True';
+  Settings.Values['ShowStartType'] := 'False';
+  Settings.Values['DefaultTime'] := '0'; // BlockTime
+  Settings.Values['DefPosition'] := '0'; // Pilot
+
+  Settings.Values['DisallowChange'] := '0';
+  Settings.Values['AllowLastEdit'] := '0';
 end;
 
 // ----------------------------------------------------------------
@@ -283,14 +310,14 @@ begin
   begin
     if (Grid.RowCount > 2) and (data['Num',1] <> '') then
       if Button = mbLeft then
-        FMain.StatusBar1.Panels[1].Text :=
+{        FMain.StatusBar1.Panels[1].Text :=
           format(_('To flight %s: %s h [%s h], %s flights'), [
             Data['Num',Row],
             CalcTime(0,Settings.Values['BFTime'],1,Row,1),
             CalcTime(0,Settings.Values['BFTime'],1,Row,0),
             InttoStr(CalcFlights(0,StrToInt(Settings.Values['BFStarts']),1,Row))
           ]);
-    Grid.Row := Row;
+}    Grid.Row := Row;
 
     if (Row > 0) and (Col > 0) and (Button = mbRight) then
       FMain.UpdateButtonState;
@@ -305,14 +332,14 @@ begin
       PUFlugloeschen.Enabled := False;
     end;
     if button = mbleft then
-      FMain.StatusBar1.Panels[1].Text :=
+{      FMain.StatusBar1.Panels[1].Text :=
         format(_('From flight %s to %s: %s h [%s h], %s flights'), [
           Data['Num',GridRect.Top], Data['Num',GridRect.Bottom],
           CalcTime(0,Settings.Values['BFTime'],GridRect.Top,GridRect.Bottom,1),
           CalcTime(0,Settings.Values['BFTime'],GridRect.Top,GridRect.Bottom,0),
           InttoStr(CalcFlights(0,StrToInt(Settings.Values['BFStarts']),GridRect.Top,GridRect.Bottom))
         ]);
-  end;
+}  end;
   { Context menu }
   if button = mbRight then
   begin
@@ -340,8 +367,8 @@ begin
 //    if length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) = 0 then
 //      PUFiles.checked := False
 //    else
-    for i := 1 to length(TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row]) do
-    if (TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row][i] = ',') then
+    for i := 1 to length(TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row]) do
+    if (TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row][i] = ',') then
     begin
       FilesMenuItem := TMenuItem.create(self);
       FilesMenuItem.Name := 'Files_'+InttoStr(Idx);
@@ -350,7 +377,7 @@ begin
       PUFiles.Add(FilesMenuItem);
       TempStr := '';
     end
-    else TempStr := TempStr + TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Fil',Row][i];
+    else TempStr := TempStr + TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row][i];
 
     PopupMenu.Popup(Mouse.CursorPos.x,Mouse.CursorPos.Y);
   end;
@@ -392,9 +419,9 @@ begin
       PosIdx := pos(TMenuItem(Sender).Caption+'/',data['Cat',Row]);
       if PosIdx > 0 then
       begin
-          TmpStr := TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Cat',Row];
+          TmpStr := TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Cat',Row];
           delete(TmpStr,PosIdx,length(TMenuItem(Sender).Caption)+1);
-          TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).data['Cat',Row] := TmpStr;
+          TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Cat',Row] := TmpStr;
           DataChanged := True;
       end;
     end;
@@ -416,13 +443,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFGrid.FormActivate(Sender: TObject);
 begin
-  if DataChanged = True then FMain.StatusBar1.Panels[2].Text := '*'
-  else FMain.StatusBar1.Panels[2].Text := '';
+{  if DataChanged = True then FMain.StatusBar1.Panels[2].Text := '*'
+  else FMain.StatusBar1.Panels[2].Text := '';}
 
   FMain.UpdateButtonState;
 
   GridActiveChild.ReCalcGridTime;
-  FMain.ActivateSButton;
 end;
 
 // ----------------------------------------------------------------
@@ -474,7 +500,7 @@ begin
   FMain.InsertData;
 
   DataChanged := True;
-  FMain.StatusBar1.Panels[2].Text := '*';
+//  FMain.StatusBar1.Panels[2].Text := '*';
 end;
 
 // ----------------------------------------------------------------
@@ -491,7 +517,7 @@ begin
       Grid.Cells[i, StrToInt(Undo[0])] := Grid.Cells[i, StrToInt(Undo[0])];
   end
   else begin
-    if TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]).Data['Num',1] <> '' then
+    if TFGrid(FlWindow[FMain.ActiveFlWindow]).Data['Num',1] <> '' then
     Grid.InsertColRow(False, StrToInt(Undo[0]));
 
     for i := 0 to Grid.ColCount-1 do
@@ -604,14 +630,14 @@ procedure TFGrid.ReCalcGridtime;
 begin
   if Data['Dat',1] = '' then Exit;
 
-  FMain.StatusBar1.Panels[0].Text :=
+{  FMain.StatusBar1.Panels[0].Text :=
     format(_('Over-all: %s flights, %s: %s h, %s: %s h'), [
       IntToStr(CalcFlights(0, StrToInt(Settings.Values['BFStarts']), 1, Grid.RowCount-1)),
       _('Flight time'),
       CalcTime(0, Settings.Values['BFTime'], 1, Grid.RowCount-1, 1),
       _('Block time'),
       CalcTime(0, Settings.Values['BFTime'], 1, Grid.RowCount-1, 0)
-    ]);
+    ]);}
 end;
 
 // ----------------------------------------------------------------

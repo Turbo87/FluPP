@@ -9,8 +9,8 @@ uses SysUtils, Classes, Types, Grid, Grids, Graphics;
 const
   DeSelectRect: TGridRect = (Left:-1; Top:-1; Right:-1; Bottom:-1 );
 
-function GridChild(Flb: Word): TFGrid;
-function GridActiveChild: TFGrid;
+function GridChild(Flb: Word): TFGrid; { TODO: deprecated }
+function GridActiveChild: TFGrid;  { TODO: deprecated }
 function CalcTime(GridIdx: Word; StartTime: String; NrFrom, NrTo: Word; DefaultTime: Byte = 2): String;
 function CalcFlights(GridIdx: Word; Flights: Word; NrFrom: Word; NrTo: Word): Word;
 //procedure SortGridByCols(ColOrder: array of Integer; Grid: TStringGrid);
@@ -28,7 +28,7 @@ uses Main, Tools;
 // ----------------------------------------------------------------
 function GridChild(Flb: Word): TFGrid;
 begin
-  Result := TFGrid(FMain.FlWindows.Items[Flb]);
+  Result := TFGrid(FlWindow.Items[Flb]);
 end;
 
 // ----------------------------------------------------------------
@@ -36,7 +36,7 @@ end;
 // ----------------------------------------------------------------
 function GridActiveChild: TFGrid;
 begin
-  Result := TFGrid(FMain.FlWindows[FMain.ActiveFlWindow]);
+  Result := FlWindow.GetActive;
 end;
 
 // ----------------------------------------------------------------
@@ -70,17 +70,17 @@ begin
     begin
       if TmpDefaultTime = 0 then
       begin
-        if TFGrid(FMain.FlWindows.Items[GridIdx]).Data['BlT',i] <> '' then
-          Time := TFGrid(FMain.FlWindows.Items[GridIdx]).Data['BlT', i]
+        if TFGrid(FlWindow.Items[GridIdx]).Data['BlT',i] <> '' then
+          Time := TFGrid(FlWindow.Items[GridIdx]).Data['BlT', i]
         else
-          Time := TFGrid(FMain.FlWindows.Items[GridIdx]).Data['FlT', i];
+          Time := TFGrid(FlWindow.Items[GridIdx]).Data['FlT', i];
       end
       else
       begin
-        if TFGrid(FMain.FlWindows.Items[GridIdx]).Data['FlT',i] <> '' then
-          Time := TFGrid(FMain.FlWindows.Items[GridIdx]).Data['FlT', i]
+        if TFGrid(FlWindow.Items[GridIdx]).Data['FlT',i] <> '' then
+          Time := TFGrid(FlWindow.Items[GridIdx]).Data['FlT', i]
         else
-          Time := TFGrid(FMain.FlWindows.Items[GridIdx]).Data['BlT', i];
+          Time := TFGrid(FlWindow.Items[GridIdx]).Data['BlT', i];
       end;
 
       Hours := '0'; Minutes := ''; j := 1;
@@ -114,7 +114,7 @@ begin
   Result := Flights;
   for i := NrFrom to NrTo do
   begin
-    inc(Result,StrtoInt(TFGrid(FMain.FlWindows.Items[GridIdx]).Data['NoL',i]));
+    inc(Result,StrtoInt(TFGrid(FlWindow.Items[GridIdx]).Data['NoL',i]));
   end;
 end;
 
@@ -227,13 +227,14 @@ procedure DrawColorbands(Grid: TStringGrid; ACol, ARow: Integer;
   Rect: TRect; State: TGridDrawState; Alignment: TAlignment);
 var
   TextOut: String;
+  TextStyle: TTextStyle;
 begin
 {  if not (gdFixed in State) and not (gdSelected	in State) then
   begin
     if Odd(ARow) then
       Grid.Canvas.Brush.Color := clColorband1
     else
-       Grid.Canvas.Brush.Color := clColorband2;
+      Grid.Canvas.Brush.Color := clColorband2;
   end;
   if (gdFixed in State) and not (gdSelected	in State) then
     Grid.Canvas.Brush.Color := clBtnFace;
@@ -244,14 +245,9 @@ begin
 
   InflateRect(Rect, -3, -2);
   TextOut := Grid.Cells[ACol,ARow];
-  if Alignment = taLeftJustify then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_LEFT);
-  if Alignment = taCenter then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_CENTER);
-  if Alignment = taRightJustify then
-    DrawText(Grid.Canvas.Handle, PChar(TextOut), StrLen(PChar(TextOut)), Rect, DT_SINGLELINE or DT_NOPREFIX or DT_VCENTER or DT_RIGHT);
-    }
-end;
+  TextStyle.Alignment:=Alignment;
+  Grid.Canvas.TextRect(Rect, Rect.Left , Rect.Top, TextOut, Textstyle);
+}end;
 
 
 // ----------------------------------------------------------------

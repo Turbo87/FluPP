@@ -104,7 +104,7 @@ begin
     writeObjStrings(XMLDoc, XMLRoot, 'Schedules', Schedules);
 
     { Settings }
-    for GridIdx := 0 to FMain.FlWindows.Count-1 do
+    for GridIdx := 0 to FlWindow.Count-1 do
     begin
       XMLNode := XMLDoc.CreateElement('FlightLog');
       TDOMElement(XMLRoot).SetAttribute('Name', GridChild(GridIdx).Name);
@@ -197,7 +197,7 @@ begin
   ScheduleList := TSTringList.Create;
   try
     ScheduleList.AddStrings(Schedules);
-    for GridIdx := 0 to FMain.FlWindows.Count-1 do
+    for GridIdx := 0 to FlWindow.Count-1 do
       ScheduleList.AddStrings(GridChild(GridIdx).LicenseDates);
     ScheduleList.AddStrings(Medicals);
 

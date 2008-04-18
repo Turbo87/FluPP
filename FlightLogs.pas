@@ -66,9 +66,9 @@ var
   i: word;
 begin
   LBFlu.Items.Clear;
-  if FMain.FlWindows.Count > 0 then
+  if FlWindow.Count > 0 then
   begin
-    for i := 0 to FMain.FlWindows.Count-1 do
+    for i := 0 to FlWindow.Count-1 do
       LBFlu.Items.Add(GridChild(i).FlName);
     LBFlu.ItemIndex := 0;
   end;
@@ -85,7 +85,7 @@ begin
     if LBFlu.Items.IndexOf(InputStr) > -1 then
       MessageDlg(format(_('The name already exists!'), [InputStr]),mtInformation,[mbOK],0)
     else
-      FMain.CreateNewWindow(InputStr, DEFAULTTABLECOLS);
+      FlWindow.Add(InputStr);
     RefreshLBFlu;
   end;
 end;
@@ -131,7 +131,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFFlightLogs.ButtonOKClick(Sender: TObject);
 begin
-  if FMain.FlWindows.Count = 0 then
+  if FlWindow.Count = 0 then
   begin
     MessageDlg(_('Please create at least one flightlog'),mtError,[mbOK],0);
     ModalResult := mrNone;
@@ -144,7 +144,7 @@ end;
 procedure TFFlightLogs.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if FMain.FlWindows.Count = 0 then
+  if FlWindow.Count = 0 then
   begin
     MessageDlg(_('Please create at least one flightlog'),mtError,[mbOK],0);
     Action := caNone;

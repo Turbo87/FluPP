@@ -8,15 +8,13 @@ unit Input;
 interface
 
 uses
-  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, MaskEdit, ExtCtrls, Buttons, ComCtrls, Spin, CheckLst,
-  Grids{, scFileDrop, shellapi, JvExGrids, JvStringGrid, gnugettext, JvExStdCtrls, JvButton,
-  JvCtrls, JvGIF, JvEdit, JvValidateEdit}, LResources, EditBtn;
+  Grids, LResources, EditBtn;
 
 type
 
   { TFInput }
-
   TFInput = class(TForm)
     DTPDate: TDateEdit;
     EditLandings: TSpinEdit;
@@ -30,6 +28,7 @@ type
     LabelFlugNr: TLabel;
     ButtonNext: TBitBtn;
     TabControl: TPageControl;
+    TIMaskEdit1: TMaskEdit;
     TSFlugdaten: TTabSheet;
     TSStreckenflug: TTabSheet;
     Label2: TLabel;
@@ -93,13 +92,13 @@ type
     PanelFlightTime: TPanel;
     Label8: TLabel;
     Label29: TLabel;
-    MEFlightTimeDep: TEdit;
+    MEFlightTimeDep: TMaskEdit;
     PanelBlockTime: TPanel;
     Label15: TLabel;
     Label19: TLabel;
     Label20: TLabel;
     MEBlockTimeDep: TMaskEdit;
-    MEBlockTimeArr: TEdit;
+    MEBlockTimeArr: TMaskEdit;
     MEBlockTime: TMaskEdit;
     PanelFromTo: TPanel;
     Label12: TLabel;
