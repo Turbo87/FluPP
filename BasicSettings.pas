@@ -123,7 +123,7 @@ begin
   If FlWindow.Count > 0 then
   begin
    FMain.UpdateSButtons;
-   GridActiveChild.ReCalcGridNr;
+   FlWindow.GetActive.ReCalcGridNr;
   end;
 end;
 

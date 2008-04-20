@@ -291,7 +291,7 @@ begin
   CLOUDTYPE.ItemIndex := 0;
 
   CLOUDBASE.Text := '';
-  OWNWEATHER.Text := GridActiveChild.data['Met',InputRow];
+  OWNWEATHER.Text := FlWindow.GetActive.data['Met',InputRow];
   OWNWEATHER.Text := Copy(OWNWEATHER.Text, 1, Length(OWNWEATHER.Text)-1);
 
   WeatherChange(Sender);
@@ -300,8 +300,8 @@ end;
 procedure TFInput.FormShow(Sender: TObject);
 begin
   Application.OnHint := onHint;
-  Label18.caption := GridActiveChild.Settings.Values['DistUnit'];
-  LabelViaDistUnit.caption := GridActiveChild.Settings.Values['DistUnit'];
+  Label18.caption := FlWindow.GetActive.Settings.Values['DistUnit'];
+  LabelViaDistUnit.caption := FlWindow.GetActive.Settings.Values['DistUnit'];
 
   { Via }
   GridVia.ColWidths[0] := 30;
@@ -349,10 +349,10 @@ end;
 procedure TFInput.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Application.OnHint := FMain.onHint;
-  if GridActiveChild.Grid.RowCount > 2 then
+  if FlWindow.GetActive.Grid.RowCount > 2 then
   begin
-    if (Status = 'Neu') and (ModalResult = mrCancel) then GridActiveChild.Grid.DeleteColRow(False,InputRow);
-    GridActiveChild.ReCalcGridNr;
+    if (Status = 'Neu') and (ModalResult = mrCancel) then FlWindow.GetActive.Grid.DeleteColRow(False,InputRow);
+    FlWindow.GetActive.ReCalcGridNr;
   end;
 end;
 
@@ -361,11 +361,11 @@ end;
 // ----------------------------------------------------------------
 procedure TFInput.InsertAutoComplete;
 begin
-  AssignNames(GridActiveChild.ACAircrafts, CBAircraftID.Items);
-  CBCoPilot.Items.Assign(GridActiveChild.ACPilots);
-  CBPilot.Items.Assign(GridActiveChild.ACPilots);
-  CBAPFrom.Items.Assign(GridActiveChild.ACAirports);
-  CBAPTo.Items.Assign(GridActiveChild.ACAirports);
+  AssignNames(FlWindow.GetActive.ACAircrafts, CBAircraftID.Items);
+  CBCoPilot.Items.Assign(FlWindow.GetActive.ACPilots);
+  CBPilot.Items.Assign(FlWindow.GetActive.ACPilots);
+  CBAPFrom.Items.Assign(FlWindow.GetActive.ACAirports);
+  CBAPTo.Items.Assign(FlWindow.GetActive.ACAirports);
 end;
 
 // ----------------------------------------------------------------
@@ -373,7 +373,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFInput.ResetInput;
 begin
-  if GridActiveChild.Settings.Values['DefaultTime'] = '0' then
+  if FlWindow.GetActive.Settings.Values['DefaultTime'] = '0' then
   begin
     PDefaultTime := @MEBlockTime;
     PDefaultStartTime := @MEBlockTimeDep;
@@ -397,7 +397,7 @@ begin
   EditPassengers.Value := 0;
   EditRemarks.Text := '';
   EditDistance.text := '';
-  LabelAvSpeed.caption := '0 '+GetSpeedUnit(GridActiveChild.Settings.Values['DistUnit']);
+  LabelAvSpeed.caption := '0 '+GetSpeedUnit(FlWindow.GetActive.Settings.Values['DistUnit']);
   CBAircraftID.Items.Clear;
   CBpilot.Items.Clear;
   CBCoPilot.Items.Clear;
@@ -438,9 +438,9 @@ var
   end;
 {-------------}
 begin
-  PanelFlightTime.Visible := StrToBool(GridActiveChild.Settings.Values['ShowFlightTime']);
-  PanelBlockTime.Visible := StrToBool(GridActiveChild.Settings.Values['ShowBlockTime']);
-  PanelStartType.Visible := StrToBool(GridActiveChild.Settings.Values['ShowStartType']);
+  PanelFlightTime.Visible := StrToBool(FlWindow.GetActive.Settings.Values['ShowFlightTime']);
+  PanelBlockTime.Visible := StrToBool(FlWindow.GetActive.Settings.Values['ShowBlockTime']);
+  PanelStartType.Visible := StrToBool(FlWindow.GetActive.Settings.Values['ShowStartType']);
 
   if (not PanelFlightTime.Visible) or (not PanelBlockTime.Visible) then
     PanelLandings.Height := PanelFlightTime.Height
@@ -465,22 +465,22 @@ begin
   InputRow := FlugNr;
   Status := 'Neu';
   caption := _('Create new flight');
-  if GridActiveChild.Data['Num',1] <> '' then
+  if FlWindow.GetActive.Data['Num',1] <> '' then
   begin
     if InputRow > 1 then
-      LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Data['Num',InputRow-1])
-      +Strtoint(GridActiveChild.data['NoL',InputRow-1]))
-    else LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Settings.Values['BFStarts'])+1);
+      LabelFlugNr.caption := InttoStr(Strtoint(FlWindow.GetActive.Data['Num',InputRow-1])
+      +Strtoint(FlWindow.GetActive.data['NoL',InputRow-1]))
+    else LabelFlugNr.caption := InttoStr(Strtoint(FlWindow.GetActive.Settings.Values['BFStarts'])+1);
   end
-  else LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Settings.Values['BFStarts'])+1);
-  LabelFlbArt.caption := GridActiveChild.Name;
+  else LabelFlugNr.caption := InttoStr(Strtoint(FlWindow.GetActive.Settings.Values['BFStarts'])+1);
+  LabelFlbArt.caption := FlWindow.GetActive.Name;
   DTPDate.Date := now;
-  CBAircraftID.Text := GridActiveChild.Settings.Values['IDPrefix'];
+  CBAircraftID.Text := FlWindow.GetActive.Settings.Values['IDPrefix'];
 
   LabelStO.Caption := '';
   LabelLaO.Caption := '';
   LabelViaOrt.Caption := '';
-  if GridActiveChild.Settings.Values['DefPosition'] = '0' then
+  if FlWindow.GetActive.Settings.Values['DefPosition'] = '0' then
   begin
     CBPilot.Text := GenSettings.Values['PilotName'];
     CBCoPilot.Text := '';
@@ -494,24 +494,24 @@ begin
     CBPilot.TabStop := True;
     CBCoPilot.TabStop := False;
   end;
-  LabelDist.Caption := '0 '+ GridActiveChild.Settings.Values['DistUnit'];
-  LabelAvSpeed.caption := '0 '+GetSpeedUnit(GridActiveChild.Settings.Values['DistUnit']);
+  LabelDist.Caption := '0 '+ FlWindow.GetActive.Settings.Values['DistUnit'];
+  LabelAvSpeed.caption := '0 '+GetSpeedUnit(FlWindow.GetActive.Settings.Values['DistUnit']);
   CBAPFrom.Text := '';
-  if GridActiveChild.Data['Num',1] <> '' then
-    CBAPFrom.Text := GridActiveChild.data['LaL',FlugNr-1];
-    If GridActiveChild.data['ToS',FlugNr-1] = 'W' Then RBW.Checked := True;
-    If GridActiveChild.data['ToS',FlugNr-1] = 'F' Then RBF.Checked := True;
-    If GridActiveChild.data['ToS',FlugNr-1] = 'E' Then RBE.Checked := True;
-    If GridActiveChild.data['ToS',FlugNr-1] = 'A' Then RBA.Checked := True;
-    If GridActiveChild.data['ToS',FlugNr-1] = 'G' Then RBG.Checked := True;
+  if FlWindow.GetActive.Data['Num',1] <> '' then
+    CBAPFrom.Text := FlWindow.GetActive.data['LaL',FlugNr-1];
+    If FlWindow.GetActive.data['ToS',FlugNr-1] = 'W' Then RBW.Checked := True;
+    If FlWindow.GetActive.data['ToS',FlugNr-1] = 'F' Then RBF.Checked := True;
+    If FlWindow.GetActive.data['ToS',FlugNr-1] = 'E' Then RBE.Checked := True;
+    If FlWindow.GetActive.data['ToS',FlugNr-1] = 'A' Then RBA.Checked := True;
+    If FlWindow.GetActive.data['ToS',FlugNr-1] = 'G' Then RBG.Checked := True;
 
   TabControl.ActivePage := TSFlugdaten;
   ButtonNext.Enabled := True;
   CBAPFrom.Text := CBAPTo.Text;
 
-  CLBKat.Items := GridActiveChild.ACCategories;
-  CLBKatTime.Items := GridActiveChild.ACTimeCat;
-  CLBContest.Items := GridActiveChild.ACContestCat;
+  CLBKat.Items := FlWindow.GetActive.ACCategories;
+  CLBKatTime.Items := FlWindow.GetActive.ACTimeCat;
+  CLBContest.Items := FlWindow.GetActive.ACContestCat;
 
   if not Active then
     ShowModal;
@@ -533,77 +533,77 @@ begin
 
   ButtonNext.Enabled := False;
 
-  CfF.Text := GridActiveChild.data['CfF',InputRow];
-  LaF.Text := GridActiveChild.data['LaF',InputRow];
-  CfC.Text := GridActiveChild.data['CfC',InputRow];
-  EfF.Text := GridActiveChild.data['EfF',InputRow];
+  CfF.Text := FlWindow.GetActive.data['CfF',InputRow];
+  LaF.Text := FlWindow.GetActive.data['LaF',InputRow];
+  CfC.Text := FlWindow.GetActive.data['CfC',InputRow];
+  EfF.Text := FlWindow.GetActive.data['EfF',InputRow];
 
-  Metar.Text := GridActiveChild.data['Met',InputRow];
+  Metar.Text := FlWindow.GetActive.data['Met',InputRow];
 
-  LabelFlugNr.caption := GridActiveChild.data['Num',InputRow];
-  LabelFlbArt.caption := GridActiveChild.Name;
-  DTPDate.Date := StrToDate(GridActiveChild.data['Dat',InputRow]);
-  CBAircraftType.Text:= GridActiveChild.data['ATy',InputRow];
-  CBAircraftID.Text := GridActiveChild.data['AId',InputRow];
-  CBPilot.Text := GridActiveChild.data['Pi1',InputRow];
-  CBCoPilot.Text := GridActiveChild.data['Pi2',InputRow];
+  LabelFlugNr.caption := FlWindow.GetActive.data['Num',InputRow];
+  LabelFlbArt.caption := FlWindow.GetActive.Name;
+  DTPDate.Date := StrToDate(FlWindow.GetActive.data['Dat',InputRow]);
+  CBAircraftType.Text:= FlWindow.GetActive.data['ATy',InputRow];
+  CBAircraftID.Text := FlWindow.GetActive.data['AId',InputRow];
+  CBPilot.Text := FlWindow.GetActive.data['Pi1',InputRow];
+  CBCoPilot.Text := FlWindow.GetActive.data['Pi2',InputRow];
 
-  if GridActiveChild.data['Pas',InputRow] <> '' then
-    EditPassengers.Value := StrToInt(GridActiveChild.data['Pas',InputRow])
+  if FlWindow.GetActive.data['Pas',InputRow] <> '' then
+    EditPassengers.Value := StrToInt(FlWindow.GetActive.data['Pas',InputRow])
   else EditPassengers.Value := 0;
 
-  if GridActiveChild.data['NoL',InputRow] <> '' then
-    EditLandings.Value := StrToInt(GridActiveChild.data['NoL',InputRow])
+  if FlWindow.GetActive.data['NoL',InputRow] <> '' then
+    EditLandings.Value := StrToInt(FlWindow.GetActive.data['NoL',InputRow])
   else EditLandings.Value := 1;
 
-  If GridActiveChild.data['ToS',InputRow] = 'W' Then RBW.Checked := True;
-  If GridActiveChild.data['ToS',InputRow] = 'F' Then RBF.Checked := True;
-  If GridActiveChild.data['ToS',InputRow] = 'E' Then RBE.Checked := True;
-  If GridActiveChild.data['ToS',InputRow] = 'A' Then RBA.Checked := True;
-  If GridActiveChild.data['ToS',InputRow] = 'G' Then RBG.Checked := True;
+  If FlWindow.GetActive.data['ToS',InputRow] = 'W' Then RBW.Checked := True;
+  If FlWindow.GetActive.data['ToS',InputRow] = 'F' Then RBF.Checked := True;
+  If FlWindow.GetActive.data['ToS',InputRow] = 'E' Then RBE.Checked := True;
+  If FlWindow.GetActive.data['ToS',InputRow] = 'A' Then RBA.Checked := True;
+  If FlWindow.GetActive.data['ToS',InputRow] = 'G' Then RBG.Checked := True;
 
-  MEFlightTimeDep.Text := GridActiveChild.data['StT',InputRow];
-  MEFlightTimeArr.Text := GridActiveChild.data['LaT',InputRow];
-  MEBlockTimeDep.Text := GridActiveChild.data['StB',InputRow];
-  MEBlockTimeArr.Text := GridActiveChild.data['LaB',InputRow];
-  if GridActiveChild.data['FlT',InputRow] <> '' then
-    MEFlightTime.Text := FormatDateTime('hh":"nn',StrtoTime(GridActiveChild.data['FlT',InputRow]))
+  MEFlightTimeDep.Text := FlWindow.GetActive.data['StT',InputRow];
+  MEFlightTimeArr.Text := FlWindow.GetActive.data['LaT',InputRow];
+  MEBlockTimeDep.Text := FlWindow.GetActive.data['StB',InputRow];
+  MEBlockTimeArr.Text := FlWindow.GetActive.data['LaB',InputRow];
+  if FlWindow.GetActive.data['FlT',InputRow] <> '' then
+    MEFlightTime.Text := FormatDateTime('hh":"nn',StrtoTime(FlWindow.GetActive.data['FlT',InputRow]))
   else
     MEFlightTime.Text := '00:00';
-  if GridActiveChild.data['BlT',InputRow] <> '' then
-    MEBlockTime.Text := FormatDateTime('hh":"nn',StrtoTime(GridActiveChild.data['BlT',InputRow]))
+  if FlWindow.GetActive.data['BlT',InputRow] <> '' then
+    MEBlockTime.Text := FormatDateTime('hh":"nn',StrtoTime(FlWindow.GetActive.data['BlT',InputRow]))
   else
     MEBlockTime.Text := '00:00';
-  CBAPFrom.Text := GridActiveChild.data['StL',InputRow];
-  CBAPTo.Text := GridActiveChild.data['LaL',InputRow];
-  EditRemarks.Text := GridActiveChild.data['Rem',InputRow];
-  EditDistance.Text := GridActiveChild.data['Dst',InputRow];
-  LabelAvSpeed.caption := '0 '+GetSpeedUnit(GridActiveChild.Settings.Values['DistUnit']);
+  CBAPFrom.Text := FlWindow.GetActive.data['StL',InputRow];
+  CBAPTo.Text := FlWindow.GetActive.data['LaL',InputRow];
+  EditRemarks.Text := FlWindow.GetActive.data['Rem',InputRow];
+  EditDistance.Text := FlWindow.GetActive.data['Dst',InputRow];
+  LabelAvSpeed.caption := '0 '+GetSpeedUnit(FlWindow.GetActive.Settings.Values['DistUnit']);
   CalcAvSpeed;
 
   { Categories }
-  CLBKat.Items := GridActiveChild.ACCategories;
-  CLBKatTime.Items := GridActiveChild.ACTimeCat;
-  CLBContest.Items := GridActiveChild.ACContestCat;
+  CLBKat.Items := FlWindow.GetActive.ACCategories;
+  CLBKatTime.Items := FlWindow.GetActive.ACTimeCat;
+  CLBContest.Items := FlWindow.GetActive.ACContestCat;
 
-  if GridActiveChild.data['Cat',InputRow] <> '' then
-    StringsToCLB(GridActiveChild.ACCategories,GridActiveChild.data['Cat',InputRow],CLBKat);
-  if GridActiveChild.data['CTi',InputRow] <> '' then
-    StringsToCLB(GridActiveChild.ACTimeCat,GridActiveChild.data['CTi',InputRow],GridKatTime,CLBKatTime);
-  if GridActiveChild.data['Con',InputRow] <> '' then
-    StringsToCLB(GridActiveChild.ACContestCat,GridActiveChild.data['Con',InputRow],GridContest,CLBContest);
+  if FlWindow.GetActive.data['Cat',InputRow] <> '' then
+    StringsToCLB(FlWindow.GetActive.ACCategories,FlWindow.GetActive.data['Cat',InputRow],CLBKat);
+  if FlWindow.GetActive.data['CTi',InputRow] <> '' then
+    StringsToCLB(FlWindow.GetActive.ACTimeCat,FlWindow.GetActive.data['CTi',InputRow],GridKatTime,CLBKatTime);
+  if FlWindow.GetActive.data['Con',InputRow] <> '' then
+    StringsToCLB(FlWindow.GetActive.ACContestCat,FlWindow.GetActive.data['Con',InputRow],GridContest,CLBContest);
 
   { via }
-  if length(GridActiveChild.data['Via',InputRow]) > 0 then
-  for i := 1 to length(GridActiveChild.data['Via',InputRow]) do
-  if (GridActiveChild.data['Via',InputRow][i] = '/')
-    or (i = length(GridActiveChild.data['Via',InputRow])) then
+  if length(FlWindow.GetActive.data['Via',InputRow]) > 0 then
+  for i := 1 to length(FlWindow.GetActive.data['Via',InputRow]) do
+  if (FlWindow.GetActive.data['Via',InputRow][i] = '/')
+    or (i = length(FlWindow.GetActive.data['Via',InputRow])) then
   begin
     GridVia.InsertColRow(False, GridVia.RowCount-1);
     GridVia.Cells[1,GridVia.RowCount-2] := TempStr;
     TempStr := '';
   end
-  else TempStr := TempStr + GridActiveChild.data['Via',InputRow][i];
+  else TempStr := TempStr + FlWindow.GetActive.data['Via',InputRow][i];
 
   CBOrtExit(CBAPFrom);
   CBOrtExit(CBAPTo);
@@ -613,15 +613,15 @@ begin
 
   { Files }
   TempStr := '';
-  if length(GridActiveChild.data['Fil',InputRow]) > 0 then
-  for i := 1 to length(GridActiveChild.data['Fil',InputRow]) do
-  if (GridActiveChild.data['Fil',InputRow][i] = '/') then
+  if length(FlWindow.GetActive.data['Fil',InputRow]) > 0 then
+  for i := 1 to length(FlWindow.GetActive.data['Fil',InputRow]) do
+  if (FlWindow.GetActive.data['Fil',InputRow][i] = '/') then
   begin
     ButtonFileRem.Enabled := True;
     LBFiles.Items.Add(TempStr);
     TempStr := '';
   end
-  else TempStr := TempStr + GridActiveChild.data['Fil',InputRow][i];
+  else TempStr := TempStr + FlWindow.GetActive.data['Fil',InputRow][i];
 
   CalcAvSpeed;
 
@@ -645,9 +645,9 @@ var
 begin
   TempStr := '';
   DataChanged := True;
-  FMain.StatusBar1.Panels[2].Text := '*';
+//  FMain.StatusBar1.Panels[2].Text := '*';
 
-  with GridActiveChild do
+  with FlWindow.GetActive do
   begin
     data['Dat',InputRow] := DateToStr(DTPDate.Date);
     data['ATy',InputRow] := CBAircraftType.Text;
@@ -767,13 +767,13 @@ begin
   end;
   SaveData;
   FMain.InsertData;
-  GridActiveChild.Grid.InsertColRow(False, InputRow+1);
+  FlWindow.GetActive.Grid.InsertColRow(False, InputRow+1);
   inc(InputRow);
 
   ResetInput;
 
-  LabelFlugNr.caption := InttoStr(Strtoint(GridActiveChild.Grid.Cells[0,InputRow-1])
-   +Strtoint(GridActiveChild.data['NoL',InputRow-1]));
+  LabelFlugNr.caption := InttoStr(Strtoint(FlWindow.GetActive.Grid.Cells[0,InputRow-1])
+   +Strtoint(FlWindow.GetActive.data['NoL',InputRow-1]));
 end;
 
 // ----------------------------------------------------------------
@@ -786,7 +786,7 @@ begin
   if (PDefaultTime^.Text <> '00:00') and (PDefaultTime^.Text <> '  :  ') and (EditDistance.Text <> '') then
     LabelAvSpeed.caption :=
      InttoStr(avgSpeed(StrtoInt(EditDistance.text),PDefaultTime^.Text))+' '
-     +GetSpeedUnit(GridActiveChild.Settings.Values['DistUnit']);
+     +GetSpeedUnit(FlWindow.GetActive.Settings.Values['DistUnit']);
 end;
 
 // ----------------------------------------------------------------
@@ -805,7 +805,7 @@ begin
   TabControl.ActivePage := TSFlugdaten;
   Result := True;
   if (CBAircraftID.Text = '') or
-    (CBAircraftID.Text = GridActiveChild.Settings.Values['IDPrefix']) then
+    (CBAircraftID.Text = FlWindow.GetActive.Settings.Values['IDPrefix']) then
   begin
     RaiseError(_('Please enter aircraft id'), CBAircraftID);
     Exit;
@@ -860,7 +860,7 @@ procedure TFInput.DTPDateExit(Sender: TObject);
 begin
   if InputRow <= 1 then
     Exit;
-  if DTPDate.Date < StrtoDate(GridActiveChild.Data['Dat',InputRow-1]) then
+  if DTPDate.Date < StrtoDate(FlWindow.GetActive.Data['Dat',InputRow-1]) then
   begin
     DTPDate.Color := clFYellow;
     DTPDate.Hint := 'This date is before the date of the last flight';
@@ -894,7 +894,7 @@ begin
   i := 1;
   while i <= length(CBAircraftID.Text) do
   begin
-    if GridActiveChild.Settings.Values['IDPrefix'] = copy(CBAircraftID.Text,1,i) then
+    if FlWindow.GetActive.Settings.Values['IDPrefix'] = copy(CBAircraftID.Text,1,i) then
     begin
       found := True;
       break;
@@ -925,7 +925,7 @@ begin
   CBAircraftID.Text := UpperCase(CBAircraftID.Text);
   if TabControl.ActivePage = TSFlugdaten then
   begin
-    Idx := GridActiveChild.ACAircrafts.IndexOfName(CBAircraftID.Text);
+    Idx := FlWindow.GetActive.ACAircrafts.IndexOfName(CBAircraftID.Text);
     { unknown aircraft }
     if (Idx = -1) then
     begin
@@ -943,7 +943,7 @@ begin
     else
     { known aircraft }
     begin
-      CBAircraftType.Text := GridActiveChild.ACAircrafts.ValueFromIndex[Idx];
+      CBAircraftType.Text := FlWindow.GetActive.ACAircrafts.ValueFromIndex[Idx];
       ActiveControl := FindNextControl(CBAircraftType,True,True,False);
       { aircraft categories }
       for i := 0  to CLBKat.Items.Count-1 do
@@ -954,8 +954,8 @@ begin
         CLBKat.Checked[i]:=False;
       end;
 
-      ACCatList := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'AircraftCat');
-      GrayCLB(GridActiveChild.ACCategories, ACCatList, CLBKat);
+      ACCatList := GetStringObject(FlWindow.GetActive.ACAircrafts, CBAircraftID.Text, 'AircraftCat');
+      GrayCLB(FlWindow.GetActive.ACCategories, ACCatList, CLBKat);
       CLBKat.Repaint;
     end;
   end;
@@ -967,16 +967,16 @@ end;
 procedure TFInput.ButtonNeuFlugzeugClick(Sender: TObject);
 begin
   { Prüfen, ob Kennung schon existiert (dürfte eigentlich nicht passieren!) }
-  if GridActiveChild.ACAircrafts.IndexOfName(CBAircraftID.Text) >= 0 then
+  if FlWindow.GetActive.ACAircrafts.IndexOfName(CBAircraftID.Text) >= 0 then
   begin
     MessageDlg(_('Aircraft id already exists!'),mtWarning,[mbOk],0);
     Exit;
   end;
   DataChanged := True;
-  FMain.StatusBar1.Panels[2].Text := '*';
+//  FMain.StatusBar1.Panels[2].Text := '*';
   ButtonNeuFlugzeug.Visible := False;
 
-  GridActiveChild.ACAircrafts.Values[CBAircraftID.Text] := CBAircraftType.Text;
+  FlWindow.GetActive.ACAircrafts.Values[CBAircraftID.Text] := CBAircraftType.Text;
 end;
 
 // ----------------------------------------------------------------
@@ -984,7 +984,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFInput.CBMusterExit(Sender: TObject);
 begin
-  if (GridActiveChild.ACAircrafts.IndexOfName(CBAircraftID.Text) >= 0)
+  if (FlWindow.GetActive.ACAircrafts.IndexOfName(CBAircraftID.Text) >= 0)
     and (CBAircraftID.Text <> '') and (CBAircraftType.Text <> '') then
       ButtonNeuFlugzeug.visible := True
   else
@@ -1004,11 +1004,11 @@ begin
     TempButton := @ButtonNeuPilot
   else TempButton := @ButtonNeuBegleiter;
 
-  Idx := GridActiveChild.ACPilots.IndexOf(UpperCase(TComboBox(Sender).Text));
+  Idx := FlWindow.GetActive.ACPilots.IndexOf(UpperCase(TComboBox(Sender).Text));
   if Idx >= 0 then
   begin
     TempButton^.Visible := False;
-    TComboBox(Sender).Text := GridActiveChild.ACPilots[Idx];
+    TComboBox(Sender).Text := FlWindow.GetActive.ACPilots[Idx];
   end
   else
     TempButton^.Visible := True;
@@ -1022,7 +1022,7 @@ var
   PComboBox: ^TComboBox;
 begin
   DataChanged := True;
-  FMain.StatusBar1.Panels[2].Text := '*';
+//  FMain.StatusBar1.Panels[2].Text := '*';
   if TSpeedButton(Sender).Name = 'ButtonNeuPilot' then
   begin
     ButtonNeuPilot.visible := False;
@@ -1034,13 +1034,13 @@ begin
     PComboBox := @CBCoPilot;
   end;
 
-  if GridActiveChild.ACPilots.IndexOf(PComboBox^.Text) >= 1 then
+  if FlWindow.GetActive.ACPilots.IndexOf(PComboBox^.Text) >= 1 then
   begin
     MessageDlg(_('Person already exists!'),mtWarning,[mbOk],0);
     Exit;
   end;
 
-  GridActiveChild.ACPilots.Add(PComboBox^.Text);
+  FlWindow.GetActive.ACPilots.Add(PComboBox^.Text);
 end;
 
 // ----------------------------------------------------------------
@@ -1088,10 +1088,10 @@ begin
     end;
     PMETime^.Text := FormatDateTime('hh":"nn',Zeit);
 
-    Tmp := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'Clc');
-    Clc1 := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'CpH');
+    Tmp := GetStringObject(FlWindow.GetActive.ACAircrafts, CBAircraftID.Text, 'Clc');
+    Clc1 := GetStringObject(FlWindow.GetActive.ACAircrafts, CBAircraftID.Text, 'CpH');
     if Clc1 = '' then Clc1 := '0'; try Calc1 := StrToFloat(Clc1); except Calc1 := 0; end;
-    Clc2 := GetStringObject(GridActiveChild.ACAircrafts, CBAircraftID.Text, 'CpF');
+    Clc2 := GetStringObject(FlWindow.GetActive.ACAircrafts, CBAircraftID.Text, 'CpF');
     if Clc2 = '' then Clc2 := '0'; try Calc2 := StrToFloat(Clc2); except Calc2 := 0; end;
 
     if StrToFloat(CfF.Text) = 0 then
@@ -1146,7 +1146,7 @@ begin
   if TComboBox(Sender).Name = 'CBAPTo' then PLabelOrt := @LabelLaO;
   if TComboBox(Sender).Name = 'CBViaOrt' then PLabelOrt := @LabelViaOrt;
 
-  Idx := GridActiveChild.ACAirports.IndexOf(TComboBox(Sender).Text);
+  Idx := FlWindow.GetActive.ACAirports.IndexOf(TComboBox(Sender).Text);
   if Idx = -1 then
   begin
     if TComboBox(Sender).Name = 'CBAPFrom' then ButtonNeuStartOrt.visible := True;
@@ -1194,7 +1194,7 @@ var
   TempComboBox: TComboBox;
 begin
   DataChanged := True;
-  FMain.StatusBar1.Panels[2].Text := '*';
+//  FMain.StatusBar1.Panels[2].Text := '*';
   if TSpeedButton(Sender).Name = 'ButtonNeuStartOrt' then
   begin
     ButtonNeuStartOrt.visible := False;
@@ -1206,13 +1206,13 @@ begin
     TempComboBox := CBAPTo;
   end;
 
-  if GridActiveChild.ACAirports.IndexOf(TempComboBox.Text) >= 0 then
+  if FlWindow.GetActive.ACAirports.IndexOf(TempComboBox.Text) >= 0 then
   begin
     MessageDlg(_('Airport aleready exists!'),mtWarning,[mbOk],0);
     Exit;
   end;
 
-  GridActiveChild.ACAirports.Add(TempComboBox.Text);
+  FlWindow.GetActive.ACAirports.Add(TempComboBox.Text);
 end;
 
 // ----------------------------------------------------------------
@@ -1290,12 +1290,12 @@ var
 begin
   if InputQuery(_('Please enter a category'),_('Please enter a category'),InputStr) then
   begin
-    if GridActiveChild.ACCategories.IndexOf(InputStr) >= 0 then
+    if FlWindow.GetActive.ACCategories.IndexOf(InputStr) >= 0 then
     begin
       MessageDlg(_('Category already exists!'),mtWarning,[mbOk],0);
       Exit;
     end;
-    GridActiveChild.ACCategories.Add(InputStr);
+    FlWindow.GetActive.ACCategories.Add(InputStr);
     CLBKat.Items.Add(InputStr);
   end;
 end;
@@ -1447,13 +1447,13 @@ begin
   TotDist := 0;
   for i := 2 to GridVia.RowCount-1 do
   begin
-    Dist := Round(AirportData.Distance(GridVia.Cells[1,i],GridVia.Cells[1,i-1],GridActiveChild.Settings.Values['DistUnit']));
+    Dist := Round(AirportData.Distance(GridVia.Cells[1,i],GridVia.Cells[1,i-1],FlWindow.GetActive.Settings.Values['DistUnit']));
     inc(TotDist,Dist);
     GridVia.Cells[2,i] := inttoStr(Dist);
   end;
   LabelViaDist.caption := inttoSTr(TotDist);
 
-  LabelDist.caption := LabelViaDist.Caption + ' '+GridActiveChild.Settings.Values['DistUnit'];
+  LabelDist.caption := LabelViaDist.Caption + ' '+FlWindow.GetActive.Settings.Values['DistUnit'];
   CheckCustomDist;
 end;
 
@@ -1577,12 +1577,12 @@ var
 begin
   if InputQuery(_('Please enter a category'),_('Please enter a category'),InputStr) then
   begin
-    if GridActiveChild.ACTimeCat.IndexOf(InputStr) >= 0 then
+    if FlWindow.GetActive.ACTimeCat.IndexOf(InputStr) >= 0 then
     begin
       MessageDlg(_('Category already exists!'),mtWarning,[mbOk],0);
       Exit;
     end;
-    GridActiveChild.ACTimeCat.Add(InputStr);
+    FlWindow.GetActive.ACTimeCat.Add(InputStr);
     CLBKatTime.Items.Add(InputStr);
   end;
 end;
@@ -1804,12 +1804,12 @@ var
 begin
   if InputQuery(_('Please enter a category'),_('Please enter a category'),InputStr) then
   begin
-    if GridActiveChild.ACContestCat.IndexOf(InputStr) >= 0 then
+    if FlWindow.GetActive.ACContestCat.IndexOf(InputStr) >= 0 then
     begin
       MessageDlg(_('Category already exists!'),mtWarning,[mbOk],0);
       Exit;
     end;
-    GridActiveChild.ACContestCat.Add(InputStr);
+    FlWindow.GetActive.ACContestCat.Add(InputStr);
     CLBContest.Items.Add(InputStr);
   end;
 end;
@@ -2018,10 +2018,10 @@ end;
 function TFInput.CanEdit(Default : Boolean) : Boolean;
 begin
   try Result := Default;
-    if (StrToBool(GridActiveChild.Settings.Values['DisallowChange'])) then begin
+    if (StrToBool(FlWindow.GetActive.Settings.Values['DisallowChange'])) then begin
       Result := false;
 
-      if ((StrToBool(GridActiveChild.Settings.Values['AllowLastEdit'])) and (GridActiveChild.Grid.Row = GridActiveChild.Grid.RowCount-1)) then
+      if ((StrToBool(FlWindow.GetActive.Settings.Values['AllowLastEdit'])) and (FlWindow.GetActive.Grid.Row = FlWindow.GetActive.Grid.RowCount-1)) then
         Result := true;
     end;
   except end;

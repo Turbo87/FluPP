@@ -107,35 +107,35 @@ begin
     for GridIdx := 0 to FlWindow.Count-1 do
     begin
       XMLNode := XMLDoc.CreateElement('FlightLog');
-      TDOMElement(XMLRoot).SetAttribute('Name', GridChild(GridIdx).Name);
+      TDOMElement(XMLRoot).SetAttribute('Name', FlWindow.GetItem(GridIdx).Name);
 
       { Settings }
-      writeValStrings(XMLDoc, XMLNode, 'Settings', GridChild(GridIdx).Settings);
+      writeValStrings(XMLDoc, XMLNode, 'Settings', FlWindow.GetItem(GridIdx).Settings);
 
       { AutoComplete }
-      writeObjStrings(XMLDoc, XMLNode, 'Aircraft', GridChild(GridIdx).ACAircrafts);
-      writeObjStrings(XMLDoc, XMLNode, 'Pilot', GridChild(GridIdx).ACPilots);
-      writeObjStrings(XMLDoc, XMLNode, 'Airport', GridChild(GridIdx).ACAirports);
+      writeObjStrings(XMLDoc, XMLNode, 'Aircraft', FlWindow.GetItem(GridIdx).ACAircrafts);
+      writeObjStrings(XMLDoc, XMLNode, 'Pilot', FlWindow.GetItem(GridIdx).ACPilots);
+      writeObjStrings(XMLDoc, XMLNode, 'Airport', FlWindow.GetItem(GridIdx).ACAirports);
 
       { Categories }
-      writeObjStrings(XMLDoc, XMLNode, 'CatTime', GridChild(GridIdx).ACTimeCat);
-      writeObjStrings(XMLDoc, XMLNode, 'Category', GridChild(GridIdx).ACCategories);
-      writeObjStrings(XMLDoc, XMLNode, 'EventCat', GridChild(GridIdx).ACEventCat);
-      writeObjStrings(XMLDoc, XMLNode, 'Contest', GridChild(GridIdx).ACContestCat);
+      writeObjStrings(XMLDoc, XMLNode, 'CatTime', FlWindow.GetItem(GridIdx).ACTimeCat);
+      writeObjStrings(XMLDoc, XMLNode, 'Category', FlWindow.GetItem(GridIdx).ACCategories);
+      writeObjStrings(XMLDoc, XMLNode, 'EventCat', FlWindow.GetItem(GridIdx).ACEventCat);
+      writeObjStrings(XMLDoc, XMLNode, 'Contest', FlWindow.GetItem(GridIdx).ACContestCat);
 
       { License Data }
-      writeObjStrings(XMLDoc, XMLNode, 'LicenseCat', GridChild(GridIdx).LicenseCategories);
-      writeObjStrings(XMLDoc, XMLNode, 'LicenseTimeCat', GridChild(GridIdx).LicenseTimeCat);
-      writeObjStrings(XMLDoc, XMLNode, 'LicenseDates', GridChild(GridIdx).LicenseDates);
-      writeObjStrings(XMLDoc, XMLNode, 'AccLicenses', GridChild(GridIdx).AccLicenses);
-      writeObjStrings(XMLDoc, XMLNode, 'OptConditions', GridChild(GridIdx).OptConditions);
-      writeObjStrings(XMLDoc, XMLNode, 'Events', GridChild(GridIdx).Events);
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseCat', FlWindow.GetItem(GridIdx).LicenseCategories);
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseTimeCat', FlWindow.GetItem(GridIdx).LicenseTimeCat);
+      writeObjStrings(XMLDoc, XMLNode, 'LicenseDates', FlWindow.GetItem(GridIdx).LicenseDates);
+      writeObjStrings(XMLDoc, XMLNode, 'AccLicenses', FlWindow.GetItem(GridIdx).AccLicenses);
+      writeObjStrings(XMLDoc, XMLNode, 'OptConditions', FlWindow.GetItem(GridIdx).OptConditions);
+      writeObjStrings(XMLDoc, XMLNode, 'Events', FlWindow.GetItem(GridIdx).Events);
 
       { Columns }
       writeColumns(XMLDoc, XMLNode, GridIdx);
 
       { Flight data }
-      for i := 1 to GridChild(GridIdx).Grid.RowCount-1 do
+      for i := 1 to FlWindow.GetItem(GridIdx).Grid.RowCount-1 do
         writeFlight(XMLDoc, XMLNode, 'Flight', GridIdx, i);
     end;
     writeXMLFile(XMLDoc, FlpTempDir+'\'+'flightlog.xml');
@@ -145,7 +145,7 @@ begin
 
   { Compress }
   Result := True;
-  try
+{  try
     ProgressBar := TProgressBar.Create(FMain);
     ProgressBar.Parent := FMain.StatusBar1;
     ProgressBar.Top := 2;
@@ -153,7 +153,7 @@ begin
     ProgressBar.Height := FMain.StatusBar1.Height - 2;
     FMain.StatusBar1.Repaint;
     Screen.Cursor := crHourGlass;
-{    try
+    try
       FMain.JvZlib.CompressDirectory(FlpTempDir,True,FileName);
     except
       on E: Exception do
@@ -161,12 +161,12 @@ begin
         MessageDlg(E.Message, mtWarning, [mbOK], 0);
         Result := False;
       end;
-    end;}
+    end;
   finally
     ProgressBar.Free;
     Screen.Cursor := crDefault;
     FMain.StatusBar1.Repaint;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------
@@ -175,7 +175,7 @@ end;
 procedure ExportCSV(FileName: String);
 var Count : Integer;
 begin
-  with GridActiveChild do begin
+  with FlWindow.GetActive do begin
     for Count := 0 to GridCols.Count - 1 do
       Grid.Cells[Count, 0] := GridCols[Count];
 
@@ -198,7 +198,7 @@ begin
   try
     ScheduleList.AddStrings(Schedules);
     for GridIdx := 0 to FlWindow.Count-1 do
-      ScheduleList.AddStrings(GridChild(GridIdx).LicenseDates);
+      ScheduleList.AddStrings(FlWindow.GetItem(GridIdx).LicenseDates);
     ScheduleList.AddStrings(Medicals);
 
     ExportICal(FluFileName+'.ics', 'FluPP', ScheduleList);
@@ -267,14 +267,14 @@ var
   GridRect: TGridRect;
   Row: Word;
 begin
-  GridREct := GridActiveChild.Grid.Selection;
+  GridREct := FlWindow.GetActive.Grid.Selection;
   TmpDecimalSeparator := DecimalSeparator;
   DecimalSeparator := '.';
   try
     for Row := GridRect.Top to GridRect.Bottom do
     begin
-      if AirportData.Find(GridActiveChild.Data['StL', Row], Airport1)
-        and AirportData.Find(GridActiveChild.Data['LaL', Row], Airport2) then
+      if AirportData.Find(FlWindow.GetActive.Data['StL', Row], Airport1)
+        and AirportData.Find(FlWindow.GetActive.Data['LaL', Row], Airport2) then
       begin
         Params := Params +
           StrToHTML(Airport1.AirportName+'/'+Airport1.ICAO)+'/'+
@@ -318,10 +318,10 @@ procedure ExportGoogleEarth;
 
     function Description(Name: String; Row: Word): String;
     begin
-      if GridActiveChild.Data[Name, Row] = '' then
+      if FlWindow.GetActive.Data[Name, Row] = '' then
         Result := ''
       else
-        Result := GridActiveChild.Data[Name, 0] +': '+ GridActiveChild.Data[Name, Row] +'<br>';
+        Result := FlWindow.GetActive.Data[Name, 0] +': '+ FlWindow.GetActive.Data[Name, Row] +'<br>';
     end;
 
   begin
@@ -366,7 +366,7 @@ var
   DestAirport, ActualAirport, TargetAirport: TAirport;
   TmpDecimalSeparator: Char; }
 begin
-{  GridREct := GridActiveChild.Grid.Selection;
+{  GridREct := FlWindow.GetActive.Grid.Selection;
   TmpDecimalSeparator := DecimalSeparator;
   DecimalSeparator := '.';
   with TJvSimpleXML.Create(FMain) do
@@ -398,11 +398,11 @@ begin
     // Placemarks
     for Row := GridRect.Top to GridRect.Bottom do
     begin
-      if AirportData.Find(GridActiveChild.Data['StL', Row], DestAirport)
-        and AirportData.Find(GridActiveChild.Data['LaL', Row], TargetAirport) then
+      if AirportData.Find(FlWindow.GetActive.Data['StL', Row], DestAirport)
+        and AirportData.Find(FlWindow.GetActive.Data['LaL', Row], TargetAirport) then
       begin
         FolElem := DocElem.Items.Add('Folder');
-        FolElem.Items.Add('name', GridActiveChild.Data['StL', Row]+'-'+GridActiveChild.Data['LaL', Row]);
+        FolElem.Items.Add('name', FlWindow.GetActive.Data['StL', Row]+'-'+FlWindow.GetActive.Data['LaL', Row]);
 
         PlaceMElem := FolElem.Items.Add('Placemark');
         PlaceMElem.Items.Add('name', DestAirport.AirportName+' '+DestAirport.ICAO);
@@ -410,7 +410,7 @@ begin
         PlaceMElem.Items.Add('styleUrl', '#DefaultStyles');
         AddPoint(DestAirport, PlaceMElem);
 
-        ViaTmp := GridActiveChild.data['Via',Row];
+        ViaTmp := FlWindow.GetActive.data['Via',Row];
         if ViaTmp > '' then begin
           while Pos('/', ViaTmp) > 0 do begin
             if AirportData.Find(Copy(ViaTmp, 1, Pos('/',ViaTmp)-1), ActualAirport) then begin

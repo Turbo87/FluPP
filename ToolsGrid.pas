@@ -9,8 +9,6 @@ uses SysUtils, Classes, Types, Grid, Grids, Graphics;
 const
   DeSelectRect: TGridRect = (Left:-1; Top:-1; Right:-1; Bottom:-1 );
 
-function GridChild(Flb: Word): TFGrid; { TODO: deprecated }
-function GridActiveChild: TFGrid;  { TODO: deprecated }
 function CalcTime(GridIdx: Word; StartTime: String; NrFrom, NrTo: Word; DefaultTime: Byte = 2): String;
 function CalcFlights(GridIdx: Word; Flights: Word; NrFrom: Word; NrTo: Word): Word;
 //procedure SortGridByCols(ColOrder: array of Integer; Grid: TStringGrid);
@@ -22,22 +20,6 @@ procedure ConvertColNames(GridCols: TSTrings);
 implementation
 
 uses Main, Tools;
-
-// ----------------------------------------------------------------
-// Gridchild
-// ----------------------------------------------------------------
-function GridChild(Flb: Word): TFGrid;
-begin
-  Result := TFGrid(FlWindow.Items[Flb]);
-end;
-
-// ----------------------------------------------------------------
-// Active GridChild
-// ----------------------------------------------------------------
-function GridActiveChild: TFGrid;
-begin
-  Result := FlWindow.GetActive;
-end;
 
 // ----------------------------------------------------------------
 // Add time NrFrom bis NrTo
@@ -63,7 +45,7 @@ begin
   if DefaultTime in [0..1] then
     TmpDefaultTime := DefaultTime
   else
-    TmpDefaultTime := StrToInt(GridChild(GridIdx).Settings.Values['DefaultTime']);
+    TmpDefaultTime := StrToInt(FlWindow.GetItem(GridIdx).Settings.Values['DefaultTime']);
 
   try
     for i := NrFrom to NrTo do
@@ -229,7 +211,7 @@ var
   TextOut: String;
   TextStyle: TTextStyle;
 begin
-{  if not (gdFixed in State) and not (gdSelected	in State) then
+  if not (gdFixed in State) and not (gdSelected	in State) then
   begin
     if Odd(ARow) then
       Grid.Canvas.Brush.Color := clColorband1
@@ -245,9 +227,9 @@ begin
 
   InflateRect(Rect, -3, -2);
   TextOut := Grid.Cells[ACol,ARow];
-  TextStyle.Alignment:=Alignment;
-  Grid.Canvas.TextRect(Rect, Rect.Left , Rect.Top, TextOut, Textstyle);
-}end;
+  TextStyle.Alignment := Alignment;
+  Grid.Canvas.TextRect(Rect, Rect.Left, Rect.Top, TextOut, Textstyle);
+end;
 
 
 // ----------------------------------------------------------------

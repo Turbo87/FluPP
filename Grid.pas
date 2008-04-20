@@ -86,7 +86,16 @@ type
     procedure LoadDefaultSettings;
   end;
   
-
+  { TFlWindow }
+  TFlWindow = class(TObjectList)
+  private
+    ActiveFlWindow: Integer;
+  public
+    function Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
+    function GetItem(Index: Word): TFGrid;
+    function GetActive: TFGrid;
+    function SetActive(Index: Word): TFGrid;
+  end;
 
 var
   FGrid: TFGrid;
@@ -128,7 +137,80 @@ EfF: Earnings for flight
 Met: Meteo-Information
 }
 
+{--\/-- TFlWindow --\/--}
 
+// ----------------------------------------------------------------
+// Add new FlWindow
+//   hides TObjectList.Add
+//   returns the added FGrid
+// ----------------------------------------------------------------
+function TFlWindow.Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
+begin
+  ChWindow := TFGrid.Create(FMain);
+
+  ActiveFlWindow := inherited Add(ChWindow);
+
+  ChWindow.Name := 'ChWindow' + IntToStr(FlWindow.Count);  { TODO: bad, when deleting}
+  ChWindow.FlName := Name;
+  ChWindow.Parent := FMain;
+  ChWindow.Align := alClient;
+  ChWindow.Show;;
+
+  ChWindow.Grid.ColCount := NumberOfGridRows + 1;
+  ChWindow.setColWidth(DefaultColWidth);
+
+  ChWindow.LoadDefaultSettings;
+
+  ReadTStrings(GridCols, ChWindow.GridCols);
+  ChWindow.Grid.ColCount := ChWindow.GridCols.Count;
+  ChWindow.NameCols;
+  SetLength(ChWindow.Undo, ChWindow.GridCols.Count);
+
+  Result := TFGrid(FlWindow[ActiveFlWindow]);
+
+//  FMain.CreateSButtons;
+//  FMain.UpdateSButtons;
+end;
+
+// ----------------------------------------------------------------
+// Gridchild
+// ----------------------------------------------------------------
+function TFlWindow.GetItem(Index: Word): TFGrid;
+begin
+  if assigned(FlWindow.Items[Index]) then
+  Result := TFGrid(FlWindow.Items[Index]);
+end;
+
+// ----------------------------------------------------------------
+// Returns the active FlWindow
+// ----------------------------------------------------------------
+function TFlWindow.GetActive: TFGrid;
+begin
+  if assigned(Items[ActiveFlWindow]) then
+  Result := TFGrid(Items[ActiveFlWindow]);
+end;
+
+// ----------------------------------------------------------------
+// Sets the active FlWindow
+// ----------------------------------------------------------------
+function TFlWindow.SetActive(Index: Word): TFGrid;
+var i: Integer;
+begin
+  ActiveFlWindow := Index;
+  for i:= 0 to Count -1 do
+    if i = Index then
+    begin
+      GetItem(i).Visible := True;
+      GetItem(i).SButton.PanelSB.Color := clFOrange;
+    end
+    else begin
+      GetItem(i).Visible := False;
+      GetItem(i).SButton.PanelSB.Color := clSilver;
+    end;
+  Result := GetActive;
+end;
+
+{--/\-- TFlWindow --/\--}
 
 // ----------------------------------------------------------------
 // From create
@@ -367,7 +449,7 @@ begin
 //    if length(TFGrid(FMain.ActiveMDIChild).data['Fil',Row]) = 0 then
 //      PUFiles.checked := False
 //    else
-    for i := 1 to length(TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row]) do
+{    for i := 1 to length(TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row]) do
     if (TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row][i] = ',') then
     begin
       FilesMenuItem := TMenuItem.create(self);
@@ -379,7 +461,7 @@ begin
     end
     else TempStr := TempStr + TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Fil',Row][i];
 
-    PopupMenu.Popup(Mouse.CursorPos.x,Mouse.CursorPos.Y);
+    PopupMenu.Popup(Mouse.CursorPos.x,Mouse.CursorPos.Y);  }
   end;
 end;
 
@@ -419,9 +501,9 @@ begin
       PosIdx := pos(TMenuItem(Sender).Caption+'/',data['Cat',Row]);
       if PosIdx > 0 then
       begin
-          TmpStr := TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Cat',Row];
+          TmpStr := FlWindow.GetActive.data['Cat',Row];
           delete(TmpStr,PosIdx,length(TMenuItem(Sender).Caption)+1);
-          TFGrid(FlWindow[FMain.ActiveFlWindow]).data['Cat',Row] := TmpStr;
+          FlWindow.GetActive.data['Cat',Row] := TmpStr;
           DataChanged := True;
       end;
     end;
@@ -448,7 +530,7 @@ begin
 
   FMain.UpdateButtonState;
 
-  GridActiveChild.ReCalcGridTime;
+  FlWindow.GetActive.ReCalcGridTime;
 end;
 
 // ----------------------------------------------------------------
@@ -517,7 +599,7 @@ begin
       Grid.Cells[i, StrToInt(Undo[0])] := Grid.Cells[i, StrToInt(Undo[0])];
   end
   else begin
-    if TFGrid(FlWindow[FMain.ActiveFlWindow]).Data['Num',1] <> '' then
+    if FlWindow.GetActive.Data['Num',1] <> '' then
     Grid.InsertColRow(False, StrToInt(Undo[0]));
 
     for i := 0 to Grid.ColCount-1 do
@@ -604,6 +686,7 @@ var i: Integer;
   end;
 
 begin
+  Exit;
   if Data['Dat',1] = '' then Exit;
 
   if Settings.Values['Numeration'] = '1' then
@@ -628,9 +711,9 @@ end;
 // ----------------------------------------------------------------
 procedure TFGrid.ReCalcGridtime;
 begin
-  if Data['Dat',1] = '' then Exit;
+{  if Data['Dat',1] = '' then Exit;
 
-{  FMain.StatusBar1.Panels[0].Text :=
+  FMain.StatusBar1.Panels[0].Text :=
     format(_('Over-all: %s flights, %s: %s h, %s: %s h'), [
       IntToStr(CalcFlights(0, StrToInt(Settings.Values['BFStarts']), 1, Grid.RowCount-1)),
       _('Flight time'),

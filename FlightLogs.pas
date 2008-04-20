@@ -6,8 +6,7 @@ interface
 
 uses
   Buttons, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls,
-  LResources;
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls, LResources;
 
 type
   TFFlightLogs = class(TForm)
@@ -69,7 +68,7 @@ begin
   if FlWindow.Count > 0 then
   begin
     for i := 0 to FlWindow.Count-1 do
-      LBFlu.Items.Add(GridChild(i).FlName);
+      LBFlu.Items.Add(FlWindow.GetItem(i).FlName);
     LBFlu.ItemIndex := 0;
   end;
 end;
@@ -104,7 +103,7 @@ begin
     if LBFlu.Items.IndexOf(InputStr) > -1 then
       MessageDlg(_('The name already exists!'), mtInformation, [mbOK], 0)
     else
-      GridChild(LBFlu.ItemIndex).FlName := InputStr;
+      FlWindow.GetItem(LBFlu.ItemIndex).FlName := InputStr;
     RefreshLBFlu;
   end;
 end;
@@ -119,10 +118,10 @@ begin
   if LBFlu.ItemIndex = -1 then
     Exit;
   Answer := MessageDlg(format(_('Are you sure you want to delete the flightlog ''%s''?'),
-    [GridChild(LBFlu.ItemIndex).FlName]),mtConfirmation,[mbYes,mbNo],0);
+    [FlWindow.GetItem(LBFlu.ItemIndex).FlName]),mtConfirmation,[mbYes,mbNo],0);
   if answer = mrNo then Exit
   else
-    GridChild(LBFlu.ItemIndex).Free;
+    FlWindow.GetItem(LBFlu.ItemIndex).Free;
   RefreshLBFlu;
 end;
 

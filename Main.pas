@@ -89,7 +89,7 @@ type
     PUSepFiles: TMenuItem;
     SaveDialog: TSaveDialog;
     StartTimer: TTimer;
-    StatusBar1: TStatusBar;
+    StatusBar: TStatusBar;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
@@ -108,6 +108,7 @@ type
     procedure MMStatisticsClick(Sender: TObject);
     procedure InfoClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem27Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
     procedure ActionSettings(Sender: TObject);
     procedure ActionFileSaveAs(Sender: TObject);
@@ -145,8 +146,6 @@ type
     procedure ActionExportGoogleEarthExecute(Sender: TObject);
     procedure ActionResetColumnsExecute(Sender: TObject);
     procedure ActionFileImportExecute(Sender: TObject);
-    procedure TIPropertyGrid1Click(Sender: TObject);
-    procedure ToolButton5Click(Sender: TObject);
   private
     ProgressBar: TProgressBar;
     procedure LoadFluFile;
@@ -162,19 +161,9 @@ type
     procedure LastFife(FileName: String);
     procedure CreateSButtons;
     procedure UpdateSButtons;
-
-    ActiveFlWindow: Word;
   end;
   
-    { TFlWindow }
-  TFlWindow = class(TObjectList)
-  private
-    ActiveFlWindow: Integer;
-  public
-    function Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
-    function GetActive: TFGrid;
-    procedure SetActive(Index: Integer);
-  end;
+
 
 var
   FMain: TFMain;
@@ -199,70 +188,6 @@ uses
   Input, BasicSettings, FlightLogs,
   ToolsGrid, ToolsShell, Import, Export, Debug;
 //  Info, Calendar, NinetyDays, TrainBaro, Airports, Print, Statistics, Licenses, Settings;
-
-{--\/-- TFlWindow --\/--}
-
-// ----------------------------------------------------------------
-// Add new FlWindow
-//   hides TObjectList.Add
-//   returns the added FGrid
-// ----------------------------------------------------------------
-function TFlWindow.Add(Name: String; GridCols: String = DEFAULTTABLECOLS): TFGrid;
-begin
-  ChWindow := TFGrid.Create(Application);
-  
-  ActiveFlWindow := inherited Add(ChWindow);
-
-  ChWindow.Name := 'ChWindow' + IntToStr(FlWindow.Count);  { TODO: bad, when deleting}
-  ChWindow.FlName := Name;
-//  ChWindow.Parent := FMain;
-  ChWindow.Align := alClient;
-  ChWindow.Show;;
-
-  ChWindow.Grid.ColCount := NumberOfGridRows + 1;
-  ChWindow.setColWidth(DefaultColWidth);
-
-  ChWindow.LoadDefaultSettings;
-
-  ReadTStrings(GridCols, ChWindow.GridCols);
-  ChWindow.Grid.ColCount := ChWindow.GridCols.Count;
-  ChWindow.NameCols;
-  SetLength(ChWindow.Undo, ChWindow.GridCols.Count);
-
-  Result := TFGrid(FlWindow[ActiveFlWindow]);
-
-//  FMain.CreateSButtons;
-//  FMain.UpdateSButtons;
-end;
-
-// ----------------------------------------------------------------
-// Returns the active FlWindow
-// ----------------------------------------------------------------
-function TFlWindow.GetActive: TFGrid;
-begin
-  Result := TFGrid(Items[ActiveFlWindow]);
-end;
-
-// ----------------------------------------------------------------
-// Sets the active FlWindow
-// ----------------------------------------------------------------
-procedure TFlWindow.SetActive(Index: Integer);
-var i: Integer;
-begin
-  ActiveFlWindow := Index;
-  for i:= 0 to FlWindow.Count -1 do
-    if i = Index then
-    begin
-      TFGRid(FlWindow.Items[i]).Visible := True;
-      TFGRid(FlWindow.Items[i]).SButton.PanelSB.Color := clFOrange;
-    end
-    else begin
-      TFGRid(FlWindow.Items[i]).Visible := False;
-      TFGRid(FlWindow.Items[i]).SButton.PanelSB.Color := clSilver;
-    end;
-end;
-
-{--/\-- TFlWindow --/\--}
 
 // ----------------------------------------------------------------
 // Form create
@@ -353,7 +278,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.onHint(Sender: TObject);
 begin
-  //StatusBar1.Panels[1].text := GetLongHint(Application.Hint);
+  //StatusBar.Panels[1].text := GetLongHint(Application.Hint);
 end;
 
 // ----------------------------------------------------------------
@@ -603,15 +528,17 @@ begin
   Medicals.Clear;
   Schedules.Clear;
   GridSched.Clear;
+  GridSched.ColCount:=1;
+  GridSched.RowCount:=1;
   SchedValidity.Clear;
 //  GridSched.Visible := False;
 
   DataChanged := False;
-{  StatusBar1.Panels[0].Text := '';
-  StatusBar1.Panels[2].Text := '';
-  StatusBar1.Panels[3].Text := '';}
+{  StatusBar.Panels[0].Text := '';
+  StatusBar.Panels[2].Text := '';
+  StatusBar.Panels[3].Text := '';}
   FluFileName := '';
-  UpdateButtonState;
+//  UpdateButtonState;
 end;
 
 // ----------------------------------------------------------------
@@ -681,8 +608,8 @@ begin
 // ----------------------------------------------------------------
 procedure TFMain.InsertData;
 begin
-  GridActiveChild.ReCalcGridTime;
-  GridActiveChild.ReCalcGridNr;
+  FlWindow.GetActive.ReCalcGridTime;
+  FlWindow.GetActive.ReCalcGridNr;
   UpdateButtonState;
   UpdateSButtons;
 end;
@@ -693,10 +620,10 @@ end;
 procedure TFMain.ActionFileOpen(Sender: TObject);
 begin
   ActionClose(Self);
-//  OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
-//  if not OpenDialog.Execute then Exit;
-//  FluFileName := OpenDialog.FileName;
-  FluFileName := '/home/momme/Daten/Programming/Delphi/FluPP/flightlog.flu';
+  OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
+  if not OpenDialog.Execute then Exit;
+  FluFileName := OpenDialog.FileName;
+//  FluFileName := '/home/momme/Daten/Programming/Delphi/FluPP/flightlog.flu';
   LoadFluFile;
 end;
 
@@ -716,10 +643,9 @@ begin
 
 //  LastFife(FluFileName);
   DataChanged := False;
-{  StatusBar1.Panels[2].Text := '';
-  Statusbar1.Panels[3].Text := FluFileName;
-}
-  GenSettings.Clear;
+{  StatusBar.Panels[2].Text := '';
+  StatusBar.Panels[3].Text := FluFileName;
+}  GenSettings.Clear;
   Medicals.Clear;
   Schedules.Clear;
   SchedValidity.Clear;
@@ -733,11 +659,11 @@ begin
 
 {  try
     ProgressBar := TProgressBar.Create(FMain);
-    ProgressBar.Parent := StatusBar1;
+    ProgressBar.Parent := StatusBar;
     ProgressBar.Top := 2;
-    ProgressBar.Width := StatusBar1.Panels.Items[0].Width;
-    ProgressBar.Height := StatusBar1.Height - 2;
-    StatusBar1.Repaint;
+    ProgressBar.Width := StatusBar.Panels.Items[0].Width;
+    ProgressBar.Height := StatusBar.Height - 2;
+    StatusBar.Repaint;
     Screen.Cursor := crHourGlass;
     try
       JvZlib.DecompressFile(FluFileName,FlpTempDir,True);
@@ -755,11 +681,11 @@ begin
   finally
     ProgressBar.Free;
     Screen.Cursor := crDefault;
-    StatusBar1.Repaint;
+    StatusBar.Repaint;
   end;}
 
   XMLDoc := TXMLDocument.Create;
-  with XMLDoc do try
+  try
     try
        ReadXMLFile(XMLDoc, FluFileName);
     except
@@ -786,15 +712,15 @@ begin
   if FlWindow.Count > 0 then
   for i := 0 to FlWindow.Count-1 do
   begin
-    GridChild(i).ReCalcGridNr;
-    GridChild(i).Grid.FixedCols := 1;
-    GridChild(i).Grid.Row := GridChild(i).Grid.RowCount-1;
-    GridChild(i).Grid.ColCount := GridChild(i).GridCols.Count;
-    GridChild(i).NameCols;
+    FlWindow.GetItem(i).Grid.FixedCols := 1;
+    FlWindow.GetItem(i).Grid.Row := FlWindow.GetItem(i).Grid.RowCount-1;
+    FlWindow.GetItem(i).Grid.ColCount := FlWindow.GetItem(i).GridCols.Count;
+    FlWindow.GetItem(i).NameCols;
+    FlWindow.GetItem(i).ReCalcGridNr;
   end;
 
 {TODO:  MDIChildren[FlWindow.Count-1].show; }
-//  GridActiveChild.ReCalcGridTime;
+//  FlWindow.GetActive.ReCalcGridTime;
 
 //  UpdateButtonState;
 //  CreateSButtons;
@@ -830,7 +756,7 @@ begin
     SaveFile(SaveDialog.FileName);
     FluFileName := SaveDialog.FileName;
     LastFife(FluFileName);
-    Statusbar1.Panels[3].Text := FluFileName;
+//    StatusBar.Panels[3].Text := FluFileName;
   end
   else SaveFile(FluFileName)
 end;
@@ -848,7 +774,7 @@ begin
   FluFileName := SaveDialog.FileName;
   LastFife(FluFileName);
 
-  Statusbar1.Panels[3].Text := FluFileName;
+//  StatusBar.Panels[3].Text := FluFileName;
 end;
 
 // ----------------------------------------------------------------
@@ -859,7 +785,7 @@ begin
   SaveFluFile(SaveFileName);
 
   DataChanged := False;
-  StatusBar1.Panels[2].Text := '';
+//  StatusBar.Panels[2].Text := '';
 
   UpdateButtonState;
 end;
@@ -906,6 +832,11 @@ end;
 procedure TFMain.MenuItem1Click(Sender: TObject);
 begin
 
+end;
+
+procedure TFMain.MenuItem27Click(Sender: TObject);
+begin
+  FlWindow.Add('Test');
 end;
 
 procedure TFMain.MenuItem3Click(Sender: TObject);
@@ -1061,8 +992,8 @@ end;
 procedure TFMain.SortAllFlightsClick(Sender: TObject);
 begin
 { TODO: sort}
-{  SortGridByCols([GridActiveChild.GridCols.IndexOf('Dat'),GridActiveChild.GridCols.IndexOf('StB'),GridActiveChild.GridCols.IndexOf('StT')], GridActiveChild.Grid);
-  GridActiveChild.ReCalcGridNr;
+{  SortGridByCols([FlWindow.GetActive.GridCols.IndexOf('Dat'),FlWindow.GetActive.GridCols.IndexOf('StB'),FlWindow.GetActive.GridCols.IndexOf('StT')], FlWindow.GetActive.Grid);
+  FlWindow.GetActive.ReCalcGridNr;
 }end;
 
 procedure TFMain.MMTrainBaroClick(Sender: TObject);
@@ -1075,7 +1006,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FlightEdit(Sender: TObject);
 begin
-  FInput.Change(GridActiveChild.Grid.Row);
+  FInput.Change(FlWindow.GetActive.Grid.Row);
 end;
 
 // ----------------------------------------------------------------
@@ -1083,12 +1014,12 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.ActionFlightNew(Sender: TObject);
 begin
-  if GridActiveChild.Grid.Cells[0,1] = '' then
+  if FlWindow.GetActive.Grid.Cells[0,1] = '' then
     FInput.Neu(1)
   else
   begin
-    GridActiveChild.Grid.InsertColRow(False, GridActiveChild.Grid.RowCount);
-    FInput.Neu(GridActiveChild.Grid.RowCount-1);
+    FlWindow.GetActive.Grid.InsertColRow(False, FlWindow.GetActive.Grid.RowCount);
+    FInput.Neu(FlWindow.GetActive.Grid.RowCount-1);
   end;
 end;
 
@@ -1097,9 +1028,9 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FlightInsert(Sender: TObject);
 begin
-  GridActiveChild.Grid.InsertColRow(False, GridActiveChild.Grid.Row);
-  FInput.Neu(GridActiveChild.Grid.Row);
-  GridActiveChild.ReCalcGridNr;
+  FlWindow.GetActive.Grid.InsertColRow(False, FlWindow.GetActive.Grid.Row);
+  FInput.Neu(FlWindow.GetActive.Grid.Row);
+  FlWindow.GetActive.ReCalcGridNr;
 end;
 
 // ----------------------------------------------------------------
@@ -1107,7 +1038,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FlightDelete(Sender: TObject);
 begin
-  GridActiveChild.PUFlugloeschenClick(Self);
+  FlWindow.GetActive.PUFlugloeschenClick(Self);
 end;
 
 // ----------------------------------------------------------------
@@ -1115,7 +1046,7 @@ end;
 // ----------------------------------------------------------------
 procedure TFMain.FlightDeleteUndo(Sender: TObject);
 begin
-  GridActiveChild.PUloeschrueckClick(Self);
+  FlWindow.GetActive.PUloeschrueckClick(Self);
 end;
 
 // ----------------------------------------------------------------
@@ -1127,23 +1058,23 @@ var
 begin
   for i:= 0 to FlWindow.Count -1 do
   begin
-    if not Assigned(GridChild(i).SButton) then
+    if not Assigned(FlWindow.GetItem(i).SButton) then
     begin
-      GridChild(i).SButton := TFSButton.create(GridChild(i)); //
-      GridChild(i).SButton.Parent := PanelSButtons;
+      FlWindow.GetItem(i).SButton := TFSButton.create(FlWindow.GetItem(i)); //
+      FlWindow.GetItem(i).SButton.Parent := PanelSButtons;
 
-      GridChild(i).SButton.Top := 2;
-      GridChild(i).SButton.Width := 94;
-      GridChild(i).SButton.Height := 50;
+      FlWindow.GetItem(i).SButton.Top := 2;
+      FlWindow.GetItem(i).SButton.Width := 94;
+      FlWindow.GetItem(i).SButton.Height := 50;
 
-      GridChild(i).SButton.PanelSB.ControlStyle := ControlStyle - [csParentBackground];
-      GridChild(i).SButton.Panel90.ControlStyle := ControlStyle - [csParentBackground];
-      GridChild(i).SButton.PanelT.ControlStyle  := ControlStyle - [csParentBackground];
+      FlWindow.GetItem(i).SButton.PanelSB.ControlStyle := ControlStyle - [csParentBackground];
+      FlWindow.GetItem(i).SButton.Panel90.ControlStyle := ControlStyle - [csParentBackground];
+      FlWindow.GetItem(i).SButton.PanelT.ControlStyle  := ControlStyle - [csParentBackground];
 
-      TranslateComponent(GridChild(i).SButton);
+      TranslateComponent(FlWindow.GetItem(i).SButton);
     end;
-    GridChild(i).SButton.Left := i*94+2;
-    GridChild(i).SButton.LabelHeading.Caption := GridChild(i).Name;
+    FlWindow.GetItem(i).SButton.Left := i*94+2;
+    FlWindow.GetItem(i).SButton.LabelHeading.Caption := FlWindow.GetItem(i).Name;
     UpdateSButtons;
   end;
   if FlWindow.Count > 0 then PanelSButtons.width := FlWindow.Count*94+4;
@@ -1160,19 +1091,19 @@ var
   Flights, GridIdx, Row: Word;
 begin
   for GridIdx := 0 to FlWindow.Count -1 do
-    if Assigned(GridChild(GridIdx).SButton) then
-      with GridChild(GridIdx).SButton do
+    if Assigned(FlWindow.GetItem(GridIdx).SButton) then
+      with FlWindow.GetItem(GridIdx).SButton do
       begin
         FlightTime := '00:00';;
         Flights := 0;
 
-        if (GridChild(GridIdx).Data['Dat',1] = '') then
+        if (FlWindow.GetItem(GridIdx).Data['Dat',1] = '') then
           Continue;
 
         { 90 days }
-        for Row := 1 to GridChild(GridIdx).Grid.RowCount -1 do
-          if StrToDate(GridChild(GridIdx).Data['Dat',Row]) >= now -90 then
-            inc(Flights,StrtoInt(GridChild(GridIdx).Data['NoL',Row]));
+        for Row := 1 to FlWindow.GetItem(GridIdx).Grid.RowCount -1 do
+          if StrToDate(FlWindow.GetItem(GridIdx).Data['Dat',Row]) >= now -90 then
+            inc(Flights,StrtoInt(FlWindow.GetItem(GridIdx).Data['NoL',Row]));
         if Flights >= 3 then
           Panel90.Color := clFGreen
         else
@@ -1182,11 +1113,11 @@ begin
 
         { TrainBaro }
         Flights := 0;
-        for Row := GridChild(GridIdx).Grid.RowCount-1 downto 1 do
+        for Row := FlWindow.GetItem(GridIdx).Grid.RowCount-1 downto 1 do
         begin
-          if StrToDate(GridChild(GridIdx).Grid.Cells[1,Row]) >= IncMonth(Now,-6) then
+          if StrToDate(FlWindow.GetItem(GridIdx).Grid.Cells[1,Row]) >= IncMonth(Now,-6) then
           begin
-            inc(Flights,StrToInt(GridChild(GridIdx).Data['NoL',Row]));
+            inc(Flights,StrToInt(FlWindow.GetItem(GridIdx).Data['NoL',Row]));
 
             FlightTime := CalcTime(GridIdx,FlightTime,Row,Row);
           end;
@@ -1249,8 +1180,8 @@ begin
   { Load Schedules }
 {  LoadSchedule(Schedules);
   for GridIdx := 0 to FlWindow.Count-1 do begin
-    LoadSchedule(GridChild(GridIdx).LicenseDates);
-    LoadSchedule(GridChild(GridIdx).Events);
+    LoadSchedule(FlWindow.GetItem(GridIdx).LicenseDates);
+    LoadSchedule(FlWindow.GetItem(GridIdx).Events);
   end;
   LoadSchedule(Medicals);
   LoadSchedule(SchedValidity);
@@ -1283,7 +1214,7 @@ begin
         Canvas.Brush.Color := clFRed;
     end;
     Canvas.FillRect(Rect);
-//    DrawText(Canvas.Handle, PChar(Cells[ACol, ARow]), StrLen(PChar(Cells[ACol, ARow])), Rect,DT_LEFT);
+    Canvas.TextRect(Rect, Rect.Left , Rect.Top, Cells[ACol, ARow]);
   end;
 end;
 
@@ -1354,17 +1285,6 @@ begin
   ImportCSV(OpenDialog.FileName);
   InsertData;
 end;
-
-procedure TFMain.TIPropertyGrid1Click(Sender: TObject);
-begin
-
-end;
-
-procedure TFMain.ToolButton5Click(Sender: TObject);
-begin
-
-end;
-
 
 initialization
   {$i Main.lrs}
