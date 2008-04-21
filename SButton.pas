@@ -63,12 +63,12 @@ end;
 
 procedure TFSButton.Panel90DblClick(Sender: TObject);
 begin
-  FMain.MMNinetyDaysClick(Sender);
+  FMain.NinetyDaysShow(Sender);
 end;
 
 procedure TFSButton.PanelTDblClick(Sender: TObject);
 begin
-  FMain.MMTrainBaroClick(Sender);
+  FMain.TrainBaroShow(Sender);
 end;
 
 initialization

@@ -16,12 +16,31 @@ type
   TFMain = class(TForm)
     ABasicSettings: TAction;
     AClose: TAction;
+    AAirports: TAction;
+    AHelpAbout: TAction;
+    AHpSupport: TAction;
+    AHpBugs: TAction;
+    AHpRFE: TAction;
+    AHpAirports: TAction;
+    AHpLicenses: TAction;
+    AHp: TAction;
+    AHpLanguages: TAction;
+    ASortFlights: TAction;
+    ATrainBaro: TAction;
+    ALicense: TAction;
+    AStatistics: TAction;
+    ANinetyDays: TAction;
+    ACalendar: TAction;
+    AFlightUnDelete: TAction;
+    AFlightDelete: TAction;
+    AFlightInsert: TAction;
+    AFlightEdit: TAction;
     AFlightNew: TAction;
     AExit: TAction;
     ASettings: TAction;
     AFlightLogs: TAction;
     APrint: TAction;
-    AEFilexport: TAction;
+    AFileExport: TAction;
     AFileImport: TAction;
     AFileSaveAs: TAction;
     AFileSave: TAction;
@@ -65,7 +84,14 @@ type
     MenuItem35: TMenuItem;
     MenuItem36: TMenuItem;
     MenuItem37: TMenuItem;
+    MenuItem38: TMenuItem;
+    MenuItem39: TMenuItem;
     MenuItem4: TMenuItem;
+    MenuItem40: TMenuItem;
+    MenuItem41: TMenuItem;
+    MenuItem42: TMenuItem;
+    MenuItem43: TMenuItem;
+    MenuItem44: TMenuItem;
     MiFile: TMenuItem;
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
@@ -102,50 +128,50 @@ type
     ToolButton9: TToolButton;
     procedure ASettingsExecute(Sender: TObject);
     procedure ActionExit(Sender: TObject);
-    procedure ActionFileSave(Sender: TObject);
-    procedure ActionFileOpen(Sender: TObject);
-    procedure ActionFileNew(Sender: TObject);
-    procedure MMStatisticsClick(Sender: TObject);
-    procedure InfoClick(Sender: TObject);
+    procedure FileSave(Sender: TObject);
+    procedure FileOpen(Sender: TObject);
+    procedure FileNew(Sender: TObject);
+    procedure StatisticShow(Sender: TObject);
+    procedure AboutShow(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem27Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
-    procedure ActionSettings(Sender: TObject);
-    procedure ActionFileSaveAs(Sender: TObject);
+    procedure SettingsShow(Sender: TObject);
+    procedure FileSaveAs(Sender: TObject);
     procedure FlightEdit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LastFifeClick(Sender: TObject);
     procedure StartTimerTimer(Sender: TObject);
-    procedure LicenseClick(Sender: TObject);
-    procedure ActionPrint(Sender: TObject);
+    procedure LicenseShow(Sender: TObject);
+    procedure Print(Sender: TObject);
     procedure FormClose(Sender: TObject; var AFileNew: TCloseAction);
     procedure ActionClose(Sender: TObject);
-    procedure ActionFlightNew(Sender: TObject);
+    procedure FlightNew(Sender: TObject);
     procedure FlightDeleteUndo(Sender: TObject);
     procedure FlightDelete(Sender: TObject);
-    procedure ActionBasicSettings(Sender: TObject);
-    procedure AirportsClick(Sender: TObject);
+    procedure BasicSettingsShow(Sender: TObject);
+    procedure AirportsShow(Sender: TObject);
     procedure FlightInsert(Sender: TObject);
-    procedure SortAllFlightsClick(Sender: TObject);
-    procedure MMTrainBaroClick(Sender: TObject);
-    procedure MMNinetyDaysClick(Sender: TObject);
-    procedure SchedulerClick(Sender: TObject);
-    procedure ActionFlightLogs(Sender: TObject);
-    procedure ActionHPExecute(Sender: TObject);
-    procedure ActionHPAirportsExecute(Sender: TObject);
-    procedure ActionHPLicensesExecute(Sender: TObject);
-    procedure ActionHPLanguagesExecute(Sender: TObject);
-    procedure ActionHPRFEExecute(Sender: TObject);
-    procedure ActionHPBugsExecute(Sender: TObject);
-    procedure ActionHPSupportExecute(Sender: TObject);
+    procedure SortAllFlights(Sender: TObject);
+    procedure TrainBaroShow(Sender: TObject);
+    procedure NinetyDaysShow(Sender: TObject);
+    procedure CalendarShow(Sender: TObject);
+    procedure FlightLogsShow(Sender: TObject);
+    procedure HpShow(Sender: TObject);
+    procedure HpAirportsShow(Sender: TObject);
+    procedure HpLicensesShow(Sender: TObject);
+    procedure HpLanguagesShow(Sender: TObject);
+    procedure HpRFEShow(Sender: TObject);
+    procedure HpBugsShow(Sender: TObject);
+    procedure HpSupportShow(Sender: TObject);
     procedure GridSchedDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
-    procedure ActionFileExport(Sender: TObject);
+    procedure FileExport(Sender: TObject);
     procedure JvZlibProgress(Sender: TObject; Position, Total: Integer);
     procedure ActionExportGoogleMapExecute(Sender: TObject);
     procedure ActionExportGoogleEarthExecute(Sender: TObject);
     procedure ActionResetColumnsExecute(Sender: TObject);
-    procedure ActionFileImportExecute(Sender: TObject);
+    procedure FileImport(Sender: TObject);
   private
     ProgressBar: TProgressBar;
     procedure LoadFluFile;
@@ -162,8 +188,6 @@ type
     procedure CreateSButtons;
     procedure UpdateSButtons;
   end;
-  
-
 
 var
   FMain: TFMain;
@@ -359,7 +383,7 @@ end;
 // ----------------------------------------------------------------
 // create new flightlog
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileNew(Sender: TObject);
+procedure TFMain.FileNew(Sender: TObject);
 begin
 //  if not SpeichernAbfrage then Exit;
 //  ActionClose(Sender);
@@ -378,8 +402,8 @@ begin
   finally
     Release;
   end;
-//  UpdateButtonState;
-//  CreateSButtons;
+  UpdateButtonState;
+  CreateSButtons;
 
 {  with TFSettings.Create(Application) do
   try
@@ -388,8 +412,8 @@ begin
     Release;
   end;}
 
-//  UpdateButtonState;
-//  CreateSButtons;
+  UpdateButtonState;
+  CreateSButtons;
 end;
 
 // ----------------------------------------------------------------
@@ -398,63 +422,66 @@ end;
 procedure TFMain.UpdateButtonState;
 var State, GridAssigned: Boolean;
 begin
-{  State := False;
-  if FlWindow.Count >0 then
-  if Assigned(TFGrid(FlWindow[ActiveFlWindow])) then
-    if (GridActiveChild.Data['Dat',1] <> '') then
+  if FlWindow.Count = 0 then Exit;
+
+  State := False;
+
+  if Assigned(FlWindow.GetActive) then
+    if (FlWindow.GetActive.Data['Dat',1] <> '') then
       State := True;
- }
+
   { Undo }
-//  ActionFlightDeleteUndo.Enabled := False;
-{  if State then
+  AFlightUnDelete.Enabled := False;
+  if State then
   begin
-    if length(GridActiveChild.Undo) > 0 then
-      if GridActiveChild.Undo[1] <> '' then
-        ActionFlightDeleteUndo.Enabled := True;
-  end;}
+    if length(FlWindow.GetActive.Undo) > 0 then
+      if FlWindow.GetActive.Undo[1] <> '' then
+        AFlightUnDelete.Enabled := True;
+  end;
 
   { Enable when data available }
-{  ActionFlightEdit.Enabled := State;
-  ActionFlightInsert.Enabled := State;
-  ActionFlightDelete.Enabled := State;
-  ActionPrint.Enabled := State;
-  ActionExportGoogleMap.Enabled := State;
-  ActionExportGoogleEarth.Enabled := State;}
+  AFlightEdit.Enabled := State;
+  AFlightInsert.Enabled := State;
+  AFlightDelete.Enabled := State;
+  APrint.Enabled := State;
+//  AExportGoogleMap.Enabled := State;
+//  AExportGoogleEarth.Enabled := State;
 
-{  if Assigned(TFGrid(ActiveMDIChild)) then
+
+  if Assigned(FlWindow.GetActive) then
   begin
-    GridActiveChild.PUFlightEdit.Enabled := State;
-    GridActiveChild.PUFlugEinfuegen.Enabled := State;
-    GridActiveChild.PUFlugloeschen.Enabled := State;
-    GridActiveChild.PUKategorieZuordnen.Enabled := State;
+    FlWindow.GetActive.PUFlightEdit.Enabled := State;
+    FlWindow.GetActive.PUFlugEinfuegen.Enabled := State;
+    FlWindow.GetActive.PUFlugloeschen.Enabled := State;
+    FlWindow.GetActive.PUKategorieZuordnen.Enabled := State;
 
-    ActionFlightEdit.Enabled := FInput.CanEdit(State);
-    GridActiveChild.PUFlightEdit.Enabled := FInput.CanEdit(State);
+    AFlightEdit.Enabled := FInput.CanEdit(State);
+//    FlWindow.GetActive.PUFlightEdit.Enabled := FInput.CanEdit(State);
   end;
-}
-  { Enable when flight log available }
-{  GridAssigned := Assigned(TFGrid(ActiveMDIChild));
-  AFileSave.Enabled := GridAssigned;
-  ActionFileSaveAs.Enabled := GridAssigned;
-  ActionFileImport.Enabled := GridAssigned;
-  ActionFileExport.Enabled := GridAssigned;
-  ActionFlightNew.Enabled := GridAssigned;
-  ActionSettings.Enabled := GridAssigned;
-  ActionScheduler.Enabled := GridAssigned;
-  ActionFlightLogs.Enabled := GridAssigned;
-  ActionClose.Enabled := GridAssigned;
 
-  ActionScheduler.Enabled := GridAssigned;
-  ActionNinetyDays.Enabled := GridAssigned;
-  ActionStatistic.Enabled := GridAssigned;
-  ActionLicense.Enabled := GridAssigned;
-  ActionTrainBaro.Enabled := GridAssigned;
-  ActionAirports.Enabled := GridAssigned;
-  ActionSortFlights.Enabled := GridAssigned;
-  ActionResetColumns.Enabled := GridAssigned;
+  { Enable when flight log available }
+  GridAssigned := Assigned(TFGrid(FlWindow.GetActive));
+  AFileSave.Enabled := GridAssigned;
+  AFileSaveAs.Enabled := GridAssigned;
+  AFileImport.Enabled := GridAssigned;
+  AFileExport.Enabled := GridAssigned;
+  AFlightNew.Enabled := GridAssigned;
+  ASettings.Enabled := GridAssigned;
+//  AScheduler.Enabled := GridAssigned; ??
+  AFlightLogs.Enabled := GridAssigned;
+  AClose.Enabled := GridAssigned;
+
+  ACalendar.Enabled := GridAssigned;
+  ANinetyDays.Enabled := GridAssigned;
+  AStatistics.Enabled := GridAssigned;
+  ALicense.Enabled := GridAssigned;
+  ATrainBaro.Enabled := GridAssigned;
+  AAirports.Enabled := GridAssigned;
+  ASortFlights.Enabled := GridAssigned;
+//  AResetColumns.Enabled := GridAssigned;
 
   UpdateScheduleGrid;
-}end;
+end;
 
 // ----------------------------------------------------------------
 // Form close
@@ -534,11 +561,11 @@ begin
 //  GridSched.Visible := False;
 
   DataChanged := False;
-{  StatusBar.Panels[0].Text := '';
+  StatusBar.Panels[0].Text := '';
   StatusBar.Panels[2].Text := '';
-  StatusBar.Panels[3].Text := '';}
+  StatusBar.Panels[3].Text := '';
   FluFileName := '';
-//  UpdateButtonState;
+  UpdateButtonState;
 end;
 
 // ----------------------------------------------------------------
@@ -617,7 +644,7 @@ end;
 // ----------------------------------------------------------------
 // Open flightlog
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileOpen(Sender: TObject);
+procedure TFMain.FileOpen(Sender: TObject);
 begin
   ActionClose(Self);
   OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
@@ -641,11 +668,11 @@ begin
     Exit;
   end;
 
-//  LastFife(FluFileName);
+  LastFife(FluFileName);
   DataChanged := False;
-{  StatusBar.Panels[2].Text := '';
+  StatusBar.Panels[2].Text := '';
   StatusBar.Panels[3].Text := FluFileName;
-}  GenSettings.Clear;
+  GenSettings.Clear;
   Medicals.Clear;
   Schedules.Clear;
   SchedValidity.Clear;
@@ -720,10 +747,10 @@ begin
   end;
 
 {TODO:  MDIChildren[FlWindow.Count-1].show; }
-//  FlWindow.GetActive.ReCalcGridTime;
+  FlWindow.GetActive.ReCalcGridTime;
 
-//  UpdateButtonState;
-//  CreateSButtons;
+  UpdateButtonState;
+  CreateSButtons;
 end;
 
 // ----------------------------------------------------------------
@@ -740,14 +767,14 @@ begin
     answer := MessageDlg(format(_('Do you want to save the file ''%s''?'),
       [extractFilename(FluFileName)]),mtConfirmation,[mbYes,mbNo,mbCancel],0);
 
-  if answer = mrYes then ActionFileSave(self);
+  if answer = mrYes then FileSave(self);
   if answer = mrCancel then result := false;
 end;
 
 // ----------------------------------------------------------------
 // Save
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileSave(Sender: TObject);
+procedure TFMain.FileSave(Sender: TObject);
 begin
   if FluFileName = '' then
   begin
@@ -756,7 +783,7 @@ begin
     SaveFile(SaveDialog.FileName);
     FluFileName := SaveDialog.FileName;
     LastFife(FluFileName);
-//    StatusBar.Panels[3].Text := FluFileName;
+    StatusBar.Panels[3].Text := FluFileName;
   end
   else SaveFile(FluFileName)
 end;
@@ -764,7 +791,7 @@ end;
 // ----------------------------------------------------------------
 // Save as
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileSaveAs(Sender: TObject);
+procedure TFMain.FileSaveAs(Sender: TObject);
 begin
   SaveDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu';
   if not SaveDialog.Execute then Exit;
@@ -774,7 +801,7 @@ begin
   FluFileName := SaveDialog.FileName;
   LastFife(FluFileName);
 
-//  StatusBar.Panels[3].Text := FluFileName;
+  StatusBar.Panels[3].Text := FluFileName;
 end;
 
 // ----------------------------------------------------------------
@@ -785,7 +812,7 @@ begin
   SaveFluFile(SaveFileName);
 
   DataChanged := False;
-//  StatusBar.Panels[2].Text := '';
+  StatusBar.Panels[2].Text := '';
 
   UpdateButtonState;
 end;
@@ -793,7 +820,7 @@ end;
 // ----------------------------------------------------------------
 // Export
 // ----------------------------------------------------------------
-procedure TFMain.ActionFileExport(Sender: TObject);
+procedure TFMain.FileExport(Sender: TObject);
 begin
   SaveDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
   if not SaveDialog.Execute then exit;
@@ -819,7 +846,7 @@ end;
 // ----------------------------------------------------------------
 // Info Dialog
 // ----------------------------------------------------------------
-procedure TFMain.InfoClick(Sender: TObject);
+procedure TFMain.AboutShow(Sender: TObject);
 begin
 {  with TFInfo.Create(Application) do
   try
@@ -847,7 +874,7 @@ end;
 // ----------------------------------------------------------------
 // Settings
 // ----------------------------------------------------------------
-procedure TFMain.ActionSettings(Sender: TObject);
+procedure TFMain.SettingsShow(Sender: TObject);
 var LastFile : string;
 begin
 {  with TFSettings.Create(Application) do
@@ -870,7 +897,7 @@ end;
 // ----------------------------------------------------------------
 // Basic settings
 // ----------------------------------------------------------------
-procedure TFMain.ActionBasicSettings(Sender: TObject);
+procedure TFMain.BasicSettingsShow(Sender: TObject);
 begin
   with TFBasicSettings.Create(Application) do
   try
@@ -883,7 +910,7 @@ end;
 // ----------------------------------------------------------------
 // Sheduler
 // ----------------------------------------------------------------
-procedure TFMain.SchedulerClick(Sender: TObject);
+procedure TFMain.CalendarShow(Sender: TObject);
 begin
 {  with TFCalendar.Create(Application) do try
     ShowModal;
@@ -896,7 +923,7 @@ end;
 // ----------------------------------------------------------------
 // 90 day regulation
 // ----------------------------------------------------------------
-procedure TFMain.MMNinetyDaysClick(Sender: TObject);
+procedure TFMain.NinetyDaysShow(Sender: TObject);
 begin
 {  with TFNinetyDays.Create(Application) do try
     ShowModal;
@@ -908,22 +935,22 @@ end;
 // ----------------------------------------------------------------
 // Statistics
 // ----------------------------------------------------------------
-procedure TFMain.MMStatisticsClick(Sender: TObject);
+procedure TFMain.StatisticShow(Sender: TObject);
 begin
 {  with TFStatistics.Create(Application) do
   try
     ShowModal;
   finally
     Release;
-  end;
+  end;}
 end;
 
 // ----------------------------------------------------------------
 // Training barometer
 // ----------------------------------------------------------------
-procedure TFMain.MMTrainBaroClick(Sender: TObject);
+procedure TFMain.TrainBaroShow(Sender: TObject);
 begin
-  with TFTrainBaro.Create(Application) do
+ { with TFTrainBaro.Create(Application) do
   try
     ShowModal;
   finally
@@ -934,7 +961,7 @@ end;
 // ----------------------------------------------------------------
 // Licenses
 // ----------------------------------------------------------------
-procedure TFMain.LicenseClick(Sender: TObject);
+procedure TFMain.LicenseShow(Sender: TObject);
 begin
 {  with TFLicenses.Create(Application) do
   try
@@ -947,7 +974,7 @@ end;
 // ----------------------------------------------------------------
 // Printing
 // ----------------------------------------------------------------
-procedure TFMain.ActionPrint(Sender: TObject);
+procedure TFMain.Print(Sender: TObject);
 begin
 {  with TFPrint.Create(Application) do
   try
@@ -960,7 +987,7 @@ end;
 // ----------------------------------------------------------------
 // Manage flight logs
 // ----------------------------------------------------------------
-procedure TFMain.ActionFlightLogs(Sender: TObject);
+procedure TFMain.FlightLogsShow(Sender: TObject);
 begin
   with TFFlightLogs.Create(Application) do
   try
@@ -975,7 +1002,7 @@ end;
 // ----------------------------------------------------------------
 // Airports
 // ----------------------------------------------------------------
-procedure TFMain.AirportsClick(Sender: TObject);
+procedure TFMain.AirportsShow(Sender: TObject);
 begin
 {  with TFAirports.Create(Application) do
   try
@@ -989,17 +1016,12 @@ end;
 // ----------------------------------------------------------------
 // sort all flights
 // ----------------------------------------------------------------
-procedure TFMain.SortAllFlightsClick(Sender: TObject);
+procedure TFMain.SortAllFlights(Sender: TObject);
 begin
 { TODO: sort}
 {  SortGridByCols([FlWindow.GetActive.GridCols.IndexOf('Dat'),FlWindow.GetActive.GridCols.IndexOf('StB'),FlWindow.GetActive.GridCols.IndexOf('StT')], FlWindow.GetActive.Grid);
   FlWindow.GetActive.ReCalcGridNr;
 }end;
-
-procedure TFMain.MMTrainBaroClick(Sender: TObject);
-begin
-
-end;
 
 // ----------------------------------------------------------------
 // Edit flight
@@ -1012,7 +1034,7 @@ end;
 // ----------------------------------------------------------------
 // New flight
 // ----------------------------------------------------------------
-procedure TFMain.ActionFlightNew(Sender: TObject);
+procedure TFMain.FlightNew(Sender: TObject);
 begin
   if FlWindow.GetActive.Grid.Cells[0,1] = '' then
     FInput.Neu(1)
@@ -1056,6 +1078,8 @@ procedure TFMain.CreateSButtons;
 var
   i: Word;
 begin
+  if FlWindow.Count = 0 then Exit;
+
   for i:= 0 to FlWindow.Count -1 do
   begin
     if not Assigned(FlWindow.GetItem(i).SButton) then
@@ -1074,10 +1098,10 @@ begin
       TranslateComponent(FlWindow.GetItem(i).SButton);
     end;
     FlWindow.GetItem(i).SButton.Left := i*94+2;
-    FlWindow.GetItem(i).SButton.LabelHeading.Caption := FlWindow.GetItem(i).Name;
-    UpdateSButtons;
+    FlWindow.GetItem(i).SButton.LabelHeading.Caption := FlWindow.GetItem(i).FlName;
+//    UpdateSButtons;
   end;
-  if FlWindow.Count > 0 then PanelSButtons.width := FlWindow.Count*94+4;
+  PanelSButtons.width := FlWindow.Count*94+4;
   UpdateSButtons;
 end;
 
@@ -1102,8 +1126,11 @@ begin
 
         { 90 days }
         for Row := 1 to FlWindow.GetItem(GridIdx).Grid.RowCount -1 do
+        begin
+          if isDate(FlWindow.GetItem(GridIdx).Data['Dat',Row]) then
           if StrToDate(FlWindow.GetItem(GridIdx).Data['Dat',Row]) >= now -90 then
             inc(Flights,StrtoInt(FlWindow.GetItem(GridIdx).Data['NoL',Row]));
+        end;
         if Flights >= 3 then
           Panel90.Color := clFGreen
         else
@@ -1233,37 +1260,37 @@ end;
 // ----------------------------------------------------------------
 // Links to HP
 // ----------------------------------------------------------------
-procedure TFMain.ActionHPExecute(Sender: TObject);
+procedure TFMain.HpShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',FluPPDomain,nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPAirportsExecute(Sender: TObject);
+procedure TFMain.HpAirportsShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/airports/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPLicensesExecute(Sender: TObject);
+procedure TFMain.HpLicensesShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/licenses/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPLanguagesExecute(Sender: TObject);
+procedure TFMain.HpLanguagesShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/languages/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPRFEExecute(Sender: TObject);
+procedure TFMain.HpRFEShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/request/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPBugsExecute(Sender: TObject);
+procedure TFMain.HpBugsShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/bug/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
 
-procedure TFMain.ActionHPSupportExecute(Sender: TObject);
+procedure TFMain.HpSupportShow(Sender: TObject);
 begin
 //  ShellExecute(Application.Handle,'open',PAnsiChar(FluPPDomain+'/support/'+StrToHTML(GetFileVersion(ParamStr(0)))),nil,nil,SW_NORMAL);
 end;
@@ -1278,7 +1305,10 @@ begin
   end;
 }end;
 
-procedure TFMain.ActionFileImportExecute(Sender: TObject);
+// ----------------------------------------------------------------
+// Import File
+// ----------------------------------------------------------------
+procedure TFMain.FileImport(Sender: TObject);
 begin
   OpenDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
   if not OpenDialog.Execute then Exit;

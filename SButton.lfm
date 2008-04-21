@@ -45,7 +45,8 @@ object FSButton: TFSButton
       Height = 17
       Top = 24
       Width = 20
-      BevelOuter = bvNone
+      BevelOuter = bvLowered
+      BorderWidth = 1
       BorderStyle = bsSingle
       Caption = '90'
       TabOrder = 0
@@ -58,7 +59,7 @@ object FSButton: TFSButton
       Height = 17
       Top = 24
       Width = 20
-      BevelOuter = bvNone
+      BevelOuter = bvLowered
       BorderStyle = bsSingle
       Caption = 'T'
       TabOrder = 1
