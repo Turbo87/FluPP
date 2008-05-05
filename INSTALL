@@ -1,0 +1,22 @@
+Howto install flupp development environment
+===========================================
+
+install (on suse 10.3) packages 'gdk' and 'gdk-pixbuf'
+(all other dependancies will be added automatically)
+
+install prm packages:
+    fpc-2.2.0-0.i386.rpm
+    fpc-src-2.2.0-071105.i386.rpm
+    lazarus-0.9.24.0.i386.rpm
+
+lazarus sources auschecken:
+    svn co https://flupp.svn.sourceforge.net/svnroot/flupp flupp
+
+
+Move into flupp source directory
+Now enter
+    'touch Airports.lrs'
+	(this is needed, because otherwise lazarus complains about
+	missing Airports.lrs file)
+    'lazarus-ide'
+compile flupp by pressing ctrl-F9 and execute the binary
