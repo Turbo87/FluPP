@@ -9,8 +9,8 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=""/>
-      <Title Value="FluPP"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <Title Value="flupp"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -52,18 +52,18 @@
         <MinVersion Major="1" Valid="True"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="81">
+    <Units Count="80">
       <Unit0>
-        <Filename Value="FluPP.lpr"/>
+        <Filename Value="flupp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="22" Y="3"/>
+        <CursorPos X="19" Y="11"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="0"/>
         <UsageCount Value="99"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="Main.pas"/>
+        <Filename Value="main.pas"/>
         <ComponentName Value="FMain"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -71,12 +71,12 @@
         <UnitName Value="Main"/>
         <CursorPos X="37" Y="261"/>
         <TopLine Value="237"/>
-        <EditorIndex Value="0"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="99"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="Info.pas"/>
+        <Filename Value="info.pas"/>
         <HasResources Value="True"/>
         <UnitName Value="Info"/>
         <CursorPos X="16" Y="89"/>
@@ -84,7 +84,7 @@
         <UsageCount Value="37"/>
       </Unit2>
       <Unit3>
-        <Filename Value="Grid.pas"/>
+        <Filename Value="grid.pas"/>
         <ComponentName Value="FGrid"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -95,7 +95,7 @@
         <UsageCount Value="99"/>
       </Unit3>
       <Unit4>
-        <Filename Value="SButton.pas"/>
+        <Filename Value="sbutton.pas"/>
         <ComponentName Value="FSButton"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -106,7 +106,7 @@
         <UsageCount Value="99"/>
       </Unit4>
       <Unit5>
-        <Filename Value="TrainBaro.pas"/>
+        <Filename Value="trainbaro.pas"/>
         <ComponentName Value="FTrainBaro"/>
         <HasResources Value="True"/>
         <UnitName Value="TrainBaro"/>
@@ -115,7 +115,7 @@
         <UsageCount Value="37"/>
       </Unit5>
       <Unit6>
-        <Filename Value="InputBox.pas"/>
+        <Filename Value="inputbox.pas"/>
         <ComponentName Value="FInputBox"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -125,7 +125,7 @@
         <UsageCount Value="99"/>
       </Unit6>
       <Unit7>
-        <Filename Value="NinetyDays.pas"/>
+        <Filename Value="ninetydays.pas"/>
         <HasResources Value="True"/>
         <UnitName Value="NinetyDays"/>
         <CursorPos X="22" Y="204"/>
@@ -133,7 +133,7 @@
         <UsageCount Value="37"/>
       </Unit7>
       <Unit8>
-        <Filename Value="Tools.pas"/>
+        <Filename Value="tools.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Tools"/>
         <CursorPos X="26" Y="534"/>
@@ -141,7 +141,7 @@
         <UsageCount Value="99"/>
       </Unit8>
       <Unit9>
-        <Filename Value="ToolsShell.pas"/>
+        <Filename Value="tools_shell.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ToolsShell"/>
         <CursorPos X="19" Y="71"/>
@@ -149,7 +149,7 @@
         <UsageCount Value="99"/>
       </Unit9>
       <Unit10>
-        <Filename Value="Print.pas"/>
+        <Filename Value="print.pas"/>
         <ComponentName Value="FPrint"/>
         <HasResources Value="True"/>
         <UnitName Value="Print"/>
@@ -158,7 +158,7 @@
         <UsageCount Value="37"/>
       </Unit10>
       <Unit11>
-        <Filename Value="Airports.pas"/>
+        <Filename Value="airports.pas"/>
         <ComponentName Value="FAirports"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -168,7 +168,7 @@
         <UsageCount Value="39"/>
       </Unit11>
       <Unit12>
-        <Filename Value="Input.pas"/>
+        <Filename Value="input.pas"/>
         <ComponentName Value="FInput"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -176,10 +176,12 @@
         <UnitName Value="Input"/>
         <CursorPos X="1" Y="450"/>
         <TopLine Value="428"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="99"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
-        <Filename Value="Settings.pas"/>
+        <Filename Value="settings.pas"/>
         <ComponentName Value="FSettings"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -190,7 +192,7 @@
         <UsageCount Value="99"/>
       </Unit13>
       <Unit14>
-        <Filename Value="BasicSettings.pas"/>
+        <Filename Value="basicsettings.pas"/>
         <ComponentName Value="FBasicSettings"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -200,7 +202,7 @@
         <UsageCount Value="99"/>
       </Unit14>
       <Unit15>
-        <Filename Value="Licenses.pas"/>
+        <Filename Value="licenses.pas"/>
         <ComponentName Value="FLicenses"/>
         <HasResources Value="True"/>
         <UnitName Value="Licenses"/>
@@ -209,7 +211,7 @@
         <UsageCount Value="37"/>
       </Unit15>
       <Unit16>
-        <Filename Value="Statistics.pas"/>
+        <Filename Value="statistics.pas"/>
         <HasResources Value="True"/>
         <UnitName Value="Statistics"/>
         <CursorPos X="22" Y="1992"/>
@@ -217,7 +219,7 @@
         <UsageCount Value="37"/>
       </Unit16>
       <Unit17>
-        <Filename Value="StatGraph.pas"/>
+        <Filename Value="statgraph.pas"/>
         <HasResources Value="True"/>
         <UnitName Value="StatGraph"/>
         <CursorPos X="21" Y="213"/>
@@ -225,14 +227,14 @@
         <UsageCount Value="37"/>
       </Unit17>
       <Unit18>
-        <Filename Value="ToolsLicense.pas"/>
+        <Filename Value="tools_license.pas"/>
         <UnitName Value="ToolsLicense"/>
         <CursorPos X="19" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="37"/>
       </Unit18>
       <Unit19>
-        <Filename Value="FlightLogs.pas"/>
+        <Filename Value="flightlogs.pas"/>
         <ComponentName Value="FFlightLogs"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
@@ -242,7 +244,7 @@
         <UsageCount Value="99"/>
       </Unit19>
       <Unit20>
-        <Filename Value="ToolsGrid.pas"/>
+        <Filename Value="tools_grid.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ToolsGrid"/>
         <CursorPos X="24" Y="62"/>
@@ -250,7 +252,7 @@
         <UsageCount Value="99"/>
       </Unit20>
       <Unit21>
-        <Filename Value="Calendar.pas"/>
+        <Filename Value="calendar.pas"/>
         <ComponentName Value="FCalendar"/>
         <HasResources Value="True"/>
         <UnitName Value="Calendar"/>
@@ -259,7 +261,7 @@
         <UsageCount Value="36"/>
       </Unit21>
       <Unit22>
-        <Filename Value="CalendarAdd.pas"/>
+        <Filename Value="calendaradd.pas"/>
         <ComponentName Value="FCalendarAdd"/>
         <HasResources Value="True"/>
         <UnitName Value="CalendarAdd"/>
@@ -268,17 +270,15 @@
         <UsageCount Value="36"/>
       </Unit22>
       <Unit23>
-        <Filename Value="Import.pas"/>
+        <Filename Value="import.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Import"/>
         <CursorPos X="61" Y="31"/>
         <TopLine Value="18"/>
-        <EditorIndex Value="1"/>
         <UsageCount Value="99"/>
-        <Loaded Value="True"/>
       </Unit23>
       <Unit24>
-        <Filename Value="Export.pas"/>
+        <Filename Value="export.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Export"/>
         <CursorPos X="21" Y="204"/>
@@ -286,7 +286,7 @@
         <UsageCount Value="99"/>
       </Unit24>
       <Unit25>
-        <Filename Value="Debug.pas"/>
+        <Filename Value="debug.pas"/>
         <UnitName Value="Debug"/>
         <CursorPos X="26" Y="8"/>
         <TopLine Value="1"/>
@@ -322,62 +322,62 @@
         <UsageCount Value="8"/>
       </Unit29>
       <Unit30>
-        <Filename Value="Grid.lfm"/>
+        <Filename Value="grid.lfm"/>
         <CursorPos X="25" Y="45"/>
         <TopLine Value="4"/>
         <UsageCount Value="8"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit30>
       <Unit31>
-        <Filename Value="Calendar.lfm"/>
+        <Filename Value="calendar.lfm"/>
         <CursorPos X="1" Y="229"/>
         <TopLine Value="188"/>
         <UsageCount Value="7"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit31>
       <Unit32>
-        <Filename Value="BasicSettings.lfm"/>
+        <Filename Value="basicsettings.lfm"/>
         <CursorPos X="34" Y="22"/>
         <TopLine Value="13"/>
         <UsageCount Value="7"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit32>
       <Unit33>
-        <Filename Value="FlightLogs.lfm"/>
+        <Filename Value="flightlogs.lfm"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="8"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit33>
       <Unit34>
-        <Filename Value="Settings.lfm"/>
+        <Filename Value="settings.lfm"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="10"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit34>
       <Unit35>
-        <Filename Value="FluPP.lrs"/>
+        <Filename Value="flupp.lrs"/>
         <CursorPos X="140" Y="23"/>
         <TopLine Value="1"/>
         <UsageCount Value="13"/>
       </Unit35>
       <Unit36>
-        <Filename Value="ToolsIGCParse.pas"/>
+        <Filename Value="tools_igcparse.pas"/>
         <UnitName Value="ToolsIGCParse"/>
         <CursorPos X="1" Y="52"/>
         <TopLine Value="1"/>
         <UsageCount Value="10"/>
       </Unit36>
       <Unit37>
-        <Filename Value="Main.lfm"/>
+        <Filename Value="main.lfm"/>
         <CursorPos X="12" Y="1864"/>
         <TopLine Value="1829"/>
         <UsageCount Value="10"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit37>
       <Unit38>
-        <Filename Value="CalendarAdd.lfm"/>
+        <Filename Value="calendaradd.lfm"/>
         <CursorPos X="1" Y="165"/>
         <TopLine Value="124"/>
         <UsageCount Value="8"/>
@@ -636,7 +636,7 @@
         <UsageCount Value="10"/>
       </Unit76>
       <Unit77>
-        <Filename Value="FluPP.rc"/>
+        <Filename Value="flupp.rc"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="10"/>
@@ -650,46 +650,14 @@
         <UsageCount Value="10"/>
       </Unit78>
       <Unit79>
-        <Filename Value="debug.pas"/>
-        <UnitName Value="debug"/>
-        <CursorPos X="20" Y="21"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="11"/>
-      </Unit79>
-      <Unit80>
         <Filename Value="../../../../../usr/share/fpcsrc/2.2.2/packages/fcl-xml/src/dom.pp"/>
         <UnitName Value="DOM"/>
         <CursorPos X="25" Y="2192"/>
         <TopLine Value="2174"/>
         <UsageCount Value="10"/>
-      </Unit80>
+      </Unit79>
     </Units>
-    <JumpHistory Count="6" HistoryIndex="5">
-      <Position1>
-        <Filename Value="Main.pas"/>
-        <Caret Line="282" Column="21" TopLine="264"/>
-      </Position1>
-      <Position2>
-        <Filename Value="Main.pas"/>
-        <Caret Line="179" Column="37" TopLine="161"/>
-      </Position2>
-      <Position3>
-        <Filename Value="Main.pas"/>
-        <Caret Line="196" Column="14" TopLine="178"/>
-      </Position3>
-      <Position4>
-        <Filename Value="Main.pas"/>
-        <Caret Line="252" Column="14" TopLine="234"/>
-      </Position4>
-      <Position5>
-        <Filename Value="Main.pas"/>
-        <Caret Line="253" Column="14" TopLine="234"/>
-      </Position5>
-      <Position6>
-        <Filename Value="Main.pas"/>
-        <Caret Line="256" Column="26" TopLine="234"/>
-      </Position6>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>
