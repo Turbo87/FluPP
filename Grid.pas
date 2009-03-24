@@ -5,7 +5,7 @@ unit Grid;
 interface
 
 uses
-  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Menus, StdCtrls, Buttons, SButton, LResources, Contnrs;
 
 const
@@ -102,7 +102,7 @@ var
   
 implementation
 
-uses Main, Input, Tools, ToolsGrid, Export;
+uses Main, Input, Tools, ToolsGrid;
 
 
 {
@@ -256,7 +256,7 @@ begin
 
   GridCols.Free;
   Settings.Free;
-
+  
   OptConditions.Free;
   LicenseCategories.Free;
   LicenseTimeCat.Free;

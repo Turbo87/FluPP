@@ -19,6 +19,7 @@ type
     DTPDate: TDateEdit;
     EditLandings: TSpinEdit;
     EditPassengers: TSpinEdit;
+    Label6: TLabel;
     Panel1: TPanel;
     ButtonCancel: TBitBtn;
     ButtonOK: TBitBtn;
@@ -34,7 +35,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     PanelStartType: TPanel;
     Label7: TLabel;
     RBW: TRadioButton;
@@ -43,9 +43,6 @@ type
     CBAircraftID: TComboBox;
     CBCoPilot: TComboBox;
     CBAircraftType: TEdit;
-    Bevel5: TBevel;
-    Bevel6: TBevel;
-    BevelPilot: TBevel;
     LabelFlbArt: TLabel;
     CBPilot: TComboBox;
     Label25: TLabel;
@@ -446,7 +443,7 @@ begin
     PanelLandings.Height := PanelFlightTime.Height
   else
     PanelLandings.Height := PanelFlightTime.Height + PanelBlockTime.Height-2;
-  PanelPos := BevelPilot.Top + BevelPilot.Height -2;
+  //PanelPos := BevelPilot.Top + BevelPilot.Height -2;
   AddPanelRow(PanelFlightTime);
   AddPanelRow(PanelBlockTime);
   AddPanelRow(PanelFromTo);

@@ -3,9 +3,9 @@ object FGrid: TFGrid
   Height = 454
   Top = 254
   Width = 563
-  HorzScrollBar.Page = 562
-  VertScrollBar.Page = 453
   ActiveControl = Grid
+  BorderIcons = []
+  BorderStyle = bsNone
   Caption = 'FGrid'
   ClientHeight = 454
   ClientWidth = 563
@@ -15,6 +15,7 @@ object FGrid: TFGrid
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefault
+  LCLVersion = '0.9.26.2'
   Visible = True
   object Grid: TStringGrid
     Height = 454
@@ -22,12 +23,11 @@ object FGrid: TFGrid
     Align = alClient
     ColCount = 2
     DefaultRowHeight = 17
-    FixedColor = clBtnFace
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect, goThumbTracking]
     RowCount = 2
-    ScrollBars = ssAutoBoth
     TabOrder = 0
-    TabStop = True
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
     OnMouseDown = GridMouseDown
     OnMouseUp = GridMouseUp
   end

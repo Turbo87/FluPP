@@ -1,15 +1,13 @@
 object FInput: TFInput
-  Left = 426
-  Height = 520
-  Top = 243
+  Left = 401
+  Height = 541
+  Top = 212
   Width = 515
-  HorzScrollBar.Page = 514
-  VertScrollBar.Page = 519
-  ActiveControl = ButtonNext
+  ActiveControl = DTPDate
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Input'
-  ClientHeight = 520
+  ClientHeight = 541
   ClientWidth = 515
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -18,9 +16,10 @@ object FInput: TFInput
   OnDestroy = FormDestroy
   OnShow = FormShow
   Position = poMainFormCenter
+  LCLVersion = '0.9.26.2'
   object Panel1: TPanel
     Height = 41
-    Top = 462
+    Top = 483
     Width = 515
     Align = alBottom
     BevelInner = bvLowered
@@ -64,7 +63,7 @@ object FInput: TFInput
   end
   object StatusBar1: TStatusBar
     Height = 17
-    Top = 503
+    Top = 524
     Width = 515
     Panels = <    
       item
@@ -93,6 +92,7 @@ object FInput: TFInput
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
+      ParentFont = False
     end
     object LabelFlugNr: TLabel
       Left = 107
@@ -106,6 +106,7 @@ object FInput: TFInput
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
+      ParentFont = False
       Transparent = False
     end
     object LabelFlbArt: TLabel
@@ -121,6 +122,7 @@ object FInput: TFInput
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
+      ParentFont = False
       Transparent = False
     end
     object Bevel2: TBevel
@@ -132,7 +134,7 @@ object FInput: TFInput
     end
   end
   object TabControl: TPageControl
-    Height = 425
+    Height = 447
     Top = 33
     Width = 515
     ActivePage = TSFlugdaten
@@ -143,75 +145,45 @@ object FInput: TFInput
     OnPageChanged = TabControlChange
     object TSFlugdaten: TTabSheet
       Caption = 'Flightdata'
-      ClientHeight = 392
-      ClientWidth = 509
-      object Bevel5: TBevel
-        Left = 6
-        Height = 33
-        Top = 6
-        Width = 500
-        Shape = bsFrame
-      end
-      object BevelPilot: TBevel
-        Left = 6
-        Height = 33
-        Top = 66
-        Width = 500
-        Shape = bsFrame
-      end
-      object Bevel6: TBevel
-        Left = 6
-        Height = 33
-        Top = 35
-        Width = 500
-        Shape = bsFrame
-      end
+      ClientHeight = 416
+      ClientWidth = 511
       object Label2: TLabel
         Left = 12
-        Height = 20
+        Height = 14
         Top = 14
-        Width = 35
+        Width = 31
         Caption = 'Date:'
         ParentColor = False
       end
       object Label3: TLabel
-        Left = 178
-        Height = 20
+        Left = 176
+        Height = 14
         Top = 45
-        Width = 81
+        Width = 74
         Alignment = taRightJustify
         Caption = 'Aircraft type:'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 12
-        Height = 20
+        Height = 14
         Top = 45
-        Width = 66
+        Width = 61
         Caption = 'Aircraft ID:'
-        ParentColor = False
-      end
-      object Label6: TLabel
-        Left = 178
-        Height = 20
-        Top = 76
-        Width = 48
-        Alignment = taRightJustify
-        Caption = 'Copilot:'
         ParentColor = False
       end
       object Label25: TLabel
         Left = 12
-        Height = 20
+        Height = 14
         Top = 76
-        Width = 32
+        Width = 29
         Caption = 'Pilot:'
         ParentColor = False
       end
       object Label26: TLabel
-        Left = 42
+        Left = 62
         Height = 13
-        Top = 380
+        Top = 399
         Width = 385
         Alignment = taCenter
         AutoSize = False
@@ -221,21 +193,31 @@ object FInput: TFInput
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         ParentColor = False
+        ParentFont = False
         Transparent = False
       end
       object Label28: TLabel
         Left = 323
-        Height = 20
+        Height = 14
         Top = 76
-        Width = 78
+        Width = 73
         Alignment = taRightJustify
         Caption = 'Passengers:'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 174
+        Height = 14
+        Top = 76
+        Width = 44
+        Alignment = taRightJustify
+        Caption = 'Copilot:'
         ParentColor = False
       end
       object PanelAC: TPanel
         Left = 347
         Height = 99
-        Top = 278
+        Top = 296
         Width = 159
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -263,6 +245,7 @@ object FInput: TFInput
           Font.Style = [fsBold]
           NumGlyphs = 0
           OnClick = ButtonNeuFlugzeugClick
+          ParentFont = False
           TabOrder = 0
         end
         object ButtonNeuPilot: TBitBtn
@@ -278,6 +261,7 @@ object FInput: TFInput
           Font.Style = [fsBold]
           NumGlyphs = 0
           OnClick = ButtonNeuBegleiterClick
+          ParentFont = False
           TabOrder = 1
         end
         object ButtonNeuBegleiter: TBitBtn
@@ -293,6 +277,7 @@ object FInput: TFInput
           Font.Style = [fsBold]
           NumGlyphs = 0
           OnClick = ButtonNeuBegleiterClick
+          ParentFont = False
           TabOrder = 2
         end
         object ButtonNeuLandeOrt: TBitBtn
@@ -308,6 +293,7 @@ object FInput: TFInput
           Font.Style = [fsBold]
           NumGlyphs = 0
           OnClick = ButtonNeuOrtClick
+          ParentFont = False
           TabOrder = 3
         end
         object ButtonNeuStartOrt: TBitBtn
@@ -323,16 +309,16 @@ object FInput: TFInput
           Font.Style = [fsBold]
           NumGlyphs = 0
           OnClick = ButtonNeuOrtClick
+          ParentFont = False
           TabOrder = 4
         end
       end
       object CBAircraftID: TComboBox
         Left = 72
-        Height = 21
+        Height = 27
         Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
-        Top = 41
+        Top = 38
         Width = 90
-        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
         MaxLength = 65535
         OnEnter = CBAircraftIDEnter
         OnExit = CBAircraftExit
@@ -341,11 +327,10 @@ object FInput: TFInput
       end
       object CBCoPilot: TComboBox
         Left = 229
-        Height = 21
+        Height = 27
         Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
-        Top = 72
+        Top = 70
         Width = 90
-        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
         MaxLength = 65535
         OnExit = CBCrewExit
         Sorted = True
@@ -353,29 +338,28 @@ object FInput: TFInput
       end
       object CBAircraftType: TEdit
         Left = 266
-        Height = 21
-        Top = 41
+        Height = 27
+        Top = 38
         Width = 120
         OnExit = CBAircraftExit
         TabOrder = 1
       end
       object CBPilot: TComboBox
         Left = 72
-        Height = 21
+        Height = 27
         Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
-        Top = 72
+        Top = 70
         Width = 90
-        TabStop = False
-        AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
         MaxLength = 65535
         OnExit = CBCrewExit
         Sorted = True
         TabOrder = 2
+        TabStop = False
       end
       object PanelLandings: TPanel
         Left = 6
         Height = 64
-        Top = 97
+        Top = 99
         Width = 126
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -384,9 +368,9 @@ object FInput: TFInput
         TabOrder = 4
         object Label30: TLabel
           Left = 6
-          Height = 20
-          Top = 22
-          Width = 61
+          Height = 14
+          Top = 25
+          Width = 56
           Anchors = [akLeft]
           Caption = 'Landings:'
           ParentColor = False
@@ -405,7 +389,7 @@ object FInput: TFInput
       object PanelFlightTime: TPanel
         Left = 130
         Height = 33
-        Top = 97
+        Top = 99
         Width = 376
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -414,43 +398,44 @@ object FInput: TFInput
         TabOrder = 5
         object Label8: TLabel
           Left = 6
-          Height = 20
+          Height = 14
           Top = 10
-          Width = 72
+          Width = 67
           Caption = 'Flight Time:'
           ParentColor = False
         end
         object Label29: TLabel
           Left = 120
-          Height = 19
+          Height = 18
           Top = 9
           Width = 6
           Caption = '-'
           Font.Height = -13
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object Label10: TLabel
           Left = 198
-          Height = 20
+          Height = 14
           Top = 10
-          Width = 59
+          Width = 53
           Caption = 'Duration:'
           ParentColor = False
         end
         object MEFlightTimeDep: TMaskEdit
           Left = 79
-          Height = 21
+          Height = 23
           Hint = 'Enter start time'
           Top = 6
           Width = 39
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 0
-          Text = '  :  '
           OnExit = METimeExit
           OnKeyUp = MEFlightTimeDepKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
         object MEFlightTimeArr: TMaskEdit
           Left = 127
@@ -458,13 +443,13 @@ object FInput: TFInput
           Hint = 'Enter landing time'
           Top = 6
           Width = 40
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 1
-          Text = '  :  '
           OnExit = METimeExit
           OnKeyUp = MEFlightTimeArrKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
         object MEFlightTime: TMaskEdit
           Left = 261
@@ -472,19 +457,19 @@ object FInput: TFInput
           Hint = 'Enter flight time for cumulative entries'
           Top = 6
           Width = 41
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 2
           TabStop = False
-          Text = '  :  '
           OnKeyUp = MEFlightTimeKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
       end
       object PanelBlockTime: TPanel
         Left = 130
         Height = 33
-        Top = 128
+        Top = 130
         Width = 376
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -516,6 +501,7 @@ object FInput: TFInput
           Font.Height = -13
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object MEBlockTimeDep: TMaskEdit
           Left = 79
@@ -523,13 +509,13 @@ object FInput: TFInput
           Hint = 'Enter start time'
           Top = 6
           Width = 39
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 0
-          Text = '  :  '
           OnExit = METimeExit
           OnKeyUp = MEBlockTimeDepKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
         object MEBlockTimeArr: TMaskEdit
           Left = 127
@@ -537,13 +523,13 @@ object FInput: TFInput
           Hint = 'Enter landing time'
           Top = 6
           Width = 40
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 1
-          Text = '  :  '
           OnExit = METimeExit
           OnKeyUp = MEBlockTimeArrKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
         object MEBlockTime: TMaskEdit
           Left = 261
@@ -551,38 +537,38 @@ object FInput: TFInput
           Hint = 'Enter flight time for cumulative entries'
           Top = 6
           Width = 41
-          EditMask = '!90:00;1;_'
           MaxLength = 5
-          ParentColor = False
           TabOrder = 2
           TabStop = False
-          Text = '  :  '
           OnKeyUp = MEFlightTimeKeyUp
+          EditMask = '90:00'
+          Text = '00:00'
+          SpaceChar = '_'
         end
       end
       object PanelFromTo: TPanel
-        Left = 6
-        Height = 64
-        Top = 159
+        Left = 7
+        Height = 70
+        Top = 162
         Width = 500
         BevelInner = bvRaised
         BevelOuter = bvLowered
-        ClientHeight = 64
+        ClientHeight = 70
         ClientWidth = 500
         TabOrder = 7
         object Label12: TLabel
           Left = 6
-          Height = 20
+          Height = 14
           Top = 11
-          Width = 35
+          Width = 33
           Caption = 'From:'
           ParentColor = False
         end
         object Label13: TLabel
           Left = 6
-          Height = 20
+          Height = 14
           Top = 39
-          Width = 18
+          Width = 17
           Caption = 'To:'
           ParentColor = False
         end
@@ -598,6 +584,7 @@ object FInput: TFInput
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object LabelDist: TLabel
           Left = 381
@@ -611,6 +598,7 @@ object FInput: TFInput
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object LabelLaO: TLabel
           Left = 230
@@ -624,12 +612,13 @@ object FInput: TFInput
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object Label4: TLabel
           Left = 328
-          Height = 20
+          Height = 14
           Top = 23
-          Width = 27
+          Width = 25
           Alignment = taRightJustify
           Caption = 'Leg:'
           ParentColor = False
@@ -641,7 +630,6 @@ object FInput: TFInput
           Top = 24
           Width = 16
           Stretch = True
-          Transparent = False
           Visible = False
         end
         object ImageAccDist: TImage
@@ -651,14 +639,13 @@ object FInput: TFInput
           Top = 26
           Width = 16
           Stretch = True
-          Transparent = False
           Visible = False
         end
         object ButtonFindLandeOrt: TBitBtn
           Left = 201
           Height = 25
           Hint = 'search airport in database'
-          Top = 34
+          Top = 38
           Width = 25
           NumGlyphs = 0
           OnClick = ButtonFindOrtClick
@@ -678,11 +665,10 @@ object FInput: TFInput
         end
         object CBAPFrom: TComboBox
           Left = 66
-          Height = 21
+          Height = 27
           Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
           Top = 7
           Width = 135
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 65535
           OnExit = CBOrtExit
           Sorted = True
@@ -690,11 +676,10 @@ object FInput: TFInput
         end
         object CBAPTo: TComboBox
           Left = 66
-          Height = 21
+          Height = 27
           Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
-          Top = 35
+          Top = 38
           Width = 135
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 65535
           OnExit = CBOrtExit
           Sorted = True
@@ -703,27 +688,27 @@ object FInput: TFInput
       end
       object PanelStartType: TPanel
         Left = 6
-        Height = 28
-        Top = 221
+        Height = 33
+        Top = 230
         Width = 500
         BevelInner = bvRaised
         BevelOuter = bvLowered
-        ClientHeight = 28
+        ClientHeight = 33
         ClientWidth = 500
         TabOrder = 8
         object Label7: TLabel
           Left = 6
-          Height = 20
+          Height = 14
           Top = 6
-          Width = 67
+          Width = 61
           Caption = 'Start type:'
           ParentColor = False
         end
         object RBW: TRadioButton
           Left = 80
-          Height = 21
+          Height = 33
           Top = 6
-          Width = 60
+          Width = 67
           Caption = 'Winch'
           Checked = True
           State = cbChecked
@@ -731,33 +716,33 @@ object FInput: TFInput
         end
         object RBF: TRadioButton
           Left = 153
-          Height = 21
+          Height = 33
           Top = 6
-          Width = 61
+          Width = 70
           Caption = 'Airtow'
           TabOrder = 1
         end
         object RBE: TRadioButton
           Left = 226
-          Height = 21
+          Height = 33
           Top = 6
-          Width = 80
+          Width = 88
           Caption = 'Self start'
           TabOrder = 2
         end
         object RBA: TRadioButton
           Left = 299
-          Height = 21
+          Height = 33
           Top = 6
-          Width = 78
+          Width = 86
           Caption = 'Car start'
           TabOrder = 3
         end
         object RBG: TRadioButton
           Left = 364
-          Height = 21
+          Height = 33
           Top = 6
-          Width = 99
+          Width = 103
           Caption = 'Rubberband'
           TabOrder = 4
         end
@@ -765,7 +750,7 @@ object FInput: TFInput
       object PanelRemarks: TPanel
         Left = 6
         Height = 33
-        Top = 247
+        Top = 263
         Width = 500
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -774,15 +759,15 @@ object FInput: TFInput
         TabOrder = 9
         object Label14: TLabel
           Left = 6
-          Height = 20
+          Height = 14
           Top = 10
-          Width = 58
+          Width = 55
           Caption = 'Remarks:'
           ParentColor = False
         end
         object EditRemarks: TEdit
           Left = 66
-          Height = 21
+          Height = 27
           Top = 6
           Width = 270
           MaxLength = 64
@@ -790,10 +775,9 @@ object FInput: TFInput
         end
         object CBStartType: TComboBox
           Left = 352
-          Height = 21
+          Height = 25
           Top = 6
           Width = 135
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             'Airtow'
@@ -813,7 +797,7 @@ object FInput: TFInput
       object PanelCat: TPanel
         Left = 6
         Height = 99
-        Top = 278
+        Top = 296
         Width = 345
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -909,7 +893,6 @@ object FInput: TFInput
           Height = 83
           Top = 8
           Width = 270
-          ItemHeight = 13
           Sorted = True
           TabOrder = 1
           TopIndex = -1
@@ -917,42 +900,54 @@ object FInput: TFInput
       end
       object DTPDate: TDateEdit
         Left = 72
-        Height = 21
-        Top = 11
+        Height = 27
+        Top = 7
         Width = 88
         CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
         OKCaption = 'OK'
         CancelCaption = 'Cancel'
-        ReadOnly = False
         ButtonWidth = 23
         Glyph.Data = {
-          2F0200002F2A2058504D202A2F0A7374617469632063686172202A63616C656E
-          6461725B5D203D207B0A2F2A20636F6C756D6E7320726F777320636F6C6F7273
-          2063686172732D7065722D706978656C202A2F0A223134203132203137203122
-          2C0A2220206320626C61636B222C0A222E20632023383030303030222C0A2258
-          20632023303038303030222C0A226F20632023383038303030222C0A224F2063
-          206E617679222C0A222B20632023383030303830222C0A224020632023303038
-          303830222C0A222320632023383038303830222C0A2224206320234330433043
-          30222C0A2225206320726564222C0A2226206320677265656E222C0A222A2063
-          2079656C6C6F77222C0A223D206320626C7565222C0A222D2063206D6167656E
-          7461222C0A223B2063206379616E222C0A223A20632067726179313030222C0A
-          223E2063204E6F6E65222C0A2F2A20706978656C73202A2F0A223E3E20202020
-          2020202020203E3E222C0A223E3E3A24242424242424243A4F23222C0A223E3E
-          3A3A3A3A3A3A3A3A3A3A4F23222C0A223E3E3A3A203A3A202020203A4F23222C
-          0A223E3E3A20203A3A203A3A3A3A4F23222C0A223E3E3A3A203A3A202020243A
-          4F23222C0A223E3E3A3A203A3A3A3A3A203A4F23222C0A223E3E3A3A203A3A24
-          3A24203A4F23222C0A223E3E3A2020203A202020243A4F23222C0A223E3E3A3A
-          3A3A3A3A3A3A3A3A4F23222C0A223E3E20204F204F4F204F20204F23222C0A22
-          3E3E3E2323232323232323232323220A7D3B0A
+          D6020000424DD60200000000000036000000280000000E0000000C0000000100
+          200000000000A002000064000000640000000000000000000000000000000000
+          000000000000808080FF808080FF808080FF808080FF808080FF808080FF8080
+          80FF808080FF808080FF808080FF808080FF0000000000000000000000FF0000
+          00FF800000FF000000FF800000FF800000FF000000FF800000FF000000FF0000
+          00FF800000FF808080FF0000000000000000808080FF808080FF808080FF8080
+          80FF808080FF808080FF808080FF808080FF808080FF808080FF800000FF8080
+          80FF0000000000000000808080FF000000FF000000FF000000FF808080FF0000
+          00FF000000FF000000FFC0C0C0FF808080FF800000FF808080FF000000000000
+          0000808080FF808080FF000000FF808080FF808080FFC0C0C0FF808080FFC0C0
+          C0FF000000FF808080FF800000FF808080FF0000000000000000808080FF8080
+          80FF000000FF808080FF808080FF808080FF808080FF808080FF000000FF8080
+          80FF800000FF808080FF0000000000000000808080FF808080FF000000FF8080
+          80FF808080FF000000FF000000FF000000FFC0C0C0FF808080FF800000FF8080
+          80FF0000000000000000808080FF000000FF000000FF808080FF808080FF0000
+          00FF808080FF808080FF808080FF808080FF800000FF808080FF000000000000
+          0000808080FF808080FF000000FF808080FF808080FF000000FF000000FF0000
+          00FF000000FF808080FF800000FF808080FF0000000000000000808080FF8080
+          80FF808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
+          80FF800000FF808080FF0000000000000000808080FFC0C0C0FFC0C0C0FFC0C0
+          C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF808080FF800000FF8080
+          80FF0000000000000000000000FF000000FF000000FF000000FF000000FF0000
+          00FF000000FF000000FF000000FF000000FF0000000000000000
         }
         NumGlyphs = 1
         TabOrder = 12
       end
+      object EditPassengers: TSpinEdit
+        Left = 401
+        Height = 27
+        Top = 70
+        Width = 50
+        TabOrder = 13
+        Value = 1
+      end
     end
     object TSStreckenflug: TTabSheet
       Caption = 'Distance flight'
-      ClientHeight = 392
-      ClientWidth = 509
+      ClientHeight = 417
+      ClientWidth = 511
       ImageIndex = 1
       object Panel7: TPanel
         Left = 6
@@ -966,40 +961,41 @@ object FInput: TFInput
         TabOrder = 3
         object Label17: TLabel
           Left = 9
-          Height = 17
+          Height = 14
           Top = 16
-          Width = 68
+          Width = 54
           Caption = 'Distance:'
           ParentColor = False
         end
         object Label18: TLabel
           Left = 162
-          Height = 17
+          Height = 14
           Top = 16
-          Width = 6
+          Width = 5
           Caption = '-'
           ParentColor = False
         end
         object Label24: TLabel
           Left = 308
-          Height = 17
+          Height = 14
           Top = 16
-          Width = 52
+          Width = 41
           Alignment = taRightJustify
           Caption = 'Speed:'
           ParentColor = False
         end
         object LabelAvSpeed: TLabel
           Left = 386
-          Height = 17
+          Height = 14
           Top = 16
-          Width = 51
+          Width = 40
           Alignment = taRightJustify
           Caption = '0 km/h'
           Font.Color = clNavy
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object EditDistance: TEdit
           Left = 82
@@ -1023,43 +1019,45 @@ object FInput: TFInput
         TabOrder = 0
         object Label16: TLabel
           Left = 9
-          Height = 17
+          Height = 14
           Top = 6
-          Width = 40
+          Width = 32
           Caption = 'Legs:'
           ParentColor = False
         end
         object Label27: TLabel
           Left = 235
-          Height = 17
+          Height = 14
           Top = 117
-          Width = 125
+          Width = 100
           Caption = 'Over-all distance:'
           ParentColor = False
         end
         object LabelViaDist: TLabel
           Left = 370
-          Height = 17
+          Height = 14
           Top = 117
-          Width = 10
+          Width = 8
           Alignment = taRightJustify
           Caption = '0'
           Font.Color = clNavy
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object LabelViaDistUnit: TLabel
           Left = 386
-          Height = 17
+          Height = 14
           Top = 117
-          Width = 23
+          Width = 18
           Alignment = taRightJustify
           Caption = 'km'
           Font.Color = clNavy
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object LabelViaOrt: TLabel
           Left = 25
@@ -1073,6 +1071,7 @@ object FInput: TFInput
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           ParentColor = False
+          ParentFont = False
         end
         object ButtonFindViaOrt: TBitBtn
           Left = 159
@@ -1126,11 +1125,10 @@ object FInput: TFInput
         end
         object CBViaOrt: TComboBox
           Left = 22
-          Height = 21
+          Height = 27
           Hint = 'Enter manually, by AutoComplete, drop-down list or arrow keys'
           Top = 44
           Width = 135
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 65535
           OnExit = CBOrtExit
           Sorted = True
@@ -1146,14 +1144,14 @@ object FInput: TFInput
           ColCount = 3
           DefaultColWidth = 50
           DefaultRowHeight = 17
-          FixedColor = clBtnFace
           FixedCols = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
           ParentShowHint = False
           RowCount = 3
           ScrollBars = ssVertical
           TabOrder = 1
-          TabStop = True
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
           ColWidths = (
             50
             50
@@ -1173,9 +1171,9 @@ object FInput: TFInput
         TabOrder = 2
         object Label31: TLabel
           Left = 9
-          Height = 17
+          Height = 14
           Top = 3
-          Width = 70
+          Width = 56
           Caption = 'Contests:'
           ParentColor = False
         end
@@ -1194,7 +1192,6 @@ object FInput: TFInput
           Height = 70
           Top = 20
           Width = 170
-          ItemHeight = 13
           OnClickCheck = CLBContestClickCheck
           Sorted = True
           TabOrder = 1
@@ -1211,14 +1208,14 @@ object FInput: TFInput
           DefaultColWidth = 50
           DefaultRowHeight = 17
           Enabled = False
-          FixedColor = clBtnFace
           FixedCols = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
           ParentShowHint = False
           RowCount = 2
           ScrollBars = ssVertical
           TabOrder = 0
-          TabStop = True
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
           OnSelectCell = NoRowSelect
         end
       end
@@ -1234,9 +1231,9 @@ object FInput: TFInput
         TabOrder = 1
         object Label23: TLabel
           Left = 9
-          Height = 17
+          Height = 14
           Top = 3
-          Width = 38
+          Width = 30
           Caption = 'Files:'
           ParentColor = False
         end
@@ -1268,7 +1265,6 @@ object FInput: TFInput
           Top = 20
           Width = 363
           Columns = 2
-          ItemHeight = 13
           OnDblClick = LBFilesDblClick
           TabOrder = 0
           TopIndex = -1
@@ -1277,8 +1273,8 @@ object FInput: TFInput
     end
     object TabSheet1: TTabSheet
       Caption = 'Categories'
-      ClientHeight = 392
-      ClientWidth = 509
+      ClientHeight = 417
+      ClientWidth = 511
       ImageIndex = 2
       object Panel4: TPanel
         Left = 6
@@ -1292,9 +1288,9 @@ object FInput: TFInput
         TabOrder = 0
         object Label32: TLabel
           Left = 9
-          Height = 20
+          Height = 14
           Top = 16
-          Width = 105
+          Width = 97
           Caption = 'Time categories:'
           ParentColor = False
         end
@@ -1313,7 +1309,6 @@ object FInput: TFInput
           Height = 65
           Top = 42
           Width = 170
-          ItemHeight = 13
           OnClickCheck = CLBKatTimeClickCheck
           Sorted = True
           TabOrder = 0
@@ -1330,22 +1325,22 @@ object FInput: TFInput
           DefaultColWidth = 50
           DefaultRowHeight = 17
           Enabled = False
-          FixedColor = clBtnFace
           FixedCols = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
           ParentShowHint = False
           RowCount = 2
           ScrollBars = ssVertical
           TabOrder = 1
-          TabStop = True
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
           OnSelectCell = NoRowSelect
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Weather'
-      ClientHeight = 392
-      ClientWidth = 509
+      ClientHeight = 417
+      ClientWidth = 511
       ImageIndex = 3
       object Panel9: TPanel
         Left = 6
@@ -1359,25 +1354,25 @@ object FInput: TFInput
         TabOrder = 0
         object Label33: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 32
-          Width = 57
+          Width = 50
           Caption = 'Weather:'
           ParentColor = False
         end
         object Label35: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 80
-          Width = 47
+          Width = 44
           Caption = 'Clouds:'
           ParentColor = False
         end
         object Label37: TLabel
           Left = 168
-          Height = 20
+          Height = 14
           Top = 100
-          Width = 26
+          Width = 23
           Caption = 'feet'
           ParentColor = False
         end
@@ -1390,19 +1385,18 @@ object FInput: TFInput
         end
         object CAVOK: TCheckBox
           Left = 8
-          Height = 21
+          Height = 33
           Top = 8
-          Width = 62
+          Width = 72
           Caption = 'CAVOK'
           OnClick = CAVOKClick
           TabOrder = 0
         end
         object INTENSITY: TComboBox
           Left = 8
-          Height = 21
+          Height = 25
           Top = 48
           Width = 41
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1416,10 +1410,9 @@ object FInput: TFInput
         end
         object DESCRIPTOR: TComboBox
           Left = 56
-          Height = 21
+          Height = 25
           Top = 48
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1439,10 +1432,9 @@ object FInput: TFInput
         end
         object PRECIPITATION: TComboBox
           Left = 128
-          Height = 21
+          Height = 25
           Top = 48
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1462,10 +1454,9 @@ object FInput: TFInput
         end
         object OBSCURATION1: TComboBox
           Left = 213
-          Height = 21
+          Height = 25
           Top = 48
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1479,10 +1470,9 @@ object FInput: TFInput
         end
         object OBSCURATION2: TComboBox
           Left = 301
-          Height = 21
+          Height = 25
           Top = 48
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1499,10 +1489,9 @@ object FInput: TFInput
         end
         object OTHER: TComboBox
           Left = 373
-          Height = 21
+          Height = 25
           Top = 48
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1519,10 +1508,9 @@ object FInput: TFInput
         end
         object CLOUDS: TComboBox
           Left = 8
-          Height = 21
+          Height = 25
           Top = 96
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             'SKC'
@@ -1555,10 +1543,9 @@ object FInput: TFInput
         end
         object CLOUDTYPE: TComboBox
           Left = 213
-          Height = 21
+          Height = 25
           Top = 96
           Width = 65
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 0
           Items.Strings = (
             ''
@@ -1590,8 +1577,8 @@ object FInput: TFInput
     end
     object TabSheet3: TTabSheet
       Caption = 'Budget'
-      ClientHeight = 392
-      ClientWidth = 509
+      ClientHeight = 417
+      ClientWidth = 511
       ImageIndex = 4
       object Panel8: TPanel
         Left = 6
@@ -1605,15 +1592,15 @@ object FInput: TFInput
         TabOrder = 0
         object Label21: TLabel
           Left = 9
-          Height = 20
+          Height = 14
           Top = 16
-          Width = 96
+          Width = 90
           Caption = 'Costs for flight:'
           ParentColor = False
         end
         object CurLabel1: TLabel
           Left = 115
-          Height = 20
+          Height = 14
           Top = 37
           Width = 5
           Caption = '-'
@@ -1621,15 +1608,15 @@ object FInput: TFInput
         end
         object Label22: TLabel
           Left = 9
-          Height = 20
+          Height = 14
           Top = 64
-          Width = 85
+          Width = 78
           Caption = 'Landing fees:'
           ParentColor = False
         end
         object CurLabel3: TLabel
           Left = 115
-          Height = 20
+          Height = 14
           Top = 85
           Width = 5
           Caption = '-'
@@ -1637,15 +1624,15 @@ object FInput: TFInput
         end
         object Label34: TLabel
           Left = 249
-          Height = 20
+          Height = 14
           Top = 16
-          Width = 93
+          Width = 88
           Caption = 'Costs for crew:'
           ParentColor = False
         end
         object CurLabel2: TLabel
           Left = 355
-          Height = 20
+          Height = 14
           Top = 37
           Width = 5
           Caption = '-'
@@ -1653,15 +1640,15 @@ object FInput: TFInput
         end
         object Label36: TLabel
           Left = 249
-          Height = 20
+          Height = 14
           Top = 64
-          Width = 116
+          Width = 107
           Caption = 'Earnings for flight:'
           ParentColor = False
         end
         object CurLabel4: TLabel
           Left = 355
-          Height = 20
+          Height = 14
           Top = 85
           Width = 5
           Caption = '-'
@@ -1670,24 +1657,15 @@ object FInput: TFInput
       end
     end
   end
-  object EditPassengers: TSpinEdit
-    Left = 416
-    Height = 21
-    Top = 136
-    Width = 50
-    TabOrder = 3
-    Value = 1
-  end
   object TimerKennung: TTimer
     Enabled = False
     Interval = 1
     OnTimer = TimerKennungTimer
-    left = 8
-    top = 467
+    left = 16
+    top = 544
   end
   object OpenDialogFiles: TOpenDialog
-    Title = 'Vorhandene Datei öffnen'
     left = 72
-    top = 466
+    top = 536
   end
 end

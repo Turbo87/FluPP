@@ -2,13 +2,15 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="/"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
       <MainUnit Value="0"/>
-      <IconPath Value="./"/>
       <TargetFileExt Value=""/>
       <Title Value="FluPP"/>
-      <ActiveEditorIndexAtStart Value="3"/>
+      <ActiveEditorIndexAtStart Value="0"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -18,7 +20,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <CurrentVersionNr Value="2"/>
-      <ProjectVersion Value=""/>
+      <CurrentBuildNr Value="28"/>
+      <ProjectVersion Value="2.0.0.1"/>
     </VersionInfo>
     <PublishOptions>
       <Version Value="2"/>
@@ -34,53 +37,45 @@
     </RunParams>
     <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="RunTimeTypeInfoControls"/>
-        <MinVersion Minor="1" Valid="True"/>
-      </Item2>
-      <Item3>
-        <PackageName Value="LCL"/>
-      </Item3>
-      <Item4>
         <PackageName Value="TAChartLazarusPkg"/>
         <MinVersion Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="RunTimeTypeInfoControls"/>
+        <MinVersion Minor="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="74">
+    <Units Count="77">
       <Unit0>
         <Filename Value="FluPP.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="43" Y="30"/>
+        <CursorPos X="1" Y="34"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="84"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="95"/>
       </Unit0>
       <Unit1>
         <Filename Value="Main.pas"/>
         <ComponentName Value="FMain"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="Main.lrs"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="Main"/>
-        <CursorPos X="3" Y="626"/>
-        <TopLine Value="606"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="84"/>
-        <Bookmarks Count="3">
-          <Item0 X="5" Y="1216" ID="1"/>
-          <Item1 X="7" Y="393" ID="2"/>
-          <Item2 X="23" Y="190" ID="3"/>
-        </Bookmarks>
+        <CursorPos X="14" Y="214"/>
+        <TopLine Value="292"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="Info.pas"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Info.lrs"/>
         <UnitName Value="Info"/>
         <CursorPos X="16" Y="89"/>
         <TopLine Value="42"/>
@@ -91,30 +86,27 @@
         <ComponentName Value="FGrid"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="Grid.lrs"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="Grid"/>
-        <CursorPos X="43" Y="95"/>
-        <TopLine Value="74"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="84"/>
-        <Loaded Value="True"/>
+        <CursorPos X="26" Y="117"/>
+        <TopLine Value="87"/>
+        <UsageCount Value="95"/>
       </Unit3>
       <Unit4>
         <Filename Value="SButton.pas"/>
         <ComponentName Value="FSButton"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="SButton.lrs"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="SButton"/>
-        <CursorPos X="14" Y="60"/>
-        <TopLine Value="24"/>
-        <UsageCount Value="84"/>
+        <CursorPos X="34" Y="33"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="95"/>
       </Unit4>
       <Unit5>
         <Filename Value="TrainBaro.pas"/>
         <ComponentName Value="FTrainBaro"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="TrainBaro.lrs"/>
         <UnitName Value="TrainBaro"/>
         <CursorPos X="17" Y="29"/>
         <TopLine Value="1"/>
@@ -125,16 +117,14 @@
         <ComponentName Value="FInputBox"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="InputBox.lrs"/>
         <UnitName Value="InputBox"/>
         <CursorPos X="20" Y="30"/>
         <TopLine Value="1"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="95"/>
       </Unit6>
       <Unit7>
         <Filename Value="NinetyDays.pas"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="NinetyDays.lrs"/>
         <UnitName Value="NinetyDays"/>
         <CursorPos X="22" Y="204"/>
         <TopLine Value="157"/>
@@ -144,11 +134,9 @@
         <Filename Value="Tools.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Tools"/>
-        <CursorPos X="57" Y="15"/>
-        <TopLine Value="11"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="84"/>
-        <Loaded Value="True"/>
+        <CursorPos X="26" Y="534"/>
+        <TopLine Value="493"/>
+        <UsageCount Value="95"/>
       </Unit8>
       <Unit9>
         <Filename Value="ToolsShell.pas"/>
@@ -156,13 +144,12 @@
         <UnitName Value="ToolsShell"/>
         <CursorPos X="19" Y="71"/>
         <TopLine Value="1"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="95"/>
       </Unit9>
       <Unit10>
         <Filename Value="Print.pas"/>
         <ComponentName Value="FPrint"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Print.lrs"/>
         <UnitName Value="Print"/>
         <CursorPos X="28" Y="20"/>
         <TopLine Value="1"/>
@@ -172,7 +159,6 @@
         <Filename Value="Airports.pas"/>
         <ComponentName Value="FAirports"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Airports.lrs"/>
         <UnitName Value="Airports"/>
         <CursorPos X="20" Y="366"/>
         <TopLine Value="327"/>
@@ -183,39 +169,36 @@
         <ComponentName Value="FInput"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="Input.lrs"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="Input"/>
-        <CursorPos X="40" Y="294"/>
-        <TopLine Value="273"/>
-        <UsageCount Value="84"/>
+        <CursorPos X="1" Y="450"/>
+        <TopLine Value="428"/>
+        <UsageCount Value="95"/>
       </Unit12>
       <Unit13>
         <Filename Value="Settings.pas"/>
         <ComponentName Value="FSettings"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="Settings.lrs"/>
         <UnitName Value="Settings"/>
         <CursorPos X="3" Y="516"/>
         <TopLine Value="495"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="95"/>
       </Unit13>
       <Unit14>
         <Filename Value="BasicSettings.pas"/>
         <ComponentName Value="FBasicSettings"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="BasicSettings.lrs"/>
         <UnitName Value="BasicSettings"/>
         <CursorPos X="22" Y="126"/>
         <TopLine Value="105"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="95"/>
       </Unit14>
       <Unit15>
         <Filename Value="Licenses.pas"/>
         <ComponentName Value="FLicenses"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Licenses.lrs"/>
         <UnitName Value="Licenses"/>
         <CursorPos X="28" Y="34"/>
         <TopLine Value="13"/>
@@ -224,7 +207,6 @@
       <Unit16>
         <Filename Value="Statistics.pas"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Statistics.lrs"/>
         <UnitName Value="Statistics"/>
         <CursorPos X="22" Y="1992"/>
         <TopLine Value="1942"/>
@@ -233,7 +215,6 @@
       <Unit17>
         <Filename Value="StatGraph.pas"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="StatGraph.lrs"/>
         <UnitName Value="StatGraph"/>
         <CursorPos X="21" Y="213"/>
         <TopLine Value="163"/>
@@ -252,27 +233,23 @@
         <ComponentName Value="FFlightLogs"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="FlightLogs.lrs"/>
         <UnitName Value="FlightLogs"/>
         <CursorPos X="21" Y="124"/>
         <TopLine Value="103"/>
-        <UsageCount Value="84"/>
+        <UsageCount Value="95"/>
       </Unit19>
       <Unit20>
         <Filename Value="ToolsGrid.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ToolsGrid"/>
-        <CursorPos X="48" Y="48"/>
-        <TopLine Value="3"/>
-        <EditorIndex Value="0"/>
-        <UsageCount Value="84"/>
-        <Loaded Value="True"/>
+        <CursorPos X="24" Y="62"/>
+        <TopLine Value="50"/>
+        <UsageCount Value="95"/>
       </Unit20>
       <Unit21>
         <Filename Value="Calendar.pas"/>
         <ComponentName Value="FCalendar"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="Calendar.lrs"/>
         <UnitName Value="Calendar"/>
         <CursorPos X="4" Y="21"/>
         <TopLine Value="1"/>
@@ -282,7 +259,6 @@
         <Filename Value="CalendarAdd.pas"/>
         <ComponentName Value="FCalendarAdd"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="CalendarAdd.lrs"/>
         <UnitName Value="CalendarAdd"/>
         <CursorPos X="61" Y="9"/>
         <TopLine Value="1"/>
@@ -292,19 +268,17 @@
         <Filename Value="Import.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Import"/>
-        <CursorPos X="25" Y="852"/>
-        <TopLine Value="831"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="84"/>
-        <Loaded Value="True"/>
+        <CursorPos X="28" Y="138"/>
+        <TopLine Value="111"/>
+        <UsageCount Value="95"/>
       </Unit23>
       <Unit24>
         <Filename Value="Export.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Export"/>
-        <CursorPos X="47" Y="201"/>
-        <TopLine Value="180"/>
-        <UsageCount Value="84"/>
+        <CursorPos X="1" Y="182"/>
+        <TopLine Value="163"/>
+        <UsageCount Value="95"/>
       </Unit24>
       <Unit25>
         <Filename Value="Debug.pas"/>
@@ -321,20 +295,20 @@
         <UsageCount Value="7"/>
       </Unit26>
       <Unit27>
-        <Filename Value="/usr/share/lazarus/components/printers/printer4lazarus.pas"/>
+        <Filename Value="../../../../../usr/share/lazarus/components/printers/printer4lazarus.pas"/>
         <UnitName Value="Printer4Lazarus"/>
         <CursorPos X="20" Y="21"/>
         <TopLine Value="1"/>
         <UsageCount Value="7"/>
       </Unit27>
       <Unit28>
-        <Filename Value="/usr/share/lazarus/lcl/include/bitmap.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/bitmap.inc"/>
         <CursorPos X="4" Y="501"/>
         <TopLine Value="479"/>
         <UsageCount Value="7"/>
       </Unit28>
       <Unit29>
-        <Filename Value="/usr/share/lazarus/lcl/forms.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/forms.pp"/>
         <ComponentName Value="Frame"/>
         <HasResources Value="True"/>
         <UnitName Value="Forms"/>
@@ -386,14 +360,14 @@
       <Unit36>
         <Filename Value="ToolsIGCParse.pas"/>
         <UnitName Value="ToolsIGCParse"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="1" Y="52"/>
         <TopLine Value="1"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="10"/>
       </Unit36>
       <Unit37>
         <Filename Value="Main.lfm"/>
-        <CursorPos X="11" Y="152"/>
-        <TopLine Value="123"/>
+        <CursorPos X="12" Y="1864"/>
+        <TopLine Value="1829"/>
         <UsageCount Value="10"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit37>
@@ -405,28 +379,28 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit38>
       <Unit39>
-        <Filename Value="/usr/share/lazarus/lcl/editbtn.pas"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/editbtn.pas"/>
         <UnitName Value="EditBtn"/>
         <CursorPos X="71" Y="31"/>
         <TopLine Value="1"/>
         <UsageCount Value="8"/>
       </Unit39>
       <Unit40>
-        <Filename Value="/usr/share/lazarus/lcl/lresources.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/lresources.pp"/>
         <UnitName Value="LResources"/>
         <CursorPos X="1" Y="2708"/>
         <TopLine Value="2687"/>
         <UsageCount Value="9"/>
       </Unit40>
       <Unit41>
-        <Filename Value="/usr/share/lazarus/lcl/calendar.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/calendar.pp"/>
         <UnitName Value="Calendar"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="8"/>
       </Unit41>
       <Unit42>
-        <Filename Value="/usr/share/lazarus/components/gettext/source/gnugettext_fpc.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/components/gettext/source/gnugettext_fpc.pp"/>
         <UnitName Value="gnugettext_fpc"/>
         <CursorPos X="34" Y="24"/>
         <TopLine Value="1"/>
@@ -447,7 +421,7 @@
         <UsageCount Value="8"/>
       </Unit44>
       <Unit45>
-        <Filename Value="/usr/share/lazarus/lcl/stdctrls.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/stdctrls.pp"/>
         <UnitName Value="StdCtrls"/>
         <CursorPos X="13" Y="7"/>
         <TopLine Value="1"/>
@@ -461,91 +435,89 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit46>
       <Unit47>
-        <Filename Value="/usr/share/lazarus/lcl/include/application.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/application.inc"/>
         <CursorPos X="1" Y="1637"/>
         <TopLine Value="1616"/>
         <UsageCount Value="8"/>
       </Unit47>
       <Unit48>
-        <Filename Value="/usr/share/lazarus/lcl/include/winapi.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/winapi.inc"/>
         <CursorPos X="1" Y="290"/>
         <TopLine Value="269"/>
         <UsageCount Value="8"/>
       </Unit48>
       <Unit49>
-        <Filename Value="/usr/share/lazarus/lcl/include/customform.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/customform.inc"/>
         <CursorPos X="1" Y="853"/>
         <TopLine Value="832"/>
         <UsageCount Value="9"/>
       </Unit49>
       <Unit50>
-        <Filename Value="/usr/share/fpcsrc/packages/fcl-base/src/inc/contnrs.pp"/>
+        <Filename Value="../../../../../usr/share/fpcsrc/packages/fcl-base/src/inc/contnrs.pp"/>
         <UnitName Value="contnrs"/>
         <CursorPos X="25" Y="72"/>
         <TopLine Value="63"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="14"/>
       </Unit50>
       <Unit51>
-        <Filename Value="/usr/share/lazarus/components/tachart/taseries.pas"/>
+        <Filename Value="../../../../../usr/share/lazarus/components/tachart/taseries.pas"/>
         <UnitName Value="TASeries"/>
         <CursorPos X="1" Y="1627"/>
         <TopLine Value="1498"/>
         <UsageCount Value="8"/>
       </Unit51>
       <Unit52>
-        <Filename Value="/usr/share/lazarus/lcl/grids.pas"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/grids.pas"/>
         <UnitName Value="Grids"/>
-        <CursorPos X="18" Y="6770"/>
-        <TopLine Value="6746"/>
+        <CursorPos X="1" Y="4267"/>
+        <TopLine Value="4246"/>
         <UsageCount Value="16"/>
       </Unit52>
       <Unit53>
-        <Filename Value="/usr/share/lazarus/lcl/include/containedaction.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/containedaction.inc"/>
         <CursorPos X="1" Y="110"/>
         <TopLine Value="80"/>
         <UsageCount Value="10"/>
       </Unit53>
       <Unit54>
-        <Filename Value="/usr/share/lazarus/lcl/lclproc.pas"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/lclproc.pas"/>
         <UnitName Value="LCLProc"/>
         <CursorPos X="1" Y="774"/>
         <TopLine Value="753"/>
         <UsageCount Value="8"/>
       </Unit54>
       <Unit55>
-        <Filename Value="/usr/share/lazarus/lcl/include/customaction.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/customaction.inc"/>
         <CursorPos X="1" Y="318"/>
         <TopLine Value="297"/>
         <UsageCount Value="9"/>
       </Unit55>
       <Unit56>
-        <Filename Value="/usr/share/lazarus/lcl/include/menuitem.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/menuitem.inc"/>
         <CursorPos X="1" Y="73"/>
         <TopLine Value="52"/>
         <UsageCount Value="8"/>
       </Unit56>
       <Unit57>
-        <Filename Value="/usr/share/lazarus/lcl/include/control.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/control.inc"/>
         <CursorPos X="1" Y="2044"/>
         <TopLine Value="2023"/>
         <UsageCount Value="10"/>
       </Unit57>
       <Unit58>
-        <Filename Value="/usr/share/lazarus/lcl/include/buttoncontrol.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/buttoncontrol.inc"/>
         <CursorPos X="1" Y="58"/>
         <TopLine Value="37"/>
         <UsageCount Value="8"/>
       </Unit58>
       <Unit59>
-        <Filename Value="/usr/share/lazarus/lcl/include/buttons.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/buttons.inc"/>
         <CursorPos X="16" Y="210"/>
         <TopLine Value="1"/>
         <UsageCount Value="8"/>
       </Unit59>
       <Unit60>
-        <Filename Value="/usr/share/lazarus/lcl/include/bitbtn.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/bitbtn.inc"/>
         <CursorPos X="1" Y="57"/>
         <TopLine Value="36"/>
         <UsageCount Value="8"/>
@@ -558,35 +530,33 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit61>
       <Unit62>
-        <Filename Value="/usr/share/lazarus/lcl/include/wincontrol.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/wincontrol.inc"/>
         <CursorPos X="1" Y="5511"/>
         <TopLine Value="5474"/>
         <UsageCount Value="9"/>
       </Unit62>
       <Unit63>
-        <Filename Value="/usr/share/lazarus/lcl/graphics.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/graphics.pp"/>
         <UnitName Value="Graphics"/>
         <CursorPos X="23" Y="1012"/>
         <TopLine Value="907"/>
         <UsageCount Value="10"/>
       </Unit63>
       <Unit64>
-        <Filename Value="/usr/share/fpcsrc/rtl/objpas/classes/classesh.inc"/>
+        <Filename Value="../../../../../usr/share/fpcsrc/rtl/objpas/classes/classesh.inc"/>
         <CursorPos X="3" Y="193"/>
         <TopLine Value="124"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="13"/>
       </Unit64>
       <Unit65>
         <Filename Value="Input.lfm"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="19" Y="565"/>
+        <TopLine Value="547"/>
         <UsageCount Value="10"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit65>
       <Unit66>
-        <Filename Value="/usr/share/lazarus/lcl/maskedit.pp"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/maskedit.pp"/>
         <UnitName Value="MaskEdit"/>
         <CursorPos X="41" Y="1130"/>
         <TopLine Value="1099"/>
@@ -596,73 +566,94 @@
         </Bookmarks>
       </Unit66>
       <Unit67>
-        <Filename Value="/usr/share/lazarus/lcl/include/customnotebook.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/customnotebook.inc"/>
         <CursorPos X="1" Y="683"/>
         <TopLine Value="662"/>
         <UsageCount Value="8"/>
       </Unit67>
       <Unit68>
-        <Filename Value="/usr/share/lazarus/lcl/include/filedialog.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/filedialog.inc"/>
         <CursorPos X="1" Y="62"/>
         <TopLine Value="41"/>
         <UsageCount Value="9"/>
       </Unit68>
       <Unit69>
-        <Filename Value="/usr/share/fpcsrc/packages/fcl-xml/src/xmlread.pp"/>
+        <Filename Value="../../../../../usr/share/fpcsrc/packages/fcl-xml/src/xmlread.pp"/>
         <UnitName Value="XMLRead"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="9"/>
       </Unit69>
       <Unit70>
-        <Filename Value="/usr/share/lazarus/lcl/include/toolbutton.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/toolbutton.inc"/>
         <CursorPos X="1" Y="121"/>
         <TopLine Value="100"/>
         <UsageCount Value="9"/>
       </Unit70>
       <Unit71>
-        <Filename Value="/usr/share/lazarus/lcl/include/statuspanels.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/statuspanels.inc"/>
         <CursorPos X="1" Y="34"/>
         <TopLine Value="13"/>
         <UsageCount Value="10"/>
       </Unit71>
       <Unit72>
-        <Filename Value="/usr/share/lazarus/lcl/include/winapih.inc"/>
+        <Filename Value="../../../../../usr/share/lazarus/lcl/include/winapih.inc"/>
         <CursorPos X="10" Y="235"/>
         <TopLine Value="214"/>
         <UsageCount Value="10"/>
       </Unit72>
       <Unit73>
-        <Filename Value="/usr/share/fpcsrc/rtl/objpas/types.pp"/>
+        <Filename Value="../../../../../usr/share/fpcsrc/rtl/objpas/types.pp"/>
         <UnitName Value="types"/>
         <CursorPos X="21" Y="407"/>
         <TopLine Value="397"/>
         <UsageCount Value="10"/>
       </Unit73>
+      <Unit74>
+        <Filename Value="../../../../../usr/lib/lazarus/components/turbopower_ipro/iputils.pas"/>
+        <UnitName Value="IpUtils"/>
+        <CursorPos X="26" Y="15"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit74>
+      <Unit75>
+        <Filename Value="../../../../../usr/lib/lazarus/lcl/maskedit.pp"/>
+        <UnitName Value="MaskEdit"/>
+        <CursorPos X="1" Y="846"/>
+        <TopLine Value="774"/>
+        <UsageCount Value="10"/>
+      </Unit75>
+      <Unit76>
+        <Filename Value="../../../../../usr/lib/lazarus/examples/hello.pp"/>
+        <UnitName Value="Hello_world"/>
+        <CursorPos X="83" Y="21"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit76>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
-      <Position1>
-        <Filename Value="/usr/share/fpcsrc/packages/fcl-base/src/inc/contnrs.pp"/>
-        <Caret Line="72" Column="25" TopLine="63"/>
-      </Position1>
-      <Position2>
-        <Filename Value="Grid.pas"/>
-        <Caret Line="95" Column="52" TopLine="79"/>
-      </Position2>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="5"/>
+    <Version Value="8"/>
     <SearchPaths>
-      <LCLWidgetType Value="gtk2"/>
+      <LCLWidgetType Value="qt"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <CodeGeneration>
-      <Generate Value="Faster"/>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="True"/>
+        <UseExternalDbgSyms Value="True"/>
       </Debugging>
+      <LinkSmart Value="True"/>
     </Linking>
     <Other>
       <Verbosity>
@@ -672,13 +663,16 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="2">
+    <Exceptions Count="3">
       <Item1>
         <Name Value="ECodetoolError"/>
       </Item1>
       <Item2>
         <Name Value="EFOpenError"/>
       </Item2>
+      <Item3>
+        <Name Value="EConvertError"/>
+      </Item3>
     </Exceptions>
   </Debugging>
 </CONFIG>

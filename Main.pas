@@ -289,7 +289,7 @@ begin
 end;
 
 // ----------------------------------------------------------------
-// Timer for param MiFile opening
+// Timer for param FluFile opening
 // ----------------------------------------------------------------
 procedure TFMain.StartTimerTimer(Sender: TObject);
 begin
@@ -642,15 +642,26 @@ begin
 end;
 
 // ----------------------------------------------------------------
+// Import File
+// ----------------------------------------------------------------
+procedure TFMain.FileImport(Sender: TObject);
+begin
+  OpenDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
+  if not OpenDialog.Execute then Exit;
+  ImportCSV(OpenDialog.FileName);
+  InsertData;
+end;
+
+// ----------------------------------------------------------------
 // Open flightlog
 // ----------------------------------------------------------------
 procedure TFMain.FileOpen(Sender: TObject);
 begin
   ActionClose(Self);
   OpenDialog.Filter := _('FluPP File')+' (*.flu)'+'|*.flu'+'|';
-  if not OpenDialog.Execute then Exit;
+//  if not OpenDialog.Execute then Exit;
   FluFileName := OpenDialog.FileName;
-//  FluFileName := '/home/momme/Daten/Programming/Delphi/FluPP/flightlog.flu';
+  FluFileName := '/home/momme/Daten/Programming/Delphi/FluPP/flightlog.flu';
   LoadFluFile;
 end;
 
@@ -677,6 +688,8 @@ begin
   Schedules.Clear;
   SchedValidity.Clear;
   LoadDefaultGenSettings;
+
+{ TODO: Compression }
 
 {  FlpTempDir := FileGetTempName('Flu');
   DeleteFile(FlpTempDir);
@@ -1194,8 +1207,9 @@ var
   GridIdx: Integer;
 begin
   if FlWindow.Count = 0 then Exit;
-  GridSched.RowCount := 1;
+
   GridSched.Clear;
+  GridSched.RowCount := 1;
 
 {  with TFLicenses.Create(Application) do
   try
@@ -1205,7 +1219,7 @@ begin
   end;}
 
   { Load Schedules }
-{  LoadSchedule(Schedules);
+  LoadSchedule(Schedules);
   for GridIdx := 0 to FlWindow.Count-1 do begin
     LoadSchedule(FlWindow.GetItem(GridIdx).LicenseDates);
     LoadSchedule(FlWindow.GetItem(GridIdx).Events);
@@ -1218,8 +1232,8 @@ begin
   else
   begin
     GridSched.Visible := True;
-    SortGridByCols([0], GridSched);
-  end;                        }
+//    SortGridByCols([0], GridSched);
+  end;
 end;
 
 // ----------------------------------------------------------------
@@ -1305,16 +1319,6 @@ begin
   end;
 }end;
 
-// ----------------------------------------------------------------
-// Import File
-// ----------------------------------------------------------------
-procedure TFMain.FileImport(Sender: TObject);
-begin
-  OpenDialog.Filter := _('Comma-Separated Variables')+' (*.csv)'+'|*.csv';
-  if not OpenDialog.Execute then Exit;
-  ImportCSV(OpenDialog.FileName);
-  InsertData;
-end;
 
 initialization
   {$i Main.lrs}

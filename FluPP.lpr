@@ -23,6 +23,8 @@ uses
   TurboPowerIPro,
   TAChartLazarusPkg;
 
+{$IFDEF WINDOWS}{$R FluPP.rc}{$ENDIF}
+
 begin
   Application.Initialize;
   Application.HelpFile := '';
