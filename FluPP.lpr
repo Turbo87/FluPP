@@ -19,6 +19,7 @@ uses
   ToolsGrid in 'ToolsGrid.pas',
   Import in 'Import.pas',
   Export in 'Export.pas',
+  debug in 'debug.pas',
   RunTimeTypeInfoControls,
   TurboPowerIPro,
   TAChartLazarusPkg;

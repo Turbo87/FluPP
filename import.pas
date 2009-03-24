@@ -17,7 +17,7 @@ procedure ImportCSV(FileName: String);
 
 implementation
 
-uses Grid, Main, Tools, ToolsGrid, ToolsShell, Debug;
+uses Grid, Main, Tools, ToolsGrid, ToolsShell, debug;
 
 //*******************************************************
 // Standard XML procedures
@@ -77,6 +77,7 @@ begin
       if FlWindow.GetActive.GridCols.IndexOf(XMLChild.Attributes.Item[i].NodeName) = -1 then
       begin
         Col := FlWindow.GetActive.GridCols.Add(XMLChild.Attributes.Item[i].NodeName);
+        DWrite(XMLChild.Attributes.Item[i].NodeName + ':' + inttostr(Col));
         if StrToInt(XMLChild.Attributes.Item[i].NodeValue) > 0 then
           FlWindow.GetActive.Grid.ColWidths[Col] := StrToInt(XMLChild.Attributes.Item[i].NodeValue);
       end;

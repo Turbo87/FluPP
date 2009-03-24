@@ -252,6 +252,7 @@ begin
   GenSettings := TSTringList.Create;
   GenSettings.Values['WarningMonth'] := '2';
   GenSettings.Values['ExportICal'] := '0';
+  GenSettings.Values['Currency'] := '€';
   Medicals := TStringList.Create;
   Schedules := TStringList.Create;
   SchedValidity := TStringList.Create;
